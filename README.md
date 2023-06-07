@@ -1,1 +1,1 @@
-# new-repo-template
+# ontap-technical-reports
