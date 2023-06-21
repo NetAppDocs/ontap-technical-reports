@@ -1,5 +1,5 @@
 indexpage:
-  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, start instead with the link:https://docs.netapp.com/us-en/ontap/[ONTAP Documentation].
+  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, start instead with the ONTAP Documentation https://docs.netapp.com/us-en/ontap/.
   tiles:
     - title: SAN Protocols
       links:
