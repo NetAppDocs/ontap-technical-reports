@@ -1,6 +1,7 @@
 ---
 layout: landing-page
 sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP
 permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "summary, used for search results"
