@@ -1,5 +1,5 @@
 settings:
-  name: "Product Name"
+  name: "ONTAP 9 Technical Reports"
   internal:
     pdf_enabled: true
   prod:
