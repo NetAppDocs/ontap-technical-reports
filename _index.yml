@@ -1,38 +1,73 @@
 indexpage:
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, start instead with the link:https://docs.netapp.com/us-en/ontap/[ONTAP Documentation].
   tiles:
-    # one or more tile definitions for the page
-    - title: Quick references
+    - title: SAN Protocols
       links:
-        # one or more links on the tile
-        - title: Links
-          url: adoc-syntax-links.html
-        - title: Text formatting
-          url: adoc-syntax-formatting.html
-        - title: Images and videos 
-          url: adoc-syntax-visuals.html
-    - title: Structural notation
+        - title: NVMeoFC
+          url: 
+        - title: NVMeoTCP
+          url:
+        - title: Fibre Channel
+          url: 
+        - title: iSCSI
+          url: 
+    - title: NAS Protocols
       links:
-        # one or more links on the tile
-        - title: Lists
-          url: adoc-syntax-lists.html
-        - title: Tables
-          url: adoc-syntax-tables.html
-        - title: Tab blocks
-          url: adoc-syntax-tabs.html
-    - title: Visual elements
+        - title: NFS
+          url: 
+        - title: SMB
+          url:
+        - title: S3
+          url: 
+        - title: NFS over RDMA
+          url:                     
+    - title: Security
       links:
-        # one or more links on the tile
-        - title: Images
-          url: adoc-syntax-images.html
-        - title: Videos
-          url: adoc-syntax-videos.html
-        - title: Accessible text
-          url: adoc-syntax-alt-text.html
-    - title: Other
+        - title: 
+          url: 
+    - title: FlexCache, FlexGroup, FlexVol volumes
       links:
-        # one or more links on the tile
-        - title: Content reuse
-          url: adoc-syntax-content-reuse.html
-        - title: Common legal
-          url: adoc-syntax-common-legal.html
+        - title: FlexVol volumes
+          url: 
+        - title: FlexGroup Volumes
+          url: 
+        - title: FlexCache
+          url: 
+    - title: Storage Efficiency
+      links:
+        - title: 
+          url: 
+    - title: Databases
+      links:
+        - title: 
+          url: 
+    - title: Virtualization
+      links:
+        - title: 
+          url:
+    - title: Disaster Recovery
+      links:
+        - title: SnapMirror Synchronous
+          url: 
+        - title: SnapMirror Asynchronous
+          url: 
+    - title: Business Continuity
+      links:
+        - title: MetroCluster
+          url: 
+        - title: SnapMirror Business Continuity
+          url: 
+    - title: 
+      links:
+        - title: 
+          url: 
+    - title: SnapCenter
+      links:
+        - title: SnapCenter for Oracle
+          url: 
+        - title: SnapCenter for MSSQL
+          url: 
+        - title: SnapCenter for Virtualization
+          url: 
+        - title: SnapCenter Service
+          url:                               
