@@ -6,9 +6,13 @@ permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "summary, used for search results"
 ---
-= ONTAP Technical Reports
+= ONTAP 9 Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
+
+ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+
+If you need procedural ONTAP documentation, start instead with the link:https://docs.netapp.com/us-en/ontap-family/[ONTAP Documentation]
