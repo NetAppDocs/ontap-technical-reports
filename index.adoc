@@ -6,7 +6,7 @@ permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "summary, used for search results"
 ---
-= replace with repository name
+= ONTAP Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font
