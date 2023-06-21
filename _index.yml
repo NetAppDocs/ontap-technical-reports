@@ -1,9 +1,38 @@
 indexpage:
-  lead: # single paragraph, shown on the page
+  lead: 
   tiles:
     # one or more tile definitions for the page
-  - title: TEST1
-    links:
-      # one or more links on the tile
-      - title: TEST
-        url: test.html
+    - title: Quick references
+      links:
+        # one or more links on the tile
+        - title: Links
+          url: adoc-syntax-links.html
+        - title: Text formatting
+          url: adoc-syntax-formatting.html
+        - title: Images and videos 
+          url: adoc-syntax-visuals.html
+    - title: Structural notation
+      links:
+        # one or more links on the tile
+        - title: Lists
+          url: adoc-syntax-lists.html
+        - title: Tables
+          url: adoc-syntax-tables.html
+        - title: Tab blocks
+          url: adoc-syntax-tabs.html
+    - title: Visual elements
+      links:
+        # one or more links on the tile
+        - title: Images
+          url: adoc-syntax-images.html
+        - title: Videos
+          url: adoc-syntax-videos.html
+        - title: Accessible text
+          url: adoc-syntax-alt-text.html
+    - title: Other
+      links:
+        # one or more links on the tile
+        - title: Content reuse
+          url: adoc-syntax-content-reuse.html
+        - title: Common legal
+          url: adoc-syntax-common-legal.html
