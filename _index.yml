@@ -14,13 +14,13 @@ indexpage:
     - title: NAS Protocols
       links:
         - title: NFS
-          url: 
+          url: nas.html
         - title: SMB
-          url:
+          url: nas.html
         - title: S3
-          url: 
+          url: nas.html
         - title: NFS over RDMA
-          url:                     
+          url: nas.html
     - title: Security
       links:
         - title: TR-4572 The NetApp Solution for Ransomware
@@ -33,14 +33,18 @@ indexpage:
       links:
         - title: FlexVol volumes
           url: 
-        - title: FlexGroup Volumes
+        - title: FlexGroup volumes
           url: 
         - title: FlexCache
           url: 
     - title: Storage Efficiency
       links:
-        - title: 
-          url: 
+        - title: Deduplication
+          url: storage-efficiency.html
+        - title: Compression
+          url: storage-efficiency.html
+        - title: Compaction
+          url: storage-efficiency.html
     - title: Databases
       links:
         - title: Oracle Technical Reports
@@ -74,13 +78,9 @@ indexpage:
     - title: Business Continuity
       links:
         - title: MetroCluster
-          url: 
+          url: metrocluster.html
         - title: SnapMirror Business Continuity
-          url: 
-    - title: 
-      links:
-        - title: 
-          url: 
+          url: snammirror-business-continuity.html
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle

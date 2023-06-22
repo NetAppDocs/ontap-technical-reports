@@ -1,0 +1,14 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, SnapMirror Business Continuity, SMBC, SM-BC
+permalink: index.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: ""
+---
+= SnapMirror Business Continuity (SM-BC)
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
