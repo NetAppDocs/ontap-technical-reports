@@ -23,11 +23,11 @@ indexpage:
           url: nas.html
     - title: Security
       links:
-        - title: TR-4572 The NetApp Solution for Ransomware
+        - title: Ransomware
           url: security.html
-        - title: ONTAP Hardening Guides
+        - title: Hardening Guide
           url: security.html
-        - title: TR-4829 NetApp and Zero Trust
+        - title: Zero Trust
           url: security.html
     - title: FlexCache, FlexGroup, FlexVol volumes
       links:
@@ -57,15 +57,15 @@ indexpage:
           url: databases.html
     - title: Virtualization
       links:
-        - title: TR-4597 VMware vSphere for ONTAP
+        - title: VMware vSphere for ONTAP
           url: virtualization.html
-        - title: TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
+        - title: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
           url: virtualization.html
-        - title: TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9
+        - title: VMware Site Recovery Manager with NetApp ONTAP 9
           url: virtualization.html
-        - title: WP-7353 ONTAP tools for VMware vSphere - Product Security
+        - title: ONTAP tools for VMware vSphere - Product Security
           url: virtualization.html
-        - title: WP-7355 SnapCenter Plug-in VMware vSphere - Product security
+        - title: SnapCenter Plug-in VMware vSphere - Product security
           url: virtualization.html
         - title: Introduction to automation for ONTAP and vSphere
           url: virtualization.html
