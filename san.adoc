@@ -17,9 +17,7 @@ This technical report provides an overview of the block protocols in NetApp® ON
     - link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[Best practices for modern SAN in ONTAP 9]
 
 This technical report describes how to implement and configure NVMe-oF transports (NVMe/FC and NVMe/TCP). It includes design, implementation, configuration, management guidelines and best practices to build highly available, high-performance modern SAN solutions using NVMe protocols and transports.
-
     - link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[Implementing and configuring modern SANs with NVMe-oF]
 
 This technical report introduces NetApp® ONTAP® AFF All SAN Array (ASA) systems and covers implementation and best practices recommendations for always-available, business-critical SAN configurations. This version of the technical report corresponds to ONTAP 9.9.1.
-
     - link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[ONTAP AFF All SAN Array (ASA)systems]
