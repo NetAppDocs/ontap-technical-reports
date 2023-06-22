@@ -1,0 +1,28 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, VMware
+permalink: virtualization.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "summary, used for search results"
+---
+= Virtualization Technical Reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+    - link:../../netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
+
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
+
+TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9
+https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html
+WP-7353 ONTAP tools for VMware vSphere - Product Security
+https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html
+
+WP-7355 SnapCenter Plug-in VMware vSphere - Product security
+https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html
+Introduction to automation for ONTAP and vSphere
+ https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html
