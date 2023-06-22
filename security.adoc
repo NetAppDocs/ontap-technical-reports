@@ -1,7 +1,7 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, security, ransomware, PCI, PCI-DSS, Hardening Guide, FIPS, Zero Trust, MFA, Multifactor Authentication
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MFA
 permalink: security.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical reports provide the best-practice recommendations for securing ONTAP"
@@ -15,11 +15,11 @@ summary: "These technical reports provide the best-practice recommendations for 
 
 TR-4829: NetApp and Zero Trust
 
--Hardening Guides
+== Hardening Guides
 TR-4569: Security Hardening Guide for NetApp ONTAP 9
 TR-4513: Security Hardening Guide Clustered Data ONTAP v8_3_x
 
--Ransomware
+== Ransomware
 TR-4572: The NetApp Solution for Ransomware
 
 
