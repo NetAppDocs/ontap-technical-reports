@@ -1,9 +1,97 @@
 indexpage:
-  lead: # single paragraph, shown on the page
+  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, start instead with the ONTAP Documentation https://docs.netapp.com/us-en/ontap/.
   tiles:
-    # one or more tile definitions for the page
-  - title: # short string (tile title)
-    links:
-      # one or more links on the tile
-      - title: # short string (link title)
-        url: # single file name or external URL
+    - title: SAN Protocols
+      links:
+        - title: NVMeoFC
+          url: 
+        - title: NVMeoTCP
+          url:
+        - title: Fibre Channel
+          url: 
+        - title: iSCSI
+          url: 
+    - title: NAS Protocols
+      links:
+        - title: NFS
+          url: 
+        - title: SMB
+          url:
+        - title: S3
+          url: 
+        - title: NFS over RDMA
+          url:                     
+    - title: Security
+      links:
+        - title: ONTAP Hardening Guide
+          url: 
+        - title: 
+          url:      
+        - title: 
+          url:                   
+        - title: 
+          url:    
+        - title: 
+          url:                      
+    - title: FlexCache, FlexGroup, FlexVol volumes
+      links:
+        - title: FlexVol volumes
+          url: 
+        - title: FlexGroup Volumes
+          url: 
+        - title: FlexCache
+          url: 
+    - title: Storage Efficiency
+      links:
+        - title: 
+          url: 
+    - title: Databases
+      links:
+        - title: Oracle Technical Reports
+          url: databases.html
+        - title: MSSQL Technical Reports
+          url: databases.html
+        - title: SAP Technical Reports
+          url: databases.html
+        - title: OpenSource  Technical Reports
+          url: databases.html
+    - title: Virtualization
+      links:
+        - title: TR-4597 VMware vSphere for ONTAP
+          url: virtualization.html
+        - title: TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
+          url: virtualization.html
+        - title: TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9
+          url: virtualization.html
+        - title: WP-7353 ONTAP tools for VMware vSphere - Product Security
+          url: virtualization.html
+        - title: WP-7355 SnapCenter Plug-in VMware vSphere - Product security
+          url: virtualization.html
+        - title: Introduction to automation for ONTAP and vSphere
+          url: virtualization.html
+    - title: Disaster Recovery
+      links:
+        - title: SnapMirror Synchronous
+          url: snapmirror.html
+        - title: SnapMirror Asynchronous
+          url: snapmirror.html
+    - title: Business Continuity
+      links:
+        - title: MetroCluster
+          url: 
+        - title: SnapMirror Business Continuity
+          url: 
+    - title: 
+      links:
+        - title: 
+          url: 
+    - title: SnapCenter
+      links:
+        - title: SnapCenter for Oracle
+          url: 
+        - title: SnapCenter for MSSQL
+          url: 
+        - title: SnapCenter for Virtualization
+          url: 
+        - title: SnapCenter Service
+          url:                               

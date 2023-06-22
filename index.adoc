@@ -1,12 +1,12 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "summary, used for search results"
+summary: "ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities."
 ---
-= ONTAP Technical Reports
+= ONTAP 9 Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font
