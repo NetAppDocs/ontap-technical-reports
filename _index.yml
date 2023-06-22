@@ -23,16 +23,12 @@ indexpage:
           url:                     
     - title: Security
       links:
-        - title: ONTAP Hardening Guide
-          url: 
-        - title: 
-          url:      
-        - title: 
-          url:                   
-        - title: 
-          url:    
-        - title: 
-          url:                      
+        - title: TR-4572 The NetApp Solution for Ransomware
+          url: security.html
+        - title: ONTAP Hardening Guides
+          url: security.html
+        - title: TR-4829 NetApp and Zero Trust
+          url: security.html
     - title: FlexCache, FlexGroup, FlexVol volumes
       links:
         - title: FlexVol volumes

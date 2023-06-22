@@ -1,0 +1,38 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, security, ransomware, PCI, PCI-DSS, Hardening Guide, FIPS, Zero Trust, MFA, Multifactor Authentication
+permalink: security.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "These technical reports provide the best-practice recommendations for securing ONTAP"
+---
+= Security
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+TR-4829: NetApp and Zero Trust
+
+-Hardening Guides
+TR-4569: Security Hardening Guide for NetApp ONTAP 9
+TR-4513: Security Hardening Guide Clustered Data ONTAP v8_3_x
+
+-Ransomware
+TR-4572: The NetApp Solution for Ransomware
+
+
+TR-4160: Secure Multitenancy in ONTAP
+TR-4303: Logging in Clustered Data ONTAP
+TR-4401: PCI-DSS 3.2 and ONTAP 9
+
+TR-4526: Compliant WORM storage using NetApp SnapLock
+
+TR-4647: Multifactor-Authentication-in-ONTAP9.3
+
+TR-4717: ONTAP SSH Authentication with a Common Access Card
+
+TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later
+
+TR-4781: FIPS 140-2
