@@ -72,9 +72,9 @@ indexpage:
     - title: Disaster Recovery
       links:
         - title: SnapMirror Synchronous
-          url: 
+          url: snapmirror.html
         - title: SnapMirror Asynchronous
-          url: 
+          url: snapmirror.html
     - title: Business Continuity
       links:
         - title: MetroCluster
