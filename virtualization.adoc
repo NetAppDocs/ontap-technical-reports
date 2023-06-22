@@ -1,10 +1,10 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, VMware, 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, VMware, vVols, SRM, SRA, Site Recovery Manager, OTV, ONTAP Tools for VMware, SnapCenter for VMware, SnapCenter
 permalink: virtualization.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "summary, used for search results"
+summary: "NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud."
 ---
 = Virtualization Technical Reports
 :hardbreaks:
@@ -13,14 +13,16 @@ summary: "summary, used for search results"
 :linkattrs:
 :imagesdir: ./media/
 
-    - link:../../netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
+NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
-    - link:../../netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
 
-    - link:../../netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9]
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
 
-    - link:../../netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353 ONTAP tools for VMware vSphere - Product Security]
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9]
 
-    - link:../../netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product Security]
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353 ONTAP tools for VMware vSphere - Product Security]
 
-    - link:../../netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to Automation for ONTAP and vSphere]
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product Security]
+
+    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to Automation for ONTAP and vSphere]
