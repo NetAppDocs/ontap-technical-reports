@@ -21,6 +21,6 @@ summary: "summary, used for search results"
 
     - link:../../netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353 ONTAP tools for VMware vSphere - Product Security]
 
-    - link:../../netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product security]
+    - link:../../netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product Security]
 
-    - link:../../netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to automation for ONTAP and vSphere]
+    - link:../../netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to Automation for ONTAP and vSphere]
