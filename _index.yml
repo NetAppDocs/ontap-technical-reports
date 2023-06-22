@@ -52,17 +52,17 @@ indexpage:
     - title: Virtualization
       links:
         - title: TR-4597 VMware vSphere for ONTAP
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html
+          url: virtualization.html
         - title: TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html
+          url: virtualization.html
         - title: TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html
+          url: virtualization.html
         - title: WP-7353 ONTAP tools for VMware vSphere - Product Security
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html
+          url: virtualization.html
         - title: WP-7355 SnapCenter Plug-in VMware vSphere - Product security
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html
+          url: virtualization.html
         - title: Introduction to automation for ONTAP and vSphere
-          url: https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html
+          url: virtualization.html
     - title: Disaster Recovery
       links:
         - title: SnapMirror Synchronous
