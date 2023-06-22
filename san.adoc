@@ -6,7 +6,7 @@ permalink: san.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "summary, used for search results"
 ---
-= MetroCluster
+= SAN
 :hardbreaks:
 :nofooter:
 :icons: font
