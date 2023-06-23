@@ -6,7 +6,7 @@ permalink: storage-efficiency.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: ""
 ---
-= Business continuity technical reports
+= Storage efficiency technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -14,6 +14,6 @@ summary: ""
 :imagesdir: ./media/
 
 Procedural documentation for deduplication can be found at link:
-Procedural documentation for SnapMirror Business Continuity can be found at link:
+Procedural documentation for compression can be found at link:
 
 == Technical reports
