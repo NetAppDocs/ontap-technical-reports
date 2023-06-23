@@ -6,7 +6,7 @@ permalink: san.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations"
 ---
-= SAN
+= SAN Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font

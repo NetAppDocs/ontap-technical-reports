@@ -6,7 +6,7 @@ permalink: security.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical reports provide the best-practice recommendations for securing ONTAP"
 ---
-= Security
+= Security Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font

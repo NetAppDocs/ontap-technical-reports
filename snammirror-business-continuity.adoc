@@ -6,9 +6,14 @@ permalink: snapmirror-business-continuity.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: ""
 ---
-= SnapMirror Business Continuity (SM-BC)
+= SnapMirror Business Continuity (SM-BC) Technical Reports
 :hardbreaks:
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
+
+[LABEL]
+====
+Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity]
+====
