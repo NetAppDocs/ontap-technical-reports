@@ -15,8 +15,7 @@ summary: "These technical report provides an overview of the FabricPool in NetAp
 Procedural documentation for SAN can be found at link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[Fabric Pool documentation]
 
 == Technical reports
-
-
+This technical report describes best practices for the NetApp® ONTAP® software component, FabricPool. The capabilities, requirements, implementation, and best practices for this software are covered in this report.
 
     - link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[]
 
