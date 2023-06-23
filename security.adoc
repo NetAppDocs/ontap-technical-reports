@@ -22,14 +22,16 @@ Zero Trust traditionally has been a network-centric approach of architecting mic
 === Hardening Guide
 This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
-    - link:https://www.netapp.com/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
+    - link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
 
 === Ransomware
 This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp® solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
 
-    - link:https://www.netapp.com/media/7334-tr4572.pdf[TR-4572: The NetApp Solution for Ransomware]
+    - link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp Solution for Ransomware]
 
-TR-4526: Compliant WORM storage using NetApp SnapLock
+Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer to their data protection roadmap. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock]
 
 TR-4160: Secure Multitenancy in ONTAP
 
@@ -37,19 +39,17 @@ TR-4303: Logging in Clustered Data ONTAP
 
 TR-4401: PCI-DSS 3.2 and ONTAP 9
 
-TR-4526: Compliant WORM storage using NetApp SnapLock
-
 === Authentication
 This document covers multifactor authentication capability for administrative access introduced in NetApp® ONTAP® 9.3 software for NetApp System Manager, Active IQ® Unified Manager and ONTAP Secure Shell (SSH) CLI authentication.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647pdf.pdf[TR-4647: Multifactor-Authentication-in-ONTAP9.3]
+    - link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor-Authentication-in-ONTAP9.3]
 
 This technical report describes configuring and testing third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
 
-    -link:https://www.netapp.com/media/17036-tr4717.pdf[TR-4717: ONTAP SSH Authentication with a Common Access Card]
+    - link:https://www.netapp.com/pdf.html?item=/media/17036-tr4717.pdf[TR-4717: ONTAP SSH Authentication with a Common Access Card]
 
 === Key Management
 This guide describes how to use the HyTrust KeyControl external key management solution for NetApp® ONTAP® 9.3 or later data management software. Topics include installation and configuration of the HyTrust KeyControl Key Management Interoperability Protocol Key Management server (KMIP server) and ONTAP 9.3 or later. This guide also offers a step-by-step example of the configuration steps, using
 HyTrust KeyControl as the KMIP server.
 
-    - link:https://www.netapp.com/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later]
+    - link:https://www.netapp.com/pdf.html?item=/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later]
