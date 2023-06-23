@@ -54,6 +54,6 @@ HyTrust KeyControl as the KMIP server.
     - link:https://www.netapp.com/pdf.html?item=/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later]
 
 === Standards
-    This technical report is targeted at qualified security assessors and storage administrators focused on validating a system against the PCI DSS 4.0 standard. This document provides guidance for meeting the requirements of the controls that you apply to the NetApp® ONTAP® 9 storage system. 
+This technical report is targeted at qualified security assessors and storage administrators focused on validating a system against the PCI DSS 4.0 standard. This document provides guidance for meeting the requirements of the controls that you apply to the NetApp® ONTAP® 9 storage system. 
 
     - link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401pdf.pdf[TR-4401: PCI-DSS 4.0 and ONTAP 9]
