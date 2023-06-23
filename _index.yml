@@ -78,9 +78,9 @@ indexpage:
     - title: Business Continuity
       links:
         - title: MetroCluster
-          url: metrocluster.html
+          url: business-continuity.html
         - title: SnapMirror Business Continuity
-          url: snammirror-business-continuity.html
+          url: business-continuity.html
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
