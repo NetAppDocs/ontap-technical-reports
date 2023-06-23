@@ -13,10 +13,7 @@ summary: ""
 :linkattrs:
 :imagesdir: ./media/
 
-
-====
 Procedural documentation for deduplication can be found at link:
 Procedural documentation for SnapMirror Business Continuity can be found at link:
-====
 
 == Technical reports

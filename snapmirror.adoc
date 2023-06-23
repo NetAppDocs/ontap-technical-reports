@@ -13,9 +13,6 @@ summary: "summary, used for search results"
 :linkattrs:
 :imagesdir: ./media/
 
-[LABEL]
-====
 Procedural documentation for SnapMirror  can be found at link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[SnapMirror Documentation]
-====
 
 == Technical reports
