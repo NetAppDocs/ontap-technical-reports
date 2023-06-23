@@ -6,7 +6,7 @@ permalink: databases.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "summary, used for search results"
 ---
-= Database Technical Reports
+= Database technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

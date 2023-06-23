@@ -6,7 +6,7 @@ permalink: business-continuity.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: ""
 ---
-= Business Continuity Technical Reports
+= Business continuity technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

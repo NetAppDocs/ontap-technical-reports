@@ -1,0 +1,32 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: data-protection-disaster-recovery.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: ""
+---
+= Data protection and disaster recovery technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[LABEL]
+====
+Procedural documentation for MetroCluster can be found at link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[MetroCluster Documentation]
+Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity Documentation]
+====
+
+This document contains information and best practices for configuring NetApp® SnapMirror® replication.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Configuration and Best Practices]
+
+This document contains information and best practices for configuring NetApp® SnapMirror® Synchronous (SM-S) replication.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733 SnapMirror Synchronous Configuration and Best Practices]
+
+Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage. 
+
+    - link:https://www.netapp.com/media/6158-tr4526.pdf[TR-4526: Compliant WORM Storage Using SnapLock]

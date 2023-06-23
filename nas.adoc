@@ -6,7 +6,7 @@ permalink: nas.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical reports provide the best-practice recommendations for NAS on ONTAP"
 ---
-= NAS Technical Reports
+= NAS technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

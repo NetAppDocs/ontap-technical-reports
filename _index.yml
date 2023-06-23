@@ -1,7 +1,7 @@
 indexpage:
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, start instead with the ONTAP Documentation https://docs.netapp.com/us-en/ontap/.
   tiles:
-    - title: SAN Protocols
+    - title: SAN protocols
       links:
         - title: NVMeoFC
           url: san.html
@@ -11,7 +11,7 @@ indexpage:
           url:  san.html
         - title: iSCSI
           url: san.html
-    - title: NAS Protocols
+    - title: NAS protocols
       links:
         - title: NFS
           url: nas.html
@@ -37,7 +37,7 @@ indexpage:
           url: 
         - title: FlexCache
           url: 
-    - title: Storage Efficiency
+    - title: Storage efficiency
       links:
         - title: Deduplication
           url: storage-efficiency.html
@@ -47,7 +47,7 @@ indexpage:
           url: storage-efficiency.html
     - title: Databases
       links:
-        - title: Oracle Technical Reports
+        - title: Oracle technical reports
           url: databases.html
         - title: MSSQL Technical Reports
           url: databases.html
@@ -69,12 +69,12 @@ indexpage:
           url: virtualization.html
         - title: Introduction to automation for ONTAP and vSphere
           url: virtualization.html
-    - title: Disaster Recovery
+    - title: Data protection and disaster recovery
       links:
         - title: SnapMirror Synchronous
-          url: snapmirror.html
+          url: data-protection-disaster-recovery.html
         - title: SnapMirror Asynchronous
-          url: snapmirror.html
+          url: data-protection-disaster-recovery.html
     - title: Business Continuity
       links:
         - title: MetroCluster

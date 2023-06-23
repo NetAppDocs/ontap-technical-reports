@@ -10,23 +10,23 @@ sidebar:
   entries:
     - title: ONTAP Technical Reports
       url: /index.html
-    - title: SAN Protocols
+    - title: SAN protocols
       url: /san.html
-    - title: NAS Protocols
+    - title: NAS protocols
       url: /nas.html
     - title: Security
       url: /security.html
     - title: FlexCache, FlexGroup, FlexVol volumes
       url: /tbd.html
-    - title: Storage Efficiency
+    - title: Storage efficiency
       url: /storage-efficiency.html
-    - title: Applications and Databases
+    - title: Applications and databases
       url: /apps-dbs.html
     - title: Virtualization
       url: /virtualization.html
-    - title: Disaster Recovery
-      url: /disaster-recovery.html
-    - title: Business Continuity
+    - title: Disaster recovery
+      url: /data-protection-disaster-recovery.html
+    - title: Business continuity
       url: /business-continuity.html
     - title: SnapCenter
       url: /snapcenter.html                                                  
