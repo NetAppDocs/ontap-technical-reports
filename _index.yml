@@ -29,7 +29,7 @@ indexpage:
           url: security.html
         - title: Hardening Guide
           url: security.html
-        - title: Authentication (SAML, SSH, MFA, etc.)
+        - title: Authentication (SSH, MFA, etc.)
           url: security.html
         - title: Key Management
           url: security.html
