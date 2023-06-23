@@ -48,15 +48,15 @@ indexpage:
     - title: Databases
       links:
         - title: ONTAP for enterprise applications
-          url: databases.html
+          url: apps-dbs.html
         - title: MS SQL Server on ONTAP
-          url: databases.html
+          url: apps-dbs.html
         - title: Oracle on ONTAP
-          url: databases.html
+          url: apps-dbs.html
         - title: SAP HANA on ONTAP
-          url: databases.html
+          url: apps-dbs.html
         - title: Other databases on ONTAP
-          url: databases.html
+          url: apps-dbs.html
     - title: Virtualization
       links:
         - title: VMware vSphere for ONTAP
