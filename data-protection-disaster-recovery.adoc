@@ -13,8 +13,7 @@ summary: ""
 :linkattrs:
 :imagesdir: ./media/
 
-Procedural documentation for MetroCluster can be found at link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[MetroCluster Documentation]
-Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity Documentation]
+Procedural documentation for SnapMirror can be found at link:
 
 == Technical reports
 This document contains information and best practices for configuring NetApp® SnapMirror® replication.

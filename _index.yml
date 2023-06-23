@@ -3,9 +3,9 @@ indexpage:
   tiles:
     - title: SAN protocols
       links:
-        - title: NVMeoFC
+        - title: NVMe over Fibre Channel
           url: san.html
-        - title: NVMeoTCP
+        - title: NVMe over TCP
           url: san.html
         - title: Fibre Channel
           url:  san.html
