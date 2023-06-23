@@ -8,7 +8,7 @@ settings:
 
 sidebar:
   entries:
-    - title: ONTAP Technical Reports
+    - title: ONTAP technical reports
       url: /index.html
     - title: SAN protocols
       url: /san.html

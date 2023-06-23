@@ -6,7 +6,7 @@ permalink: san.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations"
 ---
-= SAN Technical Reports
+= SAN technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -18,8 +18,7 @@ summary: "These technical report provides an overview of the block protocols in 
 Procedural documentation for SAN can be found at link:https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN Storage Management Documentation]
 ====
 
-
-== Technical Reports
+== Technical reports
 This technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations.
 
     - link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP 9]

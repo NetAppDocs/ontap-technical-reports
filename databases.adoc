@@ -12,3 +12,5 @@ summary: "summary, used for search results"
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
+
+== Technical reports
