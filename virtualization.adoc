@@ -13,9 +13,10 @@ summary: "NetApp provides many best practices and solutions for a robust virtual
 :linkattrs:
 :imagesdir: ./media/
 
-== Technical reports
+[lead]
 NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
+== Technical reports
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]

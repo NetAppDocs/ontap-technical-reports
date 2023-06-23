@@ -14,14 +14,17 @@ summary: "These technical reports provide the best-practice recommendations for 
 :imagesdir: ./media/
 
 == Technical reports
-TR-4829: NetApp and Zero Trust
+=== Zero Trust
+Zero Trust traditionally has been a network-centric approach of architecting micro core and perimeter (MCAP) to protect data, services, applications, or assets with controls known as a segmentation gateway. NetApp® ONTAP® takes a data-centric approach to Zero Trust in which the storage management system becomes the segmentation gateway to protect and monitor access of our customer’s data. In particular, the FPolicy™ Zero Trust engine and the FPolicy partner ecosystem becomes a control center to gain a detailed understanding of normal and aberrant data access patterns and identify insider threats.
+    - link:https://www.netapp.com/pdf.html?item=/media/19756-tr-4829.pdf[TR-4829: NetApp and Zero Trust]
 
-=== Hardening Guides
-TR-4569: Security Hardening Guide for NetApp ONTAP 9
-TR-4513: Security Hardening Guide Clustered Data ONTAP v8_3_x
+=== Hardening Guide
+This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+    - link:https://www.netapp.com/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
 
 === Ransomware
-TR-4572: The NetApp Solution for Ransomware
+This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp® solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
+    - link:https://www.netapp.com/media/7334-tr4572.pdf[TR-4572: The NetApp Solution for Ransomware]
 
 
 TR-4160: Secure Multitenancy in ONTAP
