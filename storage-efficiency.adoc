@@ -1,0 +1,22 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: storage-efficiency.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: ""
+---
+= Business continuity technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+
+====
+Procedural documentation for deduplication can be found at link:
+Procedural documentation for SnapMirror Business Continuity can be found at link:
+====
+
+== Technical reports
