@@ -33,10 +33,8 @@ indexpage:
           url: security.html
         - title: Key Management
           url: security.html
-    - title: FlexCache, FlexGroup, FlexVol volumes
+    - title: FlexCache and FlexGroup volumes
       links:
-        - title: FlexVol volumes
-          url: things-that-start-with-f.html
         - title: FlexGroup volumes
           url: things-that-start-with-f.html
         - title: FlexCache
