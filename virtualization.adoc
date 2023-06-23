@@ -17,15 +17,15 @@ summary: "NetApp provides many best practices and solutions for a robust virtual
 NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
 == Technical reports
-    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597: VMware vSphere for ONTAP]
 
-    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
 
-    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9]
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP 9]
 
-    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353 ONTAP tools for VMware vSphere - Product Security]
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353: ONTAP tools for VMware vSphere - Product Security]
 
-    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product Security]
+    - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355: SnapCenter Plug-in VMware vSphere - Product Security]
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to Automation for ONTAP and vSphere]
     

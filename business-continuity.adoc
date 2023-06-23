@@ -17,3 +17,19 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
 
 == Technical reports
+=== NetApp MetroCluster
+This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf[TR-4705: NetApp MetroCluster Solution architecture and design]
+
+=== MetroCluster IP
+NetApp® MetroCluster is a continuously available storage solution for NetApp ONTAP® running on FAS and AFF systems. MetroCluster IP is the latest evolution that uses an Ethernet-based back-end storage fabric. MetroCluster IP provides a highly redundant configuration to meet the needs of the most critical business applications. MetroCluster IP is included in ONTAP and provides NAS and SAN connectivity for clients and servers that use ONTAP storage.
+
+    - link:http://www.netapp.com/us/media/tr-4689.pdf[TR-4689: NetApp MetroCluster IP]
+
+=== MetroCluster FC
+NetApp MetroCluster provides continuous data availability across geographically separated data centers
+for mission-critical applications. This document provides technical information about NetApp® MetroCluster FC.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375pdf.pdf[TR-4375: NetApp MetroCluster FC]
+

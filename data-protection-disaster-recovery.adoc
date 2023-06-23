@@ -27,3 +27,7 @@ This document contains information and best practices for configuring NetApp® S
 Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage. 
 
     - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM Storage Using SnapLock]
+
+This document covers data protection and backup for NetApp® ONTAP® FlexGroup volumes. Topics include NetApp Snapshot™ copies, NetApp SnapMirror®, and other data protection and backup solutions. 
+
+    - link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678pdf.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes]
