@@ -18,7 +18,7 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 
 == Technical reports
 === NFS
-This document provides basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
+This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
     - link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP Best practice and implementation guide]
 
@@ -28,15 +28,15 @@ This technical report covers how to configure Lightweight Directory Access Proto
     - link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP Multiprotocol NAS identity management]
 
 === Name Services
-This document explains how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
+This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
 
     - https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS Load Balancing in ONTAP]
 
-This document provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp® ONTAP®.
+This technical report provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp® ONTAP®.
 
     - link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668pdf.pdf[TR-4668: Name Services Best Practices Guide (ONTAP 9.3 and later)]
 
 === NAS Security
-This document covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
+This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
 
     - link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]
