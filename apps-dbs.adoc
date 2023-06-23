@@ -1,0 +1,34 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: apps-dbs.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures."
+---
+= Database technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[lead]
+ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures.
+
+== Technical reports
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/index.html[ONTAP for Enterprise Applications]
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[MS SQL Server on ONTAP]
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/index.html[Oracle on ONTAP]
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/hana/index.html[SAP HANA on ONTAP]
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/postgres/index.html[PostgreSQL on ONTAP]
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/index.html[MariaDB and MySQL on ONTAP]
+
+
+
