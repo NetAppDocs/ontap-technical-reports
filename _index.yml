@@ -23,11 +23,15 @@ indexpage:
           url: nas.html
     - title: Security
       links:
+        - title: Zero Trust
+          url: security.html
         - title: Ransomware
           url: security.html
         - title: Hardening Guide
           url: security.html
-        - title: Zero Trust
+        - title: Authentication (SAML, SSH, MFA, etc.)
+          url: security.html
+        - title: Key Management
           url: security.html
     - title: FlexCache, FlexGroup, FlexVol volumes
       links:
@@ -37,6 +41,10 @@ indexpage:
           url: 
         - title: FlexCache
           url: 
+    - title: Tiering
+      links:
+        -title: FabricPool
+         url: tiering.html
     - title: Storage efficiency
       links:
         - title: Deduplication
