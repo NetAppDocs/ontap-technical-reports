@@ -16,4 +16,3 @@ summary: "ONTAP technical reports provide additional context for planning and op
 Need to add:
 
 Networking
-Fabric Pool - https://docs.netapp.com/us-en/ontap/fabricpool/index.html

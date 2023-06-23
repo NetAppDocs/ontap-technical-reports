@@ -1,0 +1,26 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: tiering.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "These technical report provides an overview of the FabricPool in NetApp® ONTAP® 9 data management software as well as best-practice recommendations"
+---
+= Tiering technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+
+Procedural documentation for SAN can be found at link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[Fabric Pool documentation]
+
+== Technical reports
+
+
+
+    - link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[]
+
+In this document, we discuss best practices and recommendations for deploying and sizing NetApp® StorageGRID® as a capacity tier for the NetApp ONTAP® software component FabricPool. This document also covers capabilities, requirements, implementation, and best
+practices when using StorageGRID.
+
+    - link: https://www.netapp.com/pdf.html?item=/media/19403-tr-4826.pdf[NetApp FabricPool with StorageGRID Recommendation guide]
