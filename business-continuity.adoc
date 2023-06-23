@@ -33,3 +33,7 @@ for mission-critical applications. This document provides technical information 
 
     - link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375pdf.pdf[TR-4375: NetApp MetroCluster FC]
 
+=== SnapMirror Business Continuity (SM-BC)
+NetApp® SnapMirror® Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP® running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)]
