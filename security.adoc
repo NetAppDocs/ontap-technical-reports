@@ -29,6 +29,7 @@ This guide covers what ransomware is; how it has evolved; and how to identify, d
 
     - link:https://www.netapp.com/media/7334-tr4572.pdf[TR-4572: The NetApp Solution for Ransomware]
 
+TR-4526: Compliant WORM storage using NetApp SnapLock
 
 TR-4160: Secure Multitenancy in ONTAP
 
@@ -38,10 +39,17 @@ TR-4401: PCI-DSS 3.2 and ONTAP 9
 
 TR-4526: Compliant WORM storage using NetApp SnapLock
 
-TR-4647: Multifactor-Authentication-in-ONTAP9.3
+=== Authentication
+This document covers multifactor authentication capability for administrative access introduced in NetApp® ONTAP® 9.3 software for NetApp System Manager, Active IQ® Unified Manager and ONTAP Secure Shell (SSH) CLI authentication.
 
-TR-4717: ONTAP SSH Authentication with a Common Access Card
+    - link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647pdf.pdf[TR-4647: Multifactor-Authentication-in-ONTAP9.3]
 
-TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later
+This technical report describes configuring and testing third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
 
-TR-4781: FIPS 140-2
+    -link:https://www.netapp.com/media/17036-tr4717.pdf[TR-4717: ONTAP SSH Authentication with a Common Access Card]
+
+=== Key Management
+This guide describes how to use the HyTrust KeyControl external key management solution for NetApp® ONTAP® 9.3 or later data management software. Topics include installation and configuration of the HyTrust KeyControl Key Management Interoperability Protocol Key Management server (KMIP server) and ONTAP 9.3 or later. This guide also offers a step-by-step example of the configuration steps, using
+HyTrust KeyControl as the KMIP server.
+
+    - link:https://www.netapp.com/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later]
