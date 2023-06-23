@@ -18,13 +18,9 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 
 == Technical reports
 === NFS
-This document provides basic concepts, support information, configuration tips, and best
-practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions
-for currency and length. In most cases, the commands and best practices listed in this guide
-apply to all ONTAP versions.
+This document provides basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
-    -link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[NFS in NetApp ONTAP
-Best practice and implementation guide]
+    - link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[NFS in NetApp ONTAP Best practice and implementation guide]
 
 === SMB
 

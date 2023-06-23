@@ -1,0 +1,27 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: things-that-start-with-f.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: ""
+---
+= Things that start with F technical reports (Need a name for this group)
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+Procedural documentation for deduplication can be found at link:
+Procedural documentation for compression can be found at link:
+
+== Technical reports
+
+
+    - link:https://www.netapp.com/pdf.html?item=/media/7337-tr4557pdf.pdf[NetApp ONTAP FlexGroup Volumes - A Technical Overview]
+
+
+
+
+    - link:

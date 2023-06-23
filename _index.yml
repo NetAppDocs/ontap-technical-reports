@@ -36,14 +36,18 @@ indexpage:
     - title: FlexCache, FlexGroup, FlexVol volumes
       links:
         - title: FlexVol volumes
-          url: 
+          url: things-that-start-with-f.html
         - title: FlexGroup volumes
-          url: 
+          url: things-that-start-with-f.html
         - title: FlexCache
-          url: 
+          url: things-that-start-with-f.html
     - title: Tiering
       links:
         - title: FabricPool
+          url: tiering.html
+        - title: FabricPool with StorageGrid
+          url: tiering.html
+        - title: Database Storage Tiering with NetApp FabricPool
           url: tiering.html
     - title: Storage efficiency
       links:
