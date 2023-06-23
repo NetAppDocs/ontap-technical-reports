@@ -14,6 +14,6 @@ summary: ""
 :imagesdir: ./media/
 
 Procedural documentation for deduplication can be found at link:
-Procedural documentation for compression can be found at link:
+Procedural documentation for can be found at link:
 
 == Technical reports

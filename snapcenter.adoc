@@ -6,11 +6,11 @@ permalink: snapcenter.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical reports provide the best-practice recommendations for SnapCenter with ONTAP"
 ---
-= SnapCenter Technical Reports
+= SnapCenter technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
 
-== Technical reports
+== Technical Reports
