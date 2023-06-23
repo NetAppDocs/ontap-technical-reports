@@ -43,8 +43,8 @@ indexpage:
           url: 
     - title: Tiering
       links:
-        -title: FabricPool
-         url: tiering.html
+        - title: FabricPool
+          url: tiering.html
     - title: Storage efficiency
       links:
         - title: Deduplication
