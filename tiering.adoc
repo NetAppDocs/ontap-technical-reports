@@ -17,7 +17,7 @@ Procedural documentation for SAN can be found at link:https://docs.netapp.com/us
 == Technical reports
 This technical report describes best practices for the NetApp® ONTAP® software component, FabricPool. The capabilities, requirements, implementation, and best practices for this software are covered in this report.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[]
+    - link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[FabricPool best practices]
 
 In this document, we discuss best practices and recommendations for deploying and sizing NetApp® StorageGRID® as a capacity tier for the NetApp ONTAP® software component FabricPool. This document also covers capabilities, requirements, implementation, and best
 practices when using StorageGRID.
