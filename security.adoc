@@ -19,7 +19,7 @@ Zero Trust traditionally has been a network-centric approach of architecting mic
 
     - link:https://www.netapp.com/pdf.html?item=/media/19756-tr-4829.pdf[TR-4829: NetApp and Zero Trust]
 
-=== Hardening Guide
+=== ONTAP Hardening Guide
 This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
     - link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
@@ -33,11 +33,10 @@ Many businesses rely on some use of write once, read many (WORM) data storage to
 
     - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock]
 
-TR-4160: Secure Multitenancy in ONTAP
+=== Multitennancy
+This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp® ONTAP®, covering design considerations and best practices.
 
-TR-4303: Logging in Clustered Data ONTAP
-
-TR-4401: PCI-DSS 3.2 and ONTAP 9
+    - link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure Multitenancy in ONTAP]
 
 === Authentication
 This document covers multifactor authentication capability for administrative access introduced in NetApp® ONTAP® 9.3 software for NetApp System Manager, Active IQ® Unified Manager and ONTAP Secure Shell (SSH) CLI authentication.
@@ -53,3 +52,8 @@ This guide describes how to use the HyTrust KeyControl external key management s
 HyTrust KeyControl as the KMIP server.
 
     - link:https://www.netapp.com/pdf.html?item=/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl Key Management in ONTAP 9.3 or Later]
+
+=== Standards
+    This technical report is targeted at qualified security assessors and storage administrators focused on validating a system against the PCI DSS 4.0 standard. This document provides guidance for meeting the requirements of the controls that you apply to the NetApp® ONTAP® 9 storage system. 
+
+    - link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401pdf.pdf[TR-4401: PCI-DSS 4.0 and ONTAP 9]
