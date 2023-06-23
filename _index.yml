@@ -47,13 +47,15 @@ indexpage:
           url: storage-efficiency.html
     - title: Databases
       links:
-        - title: Oracle technical reports
+        - title: ONTAP for enterprise applications
           url: databases.html
-        - title: MSSQL Technical Reports
+        - title: MS SQL Server on ONTAP
           url: databases.html
-        - title: SAP Technical Reports
+        - title: Oracle on ONTAP
           url: databases.html
-        - title: OpenSource  Technical Reports
+        - title: SAP HANA on ONTAP
+          url: databases.html
+        - title: Other databases on ONTAP
           url: databases.html
     - title: Virtualization
       links:
