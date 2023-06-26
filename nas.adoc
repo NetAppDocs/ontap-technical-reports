@@ -29,10 +29,7 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 *link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543pdf.pdf[TR-4543 SMB Protocol Best Practices ]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
 
 === ONTAP S3
-*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service
-(S3) with NetApp® ONTAP® software. We also cover capabilities and configurations for using
-ONTAP as an object store with native S3 applications or as a tiering destination for NetApp
-FabricPool.
+*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service (S3) with NetApp® ONTAP® software. We also cover capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for NetApp FabricPool.
 
 === Name Services
 *link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP]* - This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.

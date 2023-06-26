@@ -26,7 +26,6 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/rac.html[Oracle RAC with SM-BC]* - 
 
-
 == NetApp MetroCluster
 *link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf[TR-4705: NetApp MetroCluster solution architecture and design]* - This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
 

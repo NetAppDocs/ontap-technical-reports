@@ -31,6 +31,8 @@ sidebar:
     - title: Business continuity
       url: /business-continuity.html
     - title: SnapCenter
-      url: /snapcenter.html                                                  
+      url: /snapcenter.html      
+    - title: Networking
+      url: /networking.html                                                 
     - title: Legal notices
       url: /legal-notices.html
