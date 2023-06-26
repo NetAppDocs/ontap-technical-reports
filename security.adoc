@@ -18,10 +18,14 @@ Zero Trust traditionally has been a network-centric approach of architecting mic
 
     - link:https://www.netapp.com/pdf.html?item=/media/19756-tr-4829.pdf[TR-4829: NetApp and Zero Trust]
 
-== ONTAP Hardening Guide
+== Hardening Guides
 This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
     - link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
+
+This technical report provides guidance and configuration settings for NetApp® SnapCenter® software to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/82393-tr-4957.pdf[TR-4957: Security hardening guide for NetApp SnapCenter]
 
 == Ransomware
 This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp® solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
