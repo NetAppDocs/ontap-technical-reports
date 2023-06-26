@@ -13,11 +13,11 @@ indexpage:
       links:
         - title: NFS in NetApp ONTAP best practice and implementation guide
           url: nas.html#nfs
+        - title: Multiprotocol NAS in NetApp ONTAP overview and best practices
+          url: nas.html#multiprotocol
         - title: S3 in ONTAP best practices
           url: nas.html#ontap-s3
         - title: How to configure LDAP in ONTAP multiprotocol NAS identity management
-          url: nas.html#name-services
-        - title: DNS load balancing in ONTAP
           url: nas.html#name-services
         - title: Name services best practices guide
           url: nas.html#name-services
