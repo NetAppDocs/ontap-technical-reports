@@ -18,7 +18,6 @@ summary: ""
 Procedural documentation for data protection and disaster recovery can be found at: link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[Data protection and disaster recovery documentation].
 ====
 
-== Technical reports
 This document contains information and best practices for configuring NetApp® SnapMirror® replication.
 
     - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Configuration and Best Practices]

@@ -13,6 +13,4 @@ summary: "ONTAP technical reports provide additional context for planning and op
 :linkattrs:
 :imagesdir: ./media/
 
-Need to add:
 
-Networking

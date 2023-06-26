@@ -13,4 +13,3 @@ summary: "These technical reports provide the best-practice recommendations for 
 :linkattrs:
 :imagesdir: ./media/
 
-== Technical Reports

@@ -16,7 +16,6 @@ summary: "NetApp provides many best practices and solutions for a robust virtual
 [lead]
 NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
-== Technical reports
 NetApp ONTAP software has been a leading storage solution for VMware vSphere environments for almost two decades and continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for vSphere, including the latest product information and best practices, to streamline deployment, reduce risk, and simplify management.
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597: VMware vSphere for ONTAP]
@@ -28,8 +27,6 @@ NetApp ONTAP® software has been a leading storage solution for VMware vSphere e
 NetApp ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and best practices to streamline deployment, reduce risk, and simplify ongoing management.
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP 9]
-
-
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353: ONTAP tools for VMware vSphere - Product Security]
 
