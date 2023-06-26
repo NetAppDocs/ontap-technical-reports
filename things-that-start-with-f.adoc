@@ -13,8 +13,11 @@ summary: ""
 :linkattrs:
 :imagesdir: ./media/
 
-Procedural documentation for deduplication can be found at link:
-Procedural documentation for compression can be found at link:
+[TIP]
+====
+Procedural documentation for FlexCache can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html[FlexCache documentation]
+Procedural documentation for FlexGroup volumes can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html[FlexGroup volume documentation]
+====
 
 == Technical reports
 === FlexGroup volumes
