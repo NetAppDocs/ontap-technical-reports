@@ -18,6 +18,8 @@ sidebar:
       url: /security.html
     - title: FlexCache and FlexGroup volumes
       url: /things-that-start-with-f.html
+    - title: Tiering
+      url: /tiering.html
     - title: Storage efficiency
       url: /storage-efficiency.html
     - title: Applications and databases
