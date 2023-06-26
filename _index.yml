@@ -87,6 +87,8 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: SnapMirror Asynchronous
           url: data-protection-disaster-recovery.html
+        - title: SnapLock
+          url: data-protection-disaster-recovery.html
     - title: Business Continuity
       links:
         - title: MetroCluster
