@@ -16,15 +16,17 @@ summary: "These technical reports provide the best-practice recommendations for 
 [TIP]
 ====
 Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS Storage Management documentation]
+
 Procedural documentation for NFS over RDMA can be found at link:https://docs.netapp.com/us-en/ontap/nfs-rdma/[NFS over RDMA documentation]
 ====
 
 === NFS
-*https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide]* - This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
+*link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide]* - This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
-NFS over RDMA
+*link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962 NFSv4.2 Extended attributes]* - This document guides users through enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and later.
 
-SMB
+=== SMB
+*link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543pdf.pdf[TR-4543 SMB Protocol Best Practices ]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
 
 === ONTAP S3
 *link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service
@@ -40,7 +42,4 @@ FabricPool.
 *link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management]* - This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp® ONTAP® based systems.
 
 === NAS Security
-*link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]* - This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
-
-
-
+*link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]* - This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.

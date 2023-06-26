@@ -109,7 +109,6 @@ indexpage:
           url: business-continuity.html#metrocluster-ip
         - title: NetApp MetroCluster FC
           url: business-continuity.html#metrocluster-fc
-
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
@@ -119,4 +118,11 @@ indexpage:
         - title: SnapCenter for Virtualization
           url: 
         - title: SnapCenter Service
-          url:                               
+          url: 
+    - title: Networking
+      links:
+        - title: Ethernet storage design considerations and best practices for ONTAP
+          url: 
+        - title: BGP/VIP with ONTAP in the dta center – quick configuration guide 
+          url: 
+                       
