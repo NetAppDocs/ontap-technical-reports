@@ -30,20 +30,18 @@ NFS over RDMA
 === SMB
 
 === ONTAP S3
-
+*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service
+(S3) with NetApp® ONTAP® software. We also cover capabilities and configurations for using
+ONTAP as an object store with native S3 applications or as a tiering destination for NetApp
+FabricPool.
 
 === Name Services
-This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
+*link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP]* - This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
 
-    - https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP]
-
-This technical report provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp® ONTAP®.
-
-    - link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668pdf.pdf[TR-4668: Name services best practices guide]
+*link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668pdf.pdf[TR-4668: Name services best practices guide]* - This technical report provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp® ONTAP®.
 
 === NAS Security
-This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
+*link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]* - This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
 
-    - link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]
 
 
