@@ -13,7 +13,7 @@ summary: "These technical reports provide the best-practice recommendations for 
 :linkattrs:
 :imagesdir: ./media/
 
-== SnapCenter for Oracle
+=== SnapCenter for Oracle
 
 NetApp® SnapCenter® is a unified, scalable platform for Oracle-consistent data protection that automates complex operations with centralized control and oversight. This report explains the best practices for deploying Oracle databases with SnapCenter.
 
@@ -23,18 +23,18 @@ In this documentation, we demonstrate how you can set up SnapCenter Services to 
 
     - link:https://docs.netapp.com/us-en/netapp-solutions/databases/snapctr_svcs_ora.html[TR-4964: Oracle Database backup, restore and clone with SnapCenter Services]
 
-== SnapCenter for Microsoft SQL Server
+=== SnapCenter for Microsoft SQL Server
 
 This best practice guide is intended for storage and application administrators so that they can successfully deploy Microsoft SQL Server on NetApp® storage using NetApp SnapCenter® technology for data protection.
 
     - link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using NetApp SnapCenter]
 
-== SnapCenter for Microsoft Exchange Server
+=== SnapCenter for Microsoft Exchange Server
 This best practice guide is intended for storage and application administrators so that they can successfully deploy Microsoft Exchange Server on NetApp® storage using NetApp SnapCenter® technology for data protection.
 
     - link:https://www.netapp.com/es/pdf.html?item=/es/media/12398-tr-4681pdf.pdf[TR-4681: Best practices for Microsoft Exchange Server using NetApp SnapCenter]
 
-== SnapCenter for SAP HANA
+=== SnapCenter for SAP HANA
 This technical report provides best practices for SAP HANA data protection on Amazon FSx for NetApp ONTAP and NetApp SnapCenter. This document covers SnapCenter concepts, configuration recommendations, and operation workflows, including configuration, backup operations, and restore and recovery operations.
 
     - link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html[TR-4926: SAP HANA on Amazon FSx for NetApp ONTAP - Backup and recovery with SnapCenter]
@@ -51,7 +51,7 @@ The ability to create application-consistent NetApp Snapshot backups on the stor
 
     - link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA System Copy and Clone Operations with SnapCenter]
 
-== SnapCenter hardening guide
+=== SnapCenter hardening guide
 
 This technical report provides guidance and configuration settings for NetApp® SnapCenter® software to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 

@@ -19,13 +19,25 @@ ONTAP is the foundation for data management and data protection for many enterpr
 
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/index.html[ONTAP for enterprise applications]
 
-    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[MS SQL Server on ONTAP]
+=== Microsoft SQL Server
+This best practice guide enables storage administrators and database administrators to
+successfully deploy Microsoft SQL Server on NetApp® storage.
+
+    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]
+
+=== Oracle
 
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/index.html[Oracle on ONTAP]
 
+=== SAP HANA
+
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/hana/index.html[SAP HANA on ONTAP]
 
+=== PostgreSQL
+
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/postgres/index.html[PostgreSQL on ONTAP]
+
+=== MariaDB and MySQL
 
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/index.html[MariaDB and MySQL on ONTAP]
 
