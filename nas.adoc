@@ -30,7 +30,7 @@ NFS over RDMA
 === SMB
 
 === ONTAP S3
-*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service
+*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service
 (S3) with NetApp® ONTAP® software. We also cover capabilities and configurations for using
 ONTAP as an object store with native S3 applications or as a tiering destination for NetApp
 FabricPool.

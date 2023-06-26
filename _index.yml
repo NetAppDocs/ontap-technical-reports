@@ -3,26 +3,26 @@ indexpage:
   tiles:
     - title: SAN protocols
       links:
-        - title: NVMe over Fibre Channel
+        - title: Best practices for modern SAN in ONTAP 9
           url: san.html
-        - title: NVMe over TCP
+        - title: Implementing and configuring modern SANs with NVMe-oF
           url: san.html
-        - title: Fibre Channel
+        - title: ONTAP AFF All SAN Array (ASA) systems
           url:  san.html
-        - title: iSCSI
-          url: san.html
     - title: NAS protocols
       links:
-        - title: NFS
-          url: nas.html#nfs
-        - title: SMB
-          url: nas.html#smb
-        - title: S3
-          url: nas.html#ontap-s3
-        - title: NFS over RDMA
+        - title: NFS in NetApp ONTAP best practice and implementation guide
           url: nas.html
-        - title: NAS Security
+        - title: How to configure LDAP in ONTAP multiprotocol NAS identity management
+          url: nas.html
+        - title: S3 in ONTAP best practices
+          url: nas.html
+        - title: DNS load balancing in ONTAP
+          url: nas.html
+        - title: Name services best practices guide
           url: nas.html#nas-security
+        - title: NFS Kerberos in ONTAP
+          url: nas.html
     - title: Security
       links:
         - title: Zero Trust
