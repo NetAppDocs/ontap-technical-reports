@@ -47,11 +47,11 @@ indexpage:
           url: things-that-start-with-f.html
     - title: Tiering
       links:
-        - title: FabricPool
+        - title: FabricPool best practices
           url: tiering.html
-        - title: FabricPool with StorageGrid
+        - title: NetApp FabricPool with StorageGRID recommendation guide
           url: tiering.html
-        - title: Database Storage Tiering with NetApp FabricPool
+        - title: Database storage tiering with NetApp FabricPool
           url: tiering.html
     - title: Storage efficiency
       links:
