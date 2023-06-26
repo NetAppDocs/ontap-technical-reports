@@ -23,17 +23,17 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 == NFS
 *link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide]* - This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
-*link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962: NFSv4.2 Extended attributes]* - This document guides users through enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and later.
+*link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962: NFSv4.2 extended attributes]* - This document guides users through enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and later.
 
 == SMB
-*link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543pdf.pdf[TR-4543: SMB Protocol Best Practices ]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
+*link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543pdf.pdf[TR-4543: SMB protocol best practices]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
 
-*link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100pdf.pdf[TR-4100: Nondisruptive Operations with SMB File Shares ONTAP 9.x]* - This technical report details NetApp® ONTAP® support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.
+*link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100pdf.pdf[TR-4100: Nondisruptive operations with SMB file shares ONTAP 9.x]* - This technical report details NetApp® ONTAP® support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.
 
-*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740pdf.pdf[TR-4740: SMB 3.0 Multichannel]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. This technical report is an overview of the Multichannel feature in NetApp® ONTAP®, including its capabilities, best practices, and performance test results.
+*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740pdf.pdf[TR-4740: SMB 3.0 multichannel]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. This technical report is an overview of the Multichannel feature in NetApp® ONTAP®, including its capabilities, best practices, and performance test results.
 
 == Multiprotocol
-*link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP Overview and Best Practices]* - This technical report describes how multiprotocol NAS access works in NetApp® ONTAP® data management software and the best practices for multiprotocol environments.
+*link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP overview and best practices]* - This technical report describes how multiprotocol NAS access works in NetApp® ONTAP® data management software and the best practices for multiprotocol environments.
 
 == ONTAP S3
 *link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service (S3) with NetApp® ONTAP® software. We also cover capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for NetApp FabricPool.
