@@ -20,15 +20,15 @@ Procedural documentation for data protection and disaster recovery can be found 
 
 This document contains information and best practices for configuring NetApp® SnapMirror® replication.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Configuration and Best Practices]
+    - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror configuration and best Practices]
 
 This document contains information and best practices for configuring NetApp® SnapMirror® Synchronous (SM-S) replication.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733 SnapMirror Synchronous Configuration and Best Practices]
+    - link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733 SnapMirror Synchronous configuration and best practices]
 
 Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage. 
 
-    - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM Storage Using SnapLock]
+    - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using SnapLock]
 
 This document covers data protection and backup for NetApp® ONTAP® FlexGroup volumes. Topics include NetApp Snapshot™ copies, NetApp SnapMirror®, and other data protection and backup solutions. 
 

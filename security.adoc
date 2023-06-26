@@ -21,7 +21,7 @@ Zero Trust traditionally has been a network-centric approach of architecting mic
 === Hardening Guides
 This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security Hardening Guide for NetApp ONTAP 9]
+    - link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security hardening guide for NetApp ONTAP 9]
 
 This technical report provides guidance and configuration settings for NetApp® SnapCenter® software to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
