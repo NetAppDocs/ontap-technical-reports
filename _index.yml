@@ -27,15 +27,15 @@ indexpage:
       links:
         - title: NetApp and Zero Trust
           url: security.html#zero-trust
-        - title: The NetApp Solution for Ransomware
+        - title: The NetApp solution for ransomware
           url: security.html#ransomware
         - title: Compliant WORM storage using NetApp SnapLock
           url: security.html#ransomware
-        - title: Secure Multitenancy in ONTAP
+        - title: Secure multitenancy in ONTAP
           url: security.html#multitennancy
         - title: Authentication (SSH, MFA, etc.)
           url: security.html#authentication
-        - title: Key Management
+        - title: Key management
           url: security.html#key-management
         - title: Standards
           url: security.html#standards
