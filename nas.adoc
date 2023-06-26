@@ -24,9 +24,6 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 
 NFS over RDMA
 
-=== Multiprotocol
-*link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management]* - This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp® ONTAP® based systems.
-
 === SMB
 
 === ONTAP S3
@@ -39,6 +36,8 @@ FabricPool.
 *link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP]* - This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
 
 *link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668pdf.pdf[TR-4668: Name services best practices guide]* - This technical report provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp® ONTAP®.
+
+*link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management]* - This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp® ONTAP® based systems.
 
 === NAS Security
 *link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]* - This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 

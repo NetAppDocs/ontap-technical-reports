@@ -41,7 +41,7 @@ This report discusses the implementation of secure multitenancy using storage vi
 
     - link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure Multitenancy in ONTAP]
 
-== Authentication
+=== Authentication
 This document covers multifactor authentication capability for administrative access introduced in NetApp® ONTAP® 9.3 software for NetApp System Manager, Active IQ® Unified Manager and ONTAP Secure Shell (SSH) CLI authentication.
 
     - link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor-Authentication-in-ONTAP best practices and implementation guide]
