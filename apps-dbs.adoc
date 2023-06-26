@@ -20,14 +20,10 @@ ONTAP is the foundation for data management and data protection for many enterpr
     - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/index.html[ONTAP for enterprise applications]
 
 === Microsoft SQL Server
-This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
-
-    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
 
 === Oracle
-This best practice guide enables storage administrators and database administrators to successfully deploy Oracle on NetApp® storage.
-
-    - link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/index.html[TR-3633: https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf]
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/index.html[TR-3633: https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf]* - This best practice guide enables storage administrators and database administrators to successfully deploy Oracle on NetApp® storage.
 
 === SAP HANA
 

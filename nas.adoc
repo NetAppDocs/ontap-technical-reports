@@ -20,14 +20,17 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 ====
 
 === NFS
-This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
+*https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide]* - This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp® ONTAP®. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide]
+NFS over RDMA
 
 === Multiprotocol
-This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp® ONTAP® based systems.
+*link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management]* - This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp® ONTAP® based systems.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management]
+=== SMB
+
+=== ONTAP S3
+
 
 === Name Services
 This technical report covers how to configure NetApp® storage systems with NetApp ONTAP® management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
@@ -42,3 +45,5 @@ This technical report provides a comprehensive list of best practices, limits, r
 This technical report covers NFS Kerberos support in NetApp® ONTAP® software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients. 
 
     - link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP]
+
+

@@ -14,13 +14,15 @@ indexpage:
     - title: NAS protocols
       links:
         - title: NFS
-          url: nas.html
+          url: nas.html#nfs
         - title: SMB
-          url: nas.html
+          url: nas.html#smb
         - title: S3
-          url: nas.html
+          url: nas.html#ontap-s3
         - title: NFS over RDMA
           url: nas.html
+        - title: NAS Security
+          url: nas.html#nas-security
     - title: Security
       links:
         - title: Zero Trust
