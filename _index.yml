@@ -122,7 +122,7 @@ indexpage:
     - title: Networking
       links:
         - title: Ethernet storage design considerations and best practices for ONTAP
-          url: 
+          url: networking.html
         - title: BGP/VIP with ONTAP in the dta center – quick configuration guide 
-          url: 
+          url: networking.html
                        
