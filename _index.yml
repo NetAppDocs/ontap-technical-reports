@@ -93,12 +93,18 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: Data protection and backup NetApp ONTAP FlexGroup volumes
           url: data-protection-disaster-recovery.html
+        - title: VMware Site Recovery Manager with NetApp ONTAP 9
+          url: virtualization.html
     - title: Business Continuity
       links:
-        - title: MetroCluster
-          url: business-continuity.html
-        - title: SnapMirror Business Continuity
-          url: business-continuity.html
+        - title: NetApp MetroCluster solution architecture and design
+          url: business-continuity.html#netapp-metrocluster
+        - title: NetApp MetroCluster IP
+          url: business-continuity.html#metrocluster-ip
+        - title: NetApp MetroCluster FC
+          url: business-continuity.html#metrocluster-fc
+        - title: SnapMirror Business Continuity (SM-BC)
+          url: business-continuity.html#snapmirror-business-continuity-sm-bc
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
