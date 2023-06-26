@@ -101,14 +101,15 @@ indexpage:
           url: virtualization.html
     - title: Business Continuity
       links:
+        - title: SnapMirror Business Continuity (SM-BC)
+          url: business-continuity.html#snapmirror-business-continuity-sm-bc
         - title: NetApp MetroCluster solution architecture and design
           url: business-continuity.html#netapp-metrocluster
         - title: NetApp MetroCluster IP
           url: business-continuity.html#metrocluster-ip
         - title: NetApp MetroCluster FC
           url: business-continuity.html#metrocluster-fc
-        - title: SnapMirror Business Continuity (SM-BC)
-          url: business-continuity.html#snapmirror-business-continuity-sm-bc
+
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
