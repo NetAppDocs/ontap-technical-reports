@@ -16,8 +16,6 @@ summary: "These technical reports provide the best-practice recommendations for 
 == Zero Trust
 *link:https://www.netapp.com/pdf.html?item=/media/19756-tr-4829.pdf[TR-4829: NetApp and Zero Trust]* - Zero Trust traditionally has been a network-centric approach of architecting micro core and perimeter (MCAP) to protect data, services, applications, or assets with controls known as a segmentation gateway. NetApp® ONTAP® takes a data-centric approach to Zero Trust in which the storage management system becomes the segmentation gateway to protect and monitor access of our customer’s data. In particular, the FPolicy™ Zero Trust engine and the FPolicy partner ecosystem becomes a control center to gain a detailed understanding of normal and aberrant data access patterns and identify insider threats.
 
-    - 
-
 == Hardening Guides
 *link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security hardening guide for NetApp ONTAP 9]* - This technical report provides guidance and configuration settings for NetApp® ONTAP® 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
