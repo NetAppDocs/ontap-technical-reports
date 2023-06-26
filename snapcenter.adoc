@@ -29,12 +29,21 @@ This best practice guide is intended for storage and application administrators 
 
     - link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using NetApp SnapCenter]
 
+== SnapCenter for Microsoft Exchange Server
+This best practice guide is intended for storage and application administrators so that they can successfully deploy Microsoft Exchange Server on NetApp® storage using NetApp SnapCenter® technology for data protection.
+
+    - link:https://www.netapp.com/es/pdf.html?item=/es/media/12398-tr-4681pdf.pdf[TR-4681: Best practices for Microsoft Exchange Server using NetApp SnapCenter]
+
 == SnapCenter for SAP HANA
 This technical report provides best practices for SAP HANA data protection on Amazon FSx for NetApp ONTAP and NetApp SnapCenter. This document covers SnapCenter concepts, configuration recommendations, and operation workflows, including configuration, backup operations, and restore and recovery operations.
 
-    -link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html[TR-4926: SAP HANA on Amazon FSx for NetApp ONTAP - Backup and recovery with SnapCenter]
+    - link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html[TR-4926: SAP HANA on Amazon FSx for NetApp ONTAP - Backup and recovery with SnapCenter]
 
-TR-4719 describes how NetApp SnapCenter technology and the SAP HANA plug-in can be used for backup and recovery in an SAP HANA System Replication environment.
+SnapCenter storage cloning and the option to flexibly define pre-cloning and post-cloning operations allows SAP Basis administrators to accelerate and automate SAP system copy, clone, or refresh operations. The option to choose any SnapCenter Snapshot backup at any primary or secondary storage allows you to address your most important use cases, including logical corruption, disaster recovery testing, or the refresh of an SAP QA system.
+
+    -link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA System Copy and Clone Operations with SnapCenter]
+
+This technical report describes how NetApp SnapCenter technology and the SAP HANA plug-in can be used for backup and recovery in an SAP HANA System Replication environment.
 
     - link:https://www.netapp.com/pdf.html?item=/media/17030-tr4719pdf.pdf[TR-4719: SAP HANA System Replication Backup and Recovery with SnapCenter]
 
