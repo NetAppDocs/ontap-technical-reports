@@ -13,8 +13,11 @@ summary: ""
 :linkattrs:
 :imagesdir: ./media/
 
+[TIP]
+====
 Procedural documentation for MetroCluster can be found at link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[MetroCluster documentation]
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
+====
 
 == Technical reports
 === NetApp MetroCluster
