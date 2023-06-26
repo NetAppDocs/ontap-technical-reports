@@ -19,6 +19,9 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
 ====
 
+== SnapMirror Business Continuity (SM-BC)
+*https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)]* - NetApp® SnapMirror® Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP® running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
+
 == NetApp MetroCluster
 *link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf[TR-4705: NetApp MetroCluster solution architecture and design]* - This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
 
@@ -27,6 +30,3 @@ Procedural documentation for SnapMirror Business Continuity can be found at link
 
 === MetroCluster FC
 *link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375pdf.pdf[TR-4375: NetApp MetroCluster FC]* - NetApp MetroCluster provides continuous data availability across geographically separated data centers for mission-critical applications. This document provides technical information about NetApp® MetroCluster FC.
-
-=== SnapMirror Business Continuity (SM-BC)
-*https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)]* - NetApp® SnapMirror® Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP® running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.

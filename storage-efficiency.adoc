@@ -19,3 +19,11 @@ Procedural documentation for deduplication can be found at link:
 Procedural documentation for can be found at link:
 ====
 
+Storage Efficiency:
+•	NetApp Data Compression and Deduplication Implementation Guide
+FlexGroup
+•	TR-4571: NetApp FlexGroup Best practices and implementation guide 
+•	TR-4571a: FlexGroup Top Best Practices
+•	TR-4678: Data protection and backup — NetApp ONTAP FlexGroup volumes
+•	TR-4557: NetApp ONTAP FlexGroup Volumes — A Technical Overview
+•	TR-4972: FlexGroup Rebalancing
