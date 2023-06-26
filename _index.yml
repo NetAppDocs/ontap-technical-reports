@@ -83,11 +83,13 @@ indexpage:
           url: virtualization.html
     - title: Data protection and disaster recovery
       links:
-        - title: SnapMirror Synchronous
+        - title: SnapMirror Asynchronous configuration and best practices
           url: data-protection-disaster-recovery.html
-        - title: SnapMirror Asynchronous
+        - title:  SnapMirror Synchronous configuration and best practices
           url: data-protection-disaster-recovery.html
-        - title: SnapLock
+        - title: Compliant WORM storage using SnapLock
+          url: data-protection-disaster-recovery.html
+        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
           url: data-protection-disaster-recovery.html
     - title: Business Continuity
       links:

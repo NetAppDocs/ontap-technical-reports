@@ -18,13 +18,13 @@ summary: ""
 Procedural documentation for data protection and disaster recovery can be found at: link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[Data protection and disaster recovery documentation].
 ====
 
-This document contains information and best practices for configuring NetApp® SnapMirror® replication.
+This document contains information and best practices for configuring NetApp® SnapMirror® Asynchronous (SM-A) replication of FlexVol volumes, FlexGroup volumes, consistency groups and storage virtual machines.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror configuration and best Practices]
+    - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices]
 
 This document contains information and best practices for configuring NetApp® SnapMirror® Synchronous (SM-S) replication.
 
-    - link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733 SnapMirror Synchronous configuration and best practices]
+    - link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices]
 
 Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage. 
 
@@ -33,3 +33,7 @@ Many businesses rely on some use of write once, read many (WORM) data storage to
 This document covers data protection and backup for NetApp® ONTAP® FlexGroup volumes. Topics include NetApp Snapshot™ copies, NetApp SnapMirror®, and other data protection and backup solutions. 
 
     - link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678pdf.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes]
+
+This document describes a three-data-center disaster recovery configuration using NetApp® SnapMirror® technology for replication.
+
+    - link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7]
