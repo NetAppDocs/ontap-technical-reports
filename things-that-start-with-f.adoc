@@ -22,8 +22,6 @@ Procedural documentation for FlexGroup volumes can be found at link: link:https:
 == FlexGroup volumes
 *link:https://www.netapp.com/pdf.html?item=/media/7337-tr4557pdf.pdf[TR-4557: NetApp ONTAP FlexGroup Volumes - A technical overview]* - This document is an overview of NetApp® ONTAP® FlexGroup volumes, a feature of NetApp ONTAP. FlexGroup is an evolution of scale-out NAS containers that blends near-infinite capacity with predictable, low-latency performance in metadata-heavy workloads.
 
-    - 
-
 *link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide]* - This document provides a brief overview of NetApp® ONTAP® FlexGroup and a set of best practices and implementation tips to use with this feature. The FlexGroup feature is an evolution of scale-out NAS containers that blends nearly infinite capacity with predictable, low latency performance in  metadata-heavy workloads.
 
 *link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678pdf.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes]* - This document covers data protection and backup for NetApp® ONTAP® FlexGroup volumes. Topics include NetApp Snapshot™ copies, NetApp SnapMirror®, and other data protection and backup solutions. 

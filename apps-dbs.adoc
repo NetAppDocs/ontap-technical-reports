@@ -16,7 +16,7 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 [lead]
 ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures.
 
-== Enterprise Applications
+== Enterprise applications
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/index.html[ONTAP for enterprise applications]* - 
 
 == Microsoft SQL Server
