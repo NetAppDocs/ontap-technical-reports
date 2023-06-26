@@ -6,7 +6,7 @@ permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities."
 ---
-= ONTAP 9 technical reports
+= ONTAP technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
