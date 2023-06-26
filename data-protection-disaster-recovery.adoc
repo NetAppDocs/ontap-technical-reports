@@ -20,7 +20,7 @@ Procedural documentation for data protection and disaster recovery can be found 
 
 == SnapMirror
 === SnapMirror Asynchronous
-This document contains information and best practices for configuring NetApp® SnapMirror® Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM DR).
+*link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices]* - This document contains information and best practices for configuring NetApp® SnapMirror® Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM DR).
 
     - link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices]
 
