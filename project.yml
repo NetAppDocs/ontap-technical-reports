@@ -17,7 +17,7 @@ sidebar:
     - title: Security
       url: /security.html
     - title: FlexCache and FlexGroup volumes
-      url: /things-that-start-with-f.html
+      url: /nas-containers.html
     - title: Tiering
       url: /tiering.html
     - title: Storage efficiency
