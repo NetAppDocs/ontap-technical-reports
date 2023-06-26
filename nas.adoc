@@ -24,7 +24,7 @@ Procedural documentation for NFS over RDMA can be found at link:https://docs.net
 
 NFS over RDMA
 
-=== SMB
+SMB
 
 === ONTAP S3
 *link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf[TR-4814: S3 in ONTAP best practices]* - This technical report describes best practices for using the Amazon Simple Storage Service

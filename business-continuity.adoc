@@ -19,7 +19,7 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
 ====
 
-=== NetApp MetroCluster
+== NetApp MetroCluster
 *link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf[TR-4705: NetApp MetroCluster solution architecture and design]* - This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
 
 === MetroCluster IP
