@@ -55,7 +55,7 @@ indexpage:
           url: storage-efficiency.html
         - title: Compaction
           url: storage-efficiency.html
-    - title: Databases
+    - title: Applications and databases
       links:
         - title: ONTAP for enterprise applications
           url: apps-dbs.html
