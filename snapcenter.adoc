@@ -14,7 +14,6 @@ summary: "These technical reports provide the best-practice recommendations for 
 :imagesdir: ./media/
 
 == SnapCenter for Oracle
-
 *link:https://www.netapp.com/pdf.html?item=/media/12403-tr4700pdf.pdf[TR-4700: SnapCenter Plug-In for Oracle database best practices]* - NetApp® SnapCenter® is a unified, scalable platform for Oracle-consistent data protection that automates complex operations with centralized control and oversight. This report explains the best practices for deploying Oracle databases with SnapCenter.
 
 *link:https://docs.netapp.com/us-en/netapp-solutions/databases/snapctr_svcs_ora.html[TR-4964: Oracle Database backup, restore and clone with SnapCenter Services]* - In this documentation, we demonstrate how you can set up SnapCenter Services to backup, restore, and clone Oracle databases deployed to Amazon FSx for ONTAP storage and EC2 compute instances. Although it is much easier to set up and use, SnapCenter Services deliver key functionalities that are available in the legacy SnapCenter UI tool.
