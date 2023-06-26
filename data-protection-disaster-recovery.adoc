@@ -39,7 +39,7 @@ This document describes a three-data-center disaster recovery configuration usin
     - link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7]
 
 == SnapLock
-Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage. 
+Many businesses rely on write once, read many (WORM) data storage to meet regulatory compliance requirements to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9.
 
     - link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using SnapLock]
 
