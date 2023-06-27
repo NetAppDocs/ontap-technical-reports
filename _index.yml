@@ -8,7 +8,7 @@ indexpage:
         - title: Implementing and configuring modern SANs with NVMe-oF
           url: san.html
         - title: ONTAP AFF All SAN Array (ASA) systems
-          url:  san.html
+          url: san.html
     - title: NAS protocols
       links:
         - title: NFS in NetApp ONTAP best practice and implementation guide
@@ -23,6 +23,8 @@ indexpage:
           url: nas.html#name-services
         - title: NFS Kerberos in ONTAP
           url: nas.html#nas-security
+        - title: Additional NAS technical reports
+          url: nas.html
     - title: Security
       links:
         - title: NetApp and Zero Trust
@@ -35,16 +37,14 @@ indexpage:
           url: security.html#multitennancy
         - title: Authentication (SSH, MFA, etc.)
           url: security.html#authentication
-        - title: Key management
-          url: security.html#key-management
-        - title: Standards
-          url: security.html#standards
+        - title: Additional security technical reports
+          url: security.html
     - title: FlexCache and FlexGroup volumes
       links:
         - title: FlexGroup volumes
-          url: things-that-start-with-f.html
+          url: nas-containers.html
         - title: FlexCache
-          url: things-that-start-with-f.html
+          url: nas-containers.html
     - title: Tiering
       links:
         - title: FabricPool best practices
@@ -81,11 +81,7 @@ indexpage:
           url: virtualization.html
         - title: VMware Site Recovery Manager with NetApp ONTAP 9
           url: virtualization.html
-        - title: ONTAP tools for VMware vSphere - Product Security
-          url: virtualization.html
-        - title: SnapCenter Plug-in VMware vSphere - Product security
-          url: virtualization.html
-        - title: Introduction to automation for ONTAP and vSphere
+        - title: Additional virtualization technical reports
           url: virtualization.html
     - title: Data protection and disaster recovery
       links:
@@ -99,6 +95,8 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: VMware Site Recovery Manager with NetApp ONTAP 9
           url: virtualization.html
+        - title: Additional data protection and disaster recovery technical reports
+          url: data-protection-disaster-recovery.html
     - title: Business Continuity
       links:
         - title: SnapMirror Business Continuity (SM-BC)
@@ -109,16 +107,20 @@ indexpage:
           url: business-continuity.html#metrocluster-ip
         - title: NetApp MetroCluster FC
           url: business-continuity.html#metrocluster-fc
+        - title: Additional Business Continuity technical reports
+          url: business-continuity.html
     - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
-          url: 
+          url: snapcenter.html
         - title: SnapCenter for MSSQL
-          url: 
+          url: snapcenter.html
         - title: SnapCenter for Virtualization
-          url: 
+          url: snapcenter.html
         - title: SnapCenter Service
-          url: 
+          url: snapcenter.html
+        - title: Additional SnapCenter technical reports
+          url: snapcenter.html
     - title: Networking
       links:
         - title: Ethernet storage design considerations and best practices for ONTAP
