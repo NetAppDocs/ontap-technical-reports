@@ -61,6 +61,8 @@ indexpage:
           url: storage-efficiency.html
         - title: Compression
           url: storage-efficiency.html
+        - title: Temperature sensitive storage efficiency
+          url: storage-efficiency.html
         - title: Compaction
           url: storage-efficiency.html
     - title: Applications and databases
