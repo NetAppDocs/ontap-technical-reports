@@ -17,8 +17,8 @@ summary: "These technical report provides an overview of the block protocols in 
 Procedural documentation for SAN can be found at link:https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management documentation]
 ====
 
-*link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP 9]* - This technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations.
+*link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP 9^]* - This technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations.
 
-*link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[TR-4684: Implementing and configuring modern SANs with NVMe-oF]* - This technical report describes how to implement and configure NVMe over Fabrics transports (NVMe over Fibre Channel and NVMe over TCP). It includes design, implementation, configuration, management guidelines and best practices to build highly available, high-performance modern SAN solutions using NVMe protocols and transports.
+*link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[TR-4684: Implementing and configuring modern SANs with NVMe-oF^]* - This technical report describes how to implement and configure NVMe over Fabrics transports (NVMe over Fibre Channel and NVMe over TCP). It includes design, implementation, configuration, management guidelines and best practices to build highly available, high-performance modern SAN solutions using NVMe protocols and transports.
 
-*link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems]* - This technical report introduces NetApp® ONTAP® AFF All SAN Array (ASA) systems and covers implementation and best practices recommendations for always-available, business-critical SAN configurations.
+*link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems^]* - This technical report introduces NetApp® ONTAP® AFF All SAN Array (ASA) systems and covers implementation and best practices recommendations for always-available, business-critical SAN configurations.
