@@ -25,16 +25,18 @@ indexpage:
           url: nas.html
     - title: Security technical reports
       links:
+        - title: Security hardening guide for NetApp ONTAP 9
+          url: security.html#hardening-guides
         - title: The NetApp solution for ransomware
           url: security.html#ransomware
         - title: NetApp and Zero Trust
           url: security.html#zero-trust
         - title: Compliant WORM storage using NetApp SnapLock
           url: security.html#ransomware
-        - title: Secure multitenancy in ONTAP
-          url: security.html#multitennancy
         - title: Authentication (SSH, MFA, etc.)
           url: security.html#authentication
+        - title: Secure multitenancy in ONTAP
+          url: security.html#multitennancy
         - title: Additional security technical reports
           url: security.html
     - title: FlexCache and FlexGroup volumes technical reports
