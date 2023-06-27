@@ -1,7 +1,7 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, compaction
 permalink: storage-efficiency.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: ""
@@ -15,15 +15,10 @@ summary: ""
 
 [TIP]
 ====
-Procedural documentation for deduplication can be found at link:
-Procedural documentation for can be found at link:
+Procedural documentation for deduplication can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html[deduplication documentation]
+Procedural documentation for compression can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html[compression documentation]
+Procedural documentation for compaction can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html[compaction documentation]
 ====
 
-Storage Efficiency:
-•	NetApp Data Compression and Deduplication Implementation Guide
-FlexGroup
-•	TR-4571: NetApp FlexGroup Best practices and implementation guide 
-•	TR-4571a: FlexGroup Top Best Practices
-•	TR-4678: Data protection and backup — NetApp ONTAP FlexGroup volumes
-•	TR-4557: NetApp ONTAP FlexGroup Volumes — A Technical Overview
-•	TR-4972: FlexGroup Rebalancing
+link:https://www.netapp.com/pdf.html?item=/media/19753-tr-3966.pdf[NetApp Data Compression and Deduplication Implementation Guide^] - This technical report focuses on ONTAP®
+implementations of NetApp® deduplication and NetApp data compression. This report describes in detail how to implement and use both technologies and provides information on best practices, operational considerations, and troubleshooting.

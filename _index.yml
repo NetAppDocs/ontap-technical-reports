@@ -17,8 +17,6 @@ indexpage:
           url: nas.html#multiprotocol
         - title: S3 in ONTAP best practices
           url: nas.html#ontap-s3
-        - title: How to configure LDAP in ONTAP multiprotocol NAS identity management
-          url: nas.html#name-services
         - title: Name services best practices guide
           url: nas.html#name-services
         - title: NFS Kerberos in ONTAP
@@ -27,10 +25,10 @@ indexpage:
           url: nas.html
     - title: Security
       links:
-        - title: NetApp and Zero Trust
-          url: security.html#zero-trust
         - title: The NetApp solution for ransomware
           url: security.html#ransomware
+        - title: NetApp and Zero Trust
+          url: security.html#zero-trust
         - title: Compliant WORM storage using NetApp SnapLock
           url: security.html#ransomware
         - title: Secure multitenancy in ONTAP
@@ -41,9 +39,13 @@ indexpage:
           url: security.html
     - title: FlexCache and FlexGroup volumes
       links:
-        - title: FlexGroup volumes
-          url: nas-containers.html
-        - title: FlexCache
+        - title: FlexCache in ONTAP
+          url: nas-containers.html#flexcache
+        - title: NetApp ONTAP FlexGroup volumes best practices and implementation guide
+          url: nas-containers.html#flexgroup-volumes
+        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
+          url: nas-containers.html#flexgroup-volumes
+        - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
     - title: Tiering
       links:
@@ -91,10 +93,6 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: Compliant WORM storage using SnapLock
           url: data-protection-disaster-recovery.html
-        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
-          url: data-protection-disaster-recovery.html
-        - title: VMware Site Recovery Manager with NetApp ONTAP 9
-          url: virtualization.html
         - title: Additional data protection and disaster recovery technical reports
           url: data-protection-disaster-recovery.html
     - title: Business Continuity
