@@ -17,10 +17,10 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures.
 
 == Enterprise applications
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/index.html[ONTAP for enterprise applications]* - 
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/introduction.html[ONTAP for enterprise applications]* - 
 
 == Microsoft SQL Server
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/index.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/introduction.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
 
 == Oracle
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/introduction.html[Oracle on ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Oracle on NetApp® storage. This document is a consolidation of the content previously covered in NetApp TR-3633, TR-4591, TR-4592, TR-4534, TR-4695, and TR-4899.
@@ -29,7 +29,7 @@ ONTAP is the foundation for data management and data protection for many enterpr
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/hana/index.html[SAP HANA on ONTAP]* - 
 
 == PostgreSQL
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/postgres/index.html[PostgreSQL on ONTAP]* - 
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/postgres/introduction.html[PostgreSQL on ONTAP]* - 
 
 == MariaDB and MySQL
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/index.html[MariaDB and MySQL on ONTAP]* - 
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/introduction.html[MariaDB and MySQL on ONTAP]* - 

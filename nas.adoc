@@ -28,13 +28,13 @@ Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-
 
 == SMB
 // Oct 2016 - 9.1 - commented out by chrisgeb
-// *link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543pdf.pdf[TR-4543: SMB protocol best practices^]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
+// *link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543.pdf[TR-4543: SMB protocol best practices^]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
 
 // Oct 2016 - 9.1 - commented out by chrisgeb
-// *link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100pdf.pdf[TR-4100: Nondisruptive operations with SMB file shares ONTAP 9.x^]* - This technical report details NetApp® ONTAP® support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.
+// *link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100.pdf[TR-4100: Nondisruptive operations with SMB file shares ONTAP 9.x^]* - This technical report details NetApp® ONTAP® support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.
 
 // Jan 2019 - 9.4
-*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740pdf.pdf[TR-4740: SMB 3.0 multichannel^]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. This technical report is an overview of the Multichannel feature in NetApp® ONTAP®, including its capabilities, best practices, and performance test results.
+*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. This technical report is an overview of the Multichannel feature in NetApp® ONTAP®, including its capabilities, best practices, and performance test results.
 
 == Multiprotocol
 // Apr 2021 - 9.8
