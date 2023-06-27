@@ -20,5 +20,7 @@ Procedural documentation for compression can be found at link:https://docs.netap
 Procedural documentation for temperature sensitive storage efficiency can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html[temperature sensitive storage efficiency documentation]
 Procedural documentation for compaction can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html[compaction documentation]
 ====
-// 
+
+// Last Update - Version - current pdf owner
+// Feb 2014 - <9.0 - Maha G updating
 // *link:https://www.netapp.com/pdf.html?item=/media/19753-tr-3966.pdf[TR-3966: NetApp data compression and deduplication implementation guide^]* - This technical report focuses on ONTAP® implementations of NetApp® deduplication and NetApp data compression. This report describes in detail how to implement and use both technologies and provides information on best practices, operational considerations, and troubleshooting.

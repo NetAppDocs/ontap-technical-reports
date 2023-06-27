@@ -19,7 +19,7 @@ Procedural documentation for SnapMirror Business Continuity can be found at link
 Procedural documentation for MetroCluster can be found at link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[MetroCluster documentation]
 ====
 
-// Last Update - Version - current owner
+// Last Update - Version - current pdf owner
 // Nov 2022 - 9.12.1 - Stephen Galla
 == SnapMirror Business Continuity (SM-BC)
 *link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]* - NetApp® SnapMirror® Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP® running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
@@ -30,7 +30,7 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/rac.html[Oracle RAC with SM-BC^]* - 
 
 == NetApp MetroCluster
-// Apr 2023 - 9.12.1
+// Apr 2023 - 9.12.1 - Stephen Galla
 *link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf[TR-4705: NetApp MetroCluster solution architecture and design^]* - This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
 
 === MetroCluster IP

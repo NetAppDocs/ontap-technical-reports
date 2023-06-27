@@ -17,7 +17,7 @@ summary: "These technical report provides an overview of the block protocols in 
 Procedural documentation for SAN can be found at link:https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management documentation]
 ====
 
-// Last Update - Version - current owner
+// Last Update - Version - current pdf owner
 // Apr 2023 - 9.12.1 P2  - Mike Peppers
 *link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP 9^]* - This technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations.
 
