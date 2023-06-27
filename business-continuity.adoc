@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: business-continuity.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the business continuity in NetApp® ONTAP® as well as best-practice recommendations"
+summary: "These technical report provides an overview of the business continuity in NetApp® ONTAP® as well as recommended practices"
 ---
 = Business continuity technical reports
 :hardbreaks:
