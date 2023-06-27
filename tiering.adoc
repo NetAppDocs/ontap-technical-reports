@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: tiering.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the FabricPool in NetApp® ONTAP® 9 data management software as well as best-practice recommendations"
+summary: "These technical report provides an overview of the tiering in NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = Tiering technical reports
 :hardbreaks:

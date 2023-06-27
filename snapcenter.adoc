@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, SnapCenter
 permalink: snapcenter.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical reports provide the best-practice recommendations for SnapCenter with ONTAP"
+summary: "These technical report provides an overview of the SnapCenter with NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = SnapCenter technical reports
 :hardbreaks:

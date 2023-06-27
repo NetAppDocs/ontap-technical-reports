@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, compaction
 permalink: storage-efficiency.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: ""
+summary: "These technical report provides an overview of the storage efficiency in NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = Storage efficiency technical reports
 :hardbreaks:

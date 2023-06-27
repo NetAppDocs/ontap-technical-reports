@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, SAN, NVMe, NVMeoF, NVMeoTCP, NVMeoFC, iSCSI, fibre channel, fiber channel, igroups, namespaces, namespace, LUN, subsystem
 permalink: san.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the block protocols in NetApp® ONTAP® 9 data management software as well as best-practice recommendations"
+summary: "These technical report provides an overview of the block protocols in NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = SAN technical reports
 :hardbreaks:

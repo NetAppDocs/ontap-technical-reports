@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: nas-containers.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: ""
+summary: "These technical report provides an overview of the FlexCache and FlexGroup volumes in NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = FlexCache and FlexGroup volume technical reports
 :hardbreaks:

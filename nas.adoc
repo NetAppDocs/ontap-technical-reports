@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, NAS
 permalink: nas.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical reports provide the best-practice recommendations for NAS on ONTAP"
+summary: "These technical report provides an overview of the NFS, SMB/CIFS, S3, name services in NetApp® ONTAP® as well as best-practice recommendations"
 ---
 = NAS technical reports
 :hardbreaks:
@@ -15,7 +15,7 @@ summary: "These technical reports provide the best-practice recommendations for 
 
 [TIP]
 ====
-Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS Storage Management documentation]
+Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS storage management documentation]
 Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-en/ontap/s3-config/index.html[ONTAP S3 documentation]
 Procedural documentation for NFS over RDMA can be found at link:https://docs.netapp.com/us-en/ontap/nfs-rdma/[NFS over RDMA documentation]
 ====
