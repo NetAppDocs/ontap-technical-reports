@@ -18,20 +18,27 @@ summary: "These technical report provides an overview of the data protection and
 Procedural documentation for data protection and disaster recovery can be found at: link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[Data protection and disaster recovery documentation].
 ====
 
+// Last Update - Version - current owner
 == SnapMirror
 === SnapMirror Asynchronous
+//
 *link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices^]* - This document contains information and best practices for configuring NetApp® SnapMirror® Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM DR).
 
+//
 *link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678pdf.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes^]* - This document covers data protection and backup for NetApp® ONTAP® FlexGroup volumes. Topics include NetApp Snapshot™ copies, NetApp SnapMirror®, and other data protection and backup solutions. 
 
 === SnapMirror Synchronous 
+//
 *link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices^]* - This document contains information and best practices for configuring NetApp® SnapMirror® Synchronous (SM-S) replication.
 
 === SnapMirror Three-Data-Center DR
+//
 *link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7^]* - This document describes a three-data-center disaster recovery configuration using NetApp® SnapMirror® technology for replication.
 
 == SnapLock
+// 
 *link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using SnapLock^]* - Many businesses rely on write once, read many (WORM) data storage to meet regulatory compliance requirements to add another layer of data protection. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9.
 
 == Application and infrastructure with SnapMirror
+// 
 *link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP 9^]* - NetApp ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and best practices to streamline deployment, reduce risk, and simplify ongoing management.
