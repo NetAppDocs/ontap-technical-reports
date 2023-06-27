@@ -16,8 +16,7 @@ summary: "These technical report provides an overview of the NFS, SMB/CIFS, S3, 
 [TIP]
 ====
 Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS storage management documentation]
-Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-en/ontap/s3-config/index.html[ONTAP S3 documentation]
-Procedural documentation for NFS over RDMA can be found at link:https://docs.netapp.com/us-en/ontap/nfs-rdma/[NFS over RDMA documentation]
+Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management documentation]
 ====
 
 == NFS
