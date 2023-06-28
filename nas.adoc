@@ -29,7 +29,7 @@ Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-
 
 == SMB
 // Oct 2016 - 9.1 - commented out by chrisgeb
-// *link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543.pdf[TR-4543: SMB protocol best practices^]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
+//*link:https://www.netapp.com/pdf.html?item=/media/10678-tr-4543.pdf[TR-4543: SMB protocol best practices^]* - This technical report details NetApp® ONTAP® support for SMB protocol features. Functionality is covered in terms of capabilities, requirements, implementation, and best practices.
 
 // Oct 2016 - 9.1 - commented out by chrisgeb
 // *link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100.pdf[TR-4100: Nondisruptive operations with SMB file shares ONTAP 9.x^]* - This technical report details NetApp® ONTAP® support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.

@@ -39,10 +39,6 @@ summary: "These technical report provides an overview of the security in NetApp�
 // Sept 2018 - 9.4ish - Dan Tulledge
 *link:https://www.netapp.com/pdf.html?item=/media/17036-tr4717.pdf[TR-4717: ONTAP SSH authentication with a common access card^]* - This technical report describes configuring and testing third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
 
-//== Key management
-// Jan 2019 - 9.3 - deleted by Dan Tulledge
-//*link:https://www.netapp.com/pdf.html?item=/media/17044-tr4731.pdf[TR-4731: HyTrust KeyControl key management in ONTAP 9.3 or later^]* - This guide describes how to use the HyTrust KeyControl external key management solution for NetApp® ONTAP® 9.3 or later data management software. Topics include installation and configuration of the HyTrust KeyControl Key Management Interoperability Protocol Key Management server (KMIP server) and ONTAP 9.3 or later. This guide also offers a step-by-step example of the configuration steps, using HyTrust KeyControl as the KMIP server.
-
 == Multitennancy
 // Jan 2021 - 9.10.1 - Dan Tulledge
 *link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure multitenancy in ONTAP^]* - This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp® ONTAP®, covering design considerations and best practices.
