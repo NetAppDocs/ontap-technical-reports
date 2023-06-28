@@ -129,4 +129,8 @@ indexpage:
 #          url: networking.html
         - title: BGP/VIP with ONTAP in the dta center – quick configuration guide 
           url: networking.html
+    - title: Industry solutions technical reports
+      links:
+        - title: Electronic Design Automation best practices in ONTAP
+          url: industry-solutions.html#eda
                        

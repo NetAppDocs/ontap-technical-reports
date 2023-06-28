@@ -1,0 +1,18 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+permalink: industry-solutions.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the recommended practices and implementation procedures."
+---
+= Industry solutions technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+== EDA
+// Sept 2021 - 9.9.1 - Justin Parisi
+*link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP]* - This document highlights best practices and implementation tips in NetApp® ONTAP® for Electronic Design Automation (EDA) workloads. It also calls attention to NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
