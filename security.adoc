@@ -23,7 +23,7 @@ summary: "These technical report provides an overview of the security in NetApp�
 
 == Ransomware
 // Feb 2023 - 9.12.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp Solution for Ransomware^]* - This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp® solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
+*link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp solution for ransomware^]* - This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp® solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
 
 // Jan 2023 - 9.12.1 - Dan Tulledge
 *link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock^]* - Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer to their data protection roadmap. This document discusses the integration of NetApp® SnapLock® software, the NetApp WORM solution in NetApp ONTAP® 9, into the environments that require WORM data storage.
@@ -45,7 +45,7 @@ summary: "These technical report provides an overview of the security in NetApp�
 
 == Multitennancy
 // Jan 2021 - 9.10.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure Multitenancy in ONTAP^]* - This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp® ONTAP®, covering design considerations and best practices.
+*link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure multitenancy in ONTAP^]* - This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp® ONTAP®, covering design considerations and best practices.
 
 == Logging
 // Nov 2014 - <9.0 - Glenn Frye
