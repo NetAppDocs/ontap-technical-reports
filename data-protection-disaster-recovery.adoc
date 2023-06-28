@@ -31,7 +31,7 @@ Procedural documentation for data protection and disaster recovery can be found 
 // Jun 2023 - 9.13.1 - Tony Ansley
 *link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices^]* - This document contains information and best practices for configuring NetApp SnapMirror Synchronous (SM-S) replication.
 
-=== SnapMirror Three-Data-Center DR
+*SnapMirror Three-Data-Center DR*
 // Apr 2020 - 9.7 - Tony Ansley
 *link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7^]* - This document describes a three-data-center disaster recovery configuration using NetApp SnapMirror technology for replication.
 
