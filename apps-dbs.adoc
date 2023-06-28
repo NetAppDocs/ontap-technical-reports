@@ -34,6 +34,7 @@ ONTAP is the foundation for data management and data protection for many enterpr
 
 *link:https://www.netapp.com/pdf.html?item=/media/19750-tr-4534.pdf[TR-4534: Migration of Oracle Databases to NetApp Storage Systems^]* - This document explains the overall considerations for planning a migration strategy, outlines the three different levels in which data movement takes place, and details some of the various procedures available.
 
+// this is also in nas-containers.html
 *link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with NetApp FabricPool^]* - This document describes the benefits and configuration options of NetApp FabricPool with various databases, including the Oracle relational database management system (RDBMS).
 
 *link:https://www.netapp.com/pdf.html?item=/media/40384-tr-4899.pdf[TR-4899: Oracle database transparent application failover with NetApp SnapMirror business continuity^]* - NetApp SnapMirror Business Continuity (SM-BC) and Oracle Real Application Cluster (RAC)
