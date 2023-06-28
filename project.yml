@@ -75,6 +75,11 @@ sidebar:
       url: /data-protection-disaster-recovery.html
     - title: Business continuity technical reports
       url: /business-continuity.html
+      entries:
+      - title: SnapMirror Business Continuity
+        url: business-continuity.html#snapmirror-business-continuity-sm-bc
+      - title: MetroCluster
+        url: business-continuity.html#netapp-metrocluster
     - title: SnapCenter technical reports
       url: /snapcenter.html      
     - title: Networking technical reports
