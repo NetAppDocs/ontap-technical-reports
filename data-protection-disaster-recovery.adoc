@@ -20,14 +20,14 @@ Procedural documentation for data protection and disaster recovery can be found 
 
 // Last Update - Version - current pdf owner
 == SnapMirror
-=== SnapMirror Asynchronous
+*SnapMirror Asynchronous*
 // Jun 2023 - 9.13.1 - Tony Ansley
 *link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices^]* - This document contains information and best practices for configuring NetApp SnapMirror Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM DR).
 
 // Oct 2021 - 9.10.1 - Maha G
 *link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes^]* - This document covers data protection and backup for NetApp ONTAP FlexGroup volumes. Topics include NetApp Snapshot copies, NetApp SnapMirror, and other data protection and backup solutions. 
 
-=== SnapMirror Synchronous 
+*SnapMirror Synchronous*
 // Jun 2023 - 9.13.1 - Tony Ansley
 *link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices^]* - This document contains information and best practices for configuring NetApp SnapMirror Synchronous (SM-S) replication.
 
