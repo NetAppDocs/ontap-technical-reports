@@ -1,5 +1,5 @@
 settings:
-  name: "ONTAP 9 Technical Reports"
+  name: "ONTAP Technical Reports"
   internal:
     pdf_enabled: false
   prod:
@@ -24,6 +24,13 @@ sidebar:
       url: /storage-efficiency.html
     - title: Application and database technical reports
       url: /apps-dbs.html
+      entries:
+      - title: Microsoft SQL Server
+        url: /apps-dbs.html#microsoft-sql
+      - title: Oracle
+        url: /apps-dbs.html#oracle
+      - title: PostgreSQL
+        url: /apps-dbs.html#postgreSQL
     - title: Virtualization technical reports
       url: /virtualization.html
     - title: Data protection and disaster recovery technical reports
