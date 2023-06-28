@@ -21,6 +21,19 @@ sidebar:
         url: /san.html
     - title: NAS technical reports
       url: /nas.html
+      entries:
+      - title: NFS
+        url: /nas.html#nfs
+      - title: SMB
+        url: /nas.html#smb
+      - title: Multiprotocol
+        url: /nas.html#multiprotocol
+      - title: ONTAP
+        url: /nas.html#ontap-s3
+      - title: Name services
+        url: /nas.html#name-services
+      - title: NAS Security
+        url: nas.html#nas-security
     - title: Security technical reports
       url: /security.html
     - title: FlexCache and FlexGroup volumes technical reports
