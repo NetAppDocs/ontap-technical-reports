@@ -19,9 +19,8 @@ ONTAP is the foundation for data management and data protection for many enterpr
 == Enterprise applications
 // 
 
-
 == Microsoft SQL Server
-// 
+//
 *link:[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
 
 == Oracle
@@ -30,23 +29,18 @@ ONTAP is the foundation for data management and data protection for many enterpr
 
 *link:https://www.netapp.com/pdf.html?item=/media/19666-tr-4591.pdf[TR-4591: Oracle data protection: Backup, recovery, replication, and disaster recovery]^* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on NetApp® ONTAP® storage.
 
+// Mar 2021 - 
 *link:https://www.netapp.com/pdf.html?item=/media/8583-tr4592.pdf[TR-4592 Oracle on MetroCluster^]* - This document describes best practices, test procedures, and other considerations for operating Oracle databases on a NetApp® MetroCluster™ synchronous replication feature. 
 
+// Mar 2022 - 9.8 - Jeff Steiner
+*link:https://www.netapp.com/pdf.html?item=/media/19750-tr-4534.pdf[TR-4534: Migration of Oracle Databases to NetApp Storage Systems^]* - This document explains the overall considerations for planning a migration strategy, outlines the three different levels in which data movement takes place, and details some of the various procedures available.
 
-TR-4534
-TR-4695
-TR-4899
-
-== SAP HANA
-// 
+// Apr 2021 - 9.8 - Jeff Steiner
+*link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with NetApp FabricPool^]* - This document describes the benefits and configuration options of NetApp® FabricPool with various databases, including the Oracle relational database management system (RDBMS).
 
 
-== PostgreSQL
-// 
-
-== MariaDB and MySQL
-// 
-
+*link:https://www.netapp.com/pdf.html?item=/media/40384-tr-4899.pdf[TR-4899: Oracle database transparent application failover with NetApp SnapMirror business continuity]* - NetApp® SnapMirror® Business Continuity (SM-BC) and Oracle Real Application Cluster (RAC)
+can provide transparent application failover (TAF) and continuity in the face of site outages and true disasters. This paper describes the use of a NetApp AFF storage array with SM-BC as the storage component of RAC, and provides configuration guidance and best practices. 
 
 ////
 == Enterprise applications
