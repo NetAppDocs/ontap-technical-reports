@@ -58,8 +58,8 @@ sidebar:
         url: /nas-containers.html#flexgroup-volumes
     - title: Tiering technical reports
       url: /tiering.html
-    - title: Storage efficiency technical reports
-      url: /storage-efficiency.html
+#    - title: Storage efficiency technical reports
+#      url: /storage-efficiency.html
     - title: Application and database technical reports
       url: /apps-dbs.html
       entries:
