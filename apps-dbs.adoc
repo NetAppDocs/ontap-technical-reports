@@ -22,13 +22,15 @@ ONTAP is the foundation for data management and data protection for many enterpr
 
 == Microsoft SQL Server
 // 
-*link:[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
+*link:[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
 
 == Oracle
 // 
-*link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP]* - This document addresses the requirements for operating an Oracle database on NetApp storage in two ways. First, when a clear best practice exists, it is called out specifically. Second, this document reviews the many design considerations that must be addressed by architects of Oracle storage solutions based on their specific business requirements. This document first discusses general considerations for all environments followed by specific recommendations based on the choice of virtualization and OS.
+*link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully deploy Oracle on NetApp® ONTAP® storage.
 
-TR-4591
+*link:https://www.netapp.com/pdf.html?item=/media/19666-tr-4591.pdf[Oracle data protection: Backup, recovery, replication, and disaster recovery]^* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on NetApp® ONTAP® storage.
+
+
 TR-4592
 TR-4534
 TR-4695
