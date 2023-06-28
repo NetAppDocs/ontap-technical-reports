@@ -28,10 +28,11 @@ ONTAP is the foundation for data management and data protection for many enterpr
 // 
 *link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully deploy Oracle on NetApp® ONTAP® storage.
 
-*link:https://www.netapp.com/pdf.html?item=/media/19666-tr-4591.pdf[Oracle data protection: Backup, recovery, replication, and disaster recovery]^* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on NetApp® ONTAP® storage.
+*link:https://www.netapp.com/pdf.html?item=/media/19666-tr-4591.pdf[TR-4591: Oracle data protection: Backup, recovery, replication, and disaster recovery]^* - This document covers the recommended practices guide that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on NetApp® ONTAP® storage.
+
+*link:https://www.netapp.com/pdf.html?item=/media/8583-tr4592.pdf[TR-4592 Oracle on MetroCluster^]* - This document describes best practices, test procedures, and other considerations for operating Oracle databases on a NetApp® MetroCluster™ synchronous replication feature. 
 
 
-TR-4592
 TR-4534
 TR-4695
 TR-4899
