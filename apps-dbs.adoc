@@ -17,6 +17,36 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures.
 
 == Enterprise applications
+// 
+
+
+== Microsoft SQL Server
+// 
+*link:[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]* - This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on NetApp® storage.
+
+== Oracle
+// 
+*link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP]* - This document addresses the requirements for operating an Oracle database on NetApp storage in two ways. First, when a clear best practice exists, it is called out specifically. Second, this document reviews the many design considerations that must be addressed by architects of Oracle storage solutions based on their specific business requirements. This document first discusses general considerations for all environments followed by specific recommendations based on the choice of virtualization and OS.
+
+TR-4591
+TR-4592
+TR-4534
+TR-4695
+TR-4899
+
+== SAP HANA
+// 
+
+
+== PostgreSQL
+// 
+
+== MariaDB and MySQL
+// 
+
+
+////
+== Enterprise applications
 // git hub updated
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/introduction.html[ONTAP for enterprise applications]* - 
 
@@ -38,4 +68,5 @@ ONTAP is the foundation for data management and data protection for many enterpr
 
 == MariaDB and MySQL
 // git hub updated
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/introduction.html[MariaDB and MySQL on ONTAP]* - 
+*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/introduction.html[MariaDB and MySQL on ONTAP]* -
+////
