@@ -51,6 +51,11 @@ sidebar:
         url: /security.html#standards
     - title: FlexCache and FlexGroup volumes technical reports
       url: /nas-containers.html
+      entries:
+      - title: FlexCache
+        url: /nas-containers.html#flexcache
+      - title: FlexGroup volumes
+        url: /nas-containers.html#flexgroup-volumes
     - title: Tiering technical reports
       url: /tiering.html
     - title: Storage efficiency technical reports
