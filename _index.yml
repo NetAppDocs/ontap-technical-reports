@@ -69,15 +69,15 @@ indexpage:
           url: storage-efficiency.html
     - title: Application and database technical reports
       links:
-        - title: ONTAP for enterprise applications
-          url: apps-dbs.html
-        - title: MS SQL Server on ONTAP
-          url: apps-dbs.html
-        - title: Oracle on ONTAP
-          url: apps-dbs.html
-        - title: SAP HANA on ONTAP
-          url: apps-dbs.html
-        - title: Other databases on ONTAP
+        - title: Best practice guide for Microsoft SQL Server with ONTAP
+          url: apps-dbs.html#microsoft-sql
+        - title: Oracle Database Performance on NetApp AFF A-Series and C-Series
+          url: apps-dbs.html#oracle
+        - title: Virtualized Oracle database performance on NetApp AFF A-Series and C-Series
+          url: apps-dbs.html#oracle
+        - title: Oracle databases on ONTAP
+          url: apps-dbs.html#oracle
+        - title: Additional application and database technical reports
           url: apps-dbs.html
     - title: Virtualization technical reports
       links:
