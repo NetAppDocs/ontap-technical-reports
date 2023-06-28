@@ -15,9 +15,9 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 
 == EDA
 // Sept 2021 - 9.9.1 - Justin Parisi
-*link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]* - This document highlights best practices and implementation tips in NetApp® ONTAP® for Electronic Design Automation (EDA) workloads. It also calls attention to NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
+*link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]* - This document highlights best practices and implementation tips in NetApp ONTAP for Electronic Design Automation (EDA) workloads. It also calls attention to NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
 
 == Healthcare
 // May 2022 - 9.11.1ish - Brian O'Mahoney
 *link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf[NetApp best practices for Epic^]* - Epic makes software for the healthcare industry. This technical report presents best practices
-for integrating NetApp® storage with Epic software environments.
+for integrating NetApp storage with Epic software environments.

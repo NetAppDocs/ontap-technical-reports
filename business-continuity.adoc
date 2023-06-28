@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: business-continuity.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the business continuity in NetApp® ONTAP® as well as recommended practices"
+summary: "These technical report provides an overview of the business continuity in NetApp ONTAP as well as recommended practices"
 ---
 = Business continuity technical reports
 :hardbreaks:
@@ -22,7 +22,7 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 // Last Update - Version - current pdf owner
 // Nov 2022 - 9.12.1 - Stephen Galla
 == SnapMirror Business Continuity (SM-BC)
-*link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]* - NetApp® SnapMirror® Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP® running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
+*link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]* - NetApp SnapMirror Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
 
 //
 *link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/si.html[Single-Instance Oracle with SM-BC^]* - 
@@ -31,12 +31,12 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 
 == NetApp MetroCluster
 // Apr 2023 - 9.12.1 - Stephen Galla
-*link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf[TR-4705: NetApp MetroCluster solution architecture and design^]* - This document describes high-level architecture and design concepts for NetApp® MetroCluster features in NetApp ONTAP® storage management software.
+*link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf[TR-4705: NetApp MetroCluster solution architecture and design^]* - This document describes high-level architecture and design concepts for NetApp MetroCluster features in NetApp ONTAP storage management software.
 
 === MetroCluster IP
 // May 2023 - 9.12.1 - Stephen Galla
-*link:http://www.netapp.com/us/media/tr-4689.pdf[TR-4689: NetApp MetroCluster IP^]* - NetApp® MetroCluster is a continuously available storage solution for NetApp ONTAP® running on FAS and AFF systems. MetroCluster IP is the latest evolution that uses an Ethernet-based back-end storage fabric. MetroCluster IP provides a highly redundant configuration to meet the needs of the most critical business applications. MetroCluster IP is included in ONTAP and provides NAS and SAN connectivity for clients and servers that use ONTAP storage.
+*link:http://www.netapp.com/us/media/tr-4689.pdf[TR-4689: NetApp MetroCluster IP^]* - NetApp MetroCluster is a continuously available storage solution for NetApp ONTAP running on FAS and AFF systems. MetroCluster IP is the latest evolution that uses an Ethernet-based back-end storage fabric. MetroCluster IP provides a highly redundant configuration to meet the needs of the most critical business applications. MetroCluster IP is included in ONTAP and provides NAS and SAN connectivity for clients and servers that use ONTAP storage.
 
 === MetroCluster FC
 // Oct 2021 - 9.9.1 - Cheryl George
-*link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf[TR-4375: NetApp MetroCluster FC^]* - NetApp® MetroCluster® provides continuous data availability across geographically separated data centers for mission-critical applications. This document provides technical information about NetApp® MetroCluster FC.
+*link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf[TR-4375: NetApp MetroCluster FC^]* - NetApp MetroCluster provides continuous data availability across geographically separated data centers for mission-critical applications. This document provides technical information about NetApp MetroCluster FC.

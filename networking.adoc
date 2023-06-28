@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
 permalink: networking.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the networking in NetApp® ONTAP® 9 as well as best-practice recommendations"
+summary: "These technical report provides an overview of the networking in NetApp ONTAP 9 as well as best-practice recommendations"
 ---
 = Networking technical reports
 :hardbreaks:
@@ -20,7 +20,7 @@ Procedural documentation for networking can be found at link:https://docs.netapp
 
 // Last Update - Version - current pdf owner
 // Jan 2016 - <9.0 - Kris Lippe 
-//*link:https://www.netapp.com/pdf.html?item=/media/16885-tr-4182.pdf[TR-4182: Ethernet storage design considerations and best practices for ONTAP^]* - This technical report describes the implementation of NetApp® ONTAP® network configurations. It provides common ONTAP network deployment scenarios and recommends networking best practices as they pertain to a ONTAP environment.
+//*link:https://www.netapp.com/pdf.html?item=/media/16885-tr-4182.pdf[TR-4182: Ethernet storage design considerations and best practices for ONTAP^]* - This technical report describes the implementation of NetApp ONTAP network configurations. It provides common ONTAP network deployment scenarios and recommends networking best practices as they pertain to a ONTAP environment.
 
 // Dec 2022 - 9.12.1 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center – quick configuration guide^]* - Guide to help storage administrators quickly deploy a basic BGP configuration in NetApp® ONTAP®
+*link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center – quick configuration guide^]* - Guide to help storage administrators quickly deploy a basic BGP configuration in NetApp ONTAP
