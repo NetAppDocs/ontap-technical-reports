@@ -133,4 +133,6 @@ indexpage:
       links:
         - title: Electronic Design Automation best practices in ONTAP
           url: industry-solutions.html#eda
+        - title: NetApp best practices for Epic
+          url: industry-solutions.html#healthcare
                        
