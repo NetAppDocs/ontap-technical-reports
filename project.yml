@@ -12,6 +12,13 @@ sidebar:
       url: /index.html
     - title: SAN technical reports
       url: /san.html
+      entries:
+      - title: Best practices for modern SAN
+        url: /san.html
+      - title: Implementing and configuring modern SANs with NVMe-oF
+        url: /san.html
+      - title: ONTAP AFF All SAN Array (ASA)
+        url: /san.html
     - title: NAS technical reports
       url: /nas.html
     - title: Security technical reports
