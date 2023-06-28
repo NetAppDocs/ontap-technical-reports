@@ -68,7 +68,7 @@ sidebar:
       - title: Oracle
         url: /apps-dbs.html#oracle
       - title: PostgreSQL
-        url: /apps-dbs.html#postgreSQL
+        url: /apps-dbs.html#postgresql
     - title: Virtualization technical reports
       url: /virtualization.html
     - title: Data protection and disaster recovery technical reports
