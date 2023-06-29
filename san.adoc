@@ -28,7 +28,7 @@ Procedural documentation for SAN can be found at link:https://docs.netapp.com/us
 *link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[TR-4684: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)^]* - Learn how to implement and configure NVMe over Fabrics transports (NVMe over Fibre Channel and NVMe over TCP). It includes design, implementation, configuration, management guidelines and recommended practices to build highly available, high-performance modern SAN solutions using NVMe protocols and transports.
 
 // Jul 2021 - 9.9.1 - Mike Peppers
-*link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems^]* - Learn about NetApp ONTAP AFF All SAN Array (ASA) systems and covers implementation and recommended practices recommendations for always-available, business-critical SAN configurations.
+*link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems^]* - Learn about NetApp ONTAP AFF All SAN Array (ASA) systems, their implementation and recommended practices for always-available, business-critical SAN configurations.
 
 // May 2023 - 9.12.1 - 
-*link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[NetApp All-SAN Array data availability and integrity with the NetApp ASA^]* - Learn how the various data protection and data integrity features of NetApp All SAN array systems, plus the recommended practices for designing, implementing, and managing a SAN network to achieve maximum reliability.
+*link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[NetApp All-SAN Array data availability and integrity with the NetApp ASA^]* - Learn how the various data protection and data integrity features of a NetApp All SAN array systems work to achieve maximum application uptime plus  recommended practices for designing, implementing, and managing a SAN network.
