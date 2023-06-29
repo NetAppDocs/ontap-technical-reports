@@ -13,7 +13,7 @@ summary: "These technical report provides an overview of the storage efficiency 
 :linkattrs:
 :imagesdir: ./media/
 
-[TIP]
+[NOTE]
 ====
 Procedural documentation for deduplication can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html[deduplication documentation]
 Procedural documentation for compression can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html[compression documentation]

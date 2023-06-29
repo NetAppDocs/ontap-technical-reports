@@ -13,7 +13,7 @@ summary: "These technical report provides an overview of the business continuity
 :linkattrs:
 :imagesdir: ./media/
 
-[TIP]
+[NOTE]
 ====
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
 Procedural documentation for MetroCluster can be found at link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[MetroCluster documentation]

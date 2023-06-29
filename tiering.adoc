@@ -12,7 +12,7 @@ summary: "These technical report provides an overview of the tiering in NetApp O
 :icons: font
 :linkattrs:
 
-[TIP]
+[NOTE]
 ====
 Procedural documentation for FabricPool can be found at link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[FabricPool documentation]
 ====

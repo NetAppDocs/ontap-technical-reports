@@ -13,7 +13,7 @@ summary: "These technical report provides an overview of the FlexCache and FlexG
 :linkattrs:
 :imagesdir: ./media/
 
-[TIP]
+[NOTE]
 ====
 Procedural documentation for FlexCache can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html[FlexCache documentation]
 Procedural documentation for FlexGroup volumes can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html[FlexGroup volume documentation]
