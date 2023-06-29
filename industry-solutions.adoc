@@ -1,7 +1,7 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: industry-solutions.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the recommended practices and implementation procedures."
