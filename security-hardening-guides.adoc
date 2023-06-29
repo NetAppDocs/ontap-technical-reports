@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MFA, best practices, best-practices
 permalink: security-hardening-guides.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical reports provide guidance on how to hardening NetApp ONTAP as well as other ONTAP related products."
+summary: "These technical reports provide guidance on how to harden NetApp ONTAP as well as other ONTAP related products."
 ---
 = Security hardening guides
 :hardbreaks:
