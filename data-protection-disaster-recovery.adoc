@@ -13,6 +13,8 @@ summary: "These technical report provides an overview of the data protection and
 :linkattrs:
 :imagesdir: ./media/
 
+[lead]
+
 [NOTE]
 ====
 Procedural documentation for data protection and disaster recovery can be found at: link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[Data protection and disaster recovery documentation].

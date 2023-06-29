@@ -13,6 +13,8 @@ summary: "These technical report provides an overview of the NFS, SMB/CIFS, S3, 
 :linkattrs:
 :imagesdir: ./media/
 
+[lead]
+
 [NOTE]
 ====
 Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS storage management documentation]

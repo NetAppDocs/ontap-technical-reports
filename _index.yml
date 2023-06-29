@@ -33,7 +33,7 @@ indexpage:
           url: security.html#zero-trust
         - title: Compliant WORM storage using NetApp SnapLock
           url: security.html#ransomware
-        - title: Authentication (SSH, MFA, etc.)
+        - title: Authentication (SSH, MFA)
           url: security.html#authentication
         - title: Secure multitenancy in ONTAP
           url: security.html#multitennancy
@@ -127,7 +127,7 @@ indexpage:
       links:
 #        - title: Ethernet storage design considerations and best practices for ONTAP
 #          url: networking.html
-        - title: BGP/VIP with ONTAP in the dta center – quick configuration guide 
+        - title: BGP/VIP with ONTAP in the data center – quick configuration guide 
           url: networking.html
     - title: Industry solutions technical reports
       links:

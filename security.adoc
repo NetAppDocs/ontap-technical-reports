@@ -13,6 +13,9 @@ summary: "These technical report provides an overview of the security in NetApp 
 :linkattrs:
 :imagesdir: ./media/
 
+[lead]
+NetApp® ONTAP data management software continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry best practices. These new features also support your organization’s move toward a Zero Trust model. 
+
 // Last Update - Version - current pdf owner
 == Hardening guides
 // Jan 2023 - 9.12.1 - Dan Tulledge
@@ -37,12 +40,12 @@ summary: "These technical report provides an overview of the security in NetApp 
 
 == Multifactor authentication
 // Nov 2022 - 9.12.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor authentication inONTAP best practices and implementation guide^]* - This document covers multifactor authentication capability for administrative access introduced in NetApp ONTAP 9.3 software for NetApp System Manager, Active IQ Unified Manager and ONTAP secure shell (SSH) CLI authentication.
+*link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor authentication in ONTAP best practices and implementation guide^]* - This document covers multifactor authentication capability for administrative access introduced in NetApp ONTAP 9.3 software for NetApp System Manager, Active IQ Unified Manager and ONTAP secure shell (SSH) CLI authentication.
 
 // Sept 2018 - 9.4ish - Dan Tulledge
 *link:https://www.netapp.com/pdf.html?item=/media/17036-tr4717.pdf[TR-4717: ONTAP SSH authentication with a common access card^]* - This technical report describes configuring and testing third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
 
-== Multitennancy
+== Multitenancy
 // Jan 2021 - 9.10.1 - Dan Tulledge
 *link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure multitenancy in ONTAP^]* - This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp ONTAP, covering design considerations and best practices.
 

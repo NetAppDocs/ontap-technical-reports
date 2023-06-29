@@ -13,6 +13,8 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 :linkattrs:
 :imagesdir: ./media/
 
+[lead]
+
 == EDA
 // Sept 2021 - 9.9.1 - Justin Parisi
 *link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]* - This document highlights best practices and implementation tips in NetApp ONTAP for Electronic Design Automation (EDA) workloads. It also calls attention to NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
