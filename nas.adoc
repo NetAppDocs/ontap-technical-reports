@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, NAS, best practices, best-practices
 permalink: nas.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the NFS, SMB/CIFS, S3, name services in NetApp ONTAP as well as best-practice recommendations"
+summary: "These technical report provides an overview of the NFS, SMB/CIFS, S3, name services in NetApp ONTAP as well as recommended practices."
 ---
 = NAS technical reports
 :hardbreaks:

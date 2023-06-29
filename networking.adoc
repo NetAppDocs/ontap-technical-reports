@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: networking.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the networking in NetApp ONTAP 9 as well as best-practice recommendations"
+summary: "These technical report provides an overview of the networking in NetApp ONTAP 9 as well as recommended practices."
 ---
 = Networking technical reports
 :hardbreaks:
