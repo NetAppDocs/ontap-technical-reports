@@ -13,6 +13,7 @@ summary: "These technical report provides an overview of the block protocols in 
 :linkattrs:
 
 [lead]
+NetApp SAN storage delivers a simplified SAN experience that provides high availability for your organization’s mission-critical databases and other SAN workloads. With best-in-class data services integration with Oracle, SAP, and Microsoft SQL Server databases, plus VMware and other leading hypervisors, NetApp SAN delivers accelerated time-to-value for enterprise database applications.
 
 [NOTE]
 ====

@@ -15,6 +15,7 @@ summary: "These technical report provides an overview of the business continuity
 
 [lead]
 
+
 [NOTE]
 ====
 Procedural documentation for SnapMirror Business Continuity can be found at link:https://docs.netapp.com/us-en/ontap/smbc/index.html[SnapMirror Business Continuity documentation]
