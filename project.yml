@@ -1,5 +1,5 @@
 settings:
-  name: "ONTAP Technical Reports"
+  name: "ONTAP technical reports"
   internal:
     pdf_enabled: false
   prod:
