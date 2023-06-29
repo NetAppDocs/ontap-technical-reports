@@ -1,0 +1,31 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
+permalink: tiering.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "These technical reports provide an overview of the tiering in NetApp ONTAP as well as recommended practices."
+---
+= Tiering technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+
+[.lead]
+With the FabricPool data tiering solution, an enterprise’s overall user experience of flash systems improves while avoiding the pain of rearchitecting applications for storage efficiency. FabricPool reduces the storage footprint and the associated costs of a system’s environment. Active data remains on high-performance SSDs. Inactive data is tiered to low-cost object storage while preserving ONTAP data efficiencies.
+
+[NOTE]
+====
+Procedural documentation for FabricPool can be found at link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[FabricPool documentation]
+====
+
+// Last Update - Version - current pdf owner
+// Apr 2023 - 9.12.1 - John Lantz
+*link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[TR-4598: FabricPool best practices^]* - Learn about the capabilities, requirements, implementation, and recommended practices for ONTAP FabricPool.
+
+// Feb 2023 - 9.12.1 - Aron Klein
+*link:https://www.netapp.com/pdf.html?item=/media/19403-tr-4826.pdf[TR-4826: NetApp FabricPool with StorageGRID recommendation guide^]* - Learn about the recommended practices for deploying and sizing NetApp StorageGRID as a capacity tier for the NetApp ONTAP software component FabricPool. This document also covers core capabilities, requirements, implementation, and recommended practices when using StorageGRID.
+
+// Apr 2021 - 9.8 - Jeff Steiner - this is also in apps-dbs.html
+*link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with NetApp FabricPool^]* - Learn about the benefits and configuration options of NetApp FabricPool with various databases, including the Oracle relational database management system (RDBMS).

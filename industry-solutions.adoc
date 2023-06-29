@@ -1,0 +1,28 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
+permalink: industry-solutions.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "These technical reports provide an overview of the industry solutions with NetApp ONTAP as well as recommended practices"
+---
+= Industry solutions technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+
+== EDA
+// Sept 2021 - 9.9.1 - Justin Parisi
+*link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]* - Learn about recommended practices and implementation tips with NetApp ONTAP for Electronic Design Automation (EDA) workloads additionally, NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
+
+== Healthcare
+// May 2022 - 9.11.1ish - Brian O'Mahoney
+*link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf[NetApp best practices for Epic^]* - Epic makes software for the healthcare industry. Learn about recommended practices
+for integrating NetApp storage with Epic software environments.
+
+// 
+*link:https://www.netapp.com/pdf.html?item=/media/86527-tr-4975.pdf[FlexPod - Epic for Large Hospitals^]* - Learn about the end-to-end performance capability from FlexPod demonstrating the need for Electronic Health Record (EHR) application with Intersystem database. The document focuses storage layout and best practices which needs to be followed while setting up the application on a FlexPod solution for large hospitals.

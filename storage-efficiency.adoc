@@ -1,0 +1,29 @@
+---
+layout: landing-page
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
+permalink: storage-efficiency.html
+# lead: Use only if indexpage.lead is not present in _index.yml
+summary: "These technical reports provide an overview of the storage efficiency in NetApp ONTAP as well as recommended practices."
+---
+= Storage efficiency technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+ONTAP provides a comprehensive portfolio of storage efficiency capabilities. Inline data compression, deduplication, and compaction work together to reduce your storage costs and maximize the data you can store. Plus, you can multiply your savings with space-efficient NetApp Snapshot copies, thin provisioning, replication, and cloning technologies.
+
+[NOTE]
+====
+Procedural documentation for deduplication can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html[deduplication documentation]
+Procedural documentation for compression can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html[compression documentation]
+Procedural documentation for temperature sensitive storage efficiency can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html[temperature sensitive storage efficiency documentation]
+Procedural documentation for compaction can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html[compaction documentation]
+====
+
+// Last Update - Version - current pdf owner
+// Feb 2014 - <9.0 - Maha G updating
+//*link:https://www.netapp.com/pdf.html?item=/media/19753-tr-3966.pdf[TR-3966: NetApp data compression and deduplication implementation guide^]* - Learn about ONTAP implementations of NetApp deduplication and NetApp data compression. This report describes in detail how to implement and use both technologies and provides information on best practices, operational considerations, and troubleshooting.

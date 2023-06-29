@@ -1,28 +1,36 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, VMware, vVols, SRM, SRA, Site Recovery Manager, OTV, ONTAP Tools for VMware, SnapCenter for VMware, SnapCenter
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, VMware, vVols, SRM, SRA, Site Recovery Manager, OTV, ONTAP Tools for VMware, SnapCenter for VMware, SnapCenter, RCU, VSC, Virtual Storage Console, best practices, best-practices
 permalink: virtualization.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud."
+summary: "These technical reports provide an overview of the VMware virtualization solutions using NetApp ONTAP as well as recommended practices."
 ---
-= Virtualization Technical Reports
+= Virtualization technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
 
-NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
+[.lead]
+NetApp virtualization solutions help deliver maximum value from your servers. With a responsive virtual server infrastructure built on groundbreaking, high-performance NetApp flash systems, you gain the ability to access your data much faster. Your granular virtual infrastructure scales without disruption to multiple petabytes of data, delivering the performance you need for shared access to multiple workloads. And NetApp helps streamline and reduce the complexity of your virtual server infrastructure deployment with key partnerships, deployment guidance, application integration, and superior design. NetApp provides many recommended practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597 VMware vSphere for ONTAP]
+// Last Update - Version - current pdf owner
+// git hub updated
+*link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597: VMware vSphere for ONTAP]* - NetApp ONTAP software has been a leading storage solution for VMware vSphere environments for almost two decades and continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for vSphere, including the latest product information and recommended practices, to streamline deployment, reduce risk, and simplify management.
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vvols-overview.html[TR-4400 VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
+// git hub updated
+*link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]* - NetApp ONTAP software has been a leading storage solution for VMware vSphere environments for over two decades and continues to add innovative capabilities to simplify management while reducing costs. This document covers ONTAP capabilities for VMware vSphere Virtual Volumes (vVols), including the latest product information and use cases along with recommended practices and other information to streamline deployment and reduce errors.
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900 VMware Site Recovery Manager with NetApp ONTAP 9]
+// git hub updated - This is also in data-protection-disaster-recovery.html
+*link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP 9]* - NetApp ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and recommended practices to streamline deployment, reduce risk, and simplify ongoing management.
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353 ONTAP tools for VMware vSphere - Product Security]
+// git hub updated
+*link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to automation for ONTAP and vSphere]* - Automation has been an integral part of managing VMware environments since the first days of VMware ESX. The ability to deploy infrastructure as code and extend practices to private cloud operations helps to alleviate concerns surrounding scale, flexibility, self-provisioning, and efficiency. This document introduces the ONTAP solution for automating ONTAP and VMware vSphere environment.
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355 SnapCenter Plug-in VMware vSphere - Product Security]
+// git hub updated
+// *link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353: ONTAP tools for VMware vSphere - product security]* - Chance is working on these...
 
-    - link:https://docs.netapp.com/en-us/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to Automation for ONTAP and vSphere]
+// git hub updated
+// *link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355: SnapCenter plug-in VMware vSphere - product security]* - Chance is working on these...
