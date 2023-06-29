@@ -36,9 +36,8 @@ sidebar:
 #        url: nas.html#nas-security
     - title: Security technical reports
       url: /security.html
-#      entries:
-#      - title: Hardening guides
-#        url: /security.html#hardening-guides
+    - title: Security hardening guides
+      url: /security-hardening-guides.html
 #      - title: Ransomware
 #        url: security.html#ransomware
 #      - title: Zero Trust
