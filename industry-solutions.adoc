@@ -13,7 +13,7 @@ summary: "These technical reports provide an overview of the industry solutions 
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 
 == EDA
 // Sept 2021 - 9.9.1 - Justin Parisi

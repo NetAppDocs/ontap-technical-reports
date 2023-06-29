@@ -13,7 +13,7 @@ summary: "These technical reports provide an overview of the business continuity
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 
 
 [NOTE]

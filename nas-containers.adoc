@@ -13,7 +13,7 @@ summary: "These technical reports provide an overview of the FlexCache and FlexG
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. Our NAS solutions give you nondisruptive operations, proven efficiency, and seamless scalability within a unified architecture. Powered by NetApp ONTAP enterprise data management software, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
 
 [NOTE]

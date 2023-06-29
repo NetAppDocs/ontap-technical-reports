@@ -13,7 +13,7 @@ summary: "These technical reports provide an overview of the data protection and
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 NetApp SnapMirror software is a cost-effective, easy-to-use unified replication solution across the Data Fabric. It replicates data at high speeds over LAN or WAN. You get high data availability and fast data replication for your business-critical applications, such as Microsoft Exchange, Microsoft SQL Server, and Oracle, in both virtual and traditional environments. When you replicate data to one or more NetApp storage systems and continually update the secondary data, your data is kept current and is available whenever you need it. No external replication servers are required. 
 
 [NOTE]

@@ -13,7 +13,7 @@ summary: "These technical reports provide an overview of the networking in NetAp
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 
 
 [NOTE]

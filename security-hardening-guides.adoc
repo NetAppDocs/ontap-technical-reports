@@ -13,7 +13,7 @@ summary: "These technical reports provide guidance on how to harden NetApp ONTAP
 :linkattrs:
 :imagesdir: ./media/
 
-[lead]
+[.lead]
 These technical reports provide guidance on how to harden NetApp ONTAP as well as other ONTAP related products.
 
 // Last Update - Version - current pdf owner
