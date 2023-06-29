@@ -14,7 +14,7 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 :imagesdir: ./media/
 
 [lead]
-ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the best practices and implementation procedures.
+ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following pages provide guidance on the recommended practices and implementation procedures.
 
 == Microsoft SQL Server
 *link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]* - Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on NetApp storage.
@@ -38,7 +38,7 @@ ONTAP is the foundation for data management and data protection for many enterpr
 *link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with NetApp FabricPool^]* - Learn about the benefits and configuration options of NetApp FabricPool with various databases, including the Oracle relational database management system (RDBMS).
 
 *link:https://www.netapp.com/pdf.html?item=/media/40384-tr-4899.pdf[TR-4899: Oracle database transparent application failover with NetApp SnapMirror business continuity^]* - NetApp SnapMirror Business Continuity (SM-BC) and Oracle Real Application Cluster (RAC)
-can provide transparent application failover (TAF) and continuity in the face of site outages and true disasters. Learn about the use of a NetApp AFF storage array with SM-BC as the storage component of RAC, and provides configuration guidance and best practices. 
+can provide transparent application failover (TAF) and continuity in the face of site outages and true disasters. Learn about the use of a NetApp AFF storage array with SM-BC as the storage component of RAC, and provides configuration guidance and recommended practices. 
 
 *link:https://www.netapp.com/pdf.html?item=/media/21901-tr-4876.pdf[TR-4876:Oracle Multitenancy with ONTAP solution and deployment best practices^]* - Learn about the solution recommended practices on how to provision, manage, and protect Oracle Multitenant databases by using NetApp ONTAP storage to maximize the benefits of both Oracle Multitenant databases and the features of ONTAP software
 

@@ -1,7 +1,7 @@
 ---
 layout: landing-page
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MFA, Ransomware, Security, best practices, best-practices
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MAV, MFA, Ransomware, Security, best practices, best-practices
 permalink: security.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical report provides an overview of the security in NetApp ONTAP as well as best-practice recommendations"
@@ -14,13 +14,13 @@ summary: "These technical report provides an overview of the security in NetApp 
 :imagesdir: ./media/
 
 [lead]
-NetApp ONTAP data management software continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry best practices. These new features also support your organization’s move toward a Zero Trust model. 
+NetApp ONTAP data management software continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry recommended practices. These new features also support your organization’s move toward a Zero Trust model. 
 
 // Last Update - Version - current pdf owner
 
 == Ransomware
 // Feb 2023 - 9.12.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp solution for ransomware^]* - This guide covers what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
+*link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp solution for ransomware^]* - Learn what ransomware is; how it has evolved; and how to identify, detect early, prevent the spread, and recover as quickly as possible using the NetApp solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
 
 // Jan 2023 - 9.12.1 - Dan Tulledge - this is also in data-protection-disaster-recovery.html
 *link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock^]* - Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer to their data protection roadmap. This document discusses the integration of NetApp SnapLock software, the NetApp WORM solution in NetApp ONTAP 9, into the environments that require WORM data storage.
@@ -31,19 +31,19 @@ NetApp ONTAP data management software continues to evolve, with security as an i
 
 == Multifactor authentication
 // Nov 2022 - 9.12.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor authentication in ONTAP best practices and implementation guide^]* - This document covers multifactor authentication capability for administrative access introduced in NetApp ONTAP 9.3 software for NetApp System Manager, Active IQ Unified Manager and ONTAP secure shell (SSH) CLI authentication.
+*link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor authentication in ONTAP best practices and implementation guide^]* - Learn about ONTAP's multifactor authentication capability for administrative access introduced in NetApp ONTAP 9.3 software for NetApp System Manager, Active IQ Unified Manager and ONTAP secure shell (SSH) CLI authentication.
 
 // Sept 2018 - 9.4ish - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/17036-tr4717.pdf[TR-4717: ONTAP SSH authentication with a common access card^]* - This technical report describes configuring and testing third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
+*link:https://www.netapp.com/pdf.html?item=/media/17036-tr4717.pdf[TR-4717: ONTAP SSH authentication with a common access card^]* - Learn how to configure and test third-party SSH clients, in conjunction with ActivClient software, to authenticate an ONTAP storage administrator via the public key stored on a common access card (CAC) when it is configured in ONTAP.
 
 == Multitenancy
 // Jan 2021 - 9.10.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure multitenancy in ONTAP^]* - This report discusses the implementation of secure multitenancy using storage virtual machines (SVMs) in NetApp ONTAP, covering design considerations and best practices.
+*link:https://www.netapp.com/pdf.html?item=/media/16886-tr-4160.pdf[TR-4160: Secure multitenancy in ONTAP^]* - Learn how to implement secure multitenancy using storage virtual machines (SVMs) in NetApp ONTAP, covering design considerations and recommended practices.
 
 == Logging
 // Nov 2014 - <9.0 - Glenn Frye
-*link:https://www.netapp.com/pdf.html?item=/media/16880-tr-4303.pdf[TR-4303: Logging in Clustered Data ONTAP^]* - This document is intended to serve as a guide to defining the different logs generated by the NetApp ONTAP system and the offered capabilities in viewing and accessing these logs. Definitions and context will be provided for the different types of logs in the ONTAP system and how this has changed from 7-Mode. This document is intended for customers who require a deeper understanding of the logging mechanisms embedded in ONTAP.
+*link:https://www.netapp.com/pdf.html?item=/media/16880-tr-4303.pdf[TR-4303: Logging in Clustered Data ONTAP^]* - Learn how to define the different logs generated by the NetApp ONTAP system and the offered capabilities and how to view and access these logs. This document is intended for customers who require a deeper understanding of the logging mechanisms embedded in ONTAP.
 
 == Standards
 // Sep 2022 - 9.10.1 - Matt Trudewind
-*link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401.pdf[TR-4401: PCI-DSS 4.0 and ONTAP 9^]* - This technical report is targeted at qualified security assessors and storage administrators focused on validating a system against the PCI DSS 4.0 standard. This document provides guidance for meeting the requirements of the controls that you apply to the NetApp ONTAP 9 storage system. 
+*link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401.pdf[TR-4401: PCI-DSS 4.0 and ONTAP 9^]* - Learn how to validate a system against the PCI DSS 4.0 standard. This document provides guidance for meeting the requirements of the controls that you apply to a NetApp ONTAP system. 

@@ -25,10 +25,10 @@ Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-
 // Last Update - Version - current pdf owner
 == NFS
 // November 2021 - 9.10.1 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide^]* - This technical report covers basic concepts, support information, configuration tips, and best practices for NFS in NetApp ONTAP. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
+*link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide^]* - Learn about basic concepts, support information, configuration tips, and recommended practices for NFS in NetApp ONTAP. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and best practices listed in this guide apply to all ONTAP versions.
 
 // April 2023 - 9.12.1 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962: NFSv4.2 extended attributes^]* - This document guides users through enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and later.
+*link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962: NFSv4.2 extended attributes^]* - Learn about enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and later.
 
 == SMB
 // Oct 2016 - 9.1 - commented out by chrisgeb
@@ -38,26 +38,26 @@ Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-
 // *link:https://www.netapp.com/pdf.html?item=/media/16338-tr-4100.pdf[TR-4100: Nondisruptive operations with SMB file shares ONTAP 9.x^]* - This technical report details NetApp ONTAP support for nondisruptive operations (NDO) when using the SMB protocol. NDO capabilities are covered for each of the primary SMB dialects, including SMB 1, SMB 2, and SMB 3.
 
 // Jan 2019 - 9.4 - Chow
-*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. This technical report is an overview of the Multichannel feature in NetApp ONTAP, including its capabilities, best practices, and performance test results.
+*link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]* - Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. Get an overview of the Multichannel feature in NetApp ONTAP, including its capabilities, recommended practices, and performance test results in this technical report.
 
 == Multiprotocol
 // Apr 2021 - 9.8 - Elliot Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP overview and best practices^]* - This technical report describes how multiprotocol NAS access works in NetApp ONTAP data management software and the best practices for multiprotocol environments.
+*link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP overview and best practices^]* - Learn how multiprotocol NAS access works in NetApp ONTAP data management software and the recommended practices for multiprotocol environments.
 
 == ONTAP S3
 // March 2023 - 9.12.1 - John Lantz
-*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814.pdf[TR-4814: S3 in ONTAP best practices^]* - This technical report describes best practices for using the Amazon Simple Storage Service (S3) with NetApp ONTAP software. We also cover capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for NetApp FabricPool.
+*link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814.pdf[TR-4814: S3 in ONTAP best practices^]* - Learn about recommended practices for using the Amazon Simple Storage Service (S3) with NetApp ONTAP software. We also cover capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for NetApp FabricPool.
 
 == Name services
 // Feb 2021 - 9.4 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP^]* - This technical report covers how to configure NetApp storage systems with NetApp ONTAP management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and best practices.
+*link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP^]* - Learn how to configure NetApp storage systems with NetApp ONTAP management software for use with DNS load balancing methodologies. This document covers the on-box DNS feature available in ONTAP, various configuration methods, and recommended practices.
 
 // Mar 2018  - 9.3 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668.pdf[TR-4668: Name services best practices guide^]* - This technical report provides a comprehensive list of best practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp ONTAP.
+*link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668.pdf[TR-4668: Name services best practices guide^]* - Learn about recommended practices, limits, recommendations, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp ONTAP.
 
 // MAy 2021 - 9.9.1 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management^]* - This technical report covers how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp ONTAP based systems.
+*link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management^]* - Learn how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp ONTAP based systems.
 
 == NAS security
 // Jun 2021 - 9.9.1 - Elliott Ecton
-*link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]* - This technical report covers NFS Kerberos support in NetApp ONTAP software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.
+*link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]* - Learn about NFS Kerberos in NetApp ONTAP software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.

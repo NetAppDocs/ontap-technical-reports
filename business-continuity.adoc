@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: business-continuity.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical report provides an overview of the business continuity in NetApp ONTAP as well as recommended practices"
+summary: "These technical reports provide an overview of the business continuity in NetApp ONTAP as well as recommended practices"
 ---
 = Business continuity technical reports
 :hardbreaks:
@@ -27,10 +27,9 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 == SnapMirror Business Continuity (SM-BC)
 *link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]* - NetApp SnapMirror Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for NetApp ONTAP running on NetApp AFF or NetApp All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
 
-//
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/si.html[Single-Instance Oracle with SM-BC^]* - 
+//*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/si.html[Single-Instance Oracle with SM-BC^]* - 
 
-*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/rac.html[Oracle RAC with SM-BC^]* - 
+//*link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/rac.html[Oracle RAC with SM-BC^]* - 
 
 == NetApp MetroCluster
 // Apr 2023 - 9.12.1 - Stephen Galla
@@ -42,4 +41,4 @@ Procedural documentation for MetroCluster can be found at link:https://docs.neta
 
 *MetroCluster FC*
 // Oct 2021 - 9.9.1 - Cheryl George
-*link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf[TR-4375: NetApp MetroCluster FC^]* - NetApp MetroCluster provides continuous data availability across geographically separated data centers for mission-critical applications. This document provides technical information about NetApp MetroCluster FC.
+*link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf[TR-4375: NetApp MetroCluster FC^]* - NetApp MetroCluster provides continuous data availability across geographically separated data centers for mission-critical applications. Learn about NetApp MetroCluster FC recommended practices, design decisions, and supported configurations.

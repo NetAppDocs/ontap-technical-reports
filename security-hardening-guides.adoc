@@ -19,16 +19,16 @@ These technical reports provide guidance on how to harden NetApp ONTAP as well a
 // Last Update - Version - current pdf owner
 == Hardening guides
 // Jan 2023 - 9.12.1 - Dan Tulledge
-*link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security hardening guide for NetApp ONTAP 9^]* - This technical report provides guidance and configuration settings for NetApp ONTAP 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+*link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security hardening guide for NetApp ONTAP 9^]* - Learn how to configure NetApp ONTAP 9 to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
 // Apr 2023 - 9.12.1 - Ankita Dhawale - this is also in snapcenter.html
-*link:https://www.netapp.com/pdf.html?item=/media/82393-tr-4957.pdf[TR-4957: Security hardening guide for NetApp SnapCenter^]* - This technical report provides guidance and configuration settings for NetApp SnapCenter software to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+*link:https://www.netapp.com/pdf.html?item=/media/82393-tr-4957.pdf[TR-4957: Security hardening guide for NetApp SnapCenter^]* - Learn how to configure NetApp SnapCenter software to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
 // Mar 2023 - 9.12.1 - Ankita Dhawale - this is also in snapcenter.html
-*link:https://www.netapp.com/pdf.html?item=/media/83591-tr-4963.pdf[TR-4963: Security hardening guide: BlueXP Cloud Backup for Applications^]* - This guide is targeted for customers of the Cloud Backup for Applications solution, and contains details on NetApp's recommended best practices for securing Cloud Backup for Applications against unauthorized use which can impact confidentiality, integrity, and availability of the solution.
+*link:https://www.netapp.com/pdf.html?item=/media/83591-tr-4963.pdf[TR-4963: Security hardening guide: BlueXP Cloud Backup for Applications^]* - Learn about the NetApp Cloud Backup for Applications solution, and contains details on NetApp's recommended practices for securing Cloud Backup for Applications against unauthorized use which can impact confidentiality, integrity, and availability of the solution.
 
 // Feb 2023 - 9.12 - Chris Gebhardt
-*link:https://netapp.com/pdf.html?item=/media/78654-tr-4943.pdf[TR-4943: Security hardening guide for NetApp Active IQ Unified Manager^]* - Learn about the configuration settings for NetApp Active IQ Unified Manager to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability
+*link:https://netapp.com/pdf.html?item=/media/78654-tr-4943.pdf[TR-4943: Security hardening guide for NetApp Active IQ Unified Manager^]* - Learn how to configure NetApp Active IQ Unified Manager to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability
 
 // May 2023 - 9.12.1 - Swati Godha
-*link:https://www.netapp.com/pdf.html?item=/media/78941-tr-4945.pdf[TR-4945: Security hardening guide for NetApp Manageability SDK^]* - Learn about the configuration settings for NetApp Manageability SDK (NMSDK) to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+*link:https://www.netapp.com/pdf.html?item=/media/78941-tr-4945.pdf[TR-4945: Security hardening guide for NetApp Manageability SDK^]* - Learn how to configure NetApp Manageability SDK (NMSDK) to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
