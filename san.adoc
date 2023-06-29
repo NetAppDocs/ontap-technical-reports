@@ -32,4 +32,4 @@ Procedural documentation for SAN can be found at link:https://docs.netapp.com/us
 *link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems^]* - Learn about NetApp ONTAP AFF All SAN Array (ASA) systems, their implementation and recommended practices for always-available, business-critical SAN configurations.
 
 // May 2023 - 9.12.1 - 
-*link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[NetApp All-SAN Array data availability and integrity with the NetApp ASA^]* - Learn how the various data protection and data integrity features of a NetApp All SAN array systems work to achieve maximum application uptime plus  recommended practices for designing, implementing, and managing a SAN network.
+*link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[TR-4968: NetApp All-SAN Array data availability and integrity with the NetApp ASA^]* - Learn how the various data protection and data integrity features of a NetApp All SAN array systems work to achieve maximum application uptime plus  recommended practices for designing, implementing, and managing a SAN network.
