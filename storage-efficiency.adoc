@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the storage efficiency 
 :imagesdir: ./media/
 
 [.lead]
-
+ONTAP provides a comprehensive portfolio of storage efficiency capabilities. Inline data compression, deduplication, and compaction work together to reduce your storage costs and maximize the data you can store. Plus, you can multiply your savings with space-efficient NetApp Snapshot copies, thin provisioning, replication, and cloning technologies.
 
 [NOTE]
 ====

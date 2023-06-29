@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the business continuity
 :imagesdir: ./media/
 
 [.lead]
-
+NetApp offers a wide range of solutions that rationalize where applications and data live to improve performance cost effectively. Data protection, replication, and continuous availability: NetApp ONTAP data management software can simplify data protection with  set-it-and-forget-it policy management, while delivering business continuity with NetApp MetroCluster software and SnapMirror Business Continuity.
 
 [NOTE]
 ====
