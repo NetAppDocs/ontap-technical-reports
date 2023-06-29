@@ -14,7 +14,7 @@ summary: "These technical report provides an overview of the VMware virtualizati
 :imagesdir: ./media/
 
 [lead]
-NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
+NetApp virtualization solutions help deliver maximum value from your servers. With a responsive virtual server infrastructure built on groundbreaking, high-performance NetApp flash systems, you gain the ability to access your data much faster. Your granular virtual infrastructure scales without disruption to multiple petabytes of data, delivering the performance you need for shared access to multiple workloads. And NetApp helps streamline and reduce the complexity of your virtual server infrastructure deployment with key partnerships, deployment guidance, application integration, and superior design. NetApp provides many best practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
 // Last Update - Version - current pdf owner
 // git hub updated

@@ -14,7 +14,7 @@ summary: "These technical report provides an overview of the data protection and
 :imagesdir: ./media/
 
 [lead]
-
+NetApp SnapMirror software is a cost-effective, easy-to-use unified replication solution across the Data Fabric. It replicates data at high speeds over LAN or WAN. You get high data availability and fast data replication for your business-critical applications, such as Microsoft Exchange, Microsoft SQL Server, and Oracle, in both virtual and traditional environments. When you replicate data to one or more NetApp storage systems and continually update the secondary data, your data is kept current and is available whenever you need it. No external replication servers are required. 
 
 [NOTE]
 ====
@@ -37,10 +37,6 @@ Procedural documentation for data protection and disaster recovery can be found 
 *SnapMirror Three-Data-Center DR*
 // Apr 2020 - 9.7 - Tony Ansley
 *link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7^]* - This document describes a three-data-center disaster recovery configuration using NetApp SnapMirror technology for replication.
-
-== SnapLock
-// Jan 2023 - 9.12.1 - Dan Tulledge - this is also in security.html
-*link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using SnapLock^]* - Many businesses rely on write once, read many (WORM) data storage to meet regulatory compliance requirements to add another layer of data protection. This document discusses the integration of NetApp SnapLock software, the NetApp WORM solution in NetApp ONTAP 9.
 
 == Application and infrastructure with SnapMirror
 //  git hub updated - This is also in virtualization.html
