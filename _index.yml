@@ -25,8 +25,8 @@ indexpage:
           url: nas.html
     - title: Security technical reports
       links:
-        - title: Security hardening guide for NetApp ONTAP 9
-          url: security.html#hardening-guides
+        - title: Security hardening guides
+          url: security-hardening-guides.html
         - title: The NetApp solution for ransomware
           url: security.html#ransomware
         - title: NetApp and Zero Trust

@@ -23,3 +23,6 @@ summary: "ONTAP is the foundation for data management and data protection for ma
 // May 2022 - 9.11.1ish - Brian O'Mahoney
 *link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf[NetApp best practices for Epic^]* - Epic makes software for the healthcare industry. This technical report presents best practices
 for integrating NetApp storage with Epic software environments.
+
+// 
+*link:https://www.netapp.com/pdf.html?item=/media/86527-tr-4975.pdf[FlexPod - Epic for Large Hospitals^]* - Learn about the end-to-end performance capability from FlexPod demonstrating the need for Electronic Health Record (EHR) application with Intersystem database. The document focuses storage layout and best practices which needs to be followed while setting up the application on a FlexPod solution for large hospitals.
