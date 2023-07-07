@@ -1,14 +1,56 @@
 indexpage:
-  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities. If you need procedural ONTAP documentation, refer to the ONTAP documentation at https://docs.netapp.com/us-en/ontap.  
+  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   tiles:
-    - title: SAN technical reports
+    - title: Application and database technical reports
       links:
-        - title: Best practices for modern SAN in ONTAP 9
-          url: san.html
-        - title: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)
-          url: san.html
-        - title: ONTAP AFF All SAN Array (ASA) systems
-          url: san.html
+        - title: Best practice guide for Microsoft SQL Server with ONTAP
+          url: apps-dbs.html#microsoft-sql
+        - title: Oracle Database Performance on NetApp AFF A-Series and C-Series
+          url: apps-dbs.html#oracle
+        - title: Virtualized Oracle database performance on NetApp AFF A-Series and C-Series
+          url: apps-dbs.html#oracle
+        - title: Oracle databases on ONTAP
+          url: apps-dbs.html#oracle
+        - title: Additional application and database technical reports
+          url: apps-dbs.html
+    - title: Business Continuity technical reports
+      links:
+        - title: SnapMirror Business Continuity (SM-BC)
+          url: business-continuity.html#snapmirror-business-continuity-sm-bc
+        - title: NetApp MetroCluster solution architecture and design
+          url: business-continuity.html#netapp-metrocluster
+        - title: NetApp MetroCluster IP
+          url: business-continuity.html#metrocluster-ip
+        - title: NetApp MetroCluster FC
+          url: business-continuity.html#metrocluster-fc
+        - title: Additional Business Continuity technical reports
+          url: business-continuity.html
+    - title: Data protection and disaster recovery technical reports
+      links:
+        - title: SnapMirror Asynchronous configuration and best practices
+          url: data-protection-disaster-recovery.html
+        - title:  SnapMirror Synchronous configuration and best practices
+          url: data-protection-disaster-recovery.html
+        - title: Compliant WORM storage using SnapLock
+          url: data-protection-disaster-recovery.html
+        - title: Additional data protection and disaster recovery technical reports
+          url: data-protection-disaster-recovery.html
+    - title: FlexCache and FlexGroup volumes technical reports
+      links:
+        - title: FlexCache in ONTAP
+          url: nas-containers.html#flexcache
+        - title: NetApp ONTAP FlexGroup volumes best practices and implementation guide
+          url: nas-containers.html#flexgroup-volumes
+        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
+          url: nas-containers.html#flexgroup-volumes
+        - title: Additional FlexCache and FlexGroup volumes technical reports
+          url: nas-containers.html
+    - title: Industry solutions technical reports
+      links:
+        - title: Electronic Design Automation best practices in ONTAP
+          url: industry-solutions.html#eda
+        - title: NetApp best practices for Epic
+          url: industry-solutions.html#healthcare
     - title: NAS technical reports
       links:
         - title: NFS in NetApp ONTAP best practice and implementation guide
@@ -23,6 +65,20 @@ indexpage:
           url: nas.html#nas-security
         - title: Additional NAS technical reports
           url: nas.html
+    - title: Networking technical reports
+      links:
+#        - title: Ethernet storage design considerations and best practices for ONTAP
+#          url: networking.html
+        - title: BGP/VIP with ONTAP in the data center – quick configuration guide 
+          url: networking.html
+    - title: SAN technical reports
+      links:
+        - title: Best practices for modern SAN in ONTAP 9
+          url: san.html
+        - title: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)
+          url: san.html
+        - title: ONTAP AFF All SAN Array (ASA) systems
+          url: san.html
     - title: Security technical reports
       links:
         - title: Security hardening guides
@@ -39,78 +95,6 @@ indexpage:
           url: security.html#multitennancy
         - title: Additional security technical reports
           url: security.html
-    - title: FlexCache and FlexGroup volumes technical reports
-      links:
-        - title: FlexCache in ONTAP
-          url: nas-containers.html#flexcache
-        - title: NetApp ONTAP FlexGroup volumes best practices and implementation guide
-          url: nas-containers.html#flexgroup-volumes
-        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
-          url: nas-containers.html#flexgroup-volumes
-        - title: Additional FlexCache and FlexGroup volumes technical reports
-          url: nas-containers.html
-    - title: Tiering technical reports
-      links:
-        - title: FabricPool best practices
-          url: tiering.html
-        - title: NetApp FabricPool with StorageGRID recommendation guide
-          url: tiering.html
-        - title: Database storage tiering with NetApp FabricPool
-          url: tiering.html
-#    - title: Storage efficiency technical reports
-#      links:
-#        - title: Deduplication
-#          url: storage-efficiency.html
-#        - title: Compression
-#          url: storage-efficiency.html
-#        - title: Temperature sensitive storage efficiency
-#          url: storage-efficiency.html
-#        - title: Compaction
-#          url: storage-efficiency.html
-    - title: Application and database technical reports
-      links:
-        - title: Best practice guide for Microsoft SQL Server with ONTAP
-          url: apps-dbs.html#microsoft-sql
-        - title: Oracle Database Performance on NetApp AFF A-Series and C-Series
-          url: apps-dbs.html#oracle
-        - title: Virtualized Oracle database performance on NetApp AFF A-Series and C-Series
-          url: apps-dbs.html#oracle
-        - title: Oracle databases on ONTAP
-          url: apps-dbs.html#oracle
-        - title: Additional application and database technical reports
-          url: apps-dbs.html
-    - title: Virtualization technical reports
-      links:
-        - title: VMware vSphere for ONTAP
-          url: virtualization.html
-        - title: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
-          url: virtualization.html
-        - title: VMware Site Recovery Manager with NetApp ONTAP 9
-          url: virtualization.html
-        - title: Additional virtualization technical reports
-          url: virtualization.html
-    - title: Data protection and disaster recovery technical reports
-      links:
-        - title: SnapMirror Asynchronous configuration and best practices
-          url: data-protection-disaster-recovery.html
-        - title:  SnapMirror Synchronous configuration and best practices
-          url: data-protection-disaster-recovery.html
-        - title: Compliant WORM storage using SnapLock
-          url: data-protection-disaster-recovery.html
-        - title: Additional data protection and disaster recovery technical reports
-          url: data-protection-disaster-recovery.html
-    - title: Business Continuity technical reports
-      links:
-        - title: SnapMirror Business Continuity (SM-BC)
-          url: business-continuity.html#snapmirror-business-continuity-sm-bc
-        - title: NetApp MetroCluster solution architecture and design
-          url: business-continuity.html#netapp-metrocluster
-        - title: NetApp MetroCluster IP
-          url: business-continuity.html#metrocluster-ip
-        - title: NetApp MetroCluster FC
-          url: business-continuity.html#metrocluster-fc
-        - title: Additional Business Continuity technical reports
-          url: business-continuity.html
     - title: SnapCenter technical reports
       links:
         - title: SnapCenter for Oracle
@@ -123,16 +107,31 @@ indexpage:
           url: snapcenter.html
         - title: Additional SnapCenter technical reports
           url: snapcenter.html
-    - title: Networking technical reports
+#    - title: Storage efficiency technical reports
+#      links:
+#        - title: Deduplication
+#          url: storage-efficiency.html
+#        - title: Compression
+#          url: storage-efficiency.html
+#        - title: Temperature sensitive storage efficiency
+#          url: storage-efficiency.html
+#        - title: Compaction
+#          url: storage-efficiency.html
+    - title: Tiering technical reports
       links:
-#        - title: Ethernet storage design considerations and best practices for ONTAP
-#          url: networking.html
-        - title: BGP/VIP with ONTAP in the data center – quick configuration guide 
-          url: networking.html
-    - title: Industry solutions technical reports
+        - title: FabricPool best practices
+          url: tiering.html
+        - title: NetApp FabricPool with StorageGRID recommendation guide
+          url: tiering.html
+        - title: Database storage tiering with NetApp FabricPool
+          url: tiering.html
+    - title: Virtualization technical reports
       links:
-        - title: Electronic Design Automation best practices in ONTAP
-          url: industry-solutions.html#eda
-        - title: NetApp best practices for Epic
-          url: industry-solutions.html#healthcare
-                       
+        - title: VMware vSphere for ONTAP
+          url: virtualization.html
+        - title: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
+          url: virtualization.html
+        - title: VMware Site Recovery Manager with NetApp ONTAP 9
+          url: virtualization.html
+        - title: Additional virtualization technical reports
+          url: virtualization.html
