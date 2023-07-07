@@ -10,92 +10,37 @@ sidebar:
   entries:
     - title: ONTAP technical reports
       url: /index.html
-    - title: SAN technical reports
-      url: /san.html
-#      entries:
-#      - title: Best practices for modern SAN
-#        url: /san.html
-#      - title: Implementing and configuring modern SANs with NVMe-oF
-#        url: /san.html
-#      - title: ONTAP AFF All SAN Array (ASA)
-#        url: /san.html
+    - title: Application and database technical reports
+      url: /apps-dbs.html
+    - title: Business continuity technical reports
+      url: /business-continuity.html
+    - title: Data protection and disaster recovery technical reports
+      url: /data-protection-disaster-recovery.html
+    - title: FlexCache and FlexGroup volumes technical reports
+      url: /nas-containers.html
+    - title: Industry solutions technical reports
+      url: /industry-solutions.html
     - title: NAS technical reports
       url: /nas.html
-#      entries:
-#      - title: NFS
-#        url: /nas.html#nfs
-#      - title: SMB
-#        url: /nas.html#smb
-#      - title: Multiprotocol
-#        url: /nas.html#multiprotocol
-#      - title: ONTAP
-#        url: /nas.html#ontap-s3
-#      - title: Name services
-#        url: /nas.html#name-services
-#      - title: NAS Security
-#        url: nas.html#nas-security
+    - title: Networking technical reports
+      url: /networking.html
+    - title: SAN technical reports
+      url: /san.html
     - title: Security technical reports
       url: /security.html
     - title: Security hardening guides
       url: /security-hardening-guides.html
-#      - title: Ransomware
-#        url: security.html#ransomware
-#      - title: Zero Trust
-#        url: /security.html#zero-trust
-#      - title: Multifactor Authentication
-#        url: /security.html#multifactor-authentication
-#      - title: Multitenancy
-#        url: /security.html#multitennancy
-#      - title: Standards
-#        url: /security.html#standards
-    - title: FlexCache and FlexGroup volumes technical reports
-      url: /nas-containers.html
-#      entries:
-#      - title: FlexCache
-#        url: /nas-containers.html#flexcache
-#      - title: FlexGroup volumes
-#        url: /nas-containers.html#flexgroup-volumes
-    - title: Tiering technical reports
-      url: /tiering.html
-#    - title: Storage efficiency technical reports
-#      url: /storage-efficiency.html
-    - title: Application and database technical reports
-      url: /apps-dbs.html
-#      entries:
-#      - title: Microsoft SQL Server
-#        url: /apps-dbs.html#microsoft-sql
-#      - title: Oracle
-#        url: /apps-dbs.html#oracle
-#      - title: PostgreSQL
-#        url: /apps-dbs.html#postgresql
-    - title: Virtualization technical reports
-      url: /virtualization.html
-    - title: Data protection and disaster recovery technical reports
-      url: /data-protection-disaster-recovery.html
-#      entries: 
-#      - title: SnapMirror
-#        url: /data-protection-disaster-recovery.html#snapmirror
-#      - title: SnapLock
-#        url: /data-protection-disaster-recovery.html#snaplock
-#      - title: Application and infrastructure with SnapMirror
-#        url: /data-protection-disaster-recovery.html#application-and-infrastructure-with-snapmirror
-    - title: Business continuity technical reports
-      url: /business-continuity.html
-#      entries:
-#      - title: SnapMirror Business Continuity
-#        url: /business-continuity.html#snapmirror-business-continuity-sm-bc
-#      - title: MetroCluster
-#        url: /business-continuity.html#netapp-metrocluster
     - title: SnapCenter technical reports
       url: /snapcenter.html      
-    - title: Networking technical reports
-      url: /networking.html
-    - title: Industry solutions technical reports
-      url: /industry-solutions.html
-#      entries:
-#      - title: Electronic Design Automation
-#        url: /industry-solutions.html#eda
-#      - title: Healthcare
-#        url: /industry-solutions.html#healthcare
+    - title: Tiering technical reports
+      url: /tiering.html
+    - title: Virtualization technical reports
+      url: /virtualization.html
+    - title: Change Log
+      url: /change-log-display.html
     - title: Legal notices
       url: /legal-notices.html
+
+product-family:
+  name: ONTAP
+  repo: ontap-family

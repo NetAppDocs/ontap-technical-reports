@@ -13,4 +13,3 @@ summary: "These technical reports provide an overview of NetApp ONTAP as well as
 :linkattrs:
 :imagesdir: ./media/
 
-
