@@ -23,9 +23,6 @@ Learn how storage administrators and database administrators can successfully de
 link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using NetApp SnapCenter^]
 Learn now to successfully deploy Microsoft SQL Server on NetApp storage using NetApp SnapCenter technology for data protection.
 
-
-https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf
-
 == Oracle
 link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on NetApp ONTAP storage.
@@ -67,7 +64,6 @@ MySQL and its variants, including MariaDB and Percona, are widely used for many 
 == Enterprise applications
 // git hub updated
 link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/introduction.html[ONTAP for enterprise applications]
-
 
 == Microsoft SQL Server
 // git hub updated
