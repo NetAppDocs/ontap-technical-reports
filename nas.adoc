@@ -24,7 +24,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/n
 // Last Update - Version - current pdf owner
 == NFS
 // November 2021 - 9.10.1 - Elliott Ecton
-link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide^]
+link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in ONTAP best practice and implementation guide^]
 Learn about basic concepts, support information, configuration tips, and recommended practices for NFS in ONTAP.
 
 // April 2023 - 9.12.1 - Elliott Ecton
@@ -46,7 +46,7 @@ Microsoft introduced Multichannel in the SMB 3.0 protocol with the goal of impro
 
 == Multiprotocol
 // Apr 2021 - 9.8 - Elliot Ecton
-link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP overview and best practices^]
+link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in  ONTAP overview and best practices^]
 Learn how multiprotocol NAS access works in ONTAP and the recommended practices for multiprotocol environments.
 
 == ONTAP S3
