@@ -36,8 +36,8 @@ sidebar:
       url: /tiering.html
     - title: Virtualization technical reports
       url: /virtualization.html
-    - title: Change Log
-      url: /change-log-display.html
+#    - title: Change Log
+#      url: /change-log-display.html
     - title: Legal notices
       url: /legal-notices.html
 

@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: data-protection-disaster-recovery.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical reports provide an overview of the data protection and disaster recovery in NetApp ONTAP as well as recommended practices"
+summary: "These technical reports provide an overview of the data protection and disaster recovery in ONTAP as well as recommended practices"
 ---
 = Data protection and disaster recovery technical reports
 :hardbreaks:
@@ -14,11 +14,11 @@ summary: "These technical reports provide an overview of the data protection and
 :imagesdir: ./media/
 
 [.lead]
-NetApp SnapMirror software is a cost-effective, easy-to-use unified replication solution across the data fabric. It replicates data at high speeds over LAN or WAN. You get high data availability and fast data replication for your business-critical applications, such as Microsoft Exchange, Microsoft SQL Server, and Oracle, in both virtual and traditional environments. When you replicate data to one or more NetApp storage systems and continually update the secondary data, your data is kept current and is available whenever you need it. No external replication servers are required. 
+SnapMirror software is a cost-effective, easy-to-use unified replication solution across the data fabric. It replicates data at high speeds over LAN or WAN. You get high data availability and fast data replication for your business-critical applications, such as Microsoft Exchange, Microsoft SQL Server, and Oracle, in both virtual and traditional environments. When you replicate data to one or more ONTAP storage systems and continually update the secondary data, your data is kept current and is available whenever you need it. No external replication servers are required. 
 
 [NOTE]
 ====
-Procedural documentation for data protection and disaster recovery can be found at: link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[Data protection and disaster recovery documentation].
+Technical reports expand on the link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[ONTAP Data protection and disaster recovery documentation].
 ====
 
 // Last Update - Version - current pdf owner
@@ -26,23 +26,23 @@ Procedural documentation for data protection and disaster recovery can be found 
 *SnapMirror Asynchronous*
 // Jun 2023 - 9.13.1 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices^]
-Learn about recommended practices for configuring NetApp SnapMirror Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM DR).
+Learn about recommended practices for configuring SnapMirror Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM disaster recovery).
 
 // Oct 2021 - 9.10.1 - Maha G
-link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup NetApp ONTAP FlexGroup volumes^]
-Learn about recommended data protection and backup for NetApp ONTAP FlexGroup volumes. Topics include NetApp Snapshot copies, NetApp SnapMirror, and other data protection and backup solutions. 
+link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup ONTAP FlexGroup volumes^]
+Learn about recommended data protection and backup for FlexGroup volumes. Topics include Snapshot copies, SnapMirror, and other data protection and backup solutions. 
 
 *SnapMirror Synchronous*
 // Jun 2023 - 9.13.1 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices^]
-Learn about recommended practices for configuring NetApp SnapMirror Synchronous (SM-S) replication.
+Learn about recommended practices for configuring SnapMirror Synchronous (SM-S) replication.
 
 *SnapMirror Three-Data-Center DR*
 // Apr 2020 - 9.7 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7^]
-Learn about a three-data-center disaster recovery configuration using NetApp SnapMirror technology for replication.
+Learn about a three-data-center disaster recovery configuration using ONTAP SnapMirror technology for replication.
 
 == Application and infrastructure with SnapMirror
 //  git hub updated - This is also in virtualization.html
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP 9]
-NetApp ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. Learn about recommended the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and recommended practices to streamline deployment, reduce risk, and simplify ongoing management.
+link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with ONTAP]
+ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. Learn about recommended the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and recommended practices to streamline deployment, reduce risk, and simplify ongoing management.
