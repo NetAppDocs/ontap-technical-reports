@@ -73,7 +73,7 @@ indexpage:
           url: networking.html
     - title: SAN technical reports
       links:
-        - title: Best practices for modern SAN in ONTAP 9
+        - title: Best practices for modern SAN in ONTAP
           url: san.html
         - title: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)
           url: san.html
