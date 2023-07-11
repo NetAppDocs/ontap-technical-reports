@@ -18,7 +18,7 @@ ONTAP SAN storage delivers a simplified SAN experience that provides high availa
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/san-management/index.html[ONTAP SAN storage management] product documentation.
 ====
 
 // Last Update - Version - current pdf owner

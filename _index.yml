@@ -5,9 +5,9 @@ indexpage:
       links:
         - title: Microsoft SQL Server with ONTAP
           url: apps-dbs.html#microsoft-sql
-        - title: Oracle database performance on NetApp AFF A-Series and C-Series
+        - title: Oracle database performance on AFF A-Series and C-Series
           url: apps-dbs.html#oracle
-        - title: Virtualized Oracle database performance on NetApp AFF A-Series and C-Series
+        - title: Virtualized Oracle database performance on AFF A-Series and C-Series
           url: apps-dbs.html#oracle
         - title: Oracle databases on ONTAP
           url: apps-dbs.html#oracle
@@ -39,7 +39,7 @@ indexpage:
       links:
         - title: FlexCache volumes
           url: nas-containers.html#flexcache
-        - title: FlexGroup volumes best practices and implementation guide
+        - title: FlexGroup volumes implementation and best practices 
           url: nas-containers.html#flexgroup-volumes
         - title: Data protection and backup ONTAP FlexGroup volumes
           url: nas-containers.html#flexgroup-volumes
@@ -121,7 +121,7 @@ indexpage:
       links:
         - title: FabricPool best practices
           url: tiering.html
-        - title: FabricPool with StorageGRID recommendation guide
+        - title: FabricPool with StorageGRID recommendations
           url: tiering.html
         - title: Database storage tiering with FabricPool
           url: tiering.html
