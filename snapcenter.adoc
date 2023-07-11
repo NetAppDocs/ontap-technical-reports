@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the SnapCenter with Net
 :imagesdir: ./media/
 
 [.lead]
-NetApp SnapCenter software provides a, unified platform for application-consistent data protection and clone management. This software simplifies backup, restore, and clone lifecycle management with application-integrated workflows. Leveraging storage-based data management, SnapCenter enables increased performance and availability and reduced testing and development times.
+SnapCenter provides a, unified platform for application-consistent data protection and clone management. SnapCenter simplifies backup, restore, and clone lifecycle management with application-integrated workflows. Leveraging storage-based data management, SnapCenter enables increased performance and availability and reduced testing and development times.
 
 [NOTE]
 ====
@@ -35,7 +35,7 @@ Learn how to successfully deploy Microsoft SQL Server on NetApp storage using Sn
 
 == SnapCenter for Microsoft Exchange Server
 link:https://www.netapp.com/es/pdf.html?item=/es/media/12398-tr-4681.pdf[TR-4681: Best practices for Microsoft Exchange Server using NetApp SnapCenter^]
-Learn how to successfully deploy Microsoft Exchange Server on NetApp storage using SnapCenter  for data protection.
+Learn how to successfully deploy Microsoft Exchange Server on NetApp storage using SnapCenter for data protection.
 
 == SnapCenter for SAP HANA
 // git hub updated

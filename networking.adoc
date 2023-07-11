@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: networking.html
 # lead: Use only if indexpage.lead is not present in _index.yml
-summary: "These technical reports provide an overview of the networking in NetApp ONTAP 9 as well as recommended practices."
+summary: "These technical reports provide an overview of the networking in NetApp ONTAP as well as recommended practices."
 ---
 = Networking technical reports
 :hardbreaks:
@@ -14,11 +14,11 @@ summary: "These technical reports provide an overview of the networking in NetAp
 :imagesdir: ./media/
 
 [.lead]
-ONTAP provides a variety of different networking capabilities and configurations to meet the most demanding scale out applications.   Using the networking capabilities and features, companies can create reliable and secure access to their data.
+ONTAP provides a variety of different networking capabilities and configurations to meet the most demanding scale out applications. Using the networking capabilities and features, companies can create reliable and secure access to their data.
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/network-management/index.html[ONTAP Network management] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/network-management/index.html[ONTAP network management] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
