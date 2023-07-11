@@ -25,7 +25,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/t
 == FlexCache
 // Aug 2022 - 9.11.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/7336-tr4743.pdf[TR-4743: FlexCache in ONTAP^]
-FlexCache is a caching technology that creates sparse, writable replicas of volumes on the same or different ONTAP clusters. It can bring data and files closer to the user for faster throughput with a smaller footprint. Learn how FlexCache is used, the recommended practices, limits, and considerations for design and implementation.
+FlexCache is a caching technology that creates sparse, writable replicas of volumes on the same or different ONTAP clusters. It can bring data and files closer to the user for faster throughput with a smaller footprint. Learn how FlexCache can be used, the recommended practices, limits, and considerations for design and implementation.
 
 == FlexGroup volumes
 // Jan 2021 - 9.8 - Maha G
