@@ -25,7 +25,7 @@ Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using Sna
 
 == MySQL
 link:https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf[MySQL Database on ONTAP^]
-MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on  ONTAP data management software.
+MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP data management software.
 
 == Oracle
 link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]

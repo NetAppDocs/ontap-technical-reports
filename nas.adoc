@@ -18,7 +18,7 @@ NetApp NAS solutions simplify data management and help you keep pace with growth
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[ONTAP NAS storage management] and  link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[ONTAP NAS storage management] and link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
@@ -46,7 +46,7 @@ Microsoft introduced Multichannel in the SMB 3.0 protocol with the goal of impro
 
 == Multiprotocol
 // Apr 2021 - 9.8 - Elliot Ecton
-link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in  ONTAP overview and best practices^]
+link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in ONTAP overview and best practices^]
 Learn how multiprotocol NAS access works in ONTAP and the recommended practices for multiprotocol environments.
 
 == ONTAP S3
@@ -59,7 +59,7 @@ Learn about recommended practices for using the Amazon Simple Storage Service (S
 link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP^]
 Learn how to configure ONTAP for use with DNS load balancing methodologies including DNS in ONTAP, various configuration methods, and recommended practices.
 
-// Mar 2018  - 9.3 - Elliott Ecton
+// Mar 2018 - 9.3 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668.pdf[TR-4668: Name services best practices guide^]
 Learn about recommended practices, limits, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in ONTAP.
 
@@ -70,4 +70,4 @@ Learn how to configure Lightweight Directory Access Protocol (LDAP) identity man
 == NAS security
 // Jun 2021 - 9.9.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]
-Learn about NFS Kerberos in  ONTAP software including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.
+Learn about NFS Kerberos in ONTAP software including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.

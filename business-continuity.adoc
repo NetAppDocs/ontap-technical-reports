@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the business continuity
 :imagesdir: ./media/
 
 [.lead]
-NetApp offers a wide range of solutions that rationalize where applications and data live to improve performance cost effectively. Data protection, replication, and continuous availability: ONTAP data management software can simplify data protection with  set-it-and-forget-it policy management, while delivering business continuity with MetroCluster software and SnapMirror Business Continuity.
+NetApp offers a wide range of solutions that rationalize where applications and data live to improve performance cost effectively. Data protection, replication, and continuous availability: ONTAP data management software can simplify data protection with set-it-and-forget-it policy management, while delivering business continuity with MetroCluster software and SnapMirror Business Continuity.
 
 [NOTE]
 ====
@@ -25,7 +25,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/s
 // Nov 2022 - 9.12.1 - Stephen Galla
 == SnapMirror Business Continuity (SM-BC)
 link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]
-SnapMirror Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for  ONTAP running on AFF or All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
+SnapMirror Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for ONTAP running on AFF or All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
 
 //link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/smbc/si.html[Single-Instance Oracle with SM-BC^]
 
@@ -34,7 +34,7 @@ SnapMirror Business Continuity (SM-BC) is a continuously available storage solut
 == MetroCluster
 // Apr 2023 - 9.12.1 - Stephen Galla
 link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf[TR-4705: NetApp MetroCluster solution architecture and design^]
-This document describes high-level architecture and design concepts for MetroCluster features in  ONTAP storage management software.
+This document describes high-level architecture and design concepts for MetroCluster features in ONTAP storage management software.
 
 *MetroCluster IP*
 // May 2023 - 9.12.1 - Stephen Galla

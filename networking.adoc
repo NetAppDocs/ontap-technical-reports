@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the networking in NetAp
 :imagesdir: ./media/
 
 [.lead]
-ONTAP provides a variety of different networking capabilities and configurations to meet the most demanding scale out applications.   Using the networking capabilities and features, companies can create reliable and secure access to their data.
+ONTAP provides a variety of different networking capabilities and configurations to meet the most demanding scale out applications. Using the networking capabilities and features, companies can create reliable and secure access to their data.
 
 [NOTE]
 ====

@@ -13,7 +13,7 @@ keywords: netapp, ontap, catalog, change, log
 :imagesdir: ./media/
 
 [.lead]
-Recent changes to ONTAP technical reports.  The most recent changes are listed first.
+Recent changes to ONTAP technical reports. The most recent changes are listed first.
 
 [role="tabbed-block"]
 ====
