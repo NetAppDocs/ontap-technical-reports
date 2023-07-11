@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the FlexCache and FlexG
 :imagesdir: ./media/
 
 [.lead]
-NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. ONTAP NAS solutions give you nondisruptive operations, proven efficiency, and seamless scalability within a unified architecture. Powered by NetApp ONTAP data management software, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
+NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. ONTAP NAS solutions give you nondisruptive operations, proven efficiency, and seamless scalability within a unified architecture. Powered by  ONTAP, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
 
 [NOTE]
 ====
@@ -38,8 +38,8 @@ Learn about FlexGroup volumes, an ONTAP scale-out NAS container, that blends nea
 
 // Oct 2021 - 9.10.1 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^]
-Learn about ONTAP FlexGroup volumes and recommended practices and implementation tips. FlexGroup volumes are an evolution of ONTAP scale-out NAS containers, that blend nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
+Learn about FlexGroup volumes and recommended practices and implementation tips. FlexGroup volumes are an evolution of ONTAP scale-out NAS containers, that blends nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
 
 // Oct 2021 - 9.10.1 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup FlexGroup volumes^]
-Learn about data protection and backup for FlexGroup volumes including NetApp Snapshot copies, NetApp SnapMirror, and other data protection and backup solutions.
+Learn about data protection and backup for FlexGroup volumes including Snapshot copies, SnapMirror, and other data protection and backup solutions.
