@@ -3,9 +3,9 @@ indexpage:
   tiles:
     - title: Application and database technical reports
       links:
-        - title: Best practice guide for Microsoft SQL Server with ONTAP
+        - title: Microsoft SQL Server with ONTAP
           url: apps-dbs.html#microsoft-sql
-        - title: Oracle Database Performance on NetApp AFF A-Series and C-Series
+        - title: Oracle database performance on NetApp AFF A-Series and C-Series
           url: apps-dbs.html#oracle
         - title: Virtualized Oracle database performance on NetApp AFF A-Series and C-Series
           url: apps-dbs.html#oracle
@@ -17,11 +17,11 @@ indexpage:
       links:
         - title: SnapMirror Business Continuity (SM-BC)
           url: business-continuity.html#snapmirror-business-continuity-sm-bc
-        - title: NetApp MetroCluster solution architecture and design
+        - title: MetroCluster solution architecture and design
           url: business-continuity.html#netapp-metrocluster
-        - title: NetApp MetroCluster IP
+        - title: MetroCluster IP
           url: business-continuity.html#metrocluster-ip
-        - title: NetApp MetroCluster FC
+        - title: MetroCluster FC
           url: business-continuity.html#metrocluster-fc
         - title: Additional Business Continuity technical reports
           url: business-continuity.html
@@ -37,11 +37,11 @@ indexpage:
           url: data-protection-disaster-recovery.html
     - title: FlexCache and FlexGroup volumes technical reports
       links:
-        - title: FlexCache in ONTAP
+        - title: FlexCache volumes
           url: nas-containers.html#flexcache
-        - title: NetApp ONTAP FlexGroup volumes best practices and implementation guide
+        - title: FlexGroup volumes best practices and implementation guide
           url: nas-containers.html#flexgroup-volumes
-        - title: Data protection and backup NetApp ONTAP FlexGroup volumes
+        - title: Data protection and backup ONTAP FlexGroup volumes
           url: nas-containers.html#flexgroup-volumes
         - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
@@ -53,13 +53,13 @@ indexpage:
           url: industry-solutions.html#healthcare
     - title: NAS technical reports
       links:
-        - title: NFS in NetApp ONTAP best practice and implementation guide
+        - title: NFS in NetApp ONTAP best practice and implementation
           url: nas.html#nfs
-        - title: Multiprotocol NAS in NetApp ONTAP overview and best practices
+        - title: Multiprotocol NAS in ONTAP overview and best practices
           url: nas.html#multiprotocol
         - title: S3 in ONTAP best practices
           url: nas.html#ontap-s3
-        - title: Name services best practices guide
+        - title: Name services best practices
           url: nas.html#name-services
         - title: NFS Kerberos in ONTAP
           url: nas.html#nas-security
@@ -69,7 +69,7 @@ indexpage:
       links:
 #        - title: Ethernet storage design considerations and best practices for ONTAP
 #          url: networking.html
-        - title: BGP/VIP with ONTAP in the data center – quick configuration guide 
+        - title: BGP/VIP with ONTAP 
           url: networking.html
     - title: SAN technical reports
       links:
@@ -99,7 +99,7 @@ indexpage:
       links:
         - title: SnapCenter for Oracle
           url: snapcenter.html
-        - title: SnapCenter for MSSQL
+        - title: SnapCenter for Microsoft SQL
           url: snapcenter.html
         - title: SnapCenter for Virtualization
           url: snapcenter.html
@@ -121,17 +121,17 @@ indexpage:
       links:
         - title: FabricPool best practices
           url: tiering.html
-        - title: NetApp FabricPool with StorageGRID recommendation guide
+        - title: FabricPool with StorageGRID recommendation guide
           url: tiering.html
-        - title: Database storage tiering with NetApp FabricPool
+        - title: Database storage tiering with FabricPool
           url: tiering.html
     - title: Virtualization technical reports
       links:
         - title: VMware vSphere for ONTAP
           url: virtualization.html
-        - title: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP
+        - title: VMware vSphere Virtual Volumes (vVols) with  ONTAP
           url: virtualization.html
-        - title: VMware Site Recovery Manager with NetApp ONTAP 9
+        - title: VMware Site Recovery Manager with ONTAP
           url: virtualization.html
         - title: Additional virtualization technical reports
           url: virtualization.html
