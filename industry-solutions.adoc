@@ -28,4 +28,4 @@ Epic makes software for the healthcare industry. Learn about recommended practic
 
 // 
 link:https://www.netapp.com/pdf.html?item=/media/86527-tr-4975.pdf[FlexPod - Epic for Large Hospitals^]
-Learn about the end-to-end performance capability from FlexPod demonstrating the need for Electronic Health Record (EHR) application with Intersystem database. The document focuses storage layout and best practices which needs to be followed while setting up the application on a FlexPod solution for large hospitals.
+Learn about the end-to-end performance capability from FlexPod demonstrating the need for Electronic Health Record (EHR) application with Intersystem database, with a focus on storage layout and best practices for setting up EHR on a FlexPod solution for large hospitals.

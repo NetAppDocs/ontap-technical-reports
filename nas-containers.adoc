@@ -18,8 +18,7 @@ NetApp NAS solutions simplify data management and help you keep pace with growth
 
 [NOTE]
 ====
-Procedural documentation for FlexCache can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html[FlexCache documentation]
-Procedural documentation for FlexGroup volumes can be found at link: link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html[FlexGroup volume documentation]
+These technical reports expand on the :https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html[ONTAP FlexCache volume] and link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html[FlexGroup volume] product documentation.
 ====
 
 // Last Update - Version - current pdf owner

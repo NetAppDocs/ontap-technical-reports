@@ -18,15 +18,14 @@ NetApp NAS solutions simplify data management and help you keep pace with growth
 
 [NOTE]
 ====
-Procedural documentation for NAS can be found at link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[NAS storage management documentation]
-Procedural documentation for S3 can be found at link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management documentation]
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[ONTAP NAS storage management] and  link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
 == NFS
 // November 2021 - 9.10.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in NetApp ONTAP best practice and implementation guide^]
-Learn about basic concepts, support information, configuration tips, and recommended practices for NFS in NetApp ONTAP. This guide covers the latest available ONTAP versions for currency and length. In most cases, the commands and recommended practices listed in this guide apply to all ONTAP versions.
+Learn about basic concepts, support information, configuration tips, and recommended practices for NFS in ONTAP.
 
 // April 2023 - 9.12.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf[TR-4962: NFSv4.2 extended attributes^]
@@ -43,32 +42,32 @@ Learn about enabling and using NFSv4.2 extended attributes in ONTAP 9.12.1 and l
 
 // Jan 2019 - 9.4 - Chow
 link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]
-Microsoft has introduced a new feature called Multichannel in the SMB 3.0 protocol in Windows Server 2012 and Windows 8, with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. Learn about the Multichannel feature in NetApp ONTAP, including its capabilities, recommended practices, and performance test results.
+Microsoft introduced Multichannel in the SMB 3.0 protocol with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. Learn about the Multichannel feature in ONTAP, including its capabilities, recommended practices, and performance test results.
 
 == Multiprotocol
 // Apr 2021 - 9.8 - Elliot Ecton
 link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Multiprotocol NAS in NetApp ONTAP overview and best practices^]
-Learn how multiprotocol NAS access works in NetApp ONTAP data management software and the recommended practices for multiprotocol environments.
+Learn how multiprotocol NAS access works in ONTAP and the recommended practices for multiprotocol environments.
 
 == ONTAP S3
 // March 2023 - 9.12.1 - John Lantz
 link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814.pdf[TR-4814: S3 in ONTAP best practices^]
-Learn about recommended practices for using the Amazon Simple Storage Service (S3) with NetApp ONTAP software as well as capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for NetApp FabricPool.
+Learn about recommended practices for using the Amazon Simple Storage Service (S3) with ONTAP software as well as capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for FabricPool.
 
 == Name services
 // Feb 2021 - 9.4 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf[TR-4523: DNS load balancing in ONTAP^]
-Learn how to configure NetApp storage systems with NetApp ONTAP management software for use with DNS load balancing methodologies including DNS in ONTAP, various configuration methods, and recommended practices.
+Learn how to configure ONTAP for use with DNS load balancing methodologies including DNS in ONTAP, various configuration methods, and recommended practices.
 
 // Mar 2018  - 9.3 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/16328-tr-4668.pdf[TR-4668: Name services best practices guide^]
-Learn about recommended practices, limits, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in NetApp ONTAP.
+Learn about recommended practices, limits, and considerations when implementing network-attached storage (NAS) solutions such as CIFS/SMB and NFS in ONTAP.
 
 // MAy 2021 - 9.9.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/19423-tr-4835.pdf[TR-4835: How to configure LDAP in ONTAP multiprotocol NAS identity management^]
-Learn how to configure Lightweight Directory Access Protocol (LDAP) identity management for multiprotocol NAS in NetApp ONTAP based systems.
+Learn how to configure Lightweight Directory Access Protocol (LDAP) identity management in ONTAP for multiprotocol NAS.
 
 == NAS security
 // Jun 2021 - 9.9.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]
-Learn about NFS Kerberos in NetApp ONTAP software and configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.
+Learn about NFS Kerberos in  ONTAP software including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.

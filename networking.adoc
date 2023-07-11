@@ -18,7 +18,7 @@ ONTAP provides a variety of different networking capabilities and configurations
 
 [NOTE]
 ====
-Procedural documentation for networking can be found at link:https://docs.netapp.com/us-en/ontap/network-management/index.html[Network management documentation]
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/network-management/index.html[ONTAP Network management] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
@@ -27,5 +27,5 @@ Procedural documentation for networking can be found at link:https://docs.netapp
 //This technical report describes the implementation of NetApp ONTAP network configurations. It provides common ONTAP network deployment scenarios and recommends networking best practices as they pertain to a ONTAP environment.
 
 // Dec 2022 - 9.12.1 - Elliott Ecton
-link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center – quick configuration guide^]
-Learn how to quickly deploy a basic BGP configuration in NetApp ONTAP.
+link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center^]
+Learn how to quickly deploy a basic BGP configuration in ONTAP.
