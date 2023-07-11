@@ -32,11 +32,11 @@ ONTAP has been a leading storage solution for VMware vSphere environments since 
 // git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to automation for ONTAP and vSphere]
 Automation has been an integral part of managing VMware environments since the first days of VMware ESX. The ability to deploy infrastructure as code and extend practices to private cloud operations helps to alleviate concerns surrounding scale, flexibility, self-provisioning, and efficiency. This document introduces the ONTAP solution for automating ONTAP and VMware vSphere environment.
-//
+
 // git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353: ONTAP tools for VMware vSphere - Product security]
 This document describes the techniques and technology used to secure ONTAP tools for VMware vSphere 9.X from both existing and emerging threats in product environments.
-//
+
 // git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355: SnapCenter plug-in VMware vSphere - Product security]
 This document describes the techniques and technology used to secure the NetApp SnapCenter Plug-in for VMware vSphere 4.X from both existing and emerging threats in product environments.
