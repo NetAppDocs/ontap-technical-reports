@@ -18,7 +18,7 @@ SnapMirror software is a cost-effective, easy-to-use unified replication solutio
 
 [NOTE]
 ====
-Technical reports expand on the link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[ONTAP Data protection and disaster recovery documentation].
+Technical reports expand on the link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[ONTAP Data protection and disaster recovery] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
