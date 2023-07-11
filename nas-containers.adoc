@@ -34,11 +34,11 @@ This technical report is a condensed version of TR-4571: NetApp ONTAP FlexGroup 
 
 // Jan 2020 - 9.7 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/7337-tr4557.pdf[TR-4557: NetApp ONTAP FlexGroup volumes - A technical overview^]
-Learn about FlexGroup volumes scale-out NAS containers that blends near-infinite capacity with predictable, low-latency performance in metadata-heavy workloads.
+Learn about FlexGroup volumes, an ONTAP scale-out NAS container, that blends near-infinite capacity with predictable, low-latency performance in metadata-heavy workloads.
 
 // Oct 2021 - 9.10.1 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^]
-Learn about ONTAP FlexGroup volumes and a set of recommended practices and implementation tips. The FlexGroup feature is an evolution of scale-out NAS containers that blends nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
+Learn about ONTAP FlexGroup volumes and recommended practices and implementation tips. FlexGroup volumes are an evolution of ONTAP scale-out NAS containers, that blend nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
 
 // Oct 2021 - 9.10.1 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup FlexGroup volumes^]
