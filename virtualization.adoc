@@ -16,7 +16,7 @@ summary: "These technical reports provide an overview of the VMware virtualizati
 [.lead]
 NetApp virtualization solutions help deliver maximum value from your servers. With a responsive virtual server infrastructure built on groundbreaking, high-performance ONTAP flash systems, you gain the ability to access your data much faster. Your granular virtual infrastructure scales without disruption to multiple petabytes of data, delivering the performance you need for shared access to multiple workloads. ONTAP helps streamline and reduce the complexity of your virtual server infrastructure deployment with key partnerships, deployment guidance, application integration, and superior design. ONTAP provides many recommended practices and solutions for a robust virtualization environment both on-premises and in the cloud.
 
-These technical reports expand on the ONTAP tools for VMware vSphere link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere] product documentation.
 
 // Last Update - Version - current pdf owner
 // git hub updated

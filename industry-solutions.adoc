@@ -19,7 +19,7 @@ Our industry-specific data storage solutions, enhanced by strategic partnerships
 == EDA
 // Sept 2021 - 9.9.1 - Justin Parisi
 link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]
-Learn about recommended practices and implementation tips with NetApp ONTAP for Electronic Design Automation (EDA) workloads additionally, NetApp FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
+Learn about recommended practices and implementation tips with NetApp ONTAP for Electronic Design Automation (EDA) workloads additionally, FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
 
 == Healthcare
 // May 2022 - 9.11.1ish - Brian O'Mahoney
