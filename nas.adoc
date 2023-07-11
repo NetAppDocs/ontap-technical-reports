@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the NFS, SMB/CIFS, S3, 
 :imagesdir: ./media/
 
 [.lead]
-NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. ONTAP NAS solutions provide for nondisruptive operations, efficiency, and seamless scalability within a unified architecture. Powered by NetApp ONTAP enterprise data management software, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
+NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. ONTAP NAS solutions provide for nondisruptive operations, efficiency, and seamless scalability within a unified architecture. Powered by NetApp ONTAP, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
 
 [NOTE]
 ====
@@ -70,4 +70,4 @@ Learn how to configure Lightweight Directory Access Protocol (LDAP) identity man
 == NAS security
 // Jun 2021 - 9.9.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]
-Learn about NFS Kerberos in ONTAP software including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.
+Learn about NFS Kerberos in ONTAP including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.

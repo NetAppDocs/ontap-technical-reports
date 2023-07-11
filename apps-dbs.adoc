@@ -25,7 +25,7 @@ Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using Sna
 
 == MySQL
 link:https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf[MySQL Database on ONTAP^]
-MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP data management software.
+MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
 == Oracle
 link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]
@@ -58,7 +58,7 @@ Learn about the solution recommended practices on how to provision, manage, and 
 
 == PostgreSQL
 link:https://www.netapp.com/pdf.html?item=/media/17140-tr4770.pdf[TR-4770: PostgreSQL database on ONTAP^]
-PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP data management software.
+PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
 
 ////
 == Enterprise applications

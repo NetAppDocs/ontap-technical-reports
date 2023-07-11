@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the SnapCenter with Net
 :imagesdir: ./media/
 
 [.lead]
-NetApp SnapCenter software provides a, unified platform for application-consistent data protection and clone management. This software simplifies backup, restore, and clone lifecycle management with application-integrated workflows. Leveraging storage-based data management, SnapCenter enables increased performance and availability and reduced testing and development times.
+SnapCenter provides a, unified platform for application-consistent data protection and clone management. SnapCenter simplifies backup, restore, and clone lifecycle management with application-integrated workflows. Leveraging storage-based data management, SnapCenter enables increased performance and availability and reduced testing and development times.
 
 [NOTE]
 ====

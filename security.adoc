@@ -14,7 +14,7 @@ summary: "These technical reports provide an overview of the security in NetApp 
 :imagesdir: ./media/
 
 [.lead]
-NetApp ONTAP data management software continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry recommended practices. These new features also support your organization’s move toward a Zero Trust model. 
+ONTAP continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry recommended practices. These new features also support your organization’s move toward a Zero Trust model. 
 
 [NOTE]
 ====

@@ -41,5 +41,5 @@ link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetAp
 Learn about FlexGroup volumes, recommended practices and implementation tips. FlexGroup volumes are an evolution of ONTAP scale-out NAS containers, that blends nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
 
 // Oct 2021 - 9.10.1 - Maha G
-link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup FlexGroup volumes^]
+link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup of FlexGroup volumes^]
 Learn about data protection and backup for FlexGroup volumes including Snapshot copies, SnapMirror, and other data protection and backup solutions.

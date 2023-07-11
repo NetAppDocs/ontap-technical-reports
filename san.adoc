@@ -24,7 +24,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/s
 // Last Update - Version - current pdf owner
 // Apr 2023 - 9.12.1 P2 - Mike Peppers
 link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP^]
-Learn about block protocols in ONTAP data management software as well as recommendations practices.
+Learn about block protocols in ONTAP as well as recommendations practices.
 
 // Feb 2023 - 9.12.1 - Mike Peppers
 link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[TR-4684: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)^]
