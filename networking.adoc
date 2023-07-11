@@ -24,7 +24,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/n
 // Last Update - Version - current pdf owner
 // Jan 2016 - <9.0 - Kris Lippe 
 //link:https://www.netapp.com/pdf.html?item=/media/16885-tr-4182.pdf[TR-4182: Ethernet storage design considerations and best practices for ONTAP^]
-//This technical report describes the implementation of NetApp ONTAP network configurations. It provides common ONTAP network deployment scenarios and recommends networking best practices as they pertain to a ONTAP environment.
+//This technical report describes the implementation of ONTAP network configurations. It provides common ONTAP network deployment scenarios and recommends networking best practices as they pertain to a ONTAP environment.
 
 // Dec 2022 - 9.12.1 - Elliott Ecton
 link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center^]

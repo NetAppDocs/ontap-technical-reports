@@ -18,7 +18,7 @@ These technical reports provide guidance on how to harden NetApp ONTAP as well a
 
 [NOTE]
 ====
-Procedural documentation for security and data encryption can be found at link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[security and data encryption documentation]
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[security and data encryption] product documentation.
 ====
 
 // Last Update - Version - current pdf owner
