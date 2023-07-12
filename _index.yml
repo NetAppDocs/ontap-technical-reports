@@ -4,25 +4,25 @@ indexpage:
     - title: Application and database technical reports
       links:
         - title: Microsoft SQL Server with ONTAP
-          url: apps-dbs.html#microsoft-sql
+          url: apps-dbs.html
         - title: Oracle database performance on AFF A-Series and C-Series
-          url: apps-dbs.html#oracle
+          url: apps-dbs.html
         - title: Virtualized Oracle database performance on AFF A-Series and C-Series
-          url: apps-dbs.html#oracle
+          url: apps-dbs.html
         - title: Oracle databases on ONTAP
-          url: apps-dbs.html#oracle
+          url: apps-dbs.html
         - title: Additional application and database technical reports
           url: apps-dbs.html
     - title: Business Continuity technical reports
       links:
         - title: SnapMirror Business Continuity (SM-BC)
-          url: business-continuity.html#snapmirror-business-continuity-sm-bc
+          url: business-continuity.html
         - title: MetroCluster solution architecture and design
-          url: business-continuity.html#netapp-metrocluster
+          url: business-continuity.html
         - title: MetroCluster IP
-          url: business-continuity.html#metrocluster-ip
+          url: business-continuity.html
         - title: MetroCluster FC
-          url: business-continuity.html#metrocluster-fc
+          url: business-continuity.html
         - title: Additional Business Continuity technical reports
           url: business-continuity.html
     - title: Data protection and disaster recovery technical reports
@@ -38,31 +38,31 @@ indexpage:
     - title: FlexCache and FlexGroup volumes technical reports
       links:
         - title: FlexCache volumes
-          url: nas-containers.html#flexcache
+          url: nas-containers.html
         - title: FlexGroup volumes implementation and best practices 
-          url: nas-containers.html#flexgroup-volumes
+          url: nas-containers.html
         - title: Data protection and backup ONTAP FlexGroup volumes
-          url: nas-containers.html#flexgroup-volumes
+          url: nas-containers.html
         - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
     - title: Industry solutions technical reports
       links:
         - title: Electronic Design Automation best practices in ONTAP
-          url: industry-solutions.html#eda
+          url: industry-solutions.html
         - title: NetApp best practices for Epic
-          url: industry-solutions.html#healthcare
+          url: industry-solutions.html
     - title: NAS technical reports
       links:
         - title: NFS in NetApp ONTAP best practice and implementation
-          url: nas.html#nfs
+          url: nas.html
         - title: Multiprotocol NAS in ONTAP overview and best practices
-          url: nas.html#multiprotocol
+          url: nas.html
         - title: S3 in ONTAP best practices
-          url: nas.html#ontap-s3
+          url: nas.html
         - title: Name services best practices
-          url: nas.html#name-services
+          url: nas.html
         - title: NFS Kerberos in ONTAP
-          url: nas.html#nas-security
+          url: nas.html
         - title: Additional NAS technical reports
           url: nas.html
     - title: Networking technical reports
@@ -84,15 +84,15 @@ indexpage:
         - title: Security hardening guides
           url: security-hardening-guides.html
         - title: The NetApp solution for ransomware
-          url: security.html#ransomware
+          url: security.html
         - title: NetApp and Zero Trust
-          url: security.html#zero-trust
+          url: security.html
         - title: Compliant WORM storage using NetApp SnapLock
-          url: security.html#ransomware
+          url: security.html
         - title: Authentication (SSH, MFA)
-          url: security.html#authentication
+          url: security.html
         - title: Secure multitenancy in ONTAP
-          url: security.html#multitennancy
+          url: security.html
         - title: Additional security technical reports
           url: security.html
     - title: SnapCenter technical reports
