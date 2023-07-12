@@ -45,6 +45,7 @@ indexpage:
           url: nas-containers.html
         - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
+#Removed Industry Solutions
 #    - title: Industry solutions technical reports
 #      links:
 #        - title: Electronic Design Automation best practices in ONTAP
