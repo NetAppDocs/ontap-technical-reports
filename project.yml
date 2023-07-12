@@ -19,8 +19,8 @@ sidebar:
     - title: FlexCache and FlexGroup volumes technical reports
       url: /nas-containers.html
     - title: Industry solutions technical reports
-      url: /industry-solutions.html
-    - title: NAS technical reports
+#      url: /industry-solutions.html
+#    - title: NAS technical reports
       url: /nas.html
     - title: Networking technical reports
       url: /networking.html

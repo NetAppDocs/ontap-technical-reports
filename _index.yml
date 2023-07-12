@@ -45,12 +45,12 @@ indexpage:
           url: nas-containers.html
         - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
-    - title: Industry solutions technical reports
-      links:
-        - title: Electronic Design Automation best practices in ONTAP
-          url: industry-solutions.html
-        - title: NetApp best practices for Epic
-          url: industry-solutions.html
+#    - title: Industry solutions technical reports
+#      links:
+#        - title: Electronic Design Automation best practices in ONTAP
+#          url: industry-solutions.html
+#        - title: NetApp best practices for Epic
+#          url: industry-solutions.html
     - title: NAS technical reports
       links:
         - title: NFS in NetApp ONTAP best practice and implementation
