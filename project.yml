@@ -18,8 +18,7 @@ sidebar:
       url: /data-protection-disaster-recovery.html
     - title: FlexCache and FlexGroup volumes technical reports
       url: /nas-containers.html
-    - title: Industry solutions technical reports
-#Removed Industry Solutions
+#    - title: Industry solutions technical reports
 #      url: /industry-solutions.html
 #    - title: NAS technical reports
       url: /nas.html
