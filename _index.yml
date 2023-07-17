@@ -11,7 +11,7 @@ indexpage:
           url: apps-dbs.html
         - title: Oracle databases on ONTAP
           url: apps-dbs.html
-        - title: Additional application and database TRs
+        - title: Additional application and database technical reports
           url: apps-dbs.html
     - title: Business Continuity
       links:
@@ -23,7 +23,7 @@ indexpage:
           url: business-continuity.html
         - title: MetroCluster FC
           url: business-continuity.html
-        - title: Additional Business Continuity TRs
+        - title: Additional Business Continuity technical reports
           url: business-continuity.html
     - title: Data protection and disaster recovery
       links:
@@ -33,7 +33,7 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: Compliant WORM storage using SnapLock
           url: data-protection-disaster-recovery.html
-        - title: Additional data protection and disaster recovery TRs
+        - title: Additional data protection and disaster recovery technical reports
           url: data-protection-disaster-recovery.html
     - title: FlexCache and FlexGroup volumes
       links:
@@ -43,7 +43,7 @@ indexpage:
           url: nas-containers.html
         - title: Data protection and backup ONTAP FlexGroup volumes
           url: nas-containers.html
-        - title: Additional FlexCache and FlexGroup volumes TRs
+        - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
 #Removed Industry Solutions
 #    - title: Industry solutions technical reports
@@ -64,7 +64,7 @@ indexpage:
           url: nas.html
         - title: NFS Kerberos in ONTAP
           url: nas.html
-        - title: Additional NAS TRs
+        - title: Additional NAS technical reports
           url: nas.html
     - title: Networking
       links:
@@ -94,7 +94,7 @@ indexpage:
           url: security.html
         - title: Secure multitenancy in ONTAP
           url: security.html
-        - title: Additional security TRs
+        - title: Additional security technical reports
           url: security.html
     - title: SnapCenter
       links:
@@ -106,7 +106,7 @@ indexpage:
           url: snapcenter.html
         - title: SnapCenter Service
           url: snapcenter.html
-        - title: Additional SnapCenter TRs
+        - title: Additional SnapCenter technical reports
           url: snapcenter.html
 #    - title: Storage efficiency
 #      links:
@@ -134,5 +134,5 @@ indexpage:
           url: virtualization.html
         - title: VMware Site Recovery Manager with ONTAP
           url: virtualization.html
-        - title: Additional virtualization TRs
+        - title: Additional virtualization technical reports
           url: virtualization.html
