@@ -1,7 +1,7 @@
 indexpage:
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   tiles:
-    - title: Application and database technical reports
+    - title: Applications and databases
       links:
         - title: Microsoft SQL Server with ONTAP
           url: apps-dbs.html
@@ -11,9 +11,9 @@ indexpage:
           url: apps-dbs.html
         - title: Oracle databases on ONTAP
           url: apps-dbs.html
-        - title: Additional application and database technical reports
+        - title: Additional application and database TRs
           url: apps-dbs.html
-    - title: Business Continuity technical reports
+    - title: Business Continuity
       links:
         - title: SnapMirror Business Continuity (SM-BC)
           url: business-continuity.html
@@ -23,9 +23,9 @@ indexpage:
           url: business-continuity.html
         - title: MetroCluster FC
           url: business-continuity.html
-        - title: Additional Business Continuity technical reports
+        - title: Additional Business Continuity TRs
           url: business-continuity.html
-    - title: Data protection and disaster recovery technical reports
+    - title: Data protection and disaster recovery
       links:
         - title: SnapMirror Asynchronous configuration and best practices
           url: data-protection-disaster-recovery.html
@@ -33,9 +33,9 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: Compliant WORM storage using SnapLock
           url: data-protection-disaster-recovery.html
-        - title: Additional data protection and disaster recovery technical reports
+        - title: Additional data protection and disaster recovery TRs
           url: data-protection-disaster-recovery.html
-    - title: FlexCache and FlexGroup volumes technical reports
+    - title: FlexCache and FlexGroup volumes
       links:
         - title: FlexCache volumes
           url: nas-containers.html
@@ -43,7 +43,7 @@ indexpage:
           url: nas-containers.html
         - title: Data protection and backup ONTAP FlexGroup volumes
           url: nas-containers.html
-        - title: Additional FlexCache and FlexGroup volumes technical reports
+        - title: Additional FlexCache and FlexGroup volumes TRs
           url: nas-containers.html
 #Removed Industry Solutions
 #    - title: Industry solutions technical reports
@@ -52,7 +52,7 @@ indexpage:
 #          url: industry-solutions.html
 #        - title: NetApp best practices for Epic
 #          url: industry-solutions.html
-    - title: NAS technical reports
+    - title: NAS
       links:
         - title: NFS in NetApp ONTAP best practice and implementation
           url: nas.html
@@ -64,15 +64,15 @@ indexpage:
           url: nas.html
         - title: NFS Kerberos in ONTAP
           url: nas.html
-        - title: Additional NAS technical reports
+        - title: Additional NAS TRs
           url: nas.html
-    - title: Networking technical reports
+    - title: Networking
       links:
 #        - title: Ethernet storage design considerations and best practices for ONTAP
 #          url: networking.html
         - title: BGP/VIP with ONTAP 
           url: networking.html
-    - title: SAN technical reports
+    - title: SAN
       links:
         - title: Best practices for modern SAN in ONTAP
           url: san.html
@@ -80,7 +80,7 @@ indexpage:
           url: san.html
         - title: ONTAP AFF All SAN Array (ASA) systems
           url: san.html
-    - title: Security technical reports
+    - title: Security
       links:
         - title: Security hardening guides
           url: security-hardening-guides.html
@@ -94,9 +94,9 @@ indexpage:
           url: security.html
         - title: Secure multitenancy in ONTAP
           url: security.html
-        - title: Additional security technical reports
+        - title: Additional security TRs
           url: security.html
-    - title: SnapCenter technical reports
+    - title: SnapCenter
       links:
         - title: SnapCenter for Oracle
           url: snapcenter.html
@@ -106,9 +106,9 @@ indexpage:
           url: snapcenter.html
         - title: SnapCenter Service
           url: snapcenter.html
-        - title: Additional SnapCenter technical reports
+        - title: Additional SnapCenter TRs
           url: snapcenter.html
-#    - title: Storage efficiency technical reports
+#    - title: Storage efficiency
 #      links:
 #        - title: Deduplication
 #          url: storage-efficiency.html
@@ -118,7 +118,7 @@ indexpage:
 #          url: storage-efficiency.html
 #        - title: Compaction
 #          url: storage-efficiency.html
-    - title: Tiering technical reports
+    - title: Tiering
       links:
         - title: FabricPool best practices
           url: tiering.html
@@ -126,7 +126,7 @@ indexpage:
           url: tiering.html
         - title: Database storage tiering with FabricPool
           url: tiering.html
-    - title: Virtualization technical reports
+    - title: Virtualization
       links:
         - title: VMware vSphere for ONTAP
           url: virtualization.html
@@ -134,5 +134,5 @@ indexpage:
           url: virtualization.html
         - title: VMware Site Recovery Manager with ONTAP
           url: virtualization.html
-        - title: Additional virtualization technical reports
+        - title: Additional virtualization TRs
           url: virtualization.html
