@@ -10,31 +10,31 @@ sidebar:
   entries:
     - title: ONTAP technical reports
       url: /index.html
-    - title: Application and database technical reports
+    - title: Applications and databases
       url: /apps-dbs.html
-    - title: Business continuity technical reports
+    - title: Business continuity
       url: /business-continuity.html
-    - title: Data protection and disaster recovery technical reports
+    - title: Data protection and disaster recovery
       url: /data-protection-disaster-recovery.html
-    - title: FlexCache and FlexGroup volumes technical reports
+    - title: FlexCache and FlexGroup volumes
       url: /nas-containers.html
-#    - title: Industry solutions technical reports
+#    - title: Industry solutions 
 #      url: /industry-solutions.html
-    - title: NAS technical reports
+    - title: NAS
       url: /nas.html
-    - title: Networking technical reports
+    - title: Networking
       url: /networking.html
-    - title: SAN technical reports
+    - title: SAN
       url: /san.html
-    - title: Security technical reports
+    - title: Security
       url: /security.html
     - title: Security hardening guides
       url: /security-hardening-guides.html
-    - title: SnapCenter technical reports
+    - title: SnapCenter
       url: /snapcenter.html      
-    - title: Tiering technical reports
+    - title: Tiering
       url: /tiering.html
-    - title: Virtualization technical reports
+    - title: Virtualization
       url: /virtualization.html
 #    - title: Change Log
 #      url: /change-log-display.html
