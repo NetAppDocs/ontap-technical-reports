@@ -60,30 +60,44 @@ Learn about the solution recommended practices on how to provision, manage, and 
 link:https://www.netapp.com/pdf.html?item=/media/17140-tr4770.pdf[TR-4770: PostgreSQL database on ONTAP^]
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
 
-////
-== Enterprise applications
-// git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/common/introduction.html[ONTAP for enterprise applications]
-
-== Microsoft SQL Server
-// git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mssql/introduction.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]
-This best practice guide enables storage administrators and database administrators to successfully deploy Microsoft SQL Server on ONTAP storage.
-
-== Oracle
-// git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/oracle/introduction.html[Oracle on ONTAP]
-This best practice guide enables storage administrators and database administrators to successfully deploy Oracle on ONTAP storage. This document is a consolidation of the content previously covered in NetApp TR-3633, TR-4591, TR-4592, TR-4534, TR-4695, and TR-4899.
-
 == SAP HANA
-// git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/hana/index.html[SAP HANA on ONTAP]
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html[TR-4435: SAP HANA on NetApp AFF Systems with NFS]
+Learn about the recommended practices, and other considerations for operating SAP HANA on AFF systems with NFS. 
 
-== PostgreSQL
-// git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/postgres/introduction.html[PostgreSQL on ONTAP]
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html[TR-4436: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol]
+Learn about the recommended practices, and other considerations for operating SAP HANA on AFF systems with Fibre Channel. 
 
-== MariaDB and MySQL
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana-fas-nfs_introduction.html[TR-4290: SAP HANA on NetApp FAS systems with NFS]
+Learn about the recommended practices, and other considerations for operating SAP HANA on FAS systems with NFS. 
+
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_fas_fc_introduction.html[TR-4384: SAP HANA on NetApp FAS Systems with Fibre Channel Protocol]
+Learn about the recommended practices, and other considerations for operating SAP HANA on FAS systems with Fibre Channel. 
+
+link:https://www.netapp.com/pdf.html?item=/media/19887-TR-4821.pdf[TR-4821: SAP HANA on IBM Power Systems and NetApp AFF Systems with NFS^]
+IBM Power Systems are designed for data-intensive and mission-critical workloads like SAP HANA. IBM Power Systems simplify and accelerate SAP HANA deployments by providing four key capabilities: superior virtualization and flexibility, faster provisioning, affordable scalability, and maximized uptime. The AFF product family is certified for use with SAP HANA in tailored data center integration (TDI) projects and perfectly complements IBM Power Systems. This document describes recommended practices for a NAS (NFS) storage setup using ONTAP with the AFF product family and IBM Power Systems.
+
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html[TR-4614: SAP HANA backup and recovery with SnapCenter]
+SnapCenter is a unified, scalable platform for application-consistent data protection for SAP HANA and other databases. SnapCenter provides centralized control and oversight, while delegating the ability for users to manage application-specific backup, restore, and clone jobs. With SnapCenter, database and storage administrators learn a single tool to manage backup, restore, and cloning operations for a variety of applications and databases.
+
 // git hub updated
-link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_jfs/mysql/introduction.html[MariaDB and MySQL on ONTAP]
-////
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html[TR-4926: SAP HANA on Amazon FSx for NetApp ONTAP - Backup and recovery with SnapCenter]
+Learn about the recommended practices for SAP HANA data protection on Amazon FSx for NetApp ONTAP and SnapCenter. Topics include SnapCenter concepts, configuration recommendations, and operation workflows, including configuration, backup operations, and restore and recovery operations.
+
+// git hub updated
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA System copy and clone operations with SnapCenter]
+SnapCenter storage cloning and the option to flexibly define pre-cloning and post-cloning operations allows SAP Basis administrators to accelerate and automate SAP system copy, clone, or refresh operations. Learn now the option to choose any SnapCenter Snapshot backup at any primary or secondary storage allows you to address your most important use cases, including logical corruption, disaster recovery testing, or the refresh of an SAP QA system.
+
+//
+link:https://www.netapp.com/pdf.html?item=/media/17030-tr4719.pdf[TR-4719: SAP HANA system replication backup and recovery with SnapCenter^]
+Learn how SnapCenter technology and the SAP HANA plug-in can be used for backup and recovery in an SAP HANA System Replication environment.
+
+// git hub updated
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA system copy and clone operations with SnapCenter]
+The ability to create application-consistent NetApp Snapshot backups on the storage layer is the foundation for the system copy and system clone operations. Storage-based Snapshot backups are created by using the NetApp SnapCenter Plug-In for SAP HANA and interfaces provided by the SAP HANA database. SnapCenter registers Snapshot backups in the SAP HANA backup catalog so that the backups can be used for restore and recovery as well as for cloning operations.
+
+link:https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf[TR-4646: SAP HANA disaster recovery with storage replication^]
+This document is an overview of the options for disaster recovery protection for SAP HANA. It includes detailed setup information and a use case description of a three-site disaster recovery solution based on synchronous and asynchronous SnapMirror storage replication. The described solution uses SnapCenter with the SAP HANA plug-in to manage database consistency.
+
+link:https://www.netapp.com/pdf.html?item=/media/17050-tr4711pdf.pdf[TR-4711: SAP HANA backup and Recovery Using NetApp Storage Systems and Commvault software^]
+This document describes the design of a NetApp and Commvault solution for SAP HANA, which includes Commvault IntelliSnap snapshot management technology and Snapshot technology. The solution is based on NetApp storage and the Commvault data protection suite.
+
