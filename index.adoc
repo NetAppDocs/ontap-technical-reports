@@ -12,4 +12,3 @@ summary: "ONTAP technical reports provide additional context for planning and op
 :icons: font
 :linkattrs:
 :imagesdir: ./media/
-
