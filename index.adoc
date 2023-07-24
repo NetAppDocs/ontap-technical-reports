@@ -5,7 +5,6 @@ keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best pract
 permalink: index.html
 # lead: Use only if indexpage.lead is not present in _index.yml
 summary: "ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols, as well as recommended practices for ONTAP features."
-
 ---
 = ONTAP technical reports
 :hardbreaks:
