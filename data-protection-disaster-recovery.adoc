@@ -1,9 +1,7 @@
 ---
-layout: landing-page
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: data-protection-disaster-recovery.html
-# lead: Use only if indexpage.lead is not present in _index.yml
 summary: "These technical reports provide an overview of the data protection and disaster recovery in ONTAP as well as recommended practices"
 ---
 = Data protection and disaster recovery technical reports
