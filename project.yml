@@ -1,3 +1,4 @@
+jekyll: debug-landing-page
 settings:
   name: "ONTAP technical reports"
   internal:
