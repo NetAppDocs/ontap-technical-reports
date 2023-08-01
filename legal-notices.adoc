@@ -1,12 +1,18 @@
 ---
-permalink:  legal-notices.html
 sidebar: sidebar
+permalink: legal-notices.html
 keywords:
-summary:
+summary: 
 ---
 = Legal notices
+:hardbreaks:
+:nofooter:
 :icons: font
-:imagesdir: ../media/
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+Legal notices provide access to copyright statements, trademarks, patents, and more.
 
 // Include the common notices
 include::https://raw.githubusercontent.com/NetAppDocs/common/main/_include/common-legal-notices.adoc[]
@@ -14,14 +20,14 @@ include::https://raw.githubusercontent.com/NetAppDocs/common/main/_include/commo
 // Include the open source notice intro
 include::https://raw.githubusercontent.com/NetAppDocs/common/main/_include/open-source-notice-intro.adoc[]
 
-// Add required link(s)
+// Add required links
 === ONTAP
 
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2885801[Notice for ONTAP 9.13.1^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2884813[Notice for ONTAP 9.12.1^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2883760[Notice for ONTAP 9.12.0^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2882103[Notice for ONTAP 9.11.1^]
-link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2879817[Notice for ONTAP 9.10.1^] 
+link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2879817[Notice for ONTAP 9.10.1^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2878927[Notice for ONTAP 9.10.0^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2876856[Notice for ONTAP 9.9.1^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2873871[Notice for ONTAP 9.8^]
@@ -33,8 +39,8 @@ link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2839209[Notice for ON
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2702054[Notice for ONTAP 9.2^]
 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2516795[Notice for ONTAP 9.1^]
 
-=== ONTAP MEDIATOR FOR MCC IP
+=== ONTAP Mediator for MCC IP
 
-link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.9.1 Notice for ONTAP MEDIATOR for MCC IP^]
-link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.8 Notice for ONTAP MEDIATOR for MCC IP^]
-link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.7 Notice for ONTAP MEDIATOR for MCC IP^]
+link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.9.1 Notice for ONTAP Mediator for MCC IP^]
+link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.8 Notice for ONTAP Mediator for MCC IP^]
+link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2870521[9.7 Notice for ONTAP Mediator for MCC IP^]
