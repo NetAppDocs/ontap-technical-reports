@@ -15,11 +15,11 @@ summary: "These technical reports provide an overview of applications and databa
 ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following technical reports provide guidance on NetApp recommended practices and implementation procedures for Microsoft SQL Server, MySQL, Oracle, PostgreSQL and SAP HANA.
 
 == Microsoft SQL Server
+link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
+Learn about the performance when running Microsoft SQL Server on NetApp AFF ASeries and AFF C-Series systems as well as get guidance on how to select the right system for your storage needs based on workload usage.
+
 link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
-
-link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
-Learn about the performance when running Microsoft SQL Server on NetApp AFF ASeries and AFF C-Series systems as well as get guidance on how to select the right system for your storage needs based on workload usage.
 
 link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using SnapCenter^]
 Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using SnapCenter technology for data protection.
