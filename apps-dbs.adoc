@@ -15,20 +15,46 @@ summary: "These technical reports provide an overview of applications and databa
 ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following technical reports provide guidance on NetApp recommended practices and implementation procedures for Microsoft SQL Server, MySQL, Oracle, PostgreSQL and SAP HANA.
 
 == Microsoft SQL Server
-link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
-Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
+SQL Server is the foundation of Microsoft's data platform, delivering mission-critical performance with in-memory technologies and faster insights on any data, whether on the premises or in the cloud.
 
-link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]
+[NOTE]
+This documentation replaces the previously published technical report TR-4590: Best practice guide for Microsoft SQL Server with ONTAP.
+
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html[Microsoft SQL Server on ONTAP]
+
+////
+//link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
+//Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
+
+//link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
 
 link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using SnapCenter^]
 Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using SnapCenter technology for data protection.
+////
 
 == MySQL
+MySQL and its variants, including MariaDb and Percona MySQL, is the world's most popular database.
+
+[NOTE]
+This documentation replaces the previously published technical report TR-4722: MySQL database on NetApp ONTAP best practices.
+
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[MsSQL databases on ONTAP]
+
+////
 link:https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf[MySQL Database on ONTAP^]
 MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP.
+////
 
 == Oracle
+ONTAP is designed for Oracle databases. For decades, ONTAP has been optimized for the unique demands of relational database I/O and multiple ONTAP features were created specifically to service the needs of Oracle databases and even at the request of Oracle Inc. itself.
+
+[NOTE]
+This documentation replaces these previously published technical reports TR-3633: Oracle databases on ONTAP; TR-4591: Oracle data protection: Backup, recovery, replication; TR-4592: Oracle on MetroCluster; and TR-4534: Migration of Oracle Databases to NetApp Storage Systems
+
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle databases on ONTAP]
+
+////
 link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on ONTAP storage.
 
@@ -56,12 +82,25 @@ SnapMirror Business Continuity (SM-BC) and Oracle Real Application Cluster (RAC)
 
 link:https://www.netapp.com/pdf.html?item=/media/21901-tr-4876.pdf[TR-4876:Oracle Multitenancy with ONTAP solution and deployment best practices^]
 Learn about the solution recommended practices on how to provision, manage, and protect Oracle Multitenant databases by using ONTAP storage to maximize the benefits of both Oracle Multitenant databases and the features of ONTAP software.
+////
 
 == PostgreSQL
+PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multitier applications. NetApp ONTAP is a excellent choice for running PostgreSQL databases do to its reliability, high performing and efficent data management capabilities.
+
+[NOTE]
+This documentation on ONTAP and the PostgreSQL database replaces the previously published TR-4770: PostgreSQL database on ONTAP best practices.
+
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/overview.html[PostgreSQL databases on ONTAP]
+////
 link:https://www.netapp.com/pdf.html?item=/media/17140-tr4770.pdf[TR-4770: PostgreSQL database on ONTAP^]
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
+////
 
 == SAP HANA
+Best practices for configuring, managing and automating SAP solutions can be found on the NetApp SAP Solutions page.
+
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/[SAP HANA database solutions on ONTAP]
+////
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html[TR-4435: SAP HANA on NetApp AFF Systems with NFS]
 Learn about the recommended practices, and other considerations for operating SAP HANA on AFF systems with NFS. 
 
@@ -80,19 +119,15 @@ IBM Power Systems are designed for data-intensive and mission-critical workloads
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html[TR-4614: SAP HANA backup and recovery with SnapCenter]
 SnapCenter is a unified, scalable platform for application-consistent data protection for SAP HANA and other databases. SnapCenter provides centralized control and oversight, while delegating the ability for users to manage application-specific backup, restore, and clone jobs. With SnapCenter, database and storage administrators learn a single tool to manage backup, restore, and cloning operations for a variety of applications and databases.
 
-// git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html[TR-4926: SAP HANA on Amazon FSx for NetApp ONTAP - Backup and recovery with SnapCenter]
 Learn about the recommended practices for SAP HANA data protection on Amazon FSx for NetApp ONTAP and SnapCenter. Topics include SnapCenter concepts, configuration recommendations, and operation workflows, including configuration, backup operations, and restore and recovery operations.
 
-// git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA System copy and clone operations with SnapCenter]
 SnapCenter storage cloning and the option to flexibly define pre-cloning and post-cloning operations allows SAP Basis administrators to accelerate and automate SAP system copy, clone, or refresh operations. Learn now the option to choose any SnapCenter Snapshot backup at any primary or secondary storage allows you to address your most important use cases, including logical corruption, disaster recovery testing, or the refresh of an SAP QA system.
 
-//
 link:https://www.netapp.com/pdf.html?item=/media/17030-tr4719.pdf[TR-4719: SAP HANA system replication backup and recovery with SnapCenter^]
 Learn how SnapCenter technology and the SAP HANA plug-in can be used for backup and recovery in an SAP HANA System Replication environment.
 
-// git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html[TR-4667: Automating SAP HANA system copy and clone operations with SnapCenter]
 The ability to create application-consistent NetApp Snapshot backups on the storage layer is the foundation for the system copy and system clone operations. Storage-based Snapshot backups are created by using the NetApp SnapCenter Plug-In for SAP HANA and interfaces provided by the SAP HANA database. SnapCenter registers Snapshot backups in the SAP HANA backup catalog so that the backups can be used for restore and recovery as well as for cloning operations.
 
@@ -107,3 +142,4 @@ SAP Landscape Management (LaMa) enables SAP system administrators to automate SA
 
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html[TR-4929: Automating SAP system copy operations with Libelle SystemCopy]
 Libelle SystemCopy is a framework-based software solution to create fully automated system and landscape copies. With the proverbial touch of a button, QA and test systems can be updated with fresh production data. Libelle SystemCopy supports all conventional databases and operating systems, provides its own copy mechanisms for all platforms but, at the same time, integrates backup/restore procedures or storage tools such as NetApp Snapshot copies and NetApp FlexClone volumes.
+////
