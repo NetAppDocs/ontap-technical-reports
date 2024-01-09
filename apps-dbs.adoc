@@ -47,13 +47,13 @@ This documentation replaces these previously published pdf versions of technical
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle databases on ONTAP]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on ONTAP storage.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle data protection: Backup, recovery, replication, and disaster recovery]
+link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_main/oracle/dp/oracle-data-protection-introduction.html[Oracle data protection with ONTAP]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on ONTAP storage.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle on MetroCluster]
-Learn about the recommended practices, test procedures, and other considerations for operating Oracle databases on a MetroCluster synchronous replication feature. 
+link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_main/oracle/dr/oracle-dr-overview.html[Oracle Disaster recovery with ONTAP]
+Learn about the recommended practices, test procedures, and other considerations for operating Oracle databases on a MetroCluster and SnapMirror Business Continuity. 
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Migration of Oracle Databases to ONTAP Storage Systems]
+link:https://review.docs.netapp.com/us-en/ontap-apps-dbs_main/oracle/migration/oracle-migration-overview.html[Migration of Oracle Databases to ONTAP Storage Systems]
 Learn about the overall considerations for planning a migration strategy, the three different levels in which data movement takes place, and details some of the various procedures available.
 
 link:https://www.netapp.com/pdf.html?item=/media/85630-tr-4969.pdf[TR-4969: Oracle Database Performance on AFF A-Series and C-Series^]
