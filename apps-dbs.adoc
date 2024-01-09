@@ -39,7 +39,7 @@ This document describes the configuration requirements and provides guidance on 
 [NOTE]
 This documentation replaces the previously published pdf version of technical report TR-4722: MySQL database on NetApp ONTAP best practices.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[MsSQL databases on ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[MySQL databases on ONTAP]
 
 ////
 link:https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf[MySQL Database on ONTAP^]
