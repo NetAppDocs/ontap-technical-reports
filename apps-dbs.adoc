@@ -34,7 +34,7 @@ Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using Sna
 ////
 
 == MySQL
-MySQL and its variants, including MariaDb and Percona MySQL, is the world's most popular database.
+This document describes the configuration requirements and provides guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
 [NOTE]
 This documentation replaces the previously published pdf version of technical report TR-4722: MySQL database on NetApp ONTAP best practices.
