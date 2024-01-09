@@ -4,15 +4,15 @@ indexpage:
     - title: Applications and databases
       links:
         - title: Microsoft SQL Server  on ONTAP
-          url: https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html
+          url: apps-dbs.html#microsoft-sql-server
         - title: MySQL databases on ONTAP
-          url: https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html
+          url: apps-dbs.html#mysql
         - title: Oracle databases on ONTAP
-          url: https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html
+          url: apps-dbs.html#oracle
         - title: PostgreSQL databases on ONTAP
-          url: https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/overview.html
+          url: apps-dbs.html#postgresql
         - title: SAP HANA on ONTAP
-          url: https://docs.netapp.com/us-en/netapp-solutions-sap/
+          url: apps-dbs.html#sap-hana
     - title: Business Continuity
       links:
         - title: SnapMirror Business Continuity (SM-BC)
