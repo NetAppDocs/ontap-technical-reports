@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
+keywords: Databases, Applications, Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
 permalink: apps-dbs.html
 summary: "These technical reports provide an overview of applications and databases on ONTAP as well as recommended practices"
 ---
@@ -50,7 +50,7 @@ Learn about the recommended practices that enable storage administrators and dat
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/dp/oracle-data-protection-introduction.html[Oracle data protection with ONTAP]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on ONTAP storage.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/dr/oracle-dr-overview.html[Oracle Disaster recovery with ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/dr/oracle-dr-overview.html[Oracle disaster recovery with ONTAP]
 Learn about the recommended practices, test procedures, and other considerations for operating Oracle databases on a MetroCluster and SnapMirror Business Continuity. 
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/migration/oracle-migration-overview.html[Migration of Oracle Databases to ONTAP Storage Systems]
