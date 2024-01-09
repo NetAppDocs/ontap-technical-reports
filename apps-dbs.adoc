@@ -17,11 +17,11 @@ ONTAP is the foundation for data management and data protection for many enterpr
 == Microsoft SQL Server
 SQL Server is the foundation of Microsoft's data platform, delivering mission-critical performance with in-memory technologies and faster insights on any data, whether on the premises or in the cloud.
 
-[NOTE]
-This documentation replaces the previously published pdf version of technical report TR-4590: Best practice guide for Microsoft SQL Server with ONTAP.
-
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html[Best practice guide for Microsoft SQL Server with ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html[Best practice for Microsoft SQL Server with ONTAP]
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
+
+[NOTE]
+This documentation replaces the previously published technical report _TR-4590: Best practice guide for Microsoft SQL Server with ONTAP._
 
 link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
 Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
@@ -32,17 +32,14 @@ Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using Sna
 == MySQL
 This document describes the configuration requirements and provides guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
-[NOTE]
-This documentation replaces the previously published pdf version of technical report TR-4722: MySQL database on NetApp ONTAP best practices.
-
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[MySQL database on NetApp ONTAP best practices]
 MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
+[NOTE]
+This documentation replaces the previously published technical report _TR-4722: MySQL database on NetApp ONTAP best practices._
+
 == Oracle
 ONTAP is designed for Oracle databases. For decades, ONTAP has been optimized for the unique demands of relational database I/O and multiple ONTAP features were created specifically to service the needs of Oracle databases and even at the request of Oracle Inc. itself.
-
-[NOTE]
-This documentation replaces these previously published pdf versions of technical reports TR-3633: Oracle databases on ONTAP; TR-4591: Oracle data protection: backup, recovery, replication; TR-4592: Oracle on MetroCluster; and TR-4534: Migration of Oracle databases to NetApp storage systems
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle databases on ONTAP]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on ONTAP storage.
@@ -55,6 +52,9 @@ Learn about the recommended practices, test procedures, and other considerations
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/migration/oracle-migration-overview.html[Migration of Oracle databases to ONTAP storage systems]
 Learn about the overall considerations for planning a migration strategy, the three different levels in which data movement takes place, and details some of the various procedures available.
+
+[NOTE]
+Documentation linked above replaces these previously published technical reports _TR-3633: Oracle databases on ONTAP; TR-4591: Oracle data protection: backup, recovery, replication; TR-4592: Oracle on MetroCluster; and TR-4534: Migration of Oracle databases to NetApp storage systems_
 
 link:https://www.netapp.com/pdf.html?item=/media/85630-tr-4969.pdf[TR-4969: Oracle database performance on AFF A-Series and C-Series^]
 ONTAP is a powerful data-management platform with native capabilities that include inline compression, nondisruptive hardware upgrades, and the ability to import a LUN from a foreign storage array. Up to 24 nodes can be clustered together, simultaneously serving data through Network File System (NFS), Server Message Block (SMB), iSCSI, Fibre Channel (FC), and Nonvolatile Memory Express (NVMe) protocols. In addition, Snapshot technology is the basis for creating tens of thousands of online backups and fully operational database clones. In addition to the rich feature set of ONTAP, there are a wide variety of user requirements, including database size, performance requirements, and data protection needs. Learn about bare metal database performance using AFF storage systems, including both the A-Series and C-Series, and it covers both maximums and the practical difference between the two AFF options.
@@ -75,11 +75,11 @@ Learn about the solution recommended practices on how to provision, manage, and 
 == PostgreSQL
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multitier applications. NetApp ONTAP is a excellent choice for running PostgreSQL databases do to its reliability, high performing and efficent data management capabilities.
 
-[NOTE]
-This documentation replaces the previously published pdf version of technical report TR-4770: PostgreSQL database on ONTAP best practices.
-
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/overview.html[PostgreSQL database on ONTAP best practices]
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
+
+[NOTE]
+This documentation replaces the previously published technical report TR-4770: PostgreSQL database on ONTAP best practices.
 
 == SAP HANA
 Best practices for configuring, managing and automating SAP solutions can be found on the NetApp SAP Solutions page.
