@@ -20,18 +20,19 @@ SQL Server is the foundation of Microsoft's data platform, delivering mission-cr
 [NOTE]
 This documentation replaces the previously published pdf version of technical report TR-4590: Best practice guide for Microsoft SQL Server with ONTAP.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html[Microsoft SQL Server on ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/overview.html[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP]
+Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
 
 ////
-//link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
-//Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
-
-//link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]
+link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf[TR-4590: Best practice guide for Microsoft SQL Server with ONTAP^]
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
+////
+
+link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
+Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
 
 link:https://www.netapp.com/pdf.html?item=/media/12400-tr4714.pdf[TR-4714: Best practices for Microsoft SQL Server using SnapCenter^]
 Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using SnapCenter technology for data protection.
-////
 
 == MySQL
 This document describes the configuration requirements and provides guidance on tuning and storage configuration for deploying MySQL on ONTAP.
@@ -39,7 +40,8 @@ This document describes the configuration requirements and provides guidance on 
 [NOTE]
 This documentation replaces the previously published pdf version of technical report TR-4722: MySQL database on NetApp ONTAP best practices.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[MySQL databases on ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/overview.html[TR-4722: MySQL database on NetApp ONTAP best practices]
+MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
 ////
 link:https://www.netapp.com/pdf.html?item=/media/16423-tr-4722pdf.pdf[MySQL Database on ONTAP^]
@@ -53,6 +55,7 @@ ONTAP is designed for Oracle databases. For decades, ONTAP has been optimized fo
 This documentation replaces these previously published pdf versions of technical reports TR-3633: Oracle databases on ONTAP; TR-4591: Oracle data protection: Backup, recovery, replication; TR-4592: Oracle on MetroCluster; and TR-4534: Migration of Oracle Databases to NetApp Storage Systems
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle databases on ONTAP]
+Learn about the recommended practices to successfully deploy, backup, recover, replicate, protect and migrate Oracle on ONTAP storage.
 
 ////
 link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]
@@ -90,7 +93,9 @@ PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB
 [NOTE]
 This documentation replaces the previously published pdf version of technical report TR-4770: PostgreSQL database on ONTAP best practices.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/overview.html[PostgreSQL databases on ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/overview.html[TR-4770: PostgreSQL database on ONTAP]
+PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
+
 ////
 link:https://www.netapp.com/pdf.html?item=/media/17140-tr4770.pdf[TR-4770: PostgreSQL database on ONTAP^]
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
