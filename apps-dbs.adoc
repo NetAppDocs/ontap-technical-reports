@@ -54,22 +54,17 @@ ONTAP is designed for Oracle databases. For decades, ONTAP has been optimized fo
 [NOTE]
 This documentation replaces these previously published pdf versions of technical reports TR-3633: Oracle databases on ONTAP; TR-4591: Oracle data protection: Backup, recovery, replication; TR-4592: Oracle on MetroCluster; and TR-4534: Migration of Oracle Databases to NetApp Storage Systems
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[Oracle databases on ONTAP]
-Learn about the recommended practices to successfully deploy, backup, recover, replicate, protect and migrate Oracle on ONTAP storage.
-
-////
-link:https://www.netapp.com/pdf.html?item=/media/8744-tr3633pdf.pdf[TR-3633: Oracle databases on ONTAP^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[TR-3633: Oracle databases on ONTAP]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on ONTAP storage.
 
-link:https://www.netapp.com/pdf.html?item=/media/19666-tr-4591.pdf[TR-4591: Oracle data protection: Backup, recovery, replication, and disaster recovery^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[TR-4591: Oracle data protection: Backup, recovery, replication, and disaster recovery]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on ONTAP storage.
 
-link:https://www.netapp.com/pdf.html?item=/media/8583-tr4592.pdf[TR-4592: Oracle on MetroCluster^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[TR-4592: Oracle on MetroCluster]
 Learn about the recommended practices, test procedures, and other considerations for operating Oracle databases on a MetroCluster synchronous replication feature. 
 
-link:https://www.netapp.com/pdf.html?item=/media/19750-tr-4534.pdf[TR-4534: Migration of Oracle Databases to ONTAP Storage Systems^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/overview.html[TR-4534: Migration of Oracle Databases to ONTAP Storage Systems]
 Learn about the overall considerations for planning a migration strategy, the three different levels in which data movement takes place, and details some of the various procedures available.
-////
 
 link:https://www.netapp.com/pdf.html?item=/media/85630-tr-4969.pdf[TR-4969: Oracle Database Performance on AFF A-Series and C-Series^]
 ONTAP is a powerful data-management platform with native capabilities that include inline compression, nondisruptive hardware upgrades, and the ability to import a LUN from a foreign storage array. Up to 24 nodes can be clustered together, simultaneously serving data through Network File System (NFS), Server Message Block (SMB), iSCSI, Fibre Channel (FC), and Nonvolatile Memory Express (NVMe) protocols. In addition, Snapshot technology is the basis for creating tens of thousands of online backups and fully operational database clones. In addition to the rich feature set of ONTAP, there are a wide variety of user requirements, including database size, performance requirements, and data protection needs. Learn about bare metal database performance using AFF storage systems, including both the A-Series and C-Series, and it covers both maximums and the practical difference between the two AFF options.
