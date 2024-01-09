@@ -16,7 +16,7 @@ NetApp virtualization solutions help deliver maximum value from your servers. Wi
 
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere] product documentation.
 
-link:hhttps://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vsphere/overview.html[TR-4597: VMware vSphere for ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vsphere/overview.html[TR-4597: VMware vSphere for ONTAP]
  ONTAP has been a leading storage solution for VMware vSphere environments for almost two decades and continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for vSphere, including the latest product information and recommended practices, to streamline deployment, reduce risk, and simplify management.
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vvols/overview.html[TR-4400: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
