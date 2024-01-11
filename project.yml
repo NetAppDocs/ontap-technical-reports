@@ -1,5 +1,5 @@
 settings:
-  name: "ONTAP technical reports"
+  name: "ONTAP Technical Reports"
   internal:
     pdf_enabled: false
   prod:
@@ -8,7 +8,7 @@ settings:
 
 sidebar:
   entries:
-    - title: ONTAP technical reports
+    - title: ONTAP Technical Reports
       url: /index.html
     - title: Applications and databases
       url: /apps-dbs.html
