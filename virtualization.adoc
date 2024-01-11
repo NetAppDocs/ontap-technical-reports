@@ -16,27 +16,21 @@ NetApp virtualization solutions help deliver maximum value from your servers. Wi
 
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere] product documentation.
 
-// Last Update - Version - current pdf owner
-// git hub updated
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html[TR-4597: VMware vSphere for ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vsphere/overview.html[TR-4597: VMware vSphere for ONTAP]
  ONTAP has been a leading storage solution for VMware vSphere environments for almost two decades and continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for vSphere, including the latest product information and recommended practices, to streamline deployment, reduce risk, and simplify management.
 
-// git hub updated
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vvols-overview.html[TR-4400: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vvols/overview.html[TR-4400: VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP]
 ONTAP has been a leading storage solution for VMware vSphere environments for over two decades and continues to add innovative capabilities to simplify management while reducing costs. This document covers ONTAP capabilities for VMware vSphere Virtual Volumes (vVols), including the latest product information and use cases along with recommended practices and other information to streamline deployment and reduce errors.
 
-// git hub updated - This is also in data-protection-disaster-recovery.html
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsrm-ontap9_1._introduction_to_srm_with_ontap.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP]
-ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for VMware Site Recovery Manager (SRM), VMware’s industry leading disaster recovery (DR) software, including the latest product information and recommended practices to streamline deployment, reduce risk, and simplify ongoing management.
+// This is also in data-protection-disaster-recovery.html
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/srm/overview.html[TR-4900: VMware Site Recovery Manager with NetApp ONTAP]
+ONTAP has been a leading storage solution for VMware vSphere environments since its introduction into the modern data center in 2002, and it continues to add innovative capabilities to simplify management while reducing costs. This document introduces the ONTAP solution for VMware Site Recovery Manager (SRM), VMware's industry leading disaster recovery (DR) software, including the latest product information and recommended practices to streamline deployment, reduce risk, and simplify ongoing management.
 
-// git hub updated
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_auto_introduction.html[Introduction to automation for ONTAP and vSphere]
 Automation has been an integral part of managing VMware environments since the first days of VMware ESX. The ability to deploy infrastructure as code and extend practices to private cloud operations helps to alleviate concerns surrounding scale, flexibility, self-provisioning, and efficiency. This document introduces the ONTAP solution for automating ONTAP and VMware vSphere environment.
 
-// git hub updated
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7353: ONTAP tools for VMware vSphere - Product security]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/security/tools.html[WP-7353: ONTAP tools for VMware vSphere - Product security]
 This document describes the techniques and technology used to secure ONTAP tools for VMware vSphere 9.X from both existing and emerging threats in product environments.
 
-// git hub updated
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/tools-vmware-secure-development-activities.html[WP-7355: SnapCenter plug-in VMware vSphere - Product security]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/security/snapcenter.html[WP-7355: SnapCenter plug-in VMware vSphere - Product security]
 This document describes the techniques and technology used to secure the NetApp SnapCenter Plug-in for VMware vSphere 4.X from both existing and emerging threats in product environments.

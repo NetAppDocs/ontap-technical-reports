@@ -3,18 +3,16 @@ indexpage:
   tiles:
     - title: Applications and databases
       links:
-        - title: Microsoft SQL Server databases on ONTAP
-          url: apps-dbs.html
+        - title: Microsoft SQL Server  on ONTAP
+          url: apps-dbs.html#microsoft-sql-server
         - title: MySQL databases on ONTAP
-          url: apps-dbs.html
+          url: apps-dbs.html#mysql
         - title: Oracle databases on ONTAP
-          url: apps-dbs.html
+          url: apps-dbs.html#oracle
         - title: PostgreSQL databases on ONTAP
-          url: apps-dbs.html
+          url: apps-dbs.html#postgresql
         - title: SAP HANA on ONTAP
-          url: apps-dbs.html
-        - title: Additional application and database technical reports
-          url: apps-dbs.html
+          url: apps-dbs.html#sap-hana
     - title: Business Continuity
       links:
         - title: SnapMirror Business Continuity (SM-BC)
@@ -47,13 +45,6 @@ indexpage:
           url: nas-containers.html
         - title: Additional FlexCache and FlexGroup volumes technical reports
           url: nas-containers.html
-#Removed Industry Solutions
-#    - title: Industry solutions technical reports
-#      links:
-#        - title: Electronic Design Automation best practices in ONTAP
-#          url: industry-solutions.html
-#        - title: NetApp best practices for Epic
-#          url: industry-solutions.html
     - title: NAS
       links:
         - title: NFS in NetApp ONTAP best practice and implementation
