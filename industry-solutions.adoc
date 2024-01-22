@@ -15,15 +15,12 @@ summary: "These technical reports provide an overview of the industry solutions 
 Our industry-specific data storage solutions, enhanced by strategic partnerships, address critical business challenges.
 
 == EDA
-// Sept 2021 - 9.9.1 - Justin Parisi
 link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf[Electronic Design Automation best practices in ONTAP^]
 Learn about recommended practices and implementation tips with NetApp ONTAP for Electronic Design Automation (EDA) workloads additionally, FlexGroup volumes, which are ideal for handling the high metadata overhead in EDA environments.
 
 == Healthcare
-// May 2022 - 9.11.1ish - Brian O'Mahoney
 link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf[NetApp best practices for Epic^]
 Epic makes software for the healthcare industry. Learn about recommended practices for integrating NetApp storage with Epic software environments.
 
-// 
 link:https://www.netapp.com/pdf.html?item=/media/86527-tr-4975.pdf[FlexPod - Epic for Large Hospitals^]
 Learn about the end-to-end performance capability from FlexPod demonstrating the need for Electronic Health Record (EHR) application with Intersystem database, with a focus on storage layout and best practices for setting up EHR on a FlexPod solution for large hospitals.
