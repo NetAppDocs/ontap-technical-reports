@@ -19,24 +19,19 @@ SnapMirror is a cost-effective, easy-to-use unified replication solution across 
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/data-protection-disaster-recovery/index.html[ONTAP Data protection and disaster recovery] product documentation.
 ====
 
-// Last Update - Version - current pdf owner
 == SnapMirror
 *SnapMirror Asynchronous*
-// Jun 2023 - 9.13.1 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/17229-tr4015.pdf[TR-4015: SnapMirror Asynchronous configuration and best practices^]
 Learn about recommended practices for configuring SnapMirror Asynchronous (SM-A) replication of volumes, consistency groups, and storage virtual machines (SVM disaster recovery).
 
-// Oct 2021 - 9.10.1 - Maha G
 link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf[TR-4678: Data protection and backup ONTAP FlexGroup volumes^]
 Learn about recommended data protection and backup for FlexGroup volumes. Topics include Snapshot copies, SnapMirror, and other data protection and backup solutions. 
 
 *SnapMirror Synchronous*
-// Jun 2023 - 9.13.1 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/17174-tr4733.pdf[TR-4733: SnapMirror Synchronous configuration and best practices^]
 Learn about recommended practices for configuring SnapMirror Synchronous (SM-S) replication.
 
 *SnapMirror Three-Data-Center DR*
-// Apr 2020 - 9.7 - Tony Ansley
 link:https://www.netapp.com/pdf.html?item=/media/19369-tr-4832.pdf[TR-4832: Three-Data-Center disaster recovery using NetApp SnapMirror for ONTAP 9.7^]
 Learn about a three-data-center disaster recovery configuration using ONTAP SnapMirror technology for replication.
 

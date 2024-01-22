@@ -18,15 +18,12 @@ With the FabricPool data tiering solution, an enterprise’s overall user experi
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[ONTAP FabricPool] product documentation.
 ====
 
-// Last Update - Version - current pdf owner
-// Apr 2023 - 9.12.1 - John Lantz
 link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[TR-4598: FabricPool best practices^]
 Learn about the capabilities, requirements, implementation, and recommended practices for FabricPool.
 
-// Feb 2023 - 9.12.1 - Aron Klein
 link:https://www.netapp.com/pdf.html?item=/media/19403-tr-4826.pdf[TR-4826: NetApp FabricPool with StorageGRID recommendation guide^]
 Learn about the recommended practices for deploying and sizing StorageGRID as a capacity tier for the ONTAP component FabricPool. This document also covers core capabilities, requirements, implementation, and recommended practices when using StorageGRID.
 
-// Apr 2021 - 9.8 - Jeff Steiner - this is also in apps-dbs.html
+// this is also in apps-dbs.html
 link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with NetApp FabricPool^]
 Learn about the benefits and configuration options of FabricPool with various databases, including the Oracle relational database management system (RDBMS).
