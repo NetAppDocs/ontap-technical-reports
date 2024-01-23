@@ -1,9 +1,12 @@
 indexpage:
+  title: ONTAP Technical Reports
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  summary: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  keywords: ONTAP 9, ONTAP, Technical Reports, TR, 
   tiles:
     - title: Applications and databases
       links:
-        - title: Microsoft SQL Server  on ONTAP
+        - title: Microsoft SQL Server on ONTAP
           url: apps-dbs.html#microsoft-sql-server
         - title: MySQL databases on ONTAP
           url: apps-dbs.html#mysql
