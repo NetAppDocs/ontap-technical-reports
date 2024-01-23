@@ -61,8 +61,6 @@ indexpage:
           url: nas.html
     - title: Networking
       links:
-#        - title: Ethernet storage design considerations and best practices for ONTAP
-#          url: networking.html
         - title: BGP/VIP with ONTAP 
           url: networking.html
     - title: SAN

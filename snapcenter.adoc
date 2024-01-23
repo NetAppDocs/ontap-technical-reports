@@ -19,7 +19,6 @@ SnapCenter provides a, unified platform for application-consistent data protecti
 These technical reports expand on the link:https://docs.netapp.com/us-en/snapcenter/index.html[SnapCenter] product documentation.
 ====
 
-// Last Update - Version - current pdf owner
 == SnapCenter for Oracle
 link:https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf[TR-4700: SnapCenter Plug-In for Oracle database best practices^]
 NetApp SnapCenter is a unified, scalable platform for Oracle-consistent data protection that automates complex operations with centralized control and oversight. Learn about the recommended practices for deploying Oracle databases with SnapCenter.
@@ -56,6 +55,6 @@ link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-
 The ability to create application-consistent NetApp Snapshot backups on the storage layer is the foundation for the system copy and system clone operations. Storage-based Snapshot backups are created by using the NetApp SnapCenter Plug-In for SAP HANA and interfaces provided by the SAP HANA database. SnapCenter registers Snapshot backups in the SAP HANA backup catalog so that the backups can be used for restore and recovery as well as for cloning operations.
 
 == SnapCenter hardening guide
-// Apr 2023 - 9.12.1 - Ankita Dhawale - this is also in snapcenter.html
+// this is also in snapcenter.html
 link:https://www.netapp.com/pdf.html?item=/media/82393-tr-4957.pdf[TR-4957: Security hardening guide for NetApp SnapCenter^]
 Learn how to configure SnapCenter to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.

@@ -19,23 +19,14 @@ ONTAP SAN storage delivers a simplified SAN experience that provides high availa
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/san-management/index.html[ONTAP SAN storage management] product documentation.
 ====
 
-// Last Update - Version - current pdf owner
-// Apr 2023 - 9.12.1 P2 - Mike Peppers
 link:https://www.netapp.com/pdf.html?item=/media/10680-tr4080.pdf[TR-4080: Best practices for modern SAN in ONTAP^]
 Learn about block protocols in ONTAP as well as recommendations practices.
 
-// Feb 2023 - 9.12.1 - Mike Peppers
 link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf[TR-4684: Implementing and configuring modern SANs with NVMe over Fabrics (NVMe-oF)^]
 Learn how to implement and configure NVMe over Fabrics transports (NVMe over Fibre Channel and NVMe over TCP). Topics include design, implementation, configuration, management guidelines and recommended practices to build highly available, high-performance modern SAN solutions using NVMe protocols and transports.
 
-//  Jul 2021 - 9.9.1 - Mike Peppers - Pulled down from www at the request of Kris Cornwell
-// link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf[TR-4515: ONTAP AFF All SAN Array (ASA) systems^]
-// Learn about NetApp AFF All SAN Array (ASA) systems, and how to implement based on recommended practices for always-available, business-critical SAN configurations.
-
-// May 2023 - 9.12.1 - 
 link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[TR-4968: NetApp All-SAN Array data availability and integrity^]
 Learn how the various data protection and data integrity features of a All SAN array systems work to achieve maximum application uptime plus recommended practices for designing, implementing, and managing a SAN network.
 
-// May 2020 - 9.7
 link:https://www.netapp.com/pdf.html?item=/media/9222-nva-1145-design.pdf[Modern SAN Cloud-Connected Flash Solution^]
 This NetApp Verified Architecture has been jointly designed and verified by NetApp, VMware, andBroadcom. It uses the latest Brocade, Emulex, and VMware vSphere technology solutions along with NetApp all-flash storage, which sets a new standard for enterprise SAN storage and data protection that will drive superior business value.
