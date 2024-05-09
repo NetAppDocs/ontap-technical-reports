@@ -23,7 +23,7 @@ These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/s
 link:https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf[TR-4569: Security hardening guide for NetApp ONTAP^]
 Learn how to configure NetApp ONTAP to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-otv-hardening-overview.html.html[Security hardening guide for ONTAP tools for VMware vSphere]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-otv-hardening-overview.html[Security hardening guide for ONTAP tools for VMware vSphere]
 Learn how to configure ONTAP tools for VMware vSphere to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
 
 // this is also in snapcenter.html
