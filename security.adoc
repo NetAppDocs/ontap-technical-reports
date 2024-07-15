@@ -12,7 +12,7 @@ summary: "These technical reports provide an overview of the security in NetApp 
 :imagesdir: ./media/
 
 [.lead]
-ONTAP continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry recommended practices. These new features also support your organization’s move toward a Zero Trust model. 
+ONTAP continues to evolve, with security as an integral part of the solution. The latest releases of ONTAP contain many new security features that are invaluable for your organization to protect its data across your hybrid cloud, prevent ransomware attacks, and adhere to industry recommended practices. These new features also support your organization's move toward a Zero Trust model. 
 
 [NOTE]
 ====
@@ -28,8 +28,8 @@ link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compli
 Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer to their data protection strategy. Learn how to integrate SnapLock, the WORM solution in ONTAP, into environments that require WORM data storage.
 
 == Zero Trust
-link:https://www.netapp.com/pdf.html?item=/media/19756-tr-4829.pdf[TR-4829: NetApp and Zero Trust^]
-Zero Trust traditionally has been a network-centric approach of architecting micro core and perimeter (MCAP) to protect data, services, applications, or assets with controls known as a segmentation gateway. ONTAP takes a data-centric approach to Zero Trust in which the storage management system becomes the segmentation gateway to protect and monitor access of our customer’s data. In particular, the FPolicy Zero Trust engine and the FPolicy partner ecosystem becomes a control center to gain a detailed understanding of normal and aberrant data access patterns and identify insider threats.
+link:https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html[NetApp and Zero Trust]
+Zero Trust traditionally has been a network-centric approach of architecting micro core and perimeter (MCAP) to protect data, services, applications, or assets with controls known as a segmentation gateway. ONTAP takes a data-centric approach to Zero Trust in which the storage management system becomes the segmentation gateway to protect and monitor access of our customer's data. In particular, the FPolicy Zero Trust engine and the FPolicy partner ecosystem becomes a control center to gain a detailed understanding of normal and aberrant data access patterns and identify insider threats.
 
 == Multifactor authentication
 link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor authentication in ONTAP best practices and implementation guide^]
