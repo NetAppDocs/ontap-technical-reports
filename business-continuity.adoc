@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices, SM-BC, SnapMirror Business Continuity 
 permalink: business-continuity.html
 summary: "These technical reports provide an overview of the business continuity in NetApp ONTAP as well as recommended practices"
 ---
@@ -16,12 +16,12 @@ NetApp offers a wide range of solutions that rationalize where applications and 
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/smbc/index.html[ONTAP SnapMirror Business Continuity] and link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[ONTAP MetroCluster] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/smbc/index.html[ONTAP SnapMirror active sync] and link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[ONTAP MetroCluster] product documentation.
 ====
 
-== SnapMirror Business Continuity (SM-BC)
-link:https://www.netapp.com/pdf.html?item=/media/21888-tr-4878.pdf[TR-4878: SnapMirror Business Continuity (SM-BC)^]
-SnapMirror Business Continuity (SM-BC) is a continuously available storage solution with application-level granularity, available for ONTAP running on AFF or All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
+== SnapMirror active sync (formerly SM-BC)
+link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html[TR-4878: SnapMirror active sync^]
+SnapMirror active sync is a continuously available storage solution with application-level granularity, available for ONTAP running on AFF or All SAN Array (ASA) storage systems, to meet the RPO 0 and RTO 0 needs of the most critical business applications.
 
 == MetroCluster
 link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf[TR-4705: NetApp MetroCluster solution architecture and design^]

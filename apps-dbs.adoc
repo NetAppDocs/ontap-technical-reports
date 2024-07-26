@@ -66,8 +66,8 @@ ONTAP is a powerful data-management platform with native capabilities that inclu
 link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf[TR-4695: Database storage tiering with FabricPool^]
 Learn about the benefits and configuration options of FabricPool with various databases, including the Oracle relational database management system (RDBMS).
 
-link:https://www.netapp.com/pdf.html?item=/media/40384-tr-4899.pdf[TR-4899: Oracle database transparent application failover with SnapMirror Business Continuity^]
-SnapMirror Business Continuity (SM-BC) and Oracle Real Application Cluster (RAC) can provide transparent application failover (TAF) and continuity in the face of site outages and true disasters. Learn about the configuration guidance and recommended practices of a AFF storage array with SM-BC as the storage component of Oracle RAC.
+link:https://www.netapp.com/pdf.html?item=/media/40384-tr-4899.pdf[TR-4899: Oracle database transparent application failover with SnapMirror active sync^]
+SnapMirror active sync (formerly SM-BC) and Oracle Real Application Cluster (RAC) can provide transparent application failover (TAF) and continuity in the face of site outages and true disasters. Learn about the configuration guidance and recommended practices of a AFF storage array with SnapMirror Active Sync as the storage component of Oracle RAC.
 
 link:https://www.netapp.com/pdf.html?item=/media/21901-tr-4876.pdf[TR-4876:Oracle Multitenancy with ONTAP solution and deployment best practices^]
 Learn about the solution recommended practices on how to provision, manage, and protect Oracle Multitenant databases by using ONTAP storage to maximize the benefits of both Oracle Multitenant databases and the features of ONTAP software.
