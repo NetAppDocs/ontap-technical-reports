@@ -19,9 +19,8 @@ ONTAP continues to evolve, with security as an integral part of the solution. Th
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[ONTAP security and data encryption] product documentation.
 ====
 
-// Last Update - Version - current pdf owner
 == Ransomware
-link:https://www.netapp.com/pdf.html?item=/media/7334-tr4572.pdf[TR-4572: The NetApp solution for ransomware^]
+link:https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html[TR-4572: The NetApp solution for ransomware^]
 Learn how ransomware has evolved; and how to identify attacks, prevent the spread, and recover as quickly as possible using the NetApp solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber-resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
 
 link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock^]
