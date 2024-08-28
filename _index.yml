@@ -81,7 +81,7 @@ indexpage:
         - title: Security hardening guides
           url: security-hardening-guides.html
         - title: The NetApp solution for ransomware
-          url: security.html
+          url: https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html
         - title: NetApp and Zero Trust
           url: https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html
         - title: Compliant WORM storage using NetApp SnapLock
