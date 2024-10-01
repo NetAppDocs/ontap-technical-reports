@@ -19,7 +19,7 @@ indexpage:
     - title: Business Continuity
       links:
         - title: SnapMirror active sync
-          url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
+          url: ../../ontap/snapmirror-active-sync/index.html
         - title: MetroCluster solution architecture and design
           url: business-continuity.html
         - title: MetroCluster IP
@@ -43,7 +43,7 @@ indexpage:
         - title: FlexCache volumes
           url: nas-containers.html
         - title: FlexCache write-back
-          url: https://docs.netapp.com/us-en/ontap/flexcache-writeback/flexcache-write-back-overview.html
+          url: ../../ontap/flexcache-writeback/flexcache-write-back-overview.html
         - title: FlexGroup volumes implementation and best practices 
           url: nas-containers.html
         - title: Data protection and backup ONTAP FlexGroup volumes
@@ -80,10 +80,12 @@ indexpage:
       links:
         - title: Security hardening guides
           url: security-hardening-guides.html
+        - title: ONTAP cyber vault
+          url: ../../netapp-solutions/cyber-vault/ontap-cyber-vault-overview.html
         - title: The NetApp solution for ransomware
-          url: https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html
+          url: ../../ontap/ransomware-solutions/ransomware-overview.html
         - title: NetApp and Zero Trust
-          url: https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html
+          url: ../../ontap/zero-trust/zero-trust-overview.html
         - title: Compliant WORM storage using NetApp SnapLock
           url: security.html
         - title: Authentication (SSH, MFA)

@@ -19,6 +19,10 @@ ONTAP continues to evolve, with security as an integral part of the solution. Th
 These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[ONTAP security and data encryption] product documentation.
 ====
 
+== ONTAP cyber vault
+link:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vault-overview.html[ONTAP cyber vault^]
+NetApp's ONTAP based cyber vault provides organizations with a comprehensive and flexible solution for protecting their most critical data assets. By leveraging logical air-gapping with robust hardening methodologies, ONTAP enables you to create secure, isolated storage environments that are resilient against evolving cyber threats. With ONTAP, you can ensure the confidentiality, integrity, and availability of your data while maintaining the agility and efficiency of your storage infrastructure.
+
 == Ransomware
 link:https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html[TR-4572: The NetApp solution for ransomware^]
 Learn how ransomware has evolved; and how to identify attacks, prevent the spread, and recover as quickly as possible using the NetApp solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber-resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
