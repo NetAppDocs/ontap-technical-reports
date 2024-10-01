@@ -16,7 +16,7 @@ ONTAP continues to evolve, with security as an integral part of the solution. Th
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[ONTAP security and data encryption] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html[ONTAP security and data encryption^] product documentation.
 ====
 
 == ONTAP cyber vault
