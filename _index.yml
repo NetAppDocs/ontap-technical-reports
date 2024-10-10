@@ -16,15 +16,17 @@ indexpage:
           url: apps-dbs.html#postgresql
         - title: SAP HANA on ONTAP
           url: apps-dbs.html#sap-hana
-    - title: Data protection and business continuity
+    - title: Data protection, disaster recovery & business continuity
       links:
         - title: SnapMirror active sync
           url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
-        - title: MetroCluster solution architecture and design
-          url: business-continuity.html
         - title: MetroCluster
           url: business-continuity.html
-        - title: SnapMirror configuration and best practices
+        - title: SnapMirror Asynchronous configuration and best practices
+          url: data-protection-disaster-recovery.html
+        - title:  SnapMirror Synchronous configuration and best practices
+          url: data-protection-disaster-recovery.html
+        - title: Compliant WORM storage using SnapLock
           url: data-protection-disaster-recovery.html
     - title: FlexCache and FlexGroup volumes
       links:
@@ -52,10 +54,10 @@ indexpage:
           url: nas.html
         - title: Additional NAS technical reports
           url: nas.html
-#    - title: Networking
-#      links:
-#        - title: BGP/VIP with ONTAP 
-#          url: networking.html
+    - title: Networking
+      links:
+        - title: BGP/VIP with ONTAP 
+          url: networking.html
     - title: SAN
       links:
         - title: Best practices for modern SAN in ONTAP
