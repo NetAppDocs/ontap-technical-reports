@@ -54,10 +54,10 @@ indexpage:
           url: nas.html
         - title: Additional NAS technical reports
           url: nas.html
-    - title: Networking
-      links:
-        - title: BGP/VIP with ONTAP 
-          url: networking.html
+#    - title: Networking
+#      links:
+#        - title: BGP/VIP with ONTAP 
+#          url: networking.html
     - title: SAN
       links:
         - title: Best practices for modern SAN in ONTAP
