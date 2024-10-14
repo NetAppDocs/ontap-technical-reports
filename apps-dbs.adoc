@@ -82,6 +82,12 @@ PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB
 This documentation replaces the previously published technical report _TR-4770: PostgreSQL database on ONTAP best practices_.
 
 == SAP HANA
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/[SAP HANA database solutions on ONTAP^]
 Best practices for configuring, managing and automating SAP solutions can be found on the NetApp SAP Solutions page.
 
-link:https://docs.netapp.com/us-en/netapp-solutions-sap/[SAP HANA database solutions on ONTAP]
+== Epic EMR
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/epic/epic-overview.html[Epic on ONTAP best practices^]
+A guide to understanding the best practices for deploying Epic on Premises and in the cloud while meeting configuration standards for proper deployment on ONTAP.
+
+[NOTE]
+This documentation replaces the previously published technical report _TR-3923: NetApp best practices for Epic_.
