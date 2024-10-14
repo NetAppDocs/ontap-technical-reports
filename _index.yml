@@ -80,11 +80,7 @@ indexpage:
           url: https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html
         - title: NetApp and Zero Trust
           url: https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html
-        - title: Compliant WORM storage using NetApp SnapLock
-          url: security.html
         - title: Authentication (SSH, MFA)
-          url: security.html
-        - title: Secure multitenancy in ONTAP
           url: security.html
         - title: Additional security technical reports
           url: security.html
