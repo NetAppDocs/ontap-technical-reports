@@ -2,7 +2,7 @@ indexpage:
   title: ONTAP Technical Reports
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   summary: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
-  keywords: ONTAP 9, ONTAP, Technical Reports, TR, 
+  keywords: ONTAP 9, ONTAP, Technical Reports, TR
   tiles:
     - title: Applications and databases
       links:
@@ -18,18 +18,18 @@ indexpage:
           url: apps-dbs.html#sap-hana
         - title: Epic on ONTAP
           url: https://docs.netapp.com/us-en/ontap-apps-dbs/epic/epic-overview.html
-    - title: Data protection, disaster recovery & business continuity
+    - title: Data protection, disaster recovery and business continuity
       links:
-        - title: SnapMirror active sync
-          url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
-        - title: MetroCluster
-          url: business-continuity.html
-        - title: SnapMirror Asynchronous configuration and best practices
-          url: data-protection-disaster-recovery.html
-        - title:  SnapMirror Synchronous configuration and best practices
+        - title: SnapMirror configuration and best practices
           url: data-protection-disaster-recovery.html
         - title: Compliant WORM storage using SnapLock
           url: data-protection-disaster-recovery.html
+        - title: SnapMirror active sync
+          url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
+        - title: MetroCluster IP & FC
+          url: business-continuity.html
+        - title: Additional business continuity technical reports
+          url: business-continuity.html
     - title: FlexCache and FlexGroup volumes
       links:
         - title: FlexCache volumes
