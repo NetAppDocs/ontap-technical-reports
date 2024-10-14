@@ -18,28 +18,20 @@ indexpage:
           url: apps-dbs.html#sap-hana
         - title: Epic on ONTAP
           url: https://docs.netapp.com/us-en/ontap-apps-dbs/epic/epic-overview.html
-    - title: Business Continuity
+    - title: Data protection, disaster recovery and business continuity
       links:
+        - title: SnapMirror configuration and best practices
+          url: data-protection-disaster-recovery.html
+        - title: Compliant WORM storage using SnapLock
+          url: data-protection-disaster-recovery.html
         - title: SnapMirror active sync
           url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
         - title: MetroCluster solution architecture and design
           url: business-continuity.html
-        - title: MetroCluster IP
-          url: business-continuity.html
-        - title: MetroCluster FC
+        - title: MetroCluster IP & FC
           url: business-continuity.html
         - title: Additional business continuity technical reports
           url: business-continuity.html
-    - title: Data protection and disaster recovery
-      links:
-        - title: SnapMirror Asynchronous configuration and best practices
-          url: data-protection-disaster-recovery.html
-        - title:  SnapMirror Synchronous configuration and best practices
-          url: data-protection-disaster-recovery.html
-        - title: Compliant WORM storage using SnapLock
-          url: data-protection-disaster-recovery.html
-        - title: Additional data protection and disaster recovery technical reports
-          url: data-protection-disaster-recovery.html
     - title: FlexCache and FlexGroup volumes
       links:
         - title: FlexCache volumes
@@ -66,10 +58,10 @@ indexpage:
           url: nas.html
         - title: Additional NAS technical reports
           url: nas.html
-    - title: Networking
-      links:
-        - title: BGP/VIP with ONTAP 
-          url: networking.html
+#    - title: Networking
+#      links:
+#        - title: BGP/VIP with ONTAP 
+#          url: networking.html
     - title: SAN
       links:
         - title: Best practices for modern SAN in ONTAP
