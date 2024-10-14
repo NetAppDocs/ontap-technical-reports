@@ -12,12 +12,12 @@ summary: "These technical reports provide an overview of applications and databa
 :imagesdir: ./media/
 
 [.lead]
-ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following technical reports provide guidance on NetApp recommended practices and implementation procedures for Microsoft SQL Server, MySQL, Oracle, PostgreSQL and SAP HANA.
+ONTAP is the foundation for data management and data protection for many enterprise application and database technologies. The following technical reports provide guidance on NetApp recommended practices and implementation procedures for Microsoft SQL Server, MySQL, Oracle, PostgreSQL, SAP HANA and Epic.
 
 == Microsoft SQL Server
 SQL Server is the foundation of Microsoft's data platform, delivering mission-critical performance with in-memory technologies and faster insights on any data, whether on the premises or in the cloud.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/mssql-overview.html[Best practice for Microsoft SQL Server with ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/mssql-overview.html[Best practice for Microsoft SQL Server with ONTAP^]
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
 
 [NOTE]
@@ -32,7 +32,7 @@ Learn now to successfully deploy Microsoft SQL Server on ONTAP storage using Sna
 == MySQL
 This document describes the configuration requirements and provides guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/mysql-overview.html[MySQL database on NetApp ONTAP best practices]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/mysql-overview.html[MySQL database on NetApp ONTAP best practices^]
 MySQL and its variants, including MariaDB and Percona, are widely used for many enterprise applications. These applications range from global social networking sites and massive ecommerce systems to SMB hosting systems containing thousands of database instances. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying MySQL on ONTAP.
 
 [NOTE]
@@ -41,16 +41,16 @@ This documentation replaces the previously published technical report _TR-4722: 
 == Oracle
 ONTAP is designed for Oracle databases. For decades, ONTAP has been optimized for the unique demands of relational database I/O and multiple ONTAP features were created specifically to service the needs of Oracle databases and even at the request of Oracle Inc. itself.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html[Oracle databases on ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html[Oracle databases on ONTAP^]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully deploy Oracle on ONTAP storage.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dp-overview.html[Oracle data protection with ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dp-overview.html[Oracle data protection with ONTAP^]
 Learn about the recommended practices that enable storage administrators and database administrators to successfully backup, recover, replicate and provide disaster recovery to Oracle on ONTAP storage.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dr-overview.html[Oracle disaster recovery with ONTAP]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dr-overview.html[Oracle disaster recovery with ONTAP^]
 Learn about the recommended practices, test procedures, and other considerations for operating Oracle databases on a MetroCluster and SnapMirror Business Continuity. 
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-migration-overview.html[Migration of Oracle databases to ONTAP storage systems]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-migration-overview.html[Migration of Oracle databases to ONTAP storage systems^]
 Learn about the overall considerations for planning a migration strategy, the three different levels in which data movement takes place, and details some of the various procedures available.
 
 [NOTE]
@@ -75,13 +75,19 @@ Learn about the solution recommended practices on how to provision, manage, and 
 == PostgreSQL
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multitier applications. NetApp ONTAP is a excellent choice for running PostgreSQL databases do to its reliability, high performing and efficent data management capabilities.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/postgres-overview.html[PostgreSQL database on ONTAP best practices]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/postgres/postgres-overview.html[PostgreSQL database on ONTAP best practices^]
 PostgreSQL comes with variants that include PostgreSQL, PostgreSQL Plus, and EDB Postgres Advanced Server (EPAS). PostgreSQL is typically deployed as the back-end database for multi-tier applications. It is supported by common middleware packages (such as PHP, Java, Python, Tcl/Tk, ODBC, and JDBC) and has historically been a popular choice for open-source database management systems. Learn about the configuration requirements and guidance on tuning and storage configuration for deploying PostgreSQL on ONTAP.
 
 [NOTE]
-This documentation replaces the previously published technical report TR-4770: PostgreSQL database on ONTAP best practices.
+This documentation replaces the previously published technical report _TR-4770: PostgreSQL database on ONTAP best practices_.
 
 == SAP HANA
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/[SAP HANA database solutions on ONTAP^]
 Best practices for configuring, managing and automating SAP solutions can be found on the NetApp SAP Solutions page.
 
-link:https://docs.netapp.com/us-en/netapp-solutions-sap/[SAP HANA database solutions on ONTAP]
+== Epic
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/epic/epic-overview.html[Epic on ONTAP best practices^]
+A guide to understanding the best practices for deploying Epic on premises and in the cloud while meeting configuration standards for proper deployment on ONTAP.
+
+[NOTE]
+This documentation replaces the previously published technical report _TR-3923: NetApp best practices for Epic_.
