@@ -2,7 +2,7 @@ indexpage:
   title: ONTAP Technical Reports
   lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   summary: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
-  keywords: ONTAP 9, ONTAP, Technical Reports, TR, 
+  keywords: ONTAP 9, ONTAP, Technical Reports, TR
   tiles:
     - title: Applications and databases
       links:
@@ -26,8 +26,6 @@ indexpage:
           url: data-protection-disaster-recovery.html
         - title: SnapMirror active sync
           url: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html
-        - title: MetroCluster solution architecture and design
-          url: business-continuity.html
         - title: MetroCluster IP & FC
           url: business-continuity.html
         - title: Additional business continuity technical reports
