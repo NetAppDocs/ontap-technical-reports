@@ -39,3 +39,6 @@ Learn how to configure NetApp Active IQ Unified Manager to help organizations me
 
 link:https://www.netapp.com/pdf.html?item=/media/78941-tr-4945.pdf[TR-4945: Security hardening guide for NetApp Manageability SDK^]
 Learn how to configure NetApp Manageability SDK (NMSDK) to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
+
+link:https://docs.netapp.com/us-en/ontap-metrocluster/tiebreaker/install_security.html[Security hardening guide for MetroCluster Tiebreaker host and database^]
+Learn how to configure the NetApp MetroCluster Tiebreaker host and database to help organizations meet prescribed security objectives for information system confidentiality, integrity, and availability.
