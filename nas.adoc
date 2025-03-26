@@ -35,7 +35,7 @@ link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf[TR-4887: Mult
 Learn how multiprotocol NAS access works in ONTAP and the recommended practices for multiprotocol environments.
 
 == ONTAP S3
-link:https://www.netapp.com/pdf.html?item=/media/17219-tr4814.pdf[TR-4814: S3 in ONTAP best practices^]
+link:https://docs.netapp.com/us-en/ontap/s3-config/index.html[TR-4814: S3 in ONTAP best practices^]
 Learn about recommended practices for using the Amazon Simple Storage Service (S3) with ONTAP software as well as capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for FabricPool.
 
 == Name services
