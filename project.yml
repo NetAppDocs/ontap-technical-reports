@@ -27,6 +27,8 @@ sidebar:
       url: /san.html
     - title: Security
       url: /security.html
+      entries: 
+        - section: ransomware-solutions
     - title: Security hardening guides
       url: /security-hardening-guides.html
     - title: SnapCenter

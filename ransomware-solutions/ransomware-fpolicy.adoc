@@ -6,10 +6,7 @@ summary: "NetApp's ransomware protection includes FPolicy, which blocks unwanted
 ---
 = FPolicy file blocking
 
-:hardbreaks:
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
@@ -38,7 +35,7 @@ FPolicy external mode can also be configured to wait for approval from the FPoli
 [WARNING]
 FPolicy servers must be responsive to FPolicy requests if configured to provide approval; otherwise, storage system performance might be negatively impacted.
 
-FPolicy external mode is included in link:../system-admin/manage-licenses-concept.html[all ONTAP licenses]. 
+FPolicy external mode is included in link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[all ONTAP licenses^]. 
 
 .Learn more
 

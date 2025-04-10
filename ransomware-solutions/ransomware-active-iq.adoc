@@ -6,10 +6,7 @@ summary: "NetApp's ransomware protection includes Digital Advisor, a digital adv
 ---
 = Digital Advisor ransomware protection
 
-:hardbreaks:
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

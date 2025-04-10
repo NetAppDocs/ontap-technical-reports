@@ -6,10 +6,7 @@ summary: "NetApp's ransomware protection includes cyber vaulting with air-gapped
 ---
 = Air-gapped WORM protection with cyber vaulting in ONTAP
 
-:hardbreaks:
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
@@ -38,7 +35,7 @@ The major difference between SnapLock Compliance and tamperproof snapshots is th
 
 .Learn more
 
-* link:../snaplock/snapshot-lock-concept.html[Lock a snapshot for protection against ransomware attacks]
+* link:https://docs.netapp.com/us-en/ontap//snaplock/snapshot-lock-concept.html[Lock a snapshot for protection against ransomware attacks^]
 
 
 // 2025 Jan 22, ONTAPDOC-1070

@@ -6,10 +6,7 @@ summary: "NetApp's ransomware protection includes real-time AI-based detection a
 ---
 = NetApp ONTAP built-in on-box AI-based detection and response
 
-:hardbreaks:
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
@@ -27,11 +24,11 @@ If abnormal activity is detected, an automatic snapshot is immediately taken, wh
 
 If the activity is an expected workload, administrators can easily mark it as a false positive. ARP learns this change as normal workload activity and no longer flags it as a potential attack going forward. 
 
-To enable ARP, an link:../system-admin/manage-licenses-concept.html[ONTAP One] license is required.
+To enable ARP, an link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[ONTAP One^] license is required.
 
 .Learn more 
 
-* link:../anti-ransomware/index.html[Autonomous Ransomware Protection]
+* link:https://docs.netapp.com/us-en/ontap/anti-ransomware/index.html[Autonomous Ransomware Protection^]
 
 == Autonomous Ransomware Protection/AI (ARP/AI)
 
@@ -39,7 +36,7 @@ Introduced as a tech preview in ONTAP 9.15.1, ARP/AI takes NAS storage systems o
 
 Because training the models continuously happens in the cloud, ARP/AI does not require a learning mode. It is active the moment it is turned on. Continuous training also means that ARP/AI is always validated against new ransomware attack types as they arise. ARP/AI also comes with auto-update capabilities that deliver new parameters to all customers to keep ransomware detection up to date. All other detection, insight, and data recovery point capabilities of ARP are maintained for ARP/AI.
 
-To enable ARP/AI, an link:../system-admin/manage-licenses-concept.html[ONTAP One] license is required.
+To enable ARP/AI, an link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[ONTAP One^] license is required.
 
 .Learn more
 

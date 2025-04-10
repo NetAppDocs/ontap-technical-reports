@@ -6,10 +6,7 @@ summary: "NetApp's ransomware protection includes Storage Workload Security, whi
 ---
 = Cloud Insights Storage Workload Security (CISWS)
 
-:hardbreaks:
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
