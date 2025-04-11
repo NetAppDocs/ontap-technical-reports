@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, certificate status, certific
 summary: "Online Certificate Status Protocol (OCSP) enables ONTAP applications that use TLS communications, such as LDAP or TLS, to receive digital certificate status when OCSP is enabled."
 ---
 = Online certificate status protocol
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

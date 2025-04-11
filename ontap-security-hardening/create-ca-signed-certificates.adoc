@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, self-signed, digital certifi
 summary: "Create a CA-signed digital certificate for use in authenticating the cluster or SVM as an SSL server."
 ---
 = Create a CA-signed digital certificate
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

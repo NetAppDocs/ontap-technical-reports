@@ -29,10 +29,14 @@ sidebar:
       url: /security.html
       entries: 
         - section: ransomware-solutions
+        - section: zero-trust
+        - section: abac
     - title: Security hardening guides
       url: /security-hardening-guides.html
+      entries: 
+        - section: ontap-security-hardening
     - title: SnapCenter
-      url: /snapcenter.html      
+      url: /snapcenter.html
     - title: Tiering
       url: /tiering.html
     - title: Virtualization

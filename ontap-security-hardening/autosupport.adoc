@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, proactively monitor, NetApp 
 summary: "The AutoSupport feature of ONTAP allows you to proactively monitor the health of your system."
 ---
 = NetApp AutoSupport
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

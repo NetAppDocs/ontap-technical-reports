@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, queries, LDAP server, none, 
 summary: "Lightweight Directory Access Protocol signing and sealing enable session security on queries to an LDAP server."
 ---
 = Enable Lightweight Directory Access Protocol signing and sealing
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, time synchronize, NTP servers, symmetr
 summary: "You must configure the Network Time Protocol (NTP) servers to synchronize the cluster time with at least three external NTP servers."
 ---
 = Network Time Protocol
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
@@ -19,6 +17,6 @@ Beginning with ONTAP 9.5, you can configure your NTP server with symmetric authe
 
 You can associate a maximum of 10 external NTP servers by using the `cluster time-service ntp server create` command. For redundancy and quality of time service, you should associate at least three external NTP servers with the cluster.
 
-For details about the configuration of NTP in ONTAP, see link:../system-admin/manage-cluster-time-concept.html[Managing the cluster time (cluster administrators only)].
+For details about the configuration of NTP in ONTAP, see link:https://docs.netapp.com/us-en/ontap/system-admin/manage-cluster-time-concept.html[Managing the cluster time (cluster administrators only)^].
 
 //6-24-24 ontapdoc-1938

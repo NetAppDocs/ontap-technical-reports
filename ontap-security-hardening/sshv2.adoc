@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, security ssh modify, SSH key
 summary: "Replace existing configurations of SSH key exchange algorithms, ciphers, or MAC algorithms for the cluster or an SVM with configuration settings you specify."
 ---
 = SSHv2 management
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

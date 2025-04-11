@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, image validation, software validation,
 summary: "ONTAP image validation"
 ---
 = ONTAP image validation
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

@@ -16,7 +16,7 @@ With the FabricPool data tiering solution, an enterprise's overall user experien
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[ONTAP FabricPool] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html[ONTAP FabricPool^] product documentation.
 ====
 
 link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf[TR-4598: FabricPool best practices^]

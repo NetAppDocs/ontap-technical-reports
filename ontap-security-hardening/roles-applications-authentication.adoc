@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, RBAC, roles, role, based acc
 summary: "Roles, applications, and authentication"
 ---
 = ONTAP roles, applications, and authentication
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

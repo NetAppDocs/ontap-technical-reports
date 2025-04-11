@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, export policy, client ip add
 summary: "ONTAP uses the export policy feature to limit NFS volume access to clients that match specific parameters."
 ---
 = NFS securing
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

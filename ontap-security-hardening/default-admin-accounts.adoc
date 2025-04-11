@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, RBAC, roles, restrict access
 summary: "Restricting access considerations for admin and diag accounts"
 ---
 = Default administrative accounts
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

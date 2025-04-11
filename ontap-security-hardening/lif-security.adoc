@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, Data LIF, Cluster LIF, Node management
 summary: "Understand the security characteristics of each LIF role."
 ---
 = Security characteristics of LIF roles in ONTAP
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
@@ -40,6 +38,6 @@ LIF roles can be the following:
 * LIF roles should never be exposed to the internet.
 ====
 
-Learn more about securing LIFs, see the link:../networking/configure_firewall_policies_for_lifs.html[Configure firewall policies for LIFs].
+Learn more about securing LIFs, see the link:https://docs.netapp.com/us-en/ontap/networking/configure_firewall_policies_for_lifs.html[Configure firewall policies for LIFs^].
 
 //6-24-24 ontapdoc-1938

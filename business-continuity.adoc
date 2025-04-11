@@ -16,7 +16,7 @@ NetApp offers a wide range of solutions that rationalize where applications and 
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/smbc/index.html[ONTAP SnapMirror active sync] and link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[ONTAP MetroCluster] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/smbc/index.html[ONTAP SnapMirror active sync^] and link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html[ONTAP MetroCluster] product documentation.
 ====
 
 == SnapMirror active sync (formerly SM-BC)

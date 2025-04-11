@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, threats, threat landscape, h
 summary: "Use this guidance for ONTAP to help your organization meet prescribed security objectives for information system confidentiality, integrity, and availability."
 ---
 = ONTAP security hardening overview
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

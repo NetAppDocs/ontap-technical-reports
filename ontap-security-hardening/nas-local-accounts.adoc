@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, CIFS workgroup, local users 
 summary: "CIFS server in a workgroup with CIFS clients that authenticate to the server by using locally defined users and groups."
 ---
 = NAS file system local accounts (CIFS workgroup)
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

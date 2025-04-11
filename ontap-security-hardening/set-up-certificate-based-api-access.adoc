@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, access, certificate, certifi
 summary: "Set up mandatory certificate-based authentication for REST API or NetApp Manageability SDK API access to ONTAP instead of user ID and password authentication."
 ---
 = Set up certificate-based API access
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

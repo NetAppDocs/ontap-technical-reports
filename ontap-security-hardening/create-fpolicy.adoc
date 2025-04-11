@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, native, external server, fil
 summary: "To provide visibility and access control for files, the ONTAP solution uses the NetApp FPolicy feature."
 ---
 = Create and use a NetApp FPolicy
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

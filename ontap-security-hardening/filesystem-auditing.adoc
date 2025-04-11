@@ -5,9 +5,7 @@ keywords: tr-4569, ontap hardening guide, security, vserver audit create, file, 
 summary: "You must enable CIFS auditing to generate auditing events. Use the 'vserver audit create' command to create an audit configuration."
 ---
 = NAS file system auditing
-:hardbreaks:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/
 
 [.lead]
