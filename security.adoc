@@ -24,14 +24,14 @@ link:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vaul
 NetApp's ONTAP based cyber vault provides organizations with a comprehensive and flexible solution for protecting their most critical data assets. By leveraging logical air-gapping with robust hardening methodologies, ONTAP enables you to create secure, isolated storage environments that are resilient against evolving cyber threats. With ONTAP, you can ensure the confidentiality, integrity, and availability of your data while maintaining the agility and efficiency of your storage infrastructure.
 
 == Ransomware
-link:../ransomware-solutions/ransomware-overview.html[TR-4572: The NetApp solution for ransomware]
+link:./ransomware-solutions/ransomware-overview.html[TR-4572: The NetApp solution for ransomware]
 Learn how ransomware has evolved; and how to identify attacks, prevent the spread, and recover as quickly as possible using the NetApp solution for ransomware. The guidance and solutions provided in this document are designed to help organizations have cyber-resilient solutions while meeting their prescribed security objectives for information system confidentiality, integrity, and availability.
 
 link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf[TR-4526: Compliant WORM storage using NetApp SnapLock^]
 Many businesses rely on some use of write once, read many (WORM) data storage to meet regulatory compliance requirements or simply to add another layer to their data protection strategy. Learn how to integrate SnapLock, the WORM solution in ONTAP, into environments that require WORM data storage.
 
 == Zero Trust
-link:../zero-trust/zero-trust-overview.html[NetApp and Zero Trust]
+link:./zero-trust/zero-trust-overview.html[NetApp and Zero Trust]
 Zero Trust traditionally has been a network-centric approach of architecting micro core and perimeter (MCAP) to protect data, services, applications, or assets with controls known as a segmentation gateway. ONTAP takes a data-centric approach to Zero Trust in which the storage management system becomes the segmentation gateway to protect and monitor access of our customer's data. In particular, the FPolicy Zero Trust engine and the FPolicy partner ecosystem becomes a control center to gain a detailed understanding of normal and aberrant data access patterns and identify insider threats.
 
 == Multifactor authentication
@@ -55,5 +55,5 @@ link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401.pdf[TR-4401: PCI-D
 Learn how to validate a system against the PCI DSS 4.0 standard and meet the requirements of the controls that you apply to a NetApp ONTAP system.
 
 == Attribute-based access control
-link:../abac/abac-overview.html[Attribute-based access control with ONTAP]
+link:./abac/abac-overview.html[Attribute-based access control with ONTAP]
 Learn how to configure NFSv4.2 security labels and extended attributes (xattrs) to support role-based access control (RBAC) and attribute-based access control (ABAC), an authorization strategy that defines permissions based on user, resource, and environmental attributes.

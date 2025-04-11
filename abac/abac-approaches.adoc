@@ -248,7 +248,7 @@ UID="jrsmith" GID="jrsmith" EUID="jrsmith" SUID="jrsmith"
 FSUID="jrsmith" EGID="jrsmith" SGID="jrsmith" FSGID="jrsmith"
 ----
 
-Enabling link:../nas-audit/two-parts-fpolicy-solution-concept.html[ONTAP FPolicy] for users working with xattrs provides a layer of visibility and control that is essential for maintaining the integrity and security of the file system. By leveraging FPolicy's advanced monitoring capabilities, organizations can ensure that all changes to xattrs are tracked, audited, and aligned with their security and compliance standards. This proactive approach to file system management is why enabling ONTAP FPolicy is highly recommended for any organization looking to enhance its data governance and protection strategies.
+Enabling link:https://docs.netapp.com/us-en/ontap/nas-audit/two-parts-fpolicy-solution-concept.html[ONTAP FPolicy^] for users working with xattrs provides a layer of visibility and control that is essential for maintaining the integrity and security of the file system. By leveraging FPolicy's advanced monitoring capabilities, organizations can ensure that all changes to xattrs are tracked, audited, and aligned with their security and compliance standards. This proactive approach to file system management is why enabling ONTAP FPolicy is highly recommended for any organization looking to enhance its data governance and protection strategies.
 
 == Examples of controlling access to data
 
