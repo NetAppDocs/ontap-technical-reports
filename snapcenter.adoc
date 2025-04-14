@@ -1,10 +1,10 @@
 ---
+permalink: snapcenter.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
-permalink: snapcenter.html
 summary: "These technical reports provide an overview of the SnapCenter with NetApp ONTAP as well as recommended practices."
 ---
-= SnapCenter technical reports
+= ONTAP SnapCenter technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

@@ -1,10 +1,10 @@
 ---
+permalink: data-protection-disaster-recovery.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
-permalink: data-protection-disaster-recovery.html
 summary: "These technical reports provide an overview of the data protection and disaster recovery in ONTAP as well as recommended practices"
 ---
-= Data protection and disaster recovery technical reports
+= ONTAP data protection and disaster recovery technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

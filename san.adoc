@@ -1,10 +1,10 @@
 ---
+permalink: san.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, SAN, NVMe, NVMeoF, NVMeoTCP, NVMeoFC, iSCSI, fibre channel, fiber channel, igroups, namespaces, namespace, LUN, subsystem, best practices, best-practices
-permalink: san.html
 summary: "These technical reports provide an overview of the block protocols in ONTAP as well as recommended practices."
 ---
-= SAN technical reports
+= ONTAP SAN technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary: "These technical reports provide an overview of the block protocols in 
 :imagesdir: ./media/
 
 [.lead]
-ONTAP SAN storage delivers a simplified SAN experience that provides high availability for your organization’s mission-critical databases and other SAN workloads. With best-in-class data services integration with Oracle, SAP, and Microsoft SQL Server databases, plus VMware and other leading hypervisors, ONTAP SAN delivers accelerated time-to-value for enterprise database applications.
+ONTAP SAN storage delivers a simplified SAN experience that provides high availability for your organization's mission-critical databases and other SAN workloads. With best-in-class data services integration with Oracle, SAP, and Microsoft SQL Server databases, plus VMware and other leading hypervisors, ONTAP SAN delivers accelerated time-to-value for enterprise database applications.
 
 [NOTE]
 ====

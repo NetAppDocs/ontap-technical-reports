@@ -1,10 +1,10 @@
 ---
-sidebar: sidebar
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MAV, MFA, Ransomware, Security, best practices, best-practices, tamperproof, tamper proof, tamperproof snapshots tamper-proof snapshots
 permalink: security.html
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MAV, MFA, Ransomware, Security, best practices, best-practices, tamperproof, tamper proof, tamperproof snapshots tamper-proof snapshots
+sidebar: sidebar
 summary: "These technical reports provide an overview of the security in NetApp ONTAP as well as recommended practices."
 ---
-= Security technical reports
+= ONTAP security technical reports
 :hardbreaks:
 :nofooter:
 :icons: font

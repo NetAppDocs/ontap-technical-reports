@@ -1,7 +1,7 @@
 ---
+permalink: business-continuity.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices, SM-BC, SnapMirror Business Continuity 
-permalink: business-continuity.html
 summary: "These technical reports provide an overview of the business continuity in NetApp ONTAP as well as recommended practices"
 ---
 = Business continuity technical reports
