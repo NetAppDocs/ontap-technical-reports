@@ -1,10 +1,10 @@
 ---
+permalink: storage-efficiency.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
-permalink: storage-efficiency.html
 summary: "These technical reports provide an overview of the storage efficiency in NetApp ONTAP as well as recommended practices."
 ---
-= Storage efficiency technical reports
+= ONTAP storage efficiency technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -16,8 +16,8 @@ ONTAP provides a comprehensive portfolio of storage efficiency capabilities. Inl
 
 [NOTE]
 ====
-Procedural documentation for deduplication can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html[deduplication documentation]
-Procedural documentation for compression can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html[compression documentation]
-Procedural documentation for temperature sensitive storage efficiency can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html[temperature sensitive storage efficiency documentation]
-Procedural documentation for compaction can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html[compaction documentation]
+Procedural documentation for deduplication can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html[deduplication documentation^]
+Procedural documentation for compression can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html[compression documentation^]
+Procedural documentation for temperature sensitive storage efficiency can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html[temperature sensitive storage efficiency documentation^]
+Procedural documentation for compaction can be found at link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html[compaction documentation^]
 ====

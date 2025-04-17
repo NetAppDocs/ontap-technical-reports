@@ -26,11 +26,19 @@ sidebar:
     - title: SAN
       url: /san.html
     - title: Security
-      url: /security.html
-    - title: Security hardening guides
-      url: /security-hardening-guides.html
+      entries:
+        - title: Overview
+          url: /security.html
+        - section: ransomware-solutions
+        - section: zero-trust
+        - section: abac
+    - title: Security hardening
+      entries:
+        - title: Overview
+          url: /security-hardening-guides.html
+        - section: ontap-security-hardening
     - title: SnapCenter
-      url: /snapcenter.html      
+      url: /snapcenter.html
     - title: Tiering
       url: /tiering.html
     - title: Virtualization
