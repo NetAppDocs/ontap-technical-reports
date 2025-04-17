@@ -1,10 +1,10 @@
 ---
+permalink: networking.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices
-permalink: networking.html
 summary: "These technical reports provide an overview of the networking in NetApp ONTAP as well as recommended practices."
 ---
-= Networking technical reports
+= ONTAP networking technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -16,7 +16,7 @@ ONTAP provides a variety of different networking capabilities and configurations
 
 [NOTE]
 ====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/network-management/index.html[ONTAP network management] product documentation.
+These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/network-management/index.html[ONTAP network management^] product documentation.
 ====
 
 link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the data center^]
