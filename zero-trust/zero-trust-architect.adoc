@@ -85,7 +85,7 @@ Each day, there are new requirements for mitigating storage-system risks and inf
 
 NVE also provides a capability called https://blog.netapp.com/flash-memory-summit-award/[secure purge^] that cryptographically removes toxic data from data spills when sensitive files are written to a non-classified volume.
 
-Either the link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/support-storage-encryption-concept.html[Onboard Key Manager (OKM)], which is the key manager built into ONTAP, or https://mysupport.netapp.com/matrix/imt.jsp?components=69551;&solution=1156&isHWU&src=IMT[approved^] third-party link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/support-storage-encryption-concept.html[external key managers^] can be used with NSE and NVE to securely store keying material.
+Either the link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/support-storage-encryption-concept.html[Onboard Key Manager (OKM)^], which is the key manager built into ONTAP, or https://mysupport.netapp.com/matrix/imt.jsp?components=69551;&solution=1156&isHWU&src=IMT[approved^] third-party link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/support-storage-encryption-concept.html[external key managers^] can be used with NSE and NVE to securely store keying material.
 
 image:zero-trust-two-layer-encryption-solution-aff-fas.png[Two-layer encryption solution for AFF and FAS flow diagram]
 
