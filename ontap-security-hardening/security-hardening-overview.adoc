@@ -13,6 +13,6 @@ ONTAP provides a set of controls that allow you to harden the ONTAP storage oper
 
 The evolution of the current threat landscape presents an organization with unique challenges for protecting its most valuable assets: data and information. The advanced and dynamic threats and vulnerabilities we face are ever increasing in sophistication. Coupled with an increase in the effectiveness of obfuscation and reconnaissance techniques on the part of potential intruders, system managers must address the security of data and information proactively.
 
-NOTE: Beginning in July 2024, content from technical reports previously published as PDFs has been integrated with ONTAP product documentation. The ONTAP security documentation now includes content from _TR-4569: Security hardening guide for ONTAP_. 
+NOTE: Beginning in July 2024, content from the technical report _TR-4569: Security hardening guide for ONTAP_, which was previously published as a PDF, is available on docs.netapp.com. 
 
 //6-24-24 ontapdoc-1938

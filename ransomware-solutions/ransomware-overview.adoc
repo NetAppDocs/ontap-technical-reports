@@ -16,7 +16,7 @@ Organizations must look across their entire security posture from perimeter, net
 
 The <<NetApp's ransomware protection portfolio,NetApp product portfolio>> provides various effective tools for visibility, detection, and remediation, helping you to spot ransomware early, prevent spread, and recover quickly, if necessary, to avoid costly downtime. Traditional layered defense solutions remain prevalent, as do third parties and partner solutions for visibility and detection. Effective remediation remains a crucial part of the response to any threat. The unique industry approach leveraging immutable NetApp Snapshot technology and SnapLock logical air gap solution is an industry differentiator and the industry best practice for ransomware remediation capabilities.
 
-NOTE: Beginning in July 2024, content from the technical report _TR-4572: NetApp Ransomware Protection_, which was previously published as a PDF, has been integrated with the rest of the ONTAP product documentation. 
+NOTE: Beginning in July 2024, content from the technical report _TR-4572: NetApp Ransomware Protection_, which was previously published as a PDF, is available on docs.netapp.com.
 
 == Data is the primary target
 Cybercriminals increasingly target data directly, recognizing its value. While perimeter, network, and application security are important, they can be bypassed. Focusing on protecting data at its source, the storage layer, provides a critical last line of defense. Gaining access to production data and encrypting or rendering it inaccessible is the objective of ransomware attacks. To get there, attackers must have already pierced existing defenses deployed by organizations today, from perimeter to application security.
