@@ -1,5 +1,5 @@
 section: ontap-security-hardening
-title: ONTAP hardening guidelines
+title: ONTAP security hardening guidelines
 entries:
   - title: ONTAP security hardening overview
     url: /ontap-security-hardening/security-hardening-overview.html
