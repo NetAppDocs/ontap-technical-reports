@@ -1,5 +1,5 @@
 section: zero-trust
-title: Enable Zero Trust model
+title: NetApp and Zero Trust
 entries:
   - title: Zero Trust overview
     url: "/zero-trust/zero-trust-overview.html"
