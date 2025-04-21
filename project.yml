@@ -2,9 +2,9 @@ settings:
   name: "ONTAP Technical Reports"
   search: ontap-technical-reports, ontap-apps-dbs, netapp-solutions-sap
   internal:
-    pdf_enabled: false
+    pdf_enabled: true
   prod:
-    pdf_enabled: false
+    pdf_enabled: true
     harmony_enabled: true
 
 sidebar:
