@@ -63,7 +63,7 @@ NetApp's ransomware protection offers peace of mind in an ever-evolving threat l
 
 .Learn about other protection options
 * link:ransomware-active-iq.html[Digital Advisor ransomware protection]
-* link:ransomware-CI-workload-security.html[Cloud Insights Storage Workload Security (CISWS)]
+* link:ransomware-DII-workload-security.html[Data Infrastructure Insights Storage Workload Security]
 * link:ransomware-fpolicy.html[FPolicy]
 * link:ransomware-snaplock-tamperproof-snapshots.html[SnapLock and tamperproof snapshots]
 
@@ -82,3 +82,4 @@ NetApp offers a guarantee to restore snapshot data if a ransomware attack occurs
 * https://security.netapp.com/resources/[NetApp product security^]
 
 // 2024-8-21 ontapdoc-1811
+// 2025-8-13 Issue 52/53
