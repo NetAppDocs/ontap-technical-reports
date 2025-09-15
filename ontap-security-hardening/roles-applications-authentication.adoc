@@ -135,7 +135,7 @@ a|
 `vsadmin-volume`
 a|
 * Manage own user account local password and key information
-* Manage volumes, including volume moves
+* Manage volumes, except volume moves
 * Manage quotas, qtrees, snapshots, and files
 * Manage LUNs
 * Configure protocols: NFS, SMB, iSCSI, FC, FCoE, NVMe/FC and NVMe/TCP
