@@ -38,8 +38,9 @@ LIF roles can be the following:
 * LIF roles should never be exposed to the internet.
 ====
 
-To learn more about securing LIFs, see the link:https://docs.netapp.com/us-en/ontap/networking/configure_firewall_policies_for_lifs.html[Configure firewall policies for LIFs^]. This page also provides detail about LIF service policies beginning with ONTAP 9.10.1.
-To learn more about how to create a new service policy, see link:https://docs.netapp.com/us-en/ontap-cli/network-interface-service-policy-create.html[network interface service-policy create^]
+To learn more about securing LIFs, see link:https://docs.netapp.com/us-en/ontap/networking/configure_firewall_policies_for_lifs.html[Configure firewall policies for LIFs^]. This page also provides detail about LIF service policies beginning with ONTAP 9.10.1.
+
+To learn more about how to create a new service policy, see link:https://docs.netapp.com/us-en/ontap-cli/network-interface-service-policy-create.html[the`network interface service-policy create` command in the Command Reference.^]
 
 //6-24-24 ontapdoc-1938
 // 2025-11-18, GitHub issue 1658
