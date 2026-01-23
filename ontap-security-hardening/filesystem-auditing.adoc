@@ -11,7 +11,7 @@ summary: "You must enable CIFS auditing to generate auditing events. Use the 'vs
 [.lead]
 NAS file systems occupy an increased footprint in today's threat landscape, audit functions are critical to support visibility.
 
-Security requires validation. ONTAP 9 provides increased auditing events and details across the solution. Because NAS file systems occupy an increased footprint in today's threat landscape, audit functions are critical to support visibility. Because of the improved audit capability in ONTAP 9, CIFS audit details are more plentiful than ever. Key details, including the following, are logged with events created:
+Security requires validation. ONTAP provides increased auditing events and details across the solution. Because NAS file systems occupy an increased footprint in today's threat landscape, audit functions are critical to support visibility. Because of the improved audit capability in ONTAP, CIFS audit details are more plentiful than ever. Key details, including the following, are logged with events created:
 
 * File, folder, and share access
 * Files created, modified, or deleted
@@ -47,6 +47,8 @@ ONTAP includes the ability for administrator accounts to access and manipulate S
 
 You can prevent ONTAP administrators from using REST APIs for file access by creating a REST API role that does not have access to ONTAP volumes via REST. To provision this role, complete the following steps.
 
+NOTE: The /api/storage/volumes REST API is used for more then just file access.  It is used by System Manager, and other GUI interfaces to create, view, and modify volumes.
+
 .Steps
 
 . Create a new REST role that has no access to storage volumes but has all other REST API access.
@@ -64,4 +66,5 @@ cluster1::> security login modify -user-or-group-name user1 -application http -a
 
 NOTE: If you want to prevent the built-in ONTAP cluster administrator account from using REST APIs for file access, you need to first link:../ontap-security-hardening/default-admin-accounts.html[create a new administrator account and disable or delete the built-in account].
 
+//1-23-2026 issue 22
 //6-24-24 ontapdoc-1938
