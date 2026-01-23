@@ -15,9 +15,9 @@ There are two default administrative accounts: `admin` and `diag`.
 
 Orphaned accounts are a major security vector that often leads to vulnerabilities, including the escalation of privileges. These are unnecessary and unused accounts that remain in the user account repository. They are primarily default accounts that were never used or for which passwords were never updated or changed. To address this issue, ONTAP supports the removal and renaming of accounts.
 
-NOTE: ONTAP cannot remove or rename built-in accounts. However, NetApp recommends locking any unneeded built-in accounts with the lock command.
+NOTE: You cannot remove or rename built-in accounts. If an administrator removes the account, upon reboot, the built-in account will be recreated. *NetApp recommends* locking any unneeded built-in accounts with the lock command.
 
-Although orphaned accounts are a significant security issue, NetApp strongly recommends testing the effect of removing accounts from the local account repository.
+Although orphaned accounts are a significant security issue, *NetApp strongly recommends* testing the effect of removing accounts from the local account repository.
 
 == List local accounts
 
@@ -26,7 +26,7 @@ To list the local accounts, run the `security login show` command.
 ----
 cluster1::*> security login show -vserver cluster1
 
-Vserver: cluster1
+vserver: cluster1
                              Authentication             Acct   Is-Nsswitch
 User/Group Name  Application Method    Role Name        Locked Group
 ---------------- ----------- --------- ---------------- ------ -----------
