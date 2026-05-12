@@ -1,0 +1,228 @@
+---
+sidebar: sidebar
+permalink: afx-architecture-overview.html
+keywords: architecture, disaggregated, unified, afx, differences
+summary: "Compare unified ONTAP and AFX architectures to understand the key structural differences that enable disaggregated design."
+---
+
+= NetApp AFX architecture overview
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+Unified ONTAP clusters present file, block, and object storage via directly connected HA pairs that own their own sets of disks and manage capacity through physical aggregates. NetApp AFX removes the concept of disk ownership and physical aggregates, instead presenting all disks through a shared Storage Availability Zone accessible to all nodes. Understanding these architectural differences helps you design, manage, and optimize AFX clusters for maximum performance and scalability.
+
+== Unified ONTAP architecture overview
+
+The following diagram shows the general architecture of unified ONTAP, with a description of how it all fits together below it.
+
+.Figure 1) General ONTAP architecture
+image::image3.png[General ONTAP architecture]
+
+Some key aspects of the ONTAP architecture:
+
+* File, object, and block support
+* Protocols are served via a front-end client data network
+* Multiple independent nodes can be clustered together
+* Each node can provide independent floating IP addresses for data and management use cases
+* Clustered nodes connect to a NetApp-provided backend switch over a cluster VLAN
+* Nodes are presented as HA pairs to provide resiliency in case of hardware or power outages
+* HA pairs have directly connected NVRAM cards that replicate to protect writes
+* Each node is assigned at least one aggregate and owns a subset of the total number of disks
+* In failovers, a node's disks get reassigned to the HA partner (and only the HA partner)
+* Disk shelves are usually directly attached to nodes via multipath cabling, but higher end systems introduce the concept of storage networks on the same backend cluster switch
+* Volumes (FlexVols and FlexGroup volumes) provide the entry points to the storage for data access
+
+== Key differences in AFX architecture
+
+Above, we showed a general picture of how unified ONTAP architecture delivers file, object, and block data storage via directly connected HA pairs that own their own sets of disks and present physical capacity via aggregates of disks. This section discusses some of the major differences between unified ONTAP and NetApp AFX architectures in further detail.
+
+=== How to tell if a system is running NetApp AFX
+
+The main way to see if your system is running NetApp AFX is to run the following command:
+
+[subs="normal"]
+....
+AFX::> node show -fields personality
+node             personality
+---------------- -----------
+afx-01           AFX
+afx-02           AFX
+....
+
+Another clue is the new Storage Availability Zone, but that is also a concept available to NetApp All-SAN Arrays (ASA). You can see your capacity via that command.
+
+....
+AFX::> storage availability-zone show
+                     Availability Zone Name: storage_availability_zone_0
+                     Availability Zone UUID: 545cb59f-32e9-11f1-a2f5-d039eabdd925
+                                 Total Size: 69.59TB
+                              Physical Used: 837.1GB
+                      Physical Used Percent: 1%
+                                  Available: 68.77TB
+                              Metadata Used: 837.1GB
+                  Log and Recovery Metadata: 834.6GB
+                              Delayed Frees: 2.50GB
+ Physical User Data Without Snapshot Copies: 17.24MB
+  Logical User Data Without Snapshot Copies: 17.24MB
+   Efficiency Ratio Without Snapshot Copies: 1.00:1
+                 Space Full Threshold Percent: 98%
+        Space Nearly Full Threshold Percent: 95%
+....
+
+=== Node-to-disk relationships
+
+In the unified ONTAP architecture, reads and writes get directed to a specific subset of disks. So even if you have 24 shelves of disks in a 24-node cluster (one shelf per node), at any given time each node can only directly access one shelf of disks, which limits the capacity and performance available in the cluster.
+
+.Figure 3) Unified ONTAP cluster disk access
+image::image5.png[Unified ONTAP cluster disk access]
+
+In addition, because NVRAM is directly connected between HA pairs, nodes must physically reside next to one another and are more tightly coupled as failover targets. For instance, when one node fails over to its partner node, the only disks it physically has access to are the disks in the HA pair domain.
+
+.Figure 4) Unified ONTAP cluster during HA failover
+image::image6.png[Unified ONTAP cluster during HA failover]
+
+In NetApp AFX, there are some major shifts in how disks are presented to compute nodes.
+
+=== All disks are visible to all storage nodes—no disk ownership
+
+In NetApp AFX, nodes and shelves are all connected to the same backend switch, which makes it possible for ONTAP to extend the overall visibility domain for disks to the entire stack. As a result, no nodes own any specific disks. Rather, all disks participate in a single capacity pool called a Storage Availability Zone, which provides simpler capacity management and increased performance potential (more available disks means more available performance).
+
+.Figure 5) NetApp AFX Storage Availability Zone
+image::image7.png[NetApp AFX Storage Availability Zone]
+
+=== No more physical aggregates
+
+Unified ONTAP collects disks into RAID groups and then combines them into a capacity construct known as an aggregate. This aggregate is how physical capacity is presented to the storage and is the boundary of space available for creating volumes to serve data to end users. Every node must have at least one aggregate assigned to it and these aggregates have a current limit of 800TB. Once that limit is reached, there is no more space available for additional writes.
+
+Physical aggregates can also present some capacity management challenges, as storage admins will sometimes need to manually shuffle volumes around to keep a balance of capacity across cluster nodes. These challenges can also become magnified when leveraging a scale-out volume architecture (such as a FlexGroup volume). Aggregates can also vary in size, disk counts, disk types, etc., which can also creates some performance differences as you traverse nodes.
+
+.Figure 6) Aggregates in unified ONTAP
+image::image8.png[Aggregates in unified ONTAP]
+
+NetApp AFX takes the concept of a physical aggregate and virtualizes it, makes it ONTAP-managed, and then moves physical capacity management from a per-node methodology to per-cluster via the new Storage Availability Zone. This single pool of capacity provides a "what you see is what you get" approach to space management.
+
+.Figure 7) NetApp AFX Storage Availability Zone
+image::image9.png[NetApp AFX Storage Availability Zone]
+
+=== NVRAM moved from direct connection to switched replication
+
+ONTAP uses NVRAM as a staging to protect incoming writes to a cluster. Each node in an ONTAP cluster has a battery-backed NVRAM card. When a write is sent to a volume from a client, it is stored in NVRAM first. NVRAM contents are then flushed to disk when the NVRAM is filled or when a 10s timer expires (whichever comes first). This is known as a consistency point.
+
+The NVRAM contents are also constantly replicating between HA pairs, which further helps protect data consistency, because in the event of a node failure, the NVRAM contents will be preserved on the surviving node and be committed to disk.
+
+In unified ONTAP clusters, the NVRAM cards between HA pairs are connected directly to one another. NetApp AFX moves NVRAM replication to the backend cluster network. As a result, HA partner nodes don't have such a strict distance requirement for nodes. Instead, HA pairs can be separated up to the maximum distance of ethernet.
+
+.Figure 8) NetApp AFX NVRAM replication
+image::image10.png[NetApp AFX NVRAM replication]
+
+=== Data written to any and all disks in the availability zone
+
+NetApp AFX removes the concept of disk ownership and moves the physical aggregate construct to a virtualized approach managed by ONTAP, where the capacity purchased for the cluster is all available to the nodes attached to the cluster. With AFX, all nodes have the ability to write to any and all disks in the Storage Availability Zone, regardless of what the node:volume ownership is. Nodes still have a concept of volume ownership since writes still have a path through the NVRAM, but that data can land anywhere in the available capacity. This means that a higher number of disks can participate in a single workload, which provides performance benefits.
+
+.Figure 9) How data lands in a Storage Availability Zone
+image::image11.png[How data lands in a Storage Availability Zone]
+
+=== Independent scale of capacity and compute nodes
+
+With hardware resources decoupled in the NetApp AFX architecture, nodes no longer require associated disks to be added alongside one another. When a cluster is running low on performance-related resources such as RAM, CPU, or network throughput, only storage nodes need to be added to the cluster and can leverage the existing Storage Availability Zone. Conversely, if the requirement is capacity, only shelves would need to be added to the mix. This flexibility ensures that you only buy the resources you will need, thus avoiding overprovisioning.
+
+.Figure 10) NetApp AFX – Independent scale
+image::image12.png[NetApp AFX – Independent scale]
+
+=== Linear scaling of node performance
+
+As nodes are added to an AFX cluster, more CPU, RAM, and network resources are introduced into the workload. As these resources are incorporated into the environment, performance increases are linear in nature. The graphic below shows how that performance would increase as nodes are added.
+
+.Figure 11) Linear performance increases with NetApp AFX node additions
+image::image13.png[Linear performance increases with NetApp AFX node additions]
+
+=== Larger RAID groups, fewer parity drives
+
+ONTAP provides a blend of data protection and performance for disks via RAID groups – specifically RAID-TEC, which offers triple parity protection in the event of disk failures. RAID-TEC can survive up to three simultaneous drive failures in a RAID group. In unified ONTAP, RAID groups have a maximum disk count of 28, where 3 drives are spent on parity and 1 drive is reserved as a spare. As a result, 24 of the 28 drives are used for data operations/RAID stripes.
+
+.Figure 12) Unified ONTAP RAID groups
+image::image14.png[Unified ONTAP RAID groups]
+
+NetApp AFX still leverages RAID-TEC, but increases the RAID group size to 96 drives while only requiring 3 parity drives and 1 spare. Larger RAID groups deliver greater overall performance, while drive failure exposure is minimized by a combination of low failure rates for SSD, more evenly distributed operations across a larger set of drives, as well as improvements to rebuilds of data drives from parity in NetApp AFX.
+
+.Figure 13) NetApp AFX Storage Availability Zone RAID group
+image::image15.png[NetApp AFX Storage Availability Zone RAID group]
+
+The following table approximates the amount of usable raw capacity for 84 disks in unified ONTAP and NetApp AFX with varying drive sizes.
+
+.Approximate raw capacity comparison, 84 drives – Unified ONTAP and NetApp AFX
+[options="header"]
+|===
+| Drive size | Approximate raw capacity (Unified) | Approximate raw capacity (AFX)
+| 7.6TB | ~547.2TB | ~608TB (+60.8TB)
+| 15.3TB | ~1101.6TB | ~1224TB (+122.4TB)
+| 30.6TB | ~2203.2TB | ~2448TB (+244.7TB)
+| 60.1TB | ~4327.2TB | ~4808TB (+480.8TB)
+|===
+
+=== Faster disk failure rebuild times
+
+In unified ONTAP, each node owns a subset of disks in the storage stack. This means that that node only writes to those disks, but also that disk rebuilds are only handled by a single node in the event of a disk failure.
+
+NetApp AFX eschews the need for disk ownership. As a result, all drives can be written to from a single node if needed. That also means that when a drive needs to be rebuilt from parity, all nodes in the cluster participate, so drive rebuilds can occur more quickly than if a single node had to do it alone.
+
+.Figure 14) Disk rebuilds in NetApp AFX
+image::image16.png[Disk rebuilds in NetApp AFX]
+
+=== Deduplication domains
+
+Deduplication allows a storage system to find duplicate blocks in its file system and then create pointers to a single block to reduce the total amount of used capacity. In unified ONTAP, deduplication follows a specific boundary for what blocks can be reduced. Those boundaries depend on the type of deduplication in use. In general:
+
+* Volume-based deduplication -> Volume boundary
+* Cross-volume deduplication -> Aggregate boundary
+
+.Figure 15) Unified ONTAP deduplication domains
+image::image17.png[Unified ONTAP deduplication domains]
+
+The table below shows the capacity behaviors for duplicated data in different scenarios in unified ONTAP. As file copies span nodes and aggregates (and thus, deduplication domains), space savings get reduced.
+
+.Deduplication behaviors in different scenarios for identical 10GB files – unified ONTAP
+[options="header"]
+|===
+| Scenario | Space used
+| Four copies of same 10GB file, same volume (volume deduplication) | 10GB
+| Four copies of same 10GB file, different volumes, same aggregate (cross-volume deduplication enabled) | 10GB
+| Four copies of same 10GB file, 4 different volumes, 4 different aggregates (cross-volume deduplication enabled) | 40GB
+|===
+
+Because NetApp AFX removes physical aggregates and moves capacity management to the new Storage Availability Zone, the deduplication domain boundaries also change. In AFX, the deduplication domain is at the volume-level (like unified ONTAP) and the node (rather than the aggregate) prior to 9.19.1.
+
+Starting in ONTAP 9.19.1, AFX supports a global deduplication domain at the Storage Availability Zone level, so all duplicated blocks in the cluster storage pool are treated the same.
+
+.Figure 16) NetApp AFX – Global deduplication domain (ONTAP 9.19.1)
+image::image18.png[NetApp AFX – Global deduplication domain (ONTAP 9.19.1)]
+
+The table below shows the capacity behaviors for duplicated data in different scenarios in NetApp AFX.
+
+.Deduplication behaviors in different scenarios for identical 10GB files – NetApp AFX
+[options="header"]
+|===
+| Scenario | Space used
+| Four copies of same 10GB file, same volume (volume deduplication) | 10GB (9.18.1) 10GB (9.19.1)
+| Four copies of same 10GB file, different volumes, same node (cross-volume deduplication enabled) | 10GB (9.18.1) 10GB (9.19.1)
+| Four copies of same 10GB file, 4 different volumes, 4 different nodes (cross-volume deduplication enabled) | 40GB (9.18.1) 10GB (9.19.1)
+|===
+
+== Features that have been removed or are unsupported
+
+NetApp AFX is designed for high-performance NAS and object workloads – particularly (but not exclusive to) those in the AI training and inference space. With the design of NetApp AFX, some decisions were made to disable some of the features in ONTAP.
+
+* Because of the focus on high-performance NAS and object, block workloads have been removed from the NetApp AFX solution. There is no support for FCP, iSCSI or NVMe data protocols and there are no plans to add block protocols.
+* Disaggregated is synonymous to de-aggregated, which means that aggregates (at least as a physical storage administration concept) have been removed. Removal of the physical aggregate not only simplifies the management of capacity in ONTAP, but it also provides the mechanism to allow for a single pool of capacity.
+* Aggregates being removed means that aggregate-specific features are also removed. Metrocluster, for instance, leverages aggregate-level mirroring for its site failover capabilities. As such, Metrocluster is also removed from NetApp AFX. Site failover functionality will instead be provided by the new SnapMirror Active-Sync for NAS feature offered in ONTAP 9.19.1GA.
+* The cold data tiering feature called FabricPool is also currently unavailable to NetApp AFX since it is also aggregate-specific.
+* Copy-based volume moves are also no longer necessary in NetApp AFX, due to the new capacity architecture. For more information on that, see "Zero-copy volume moves."
+* Feature removal also means some CLI/GUI/REST API changes, so any commands or API calls for features no longer supported will also be removed.
+* ZAPI is currently unavailable to NetApp AFX.
+* NFS copy offload for virtualization (FlexGroup volumes with Granular Data Distribution only)

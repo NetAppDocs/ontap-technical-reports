@@ -1,0 +1,63 @@
+---
+sidebar: sidebar
+permalink: afx-learn-about.html
+keywords: afx, ontap, overview, disaggregated, architecture
+summary: "Understand the evolution of NetApp ONTAP and how AFX fits into the ecosystem of ONTAP personalities."
+---
+
+= Learn about NetApp AFX
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+NetApp ONTAP was created in 1992 to serve NFS workloads to multiple clients while revolutionizing performance, data resiliency, point-in-time copies, and more. NetApp AFX is the latest evolution in the ONTAP lineage, delivering disaggregated architecture for high-performance NAS and object workloads while maintaining the feature-rich ONTAP software platform you know and trust.
+
+== An evolution of innovation: NetApp ONTAP
+
+NetApp ONTAP was created in 1992 as a new way to serve NFS workloads to multiple clients, while revolutionizing performance, data resiliency, point in time copies, and more. It originally only supported NFSv2, but as demand grew for newer NFS versions, other data protocols, more data protection features, NetApp ONTAP had to evolve.
+
+Below is an abbreviated timeline of some of the major ONTAP evolutions that have taken place over the past 30+ years.
+
+.The evolution of NetApp ONTAP
+[options="header"]
+|===
+| Decade | Features
+| 1990s | NFSv2, NFSv3, CIFS, Snapshots, WAFL filesystem, AutoSupport, SnapMirror
+| 2000s | SnapVault, SnapLock, NFSv4, Block protocols, FlexVols, FlexClone, GX/Scale out, Deduplication, file clones
+| 2010s | Clustered ONTAP, inline storage efficiencies, NFSv4.1/pNFS, NVMe, RAID-TEC, FlexGroup volumes, volume encryption, AFF, Cloud Volumes ONTAP, QoS, FabricPool, Azure NetApp Files (ANF), Google Cloud NetApp Volumes (GCNV), All SAN Array (ASA)
+| 2020s | SnapMirror Business Continuity, FlexCache, ONTAP S3, IPsec, Autonomous Ransomware Protection, SnapMirror in and out of ANF and GCNV, Amazon FSxN, ASAr2, NetApp AFX  you are here
+|===
+
+== ONTAP personalities
+
+For years, ONTAP ran as a single unified platform, combining file, block, and object into a single system. This positioned ONTAP as the Swiss army knife of the datacenter – a platform that could do anything you asked it to.
+
+However, as applications evolved and datacenter requirements changed with a series of shifts in the IT industry, demand for platforms that could do specific things grew. As a result, there are now a few different ways to consume ONTAP.
+
+.NetApp ONTAP personalities
+[options="header"]
+|===
+| ONTAP Personality | Description
+| Unified ONTAP | Same ONTAP you have always known, still being actively developed and improved.
+| All SAN Arrays | ONTAP that supports only iSCSI, FCP and NVMe over FC/TCP and provides active/active controller functionality, as well as disaggregated concepts in ASAr2.
+| Cloud-resident ONTAP | ONTAP that runs in the cloud; either on bare metal systems sitting in a cloud datacenter or virtualized ONTAP instances.
+| Disaggregated ONTAP/AFX | ONTAP using disaggregated architecture for high performance NAS and object workloads.
+|===
+
+== What is NetApp AFX?
+
+One thing to keep in mind here is that NetApp AFX is still ONTAP.
+
+It's simply a different way to leverage the benefits of ONTAP. The same image you would install for your Unified ONTAP or All SAN Array systems is the same image used with NetApp AFX. The codebase is identical, but the way the systems boot up determines what code path is followed, how the backend storage is presented, and what features and protocols are supported.
+
+NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love. Disaggregated ONTAP refers to a storage architecture where every NetApp controller node sees the same capacity by way of redundant network switches and a high speed, low latency network. This approach allows the controller nodes and storage capacity to scale independently of each other to more closely meet the needs of various high-performance workloads. In other words, when you need additional performance, simply add controller nodes. If you need additional capacity, add shelf enclosures. This gives storage administrators the flexibility to present a more cost-effective storage solution to their end users.
+
+Because no controller node independently owns disks, there are also no physical aggregates with their own capacity and performance constraints. Instead, the capacity is presented as a shared model that all nodes can interact with, and ONTAP can automatically manage.
+
+.Figure 2) Disaggregated ONTAP
+image::image4.png[Disaggregated ONTAP architecture]

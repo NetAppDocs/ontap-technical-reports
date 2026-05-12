@@ -1,0 +1,144 @@
+---
+sidebar: sidebar
+permalink: afx-operations.html
+keywords: management, operations, cli, gui, security, networking
+summary: "Understand how AFX management tools, networking, security, and operations compare to unified ONTAP systems."
+---
+
+= NetApp AFX management and operations
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+While NetApp AFX has significant architectural differences from unified ONTAP, the feature set and management approach remain largely unchanged by design. This means minimal learning curve—AFX supports the same management tools, networking protocols, security features, and operational procedures as unified ONTAP, allowing you to apply existing expertise and automation scripts.
+
+== Management—CLI
+
+In NetApp AFX, the CLI is nearly identical to what unified ONTAP's CLI offers. Commands are still run at the cluster level for the most part, while there are still node-level commands that can be issued. There are still top-level command directories and sub-commands, as well as tab completion of commands. In addition, all of the same CLI shortcuts work (for example, filtering content using `-fields`).
+
+The only real differences in the NetApp AFX CLI have to do with what was added and what was removed (as covered in the "Features that have been removed or are unsupported" section of this document). If a feature (such as aggregates or Metrocluster) have been removed, then the corresponding CLI command will no longer be available.
+
+In addition, where new features and functionality have been added to NetApp AFX, new commands will also be available. For instance, the new link:https://www.netapp.com/aide/[NetApp AI Data Engine (AIDE)^] add-on interacts directly with a NetApp AFX cluster over the backend cluster network. As a result, the `dcn` and `data-engine` command directories are added to the NetApp AFX CLI.
+
+The following shows the top-level command directories available at admin privilege in a NetApp AFX cluster. Newly added commands in bold.
+
+....
+AFX::>
+    cluster       data-engine   dcn           event         exit
+    history       job           man           metrocluster  network
+    qos           redo          rows          run           security
+    set           snaplock      snapmirror    statistics    statistics-v1
+    storage       system        top           up            volume
+    vserver
+....
+
+== Management—GUI
+
+System Manager is still the GUI interface to interact with NetApp AFX clusters for management of resources, and when you first log in to it, you likely won't be able to tell at first glance that you aren't still logged into a unified ONTAP system.
+
+.Side-by-side look at unified ONTAP and NetApp AFX System Manager landing pages
+[options="header"]
+|===
+| Unified ONTAP System Manager dashboard image::image38.png[Unified ONTAP System Manager] | NetApp AFX System Manager dashboard image::image39.png[NetApp AFX System Manager]
+|===
+
+As you can see from the above, there aren't many obvious differences in System Manager for unified ONTAP and NetApp AFX. There are a few tells, however.
+
+.Figure 37) How NetApp AFX differs in System Manager
+image::image40.png[How NetApp AFX differs in System Manager]
+
+As you drill down into menus and dashboards, most everything remains the same. Volumes still show used and total capacity. Network interfaces still show ports and IP addresses. You can still configure protection policies for SnapMirror. Hardware views are still available. But NetApp AFX also enhances the views a bit by offering a new cabling view, where you can drill down and see where all the cables are connected throughout the storage stack.
+
+.Figure 38) NetApp AFX cabling view
+image::image41.png[NetApp AFX cabling view]
+
+== REST APIs
+
+NetApp AFX also makes a concerted effort to retain a majority of the ONTAP REST API calls, which means if you've created a suite of automation tools based on REST API, they should still be able to be used in most cases. The main exceptions include aggregates, Metrocluster, SAN, and some performance counters. Complete REST API documentation can be found within the NetApp AFX cluster's System Manager by navigating to https://clus_mgmt_ip/docs/api.
+
+== Off-box ONTAP management tools
+
+NetApp AFX provides some support for off-box ONTAP management tools, such as:
+
+* NetApp System Manager
+* NetApp Console
+* Grafana Harvest (25.11.0 and later)
+* NetApp Trident (25.10 and later)
+
+NetApp AFX does not currently support:
+
+* NetApp ActiveIQ Unified Manager
+
+== Networking
+
+The networking stack in NetApp AFX is identical to unified ONTAP.
+
+* Data LIFs are still used to present network addresses to internal and external services.
+* Each node has its own set of physical and virtual ports.
+* VLANs, ifgroups, and BGP are all still supported.
+* LIFs can still failover between physical nodes and ports in the cluster.
+* IPspaces/broadcast domains are still configured the same.
+* Each SVM can have its own dedicated data network.
+* Management networks can be segmented from data networks.
+* Client data networks don't change outside of the new addition of 400GB networking support.
+* Backend cluster switches are still configured via a "golden configuration" file provided by NetApp.
+
+Some key network differences include:
+
+* Backend cluster network ports now support only 100GB connections to the cluster switches.
+* Because the cluster switches are 400GB capable, the backend node connections use 4 x 100GB breakout cables to reduce the number of ports used on the switches.
+* NVRAM is now mirrored between HA pairs across the backend cluster network via a new HA VLAN configuration on the switches.
+* A new DCN network is added by default for the AI Data Engine. These IP addresses are automatically generated and can be changed as needed.
+
+== Security
+
+NetApp AFX runs ONTAP, which means it uses the same security as ONTAP. All of the cryptomods are identical, which means that security certifications will be identical once the certification processes are completed. NetApp AFX also leverages the same support for security ciphers as unified ONTAP.
+
+In addition, NetApp AFX supports many of the security features provided by unified ONTAP, including (but not limited to):
+
+* Autonomous Ransomware Protection
+* Secure Multi-tenancy
+* Encryption at-rest (volume encryption) and in-flight (TLS 1.3)
+* Self-encrypting drives (SEDs)
+* NFS and SMB Kerberos authentication and encryption
+* Multi-admin verification
+* SnapLock
+
+For information on which certifications unified ONTAP has received (as well as other security hardening information), see:
+
+* link:https://security.netapp.com/certifications[NetApp Product Security^]
+* link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/security-hardening-overview.html[ONTAP security hardening overview^]
+
+== Snapshots and data protection
+
+NetApp AFX leverages the same snapshot and replication technologies as unified ONTAP, with no major changes to the way these features work. In fact, AFX can replicate to and from unified ONTAP systems with the same link:https://docs.netapp.com/us-en/ontap/data-protection/compatible-ontap-versions-snapmirror-concept.html[rules and configurations^] you are familiar with.
+
+The only exception in AFX for replication has to do with FlexGroup volumes replicating to a unified ONTAP system. In that case, the destination unified ONTAP system must be running ONTAP 9.16.1 or later to provide Advanced Capacity Balancing support.
+
+== Nondisruptive operations
+
+ONTAP provides nondisruptive operations, such as volume moves, upgrades, cluster maintenance, storage failovers, and more. NetApp AFX provides the same nondisruptive operations, with some adjustments.
+
+* Volume moves are still nondisruptive, but no longer require a copy.
+* Storage failovers are still nondisruptive, but after initial failover, volumes rebalance across all surviving nodes in the cluster.
+* LIF migrations are identical.
+* Hardware maintenance and upgrades are identical.
+
+== Volume types
+
+Unified ONTAP supports several different volume types, such as:
+
+* FlexVols
+* FlexGroup volumes
+* FlexCache
+* FlexClone
+* Object buckets
+
+NetApp AFX provides full support for each of these volume types, as well as full interoperability for FlexCache volumes with unified ONTAP systems.
+
+For more information on how FlexGroup volumes benefit from AFX architecture, see "FlexGroup volume management improvements."
