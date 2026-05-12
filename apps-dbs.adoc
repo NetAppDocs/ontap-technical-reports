@@ -21,7 +21,7 @@ link:https://docs.netapp.com/us-en/ontap-apps-dbs/mssql/mssql-overview.html[Best
 Learn how storage administrators and database administrators can successfully deploy Microsoft SQL Server on ONTAP storage.
 
 [NOTE]
-This documentation replaces the previously published technical report _TR-4590: Best practice guide for Microsoft SQL Server with ONTAP._
+This documentation replaces the previously published technical report _TR-4590: Best practice guide for Microsoft SQL Server with ONTAP._ 
 
 link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf[TR-4976: Virtualized Microsoft SQL Server performance on NetApp AFF A-Series and C-Series systems^]
 Learn about Microsoft SQL Server performance characteristics using a NetApp AFF A-Series and C-Series systems as well as guidance on how to select the right system based on workload. 
