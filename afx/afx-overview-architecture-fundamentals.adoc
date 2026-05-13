@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-architecture-fundamentals.html
+permalink: afx/afx-overview-architecture-fundamentals.html
 keywords: afx, disaggregated ontap, architecture, compute capacity
 summary: "AFX architecture differs from unified ONTAP in disk relationships, NVRAM replication, RAID groups, and deduplication domains."
 ---

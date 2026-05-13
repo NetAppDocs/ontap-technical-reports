@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-scale-limits-maximums.html
+permalink: afx/afx-overview-scale-limits-maximums.html
 keywords: afx, scale, limits, maximums, capacity, nodes
 summary: "AFX supports up to 32 nodes, 32PB capacity, and 600 drives with higher scale limits than unified ONTAP for most metrics."
 ---

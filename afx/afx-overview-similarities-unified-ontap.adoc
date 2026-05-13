@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-similarities-unified-ontap.html
+permalink: afx/afx-overview-similarities-unified-ontap.html
 keywords: afx, unified ontap, features, management, cli, gui
 summary: "AFX supports most ONTAP features including CLI, System Manager, snapshots, data protection, and nondisruptive operations."
 ---

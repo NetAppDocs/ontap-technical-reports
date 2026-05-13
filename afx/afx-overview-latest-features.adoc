@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-latest-features.html
+permalink: afx/afx-overview-latest-features.html
 keywords: afx, features, ontap, release, 9.19.1
 summary: "ONTAP 9.19.1 introduces global deduplication, dynamic storage efficiency, advanced readahead, 32-node support, and 512 FlexGroup constituents."
 ---

@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-performance-capabilities.html
+permalink: afx/afx-overview-performance-capabilities.html
 keywords: afx, performance, benchmark, nfs, throughput
 summary: "AFX delivers high read and write throughput with linear scaling, aggressive readahead for media workloads, and improved NFSv4.x performance."
 ---

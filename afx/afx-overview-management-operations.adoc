@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-management-operations.html
+permalink: afx/afx-overview-management-operations.html
 keywords: afx, management, operations, capacity management, volume moves
 summary: "AFX simplifies capacity management through a single Storage Availability Zone and enables zero-copy volume moves for automated load balancing."
 ---

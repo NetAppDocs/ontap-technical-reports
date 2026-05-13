@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-hardware-specifications.html
+permalink: afx/afx-overview-hardware-specifications.html
 keywords: afx, hardware, nodes, shelves, switches, disk
 summary: "AFX hardware includes modular nodes based on AFF A1K, standard shelves with enhanced NSM140 modules, and 400GB capable switches."
 ---

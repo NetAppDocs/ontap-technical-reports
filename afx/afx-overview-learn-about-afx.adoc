@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-learn-about-afx.html
+permalink: afx/afx-overview-learn-about-afx.html
 keywords: afx, disaggregated ontap, compute nodes, storage availability zone
 summary: "NetApp AFX is a disaggregated ONTAP architecture that lets you scale compute and capacity independently."
 ---

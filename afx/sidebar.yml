@@ -1,17 +1,17 @@
 entries:
   - title: Learn about AFX
-    url: /afx-overview/afx-overview-learn-about-afx.html
+    url: /afx/afx-overview-learn-about-afx.html
   - title: Architecture fundamentals
-    url: /afx-overview/afx-overview-architecture-fundamentals.html
+    url: /afx/afx-overview-architecture-fundamentals.html
   - title: Management and operations
-    url: /afx-overview/afx-overview-management-operations.html
+    url: /afx/afx-overview-management-operations.html
   - title: Performance capabilities
-    url: /afx-overview/afx-overview-performance-capabilities.html
+    url: /afx/afx-overview-performance-capabilities.html
   - title: Similarities with unified ONTAP
-    url: /afx-overview/afx-overview-similarities-unified-ontap.html
+    url: /afx/afx-overview-similarities-unified-ontap.html
   - title: Hardware specifications
-    url: /afx-overview/afx-overview-hardware-specifications.html
+    url: /afx/afx-overview-hardware-specifications.html
   - title: Scale limits and maximums
-    url: /afx-overview/afx-overview-scale-limits-maximums.html
+    url: /afx/afx-overview-scale-limits-maximums.html
   - title: Latest features
-    url: /afx-overview/afx-overview-latest-features.html
+    url: /afx/afx-overview-latest-features.html
