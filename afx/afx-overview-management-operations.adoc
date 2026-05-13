@@ -1,21 +1,21 @@
 ---
 sidebar: sidebar
-permalink: afx-management-features.html
-keywords: management, automation, capacity, features, afx
-summary: "Discover how AFX simplifies storage management through automated capacity handling, zero-copy volume moves, and intelligent failover and scaling."
+permalink: afx-overview/afx-overview-management-operations.html
+keywords: afx, management, operations, capacity management, volume moves
+summary: "AFX simplifies capacity management through a single Storage Availability Zone and enables zero-copy volume moves for automated load balancing."
 ---
 
-= NetApp AFX management features
+= Management and operations
 :toc: macro
 :hardbreaks:
 :toclevels: 1
 :nofooter:
 :icons: font
 :linkattrs:
-:imagesdir: ./media/
+:imagesdir: ../media/afx-overview/
 
 [.lead]
-NetApp AFX management uses the same CLI, GUI, and REST APIs as unified ONTAP, but the disaggregated architecture enables significant operational improvements. Storage administrators can manage capacity as a single shared pool, automate volume rebalancing during failovers, and scale compute and capacity independently—simplifying many traditionally manual storage management tasks.
+NetApp AFX management doesn't change the mechanisms used to manage a cluster. Admins can still leverage the CLI, GUI, and REST APIs to log into and configure a cluster. But NetApp AFX did present an opportunity to improve upon some of how storage management operations are conducted.
 
 == ONTAP management changes
 
@@ -29,18 +29,15 @@ Because of this, storage administrators no longer need to worry about locating a
 
 For instance, in the CLI of unified ONTAP, if you wanted to see total physical capacity information for a cluster, you would use "`aggregate show-space`," which would then print out every aggregate entry. In NetApp AFX, you have "`cluster space show`," which will show only the single Storage Availability Zone.
 
-.Figure 17) Side by side comparison of capacity CLI commands in unified ONTAP and NetApp AFX
-image::image19.png[Capacity CLI commands comparison]
+image:image19.png["Side by side comparison of capacity CLI commands in unified ONTAP and NetApp AFX"]
 
 In the Unified ONTAP System Manager GUI, tiers are used to show capacity. In fact, the GUI does attempt to show holistic capacity for the cluster by adding up totals, but it still will show the overall usage on a per-aggregate basis.
 
-.Figure 18) System Manager capacity views – Unified ONTAP
-image::image20.png[Unified ONTAP System Manager capacity views]
+image:image20.png["System Manager capacity views – Unified ONTAP"]
 
 In NetApp AFX System Manager, the view is virtually the same for cluster space, but because there are no aggregates, there's no extra math to be done. The capacity you see is the capacity you get.
 
-.Figure 19) System Manager capacity views – NetApp AFX
-image::image21.png[NetApp AFX System Manager capacity views]
+image:image21.png["System Manager capacity views – NetApp AFX"]
 
 === FlexGroup volume management improvements
 
@@ -48,15 +45,13 @@ A FlexGroup volume consists of multiple underlying FlexVol constituent volumes c
 
 As a result, storage administrators may find themselves worrying too much about underlying FlexGroup infrastructure and become less focused on maintaining other aspects of the environment.
 
-.Figure 20) FlexGroup volume layout - Unified ONTAP aggregates
-image::image22.png[FlexGroup volume layout - Unified ONTAP aggregates]
+image:image22.png["FlexGroup volume layout - Unified ONTAP aggregates"]
 
 NetApp AFX presents capacity in a single Storage Availability Zone, which more closely mirrors the way FlexGroup volumes are intended to work. Instead of multiple constituent volumes across multiple disparate aggregates of potentially varying sizes, all volumes reside in the same pool of capacity, which greatly simplifies the overall management overhead of using a FlexGroup volume.
 
 In addition, AFX enables Advanced Capacity Balancing by default for FlexGroup volumes, which helps better distribute larger files in the volume. Now, FlexGroup volume constituents become less of a management concept and instead do their work quietly in the background.
 
-.Figure 21) FlexGroup volume layout - NetApp AFX
-image::image23.png[FlexGroup volume layout - NetApp AFX]
+image:image23.png["FlexGroup volume layout - NetApp AFX"]
 
 === Automated storage administration tasks
 
@@ -79,8 +74,7 @@ When a volume move is started, the following happens:
 
 In NetApp AFX, the Storage Availability Zone presents all capacity to all nodes, and all nodes can write to any disk in that pool. Once the data is placed, it stays where it lands – even if the volume is moved. That means no data copy is required. The volume move process is identical to unified ONTAP, minus the need to replicate data via SnapMirror. No extra capacity required.
 
-.Figure 22) Zero copy volume moves in NetApp AFX
-image::image24.png[Zero copy volume moves in NetApp AFX]
+image:image24.png["Zero copy volume moves in NetApp AFX"]
 
 Having lightweight volume mobility allows AFX to automate away many of the administration tasks without the performance or capacity constraints, and these volume moves are used in a few new features provided by NetApp AFX, as described in topics seen below.
 
@@ -92,13 +86,11 @@ As part of the initial unified ONTAP cluster deployment, it is recommended to pl
 
 The images below show how unified ONTAP clusters can incur uneven performance balance across nodes, as well as how a failover can create performance degradation in some cases.
 
-.Figure 23) Unified ONTAP – potential imbalances in node utilization
-image::image25.png[Unified ONTAP potential imbalances in node utilization]
+image:image25.png["Unified ONTAP – potential imbalances in node utilization"]
 
 When an HA pair's nodes become imbalanced with volume count and performance utilization, node failovers will impact overall performance, since the surviving node will now own all of the failed node's volumes. Meanwhile, other nodes in the cluster may have room to take on additional work.
 
-.Figure 24) Unified ONTAP – Failover impact on node utilization
-image::image26.png[Unified ONTAP Failover impact on node utilization]
+image:image26.png["Unified ONTAP – Failover impact on node utilization"]
 
 In the above, when an HA partner has to take on additional work, it can potentially become overloaded and impact performance for all volumes on that node. Volume moves can help alleviate the situation, but those require copies across nodes (which requires available free space), and the time that takes may exceed the time it takes for the nodes to fail back. Additionally, if you relocate a volume, it will not fail back to the original node. Instead, it will remain on the node you moved it to.
 
@@ -111,21 +103,20 @@ With NetApp AFX, node failovers take on some different behaviors.
 
 NetApp AFX already maintains performance balance across nodes in the cluster to keep a relatively even utilization, so when a failover happens and volumes are rebalanced, the node utilization should be roughly the same across the cluster.
 
-.Figure 25) NetApp AFX - Volume rebalance after failover
-image::image27.png[NetApp AFX Volume rebalance after failover]
+image:image27.png["NetApp AFX - Volume rebalance after failover"]
 
 ==== Node additions and removals
 
 Both unified ONTAP and NetApp AFX allow for nodes to be added and removed from the cluster. However, due to some of the architectural differences, the process for node additions and removals differ a bit.
 
-===== Node addition and removal in unified ONTAP
+===== Node addition/removal in unified ONTAP
 
 We've already learned that unified ONTAP has a direct node to disk ownership and that all nodes must have some disks and at least one aggregate attached to them. With that in mind, the following holds true for additions and removals.
 
 * Node additions in unified ONTAP don't require any extra steps, but to provide balanced performance across all nodes (including the new nodes), volumes would need to be moved to the new nodes. This requires upfront analysis of the existing volumes and their workloads, decisions about which volumes to move, and then the actual volume moves taking place, which, again, would require a copy of that data across the backend cluster network.
 * Node removals in unified ONTAP would require a manual evacuation of existing volumes on the node, which means you must identify which nodes can host which volumes to maintain even performance, and you must have enough free capacity to provide a place for those volumes to move. If free capacity is a challenge, additional volume moves may be needed to shuffle workloads around a bit in the cluster. Node removals also HA pair removals, so the work involved is doubled. Because nodes own disks, an entire disk reinitialization would also be required for those nodes. Each of these things add time and effort to what should be a relatively simple task.
 
-===== Node addition and removal in NetApp AFX
+===== Node addition/removal in NetApp AFX
 
 We've also learned that NetApp AFX doesn't leverage the standard node to disk ownership and does not use physical aggregates to present capacity to the cluster. Because of that, node additions and removals behave a bit differently.
 
@@ -138,25 +129,21 @@ NetApp AFX's zero-copy volume move functionality means that it can rebalance vol
 
 In NetApp AFX running ONTAP 9.18.1 and later, node, HA pair, and volume utilization is being constantly monitored, while performance data is collected and analyzed. If a node's utilization falls outside of the defined thresholds, then ONTAP will automatically select a volume to move to a less utilized node in an effort to keep balanced performance across the cluster.
 
-.Figure 26) Performance-driven volume moves in NetApp AFX – high utilization triggers a volume move
-image::image28.png[Performance-driven volume moves high utilization triggers]
+image:image28.png["Performance-driven volume moves in NetApp AFX – high utilization triggers a volume move"]
 
-.Figure 27) Performance-driven volume moves in NetApp AFX – Balanced node utilization after volume move
-image::image29.png[Performance-driven volume moves balanced node utilization after]
+image:image29.png["Performance-driven volume moves in NetApp AFX – Balanced node utilization after volume move"]
 
-== Cluster scale and expansion
+==== Cluster scale and expansion
 
 Unified ONTAP clusters support up to 24 nodes and each node that is added must also be added with disks (both for system functionality and data services). Disk shelves can be added to the cluster, but they are always connected to a single HA pair and owned only by a single node, even if the cluster is 24 nodes in size. This means that capacity is added to a cluster even when only performance is required, and that performance increase is mostly relegated to a specific set of disks owned by the new nodes. As a result, you may end up with extra capacity that you don't necessarily need.
 
-.Figure 28) Unified ONTAP – added scale considerations
-image::image30.png[Unified ONTAP added scale considerations]
+image:image30.png["Unified ONTAP – added scale considerations"]
 
 NetApp AFX supports larger scale for clusters. Starting in 9.19.1, AFX clusters can reach 32 nodes in a single cluster. And because all nodes can see and access all disks, they can all share the performance and capacity (up to 32PB as of ONTAP 9.19.1) of those drives so that there is never any stranded resource. Volume moves don't require copies, so ONTAP is able to automatically move volumes to newly added nodes to ensure evenly distributed node utilization, while capacity is evenly distributed via the Storage Availability Zone.
 
-.Figure 29) NetApp AFX – added scale considerations
-image::image31.png[NetApp AFX added scale considerations]
+image:image31.png["NetApp AFX – added scale considerations"]
 
-== Root volume changes
+==== Root volume changes
 
 In NetApp ONTAP, each node is assigned a root volume, which is used for system-specific files and functions, such as log files, boot images, core files, cluster databases, and more.
 
@@ -164,6 +151,6 @@ In unified ONTAP, those root volumes lived on physical root aggregates. To reduc
 
 NetApp AFX removes physical aggregates from the equation, and as a result, removes the need for root aggregates and ADP to be used. Root volumes are still a concept, but they now live in virtualized areas of the capacity pool and do not require extra configuration. Additionally, root volume functionality changes. Boot images and replicated cluster databases are moved off the storage stack and into an on-board boot media found on each AFX node. Now, if access to the storage stack is lost, nodes can still boot and maintain cluster eligibility, which eases the complexity of troubleshooting.
 
-== Onboard boot media
+==== Onboard boot media
 
 NetApp AFX nodes leverage on-board boot media, which is an NVMe attached M.2 device roughly 3.8TB in size. These boot devices contain boot image files and replicated databases that are separate from the storage enclosures, which provides extra redundancy in the case of disk access issues. If the boot media fails, the node will be taken over by its HA partner and the boot media can be replaced. Once replaced, a new ONTAP image would be loaded to the device by a storage administrator and ONTAP will automatically rebuild the cluster database to restore full functionality.

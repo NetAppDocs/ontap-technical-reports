@@ -1,29 +1,28 @@
 ---
 sidebar: sidebar
-permalink: afx-learn-about.html
-keywords: afx, ontap, overview, disaggregated, architecture
-summary: "Understand the evolution of NetApp ONTAP and how AFX fits into the ecosystem of ONTAP personalities."
+permalink: afx-overview/afx-overview-learn-about-afx.html
+keywords: afx, disaggregated ontap, compute nodes, storage availability zone
+summary: "NetApp AFX is a disaggregated ONTAP architecture that lets you scale compute and capacity independently."
 ---
 
-= Learn about NetApp AFX
+= Learn about AFX
 :toc: macro
 :hardbreaks:
 :toclevels: 1
 :nofooter:
 :icons: font
 :linkattrs:
-:imagesdir: ./media/
+:imagesdir: ../media/afx-overview/
 
 [.lead]
-NetApp ONTAP was created in 1992 to serve NFS workloads to multiple clients while revolutionizing performance, data resiliency, point-in-time copies, and more. NetApp AFX is the latest evolution in the ONTAP lineage, delivering disaggregated architecture for high-performance NAS and object workloads while maintaining the feature-rich ONTAP software platform you know and trust.
+NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love. Disaggregated ONTAP refers to a storage architecture where every NetApp controller node sees the same capacity by way of redundant network switches and a high speed, low latency network. This approach allows the controller nodes and storage capacity to scale independently of each other to more closely meet the needs of various high-performance workloads.
 
-== An evolution of innovation: NetApp ONTAP
+== An Evolution of Innovation: NetApp ONTAP
 
 NetApp ONTAP was created in 1992 as a new way to serve NFS workloads to multiple clients, while revolutionizing performance, data resiliency, point in time copies, and more. It originally only supported NFSv2, but as demand grew for newer NFS versions, other data protocols, more data protection features, NetApp ONTAP had to evolve.
 
 Below is an abbreviated timeline of some of the major ONTAP evolutions that have taken place over the past 30+ years.
 
-.The evolution of NetApp ONTAP
 [options="header"]
 |===
 | Decade | Features
@@ -33,13 +32,12 @@ Below is an abbreviated timeline of some of the major ONTAP evolutions that have
 | 2020s | SnapMirror Business Continuity, FlexCache, ONTAP S3, IPsec, Autonomous Ransomware Protection, SnapMirror in and out of ANF and GCNV, Amazon FSxN, ASAr2, NetApp AFX  you are here
 |===
 
-== ONTAP personalities
+=== NetApp ONTAP personalities
 
 For years, ONTAP ran as a single unified platform, combining file, block, and object into a single system. This positioned ONTAP as the Swiss army knife of the datacenter – a platform that could do anything you asked it to.
 
 However, as applications evolved and datacenter requirements changed with a series of shifts in the IT industry, demand for platforms that could do specific things grew. As a result, there are now a few different ways to consume ONTAP.
 
-.NetApp ONTAP personalities
 [options="header"]
 |===
 | ONTAP Personality | Description
@@ -59,5 +57,26 @@ NetApp AFX delivers disaggregated architecture for NAS and object workloads whil
 
 Because no controller node independently owns disks, there are also no physical aggregates with their own capacity and performance constraints. Instead, the capacity is presented as a shared model that all nodes can interact with, and ONTAP can automatically manage.
 
-.Figure 2) Disaggregated ONTAP
-image::image4.png[Disaggregated ONTAP architecture]
+image:image4.png["Disaggregated ONTAP"]
+
+== Key terms and concepts
+
+Below are terms directly related to AFX. For ONTAP-specific terminology, see the product documentation.
+
+link:https://docs.netapp.com/us-en/ontap-family/index.html[ONTAP product documentation^].
+
+=== Disaggregated ONTAP
+
+Refers to the new architecture powered by ONTAP that offers the ability to scale compute and capacity independently of one another. The term "Disaggregated ONTAP" is not a product name but a means to differentiate between unified ONTAP and NetApp AFX architectures.
+
+=== NetApp AFX
+
+NetApp AFX is the official product name for the disaggregated ONTAP architecture and was announced at NetApp Insight 2025.
+
+=== Compute nodes
+
+A compute node in NetApp AFX refers to the storage controller node (and is often used interchangeably in docs). These nodes have no on-board disk and are intended to be fully modular to enable the independent scale that disaggregated ONTAP architecture provides.
+
+=== Storage Availability Zone
+
+A Storage Availability Zone (SAZ) is the single pool of capacity in a NetApp AFX cluster, where all disks are shared across all nodes. The SAZ enables functionality such as shared capacity, enhanced performance, global deduplication, and more.
