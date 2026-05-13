@@ -11,6 +11,26 @@ sidebar:
   entries:
     - title: ONTAP Technical Reports
       url: /index.html
+    - title: AFX
+      entries:
+        - title: Learn about NetApp AFX
+          url: /afx-learn-about.html
+        - title: Core concepts
+          url: /afx-core-concepts.html
+        - title: Architecture overview
+          url: /afx-architecture-overview.html
+        - title: Management features
+          url: /afx-management-features.html
+        - title: Management and operations
+          url: /afx-operations.html
+        - title: Performance specifications
+          url: /afx-performance.html
+        - title: Hardware specifications
+          url: /afx-hardware.html
+        - title: Limits and maximums
+          url: /afx-limits.html
+        - title: What's new
+          url: /afx-whats-new.html
     - title: Applications and databases
       url: /apps-dbs.html
     - title: Business continuity
