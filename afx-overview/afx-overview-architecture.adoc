@@ -55,7 +55,6 @@ AFX::> storage availability-zone show
 
 In the unified ONTAP architecture, reads and writes get directed to a specific subset of disks. So even if you have 24 shelves of disks in a 24-node cluster (one shelf per node), at any given time each node can only directly access one shelf of disks, which limits the capacity and performance available in the cluster.
 
-.Figure 3) Unified ONTAP cluster disk access
 image:image5.png["Image"]
 
 In addition, because NVRAM is directly connected between HA pairs, nodes must physically reside next to one another and are more tightly coupled as failover targets. For instance, when one node fails over to its partner node, the only disks it physically has access to are the disks in the HA pair domain.
