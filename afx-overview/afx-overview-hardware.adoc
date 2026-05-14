@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
-permalink: afx/afx-overview-hardware-specifications.html
-keywords: afx, hardware, nodes, shelves, switches, disk
-summary: "AFX hardware includes modular nodes based on AFF A1K, standard shelves with enhanced NSM140 modules, and 400GB capable switches."
+permalink: afx-overview/afx-overview-hardware.html
+keywords: netapp afx, hardware, nodes, shelves, switches, disks, nvme
+summary: "This page covers details about the NetApp AFX cluster hardware, including nodes, shelves, switches, and supported disk types."
 ---
 
-= Hardware specifications
+= Hardware details
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -15,21 +15,18 @@ summary: "AFX hardware includes modular nodes based on AFF A1K, standard shelves
 :imagesdir: ../media/afx-overview/
 
 [.lead]
-NetApp AFX nodes are based on the AFF A1K model, containing no on-board disk storage and designed to be fully modular. AFX uses standard shelf enclosures with enhanced NSM140 modules and backend cluster switches that support 400GB connectivity.
-
-== Hardware details
-
 The following section covers details about the NetApp AFX cluster hardware. For the most recent information about NetApp AFX hardware, see link:https://hwu.netapp.com[https://hwu.netapp.com^].
 
 === Supported hardware
 
-For the latest information on supported hardware for NetApp AFX, check link:https://hwu.netapp.com[https://hwu.netapp.com^].
+For the latest information on supported hardware for NetApp AFX, check link:https://hwu.netapp.com[https://hwu.netapp.com^]. 
 
 === Nodes
 
 NetApp AFX nodes are based on the AFF A1K model of nodes provided for unified ONTAP clusters. These nodes have no on-board disk for storage and are intended to be modular to easily add and remove nodes based on performance requirements. Each node uses 2U of rack space and increases performance linearly as they are added to an AFX cluster.
 
-image:image42.png["NetApp AFX 1K node details"]
+.Figure 39) NetApp AFX 1K node details
+image:image42.png["Image"]
 
 ==== Hardware slots
 
@@ -47,7 +44,8 @@ NetApp AFX shelves use the same enclosures that the AFF systems leverage. The ma
 * Shelves are automatically detected by NetApp AFX when plugged in.
 * No shelf removal support currently.
 
-image:image43.png["NetApp AFX shelf enclosure details"]
+.Figure 40) NetApp AFX shelf enclosure details
+image:image43.png["Image"]
 
 === Switches
 
@@ -57,13 +55,15 @@ NetApp AFX still makes use of backend cluster switches for intracluster communic
 * New HA VLAN
 * For more information, see the link:https://www.cisco.com/site/us/en/products/collateral/networking/switches/nexus-9000-series-switches/nexus-9300-gx2-series-fixed-switches-data-sheet.html[Cisco switches data sheet^].
 
-image:image44.png["NetApp AFX cluster switches"]
+.Figure 41) NetApp AFX cluster switches
+image:image44.png["Image"]
 
 ==== Cluster switch connectivity
 
 NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. Currently, all of these interfaces support 100GB communication only, while the switches support 400GB. As a result, the 100GB interfaces plug into the 400GB interfaces on the switch by way of 4 x 100GB breakout cables. This approach reduces the number of ports used on the switches. For instance, 16 x 100GB storage shelf module ports will use just 4 ports on the switches, while the 8 total ports on the nodes use 2 switch ports.
 
-image:image45.png["NetApp AFX switch cabling"]
+.Figure 42) NetApp AFX switch cabling
+image:image45.png["Image"]
 
 === Disk types and sizes
 
@@ -78,7 +78,7 @@ NetApp AFX currently only supports NVMe attached SSDs in the following sizes:
 
 NetApp AFX can leverage both TLC and QLC flash types. The 7.6 and 15.3TB drives are TLC models, while drives larger than 30.1TB will be QLC. Regardless of media type, the NVIDIA SuperPod certification performance standards can be met.
 
-All drives used with NetApp AFX are performance-rated drives, and both QLC and TLC will perform nearly identically for read traffic. QLC lags a bit behind write performance as compared to TLC and can experience slightly more wear-leveling with write-heavy workloads.
+All drives used with NetApp AFX are performance-rated drives, and both QLC and TLC will perform nearly identically for read traffic. QLC lags a bit behind write performance as compared to TLC and can experience slightly more wear-leveling with write-heavy workloads. 
 
 For performance numbers, see Table 7) Per-shelf performance estimates.
 

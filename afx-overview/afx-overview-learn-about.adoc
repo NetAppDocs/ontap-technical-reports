@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
-permalink: afx/afx-overview-learn-about-afx.html
-keywords: afx, disaggregated ontap, compute nodes, storage availability zone
-summary: "NetApp AFX is a disaggregated ONTAP architecture that lets you scale compute and capacity independently."
+permalink: afx-overview/afx-overview-learn-about.html
+keywords: netapp afx, ontap, disaggregated architecture, overview, key terms
+summary: "NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love."
 ---
 
-= Learn about AFX
+= Learn about NetApp AFX
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -15,13 +15,15 @@ summary: "NetApp AFX is a disaggregated ONTAP architecture that lets you scale c
 :imagesdir: ../media/afx-overview/
 
 [.lead]
-NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love. Disaggregated ONTAP refers to a storage architecture where every NetApp controller node sees the same capacity by way of redundant network switches and a high speed, low latency network. This approach allows the controller nodes and storage capacity to scale independently of each other to more closely meet the needs of various high-performance workloads.
+NetApp AFX is still ONTAP — it's simply a different way to leverage the benefits of ONTAP. NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love.
 
 == An Evolution of Innovation: NetApp ONTAP
 
 NetApp ONTAP was created in 1992 as a new way to serve NFS workloads to multiple clients, while revolutionizing performance, data resiliency, point in time copies, and more. It originally only supported NFSv2, but as demand grew for newer NFS versions, other data protocols, more data protection features, NetApp ONTAP had to evolve.
 
-Below is an abbreviated timeline of some of the major ONTAP evolutions that have taken place over the past 30+ years.
+Below is an abbreviated timeline of some of the major ONTAP evolutions that have taken place over the past 30+ years. 
+
+.The evolution of NetApp ONTAP
 
 [options="header"]
 |===
@@ -38,6 +40,8 @@ For years, ONTAP ran as a single unified platform, combining file, block, and ob
 
 However, as applications evolved and datacenter requirements changed with a series of shifts in the IT industry, demand for platforms that could do specific things grew. As a result, there are now a few different ways to consume ONTAP.
 
+.NetApp ONTAP personalities
+
 [options="header"]
 |===
 | ONTAP Personality | Description
@@ -47,9 +51,30 @@ However, as applications evolved and datacenter requirements changed with a seri
 | Disaggregated ONTAP/AFX | ONTAP using disaggregated architecture for high performance NAS and object workloads.
 |===
 
+== Unified ONTAP architecture overview
+
+The following diagram shows the general architecture of unified ONTAP, with a description of how it all fits together below it.
+
+.Figure 1) General ONTAP architecture
+image:image3.png["Image"]
+
+Some key aspects of the ONTAP architecture:
+
+* File, object, and block support
+* Protocols are served via a front-end client data network
+* Multiple independent nodes can be clustered together
+* Each node can provide independent floating IP addresses for data and management use cases
+* Clustered nodes connect to a NetApp-provided backend switch over a cluster VLAN
+* Nodes are presented as HA pairs to provide resiliency in case of hardware or power outages
+* HA pairs have directly connected NVRAM cards that replicate to protect writes
+* Each node is assigned at least one aggregate and owns a subset of the total number of disks
+* In failovers, a node's disks get reassigned to the HA partner (and only the HA partner)
+* Disk shelves are usually directly attached to nodes via multipath cabling, but higher end systems introduce the concept of storage networks on the same backend cluster switch
+* Volumes (FlexVols and FlexGroup volumes) provide the entry points to the storage for data access
+
 == What is NetApp AFX?
 
-One thing to keep in mind here is that NetApp AFX is still ONTAP.
+One thing to keep in mind here is that NetApp AFX is still ONTAP. 
 
 It's simply a different way to leverage the benefits of ONTAP. The same image you would install for your Unified ONTAP or All SAN Array systems is the same image used with NetApp AFX. The codebase is identical, but the way the systems boot up determines what code path is followed, how the backend storage is presented, and what features and protocols are supported.
 
@@ -57,7 +82,8 @@ NetApp AFX delivers disaggregated architecture for NAS and object workloads whil
 
 Because no controller node independently owns disks, there are also no physical aggregates with their own capacity and performance constraints. Instead, the capacity is presented as a shared model that all nodes can interact with, and ONTAP can automatically manage.
 
-image:image4.png["Disaggregated ONTAP"]
+.Figure 2) Disaggregated ONTAP
+image:image4.png["Image"]
 
 == Key terms and concepts
 

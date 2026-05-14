@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
-permalink: afx/afx-overview-scale-limits-maximums.html
-keywords: afx, scale, limits, maximums, capacity, nodes
-summary: "AFX supports up to 32 nodes, 32PB capacity, and 600 drives with higher scale limits than unified ONTAP for most metrics."
+permalink: afx-overview/afx-overview-limits.html
+keywords: netapp afx, maximums, minimums, limits, capacity, nodes, volumes
+summary: "This page covers the maximums and minimums of a NetApp AFX cluster as compared to unified ONTAP."
 ---
 
-= Scale limits and maximums
+= Maximums and limits
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -15,20 +15,18 @@ summary: "AFX supports up to 32 nodes, 32PB capacity, and 600 drives with higher
 :imagesdir: ../media/afx-overview/
 
 [.lead]
-NetApp AFX clusters support larger scale than unified ONTAP, reaching 32 nodes and 32PB total capacity. Most other scale limits remain consistent with unified ONTAP or have increased.
-
-== Maximums and minimums
-
 The following section covers the maximums and minimums of a NetApp AFX cluster as compared to unified ONTAP.
 
 For the most recent limits, see link:http://hwu.netapp.com/[Hardware Universe^].
+
+.NetApp AFX maximums and minimums
 
 [options="header"]
 |===
 | Limit | Unified ONTAP | NetApp AFX
 | Volume count (cluster)
 a|
-* 30,000
+* 30,000 
 (platform dependent)
 
 a|
@@ -77,7 +75,7 @@ a|
 * 2880 (24 nodes)
 
 a|
-* 288 per cluster
+* 288 per cluster 
 (based on shelf count limits; no HA pair limitation)
 * 408 per cluster (9.19.1RC0)
 * 600 per cluster (9.19.1RC1)
@@ -181,3 +179,4 @@ a|
 * 400
 
 |===
+
