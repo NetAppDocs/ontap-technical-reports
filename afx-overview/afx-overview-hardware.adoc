@@ -17,18 +17,18 @@ summary: "This page covers details about the NetApp AFX cluster hardware, includ
 [.lead]
 The following section covers details about the NetApp AFX cluster hardware. For the most recent information about NetApp AFX hardware, see link:https://hwu.netapp.com[https://hwu.netapp.com^].
 
-=== Supported hardware
+== Supported hardware
 
 For the latest information on supported hardware for NetApp AFX, check link:https://hwu.netapp.com[https://hwu.netapp.com^]. 
 
-=== Nodes
+== Nodes
 
 NetApp AFX nodes are based on the AFF A1K model of nodes provided for unified ONTAP clusters. These nodes have no on-board disk for storage and are intended to be modular to easily add and remove nodes based on performance requirements. Each node uses 2U of rack space and increases performance linearly as they are added to an AFX cluster.
 
 .Figure 39) NetApp AFX 1K node details
 image:image42.png["Image"]
 
-==== Hardware slots
+=== Hardware slots
 
 NetApp AFX 1K nodes use the following slot assignments.
 
@@ -36,7 +36,7 @@ NetApp AFX 1K nodes use the following slot assignments.
 * Slot 7 is dedicated to cluster replication
 * Slots 10 and 11 are dedicated to storage shelf communication
 
-=== Shelves
+== Shelves
 
 NetApp AFX shelves use the same enclosures that the AFF systems leverage. The main difference in shelves in AFX is in the module used. The NSM140 modules provide enhanced performance capabilities and help make disaggregated ONTAP possible. A few key considerations:
 
@@ -47,7 +47,7 @@ NetApp AFX shelves use the same enclosures that the AFF systems leverage. The ma
 .Figure 40) NetApp AFX shelf enclosure details
 image:image43.png["Image"]
 
-=== Switches
+== Switches
 
 NetApp AFX still makes use of backend cluster switches for intracluster communication, such as cluster database replication, remote data operations, storage operations, and NVRAM mirroring. Functionally, the only differences between unified ONTAP and NetApp AFX cluster switches are:
 
@@ -58,14 +58,14 @@ NetApp AFX still makes use of backend cluster switches for intracluster communic
 .Figure 41) NetApp AFX cluster switches
 image:image44.png["Image"]
 
-==== Cluster switch connectivity
+=== Cluster switch connectivity
 
 NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. Currently, all of these interfaces support 100GB communication only, while the switches support 400GB. As a result, the 100GB interfaces plug into the 400GB interfaces on the switch by way of 4 x 100GB breakout cables. This approach reduces the number of ports used on the switches. For instance, 16 x 100GB storage shelf module ports will use just 4 ports on the switches, while the 8 total ports on the nodes use 2 switch ports.
 
 .Figure 42) NetApp AFX switch cabling
 image:image45.png["Image"]
 
-=== Disk types and sizes
+== Disk types and sizes
 
 NetApp AFX currently only supports NVMe attached SSDs in the following sizes:
 
@@ -74,7 +74,7 @@ NetApp AFX currently only supports NVMe attached SSDs in the following sizes:
 * 30.1TB
 * 60.6TB
 
-==== TLC vs. QLC
+=== TLC vs. QLC
 
 NetApp AFX can leverage both TLC and QLC flash types. The 7.6 and 15.3TB drives are TLC models, while drives larger than 30.1TB will be QLC. Regardless of media type, the NVIDIA SuperPod certification performance standards can be met.
 

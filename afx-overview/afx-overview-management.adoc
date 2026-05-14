@@ -17,7 +17,7 @@ summary: "While there are some fairly large architectural differences in how sto
 [.lead]
 While there are some fairly large architectural differences in how storage is presented in NetApp AFX, the feature set and the way ONTAP is managed is virtually unchanged. This is entirely by design. ONTAP is ONTAP and there should be little to no learning curve when possible. And in this case, NetApp AFX is still running ONTAP.
 
-=== Management – CLI
+== Management – CLI
 
 In NetApp AFX, the CLI is nearly identical to what unified ONTAP's CLI offers. Commands are still run at the cluster level for the most part, while there are still node-level commands that can be issued. There are still top-level command directories and sub-commands, as well as tab completion of commands. In addition, all of the same CLI shortcuts work (for example, filtering content using `-fields`).
 
@@ -37,7 +37,7 @@ AFX::>
     vserver
 ----
 
-=== Management – GUI
+== Management – GUI
 
 System Manager is still the GUI interface to interact with NetApp AFX clusters for management of resources, and when you first log in to it, you likely won't be able to tell at first glance that you aren't still logged into a unified ONTAP system.
 
@@ -58,11 +58,11 @@ As you drill down into menus and dashboards, most everything remains the same. V
 .Figure 38) NetApp AFX cabling view
 image:image41.png["Image"]
 
-=== REST APIs
+== REST APIs
 
 NetApp AFX also makes a concerted effort to retain a majority of the ONTAP REST API calls, which means if you've created a suite of automation tools based on REST API, they should still be able to be used in most cases. The main exceptions include aggregates, Metrocluster, SAN, and some performance counters. Complete REST API documentation can be found within the NetApp AFX cluster's System Manager by navigating to https://clus_mgmt_ip/docs/api. 
 
-=== Off-box ONTAP management tools
+== Off-box ONTAP management tools
 
 NetApp AFX provides some support for off-box ONTAP management tools, such as:
 
