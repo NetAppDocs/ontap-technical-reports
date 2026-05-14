@@ -6,12 +6,7 @@ summary: "This page covers the maximums and minimums of a NetApp AFX cluster as 
 ---
 
 = Maximums and limits
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

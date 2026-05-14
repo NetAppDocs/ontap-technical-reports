@@ -6,12 +6,7 @@ summary: "This page covers the latest updates for NetApp AFX and will be updated
 ---
 
 = What's new in NetApp AFX
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

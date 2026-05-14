@@ -6,12 +6,7 @@ summary: "While there are some fairly large architectural differences in how sto
 ---
 
 = Management tools
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

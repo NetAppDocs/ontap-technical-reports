@@ -6,12 +6,7 @@ summary: "NetApp AFX supports the same networking stack, security features, data
 ---
 
 = Networking, security, and operations
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

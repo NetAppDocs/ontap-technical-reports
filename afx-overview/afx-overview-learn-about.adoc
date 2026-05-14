@@ -6,12 +6,7 @@ summary: "NetApp AFX delivers disaggregated architecture for NAS and object work
 ---
 
 = Learn about NetApp AFX
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

@@ -6,12 +6,7 @@ summary: "Review the following resources to learn more about NetApp AFX."
 ---
 
 = Where to find additional information
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

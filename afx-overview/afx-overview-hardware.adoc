@@ -6,12 +6,7 @@ summary: "This page covers details about the NetApp AFX cluster hardware, includ
 ---
 
 = Hardware details
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]

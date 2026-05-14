@@ -6,12 +6,7 @@ summary: "NetApp AFX introduces significant architectural differences from unifi
 ---
 
 = How NetApp AFX architecture differs from unified ONTAP
-:toc: macro
-:hardbreaks:
-:toclevels: 1
-:nofooter:
 :icons: font
-:linkattrs:
 :imagesdir: ../media/afx-overview/
 
 [.lead]
