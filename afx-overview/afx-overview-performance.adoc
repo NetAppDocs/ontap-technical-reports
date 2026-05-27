@@ -20,7 +20,7 @@ Currently, the node types are link:https://www.netapp.com/media/142853-ds-3466-n
 NOTE: Maximum performance was reached using multiple clients reading and writing multiple files as shown in the "Benchmark results" section below.
 
 
-.Per-node performance estimates
+.*Per-node performance estimates*
 
 [options="header"]
 |===
@@ -34,7 +34,7 @@ NOTE: For the most up-to-date performance estimates, check with your NetApp sale
 
 Each shelf contains high performance shelf modules with 16 x 100GB Ethernet ports that leverage RoCEv2 communication for high bandwidth storage interaction with the compute nodes in the cluster. Like any physical resource, these shelves have maximums that can be achieved – particularly since NetApp AFX can present multiple nodes pointing to the same set of disks. The following table shows the estimated maximum read and write performance for a single shelf for TLC and QLC drives. For more information on TLC and QLC differences, see "TLC vs. QLC."
 
-.Per-shelf performance estimates
+.*Per-shelf performance estimates*
 
 [options="header"]
 |===
@@ -52,12 +52,12 @@ This concept of "performance density" enables storage administrators to get the 
 
 For instance, in a unified ONTAP cluster, since each node has its own set of disks, the performance is directed only to the disks owned by the node, and since only one node can access one set of disks, it can't necessarily saturate the available disks and achieve its maximum performance.
 
-.Unified ONTAP – How performance is divided up
+.*Unified ONTAP – How performance is divided up*
 image:image32.png["Image"]
 
 NetApp AFX pools all the disks into a single Storage Availability Zone, so all nodes can leverage all the disks. And because the disks and nodes are decoupled, you won't need as many shelves to get the same performance. This condenses down the performance and maximizes the shelf's maximum performance potential.
 
-.NetApp AFX – Performance density
+.*NetApp AFX – Performance density*
 image:image33.png["Image"]
 
 == Node to shelf ratios
@@ -85,10 +85,10 @@ The following section covers benchmark results using a NetApp AFX cluster with t
 
 The configuration above achieved very near the maximum reads available to the 4-node cluster (~134GB/s) and was right at the maximum writes allowed per node (40GB/s).
 
-.NetApp AFX – ElBencho read performance, 4 nodes
+.*NetApp AFX – ElBencho read performance, 4 nodes*
 image:image34.png["x_Picture 3"]
 
-.NetApp AFX – ElBencho write performance, 4 nodes
+.*NetApp AFX – ElBencho write performance, 4 nodes*
 image:image35.png["x_Picture 5"]
 
 == Aggressive read-ahead
@@ -153,7 +153,7 @@ All of these changes – along with the architecture changes brought about in AF
 
 One of the areas where some modest performance improvements were seen was with sequential IO (ie, IO that is predictable and issued consecutively). In standard performance tests using fio, AFX running ONTAP 9.18.1 improved sequential read performance by nearly 30% and sequential write performance by 10%.
 
-.NetApp AFX – NFSv4.1 sequential IO performance in ONTAP 9.18.1
+.*NetApp AFX – NFSv4.1 sequential IO performance in ONTAP 9.18.1*
 image:image36.png["Image"]
 
 === Metadata-heavy workload results
@@ -164,5 +164,5 @@ With the changes in AFX ONTAP 9.18.1, NFSv4.x performance for these types of wor
 
 Our performance engineering teams compared performance of standard AI image, EDA, and software build benchmarks and found massive gains from the previous ONTAP release.
 
-.NetApp AFX – NFSv4.1 metadata IO performance in ONTAP 9.18.1
+.*NetApp AFX – NFSv4.1 metadata IO performance in ONTAP 9.18.1*
 image:image37.png["Image"]

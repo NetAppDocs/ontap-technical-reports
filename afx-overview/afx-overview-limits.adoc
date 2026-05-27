@@ -14,7 +14,7 @@ The following section covers the maximums and minimums of a NetApp AFX cluster a
 
 For the most recent limits, see link:http://hwu.netapp.com/[Hardware Universe^].
 
-.NetApp AFX maximums and minimums
+.*NetApp AFX maximums and minimums*
 
 [options="header"]
 |===

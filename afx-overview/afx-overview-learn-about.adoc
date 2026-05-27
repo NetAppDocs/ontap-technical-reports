@@ -18,7 +18,7 @@ NetApp ONTAP was created in 1992 as a new way to serve NFS workloads to multiple
 
 Below is an abbreviated timeline of some of the major ONTAP evolutions that have taken place over the past 30+ years. 
 
-.The evolution of NetApp ONTAP
+.*The evolution of NetApp ONTAP*
 
 [options="header"]
 |===
@@ -35,7 +35,7 @@ For years, ONTAP ran as a single unified platform, combining file, block, and ob
 
 However, as applications evolved and datacenter requirements changed with a series of shifts in the IT industry, demand for platforms that could do specific things grew. As a result, there are now a few different ways to consume ONTAP.
 
-.NetApp ONTAP personalities
+.*NetApp ONTAP personalities*
 
 [options="header"]
 |===
@@ -50,7 +50,7 @@ However, as applications evolved and datacenter requirements changed with a seri
 
 The following diagram shows the general architecture of unified ONTAP, with a description of how it all fits together below it.
 
-.General ONTAP architecture
+.*General ONTAP architecture*
 image:image3.png["Image"]
 
 Some key aspects of the ONTAP architecture:
@@ -77,7 +77,7 @@ NetApp AFX delivers disaggregated architecture for NAS and object workloads whil
 
 Because no controller node independently owns disks, there are also no physical aggregates with their own capacity and performance constraints. Instead, the capacity is presented as a shared model that all nodes can interact with, and ONTAP can automatically manage.
 
-.Disaggregated ONTAP
+.*Disaggregated ONTAP*
 image:image4.png["Image"]
 
 == Key terms and concepts
