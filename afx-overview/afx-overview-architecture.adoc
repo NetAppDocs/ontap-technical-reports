@@ -12,7 +12,7 @@ summary: "NetApp AFX introduces significant architectural differences from unifi
 [.lead]
 NetApp AFX introduces significant architectural differences from unified ONTAP in how storage is presented, how nodes interact with disks, and how capacity is managed.
 
-Above, we showed a general picture of how unified ONTAP architecture delivers file, object, and block data storage via directly connected HA pairs that own their own sets of disks and present physical capacity via aggregates of disks. In this section, we'll discuss some of the major differences between unified ONTAP and NetApp AFX architectures in further detail.
+Previously, we showed a general picture of how unified ONTAP architecture delivers file, object, and block data storage via directly connected HA pairs that own their own sets of disks and present physical capacity via aggregates of disks. In this section, we'll discuss some of the major differences between unified ONTAP and NetApp AFX architectures in further detail.
 
 == How to tell if a system is running NetApp AFX
 
