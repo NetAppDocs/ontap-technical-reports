@@ -50,7 +50,7 @@ However, as applications evolved and datacenter requirements changed with a seri
 
 The following diagram shows the general architecture of unified ONTAP, with a description of how it all fits together below it.
 
-.Figure 1) General ONTAP architecture
+.General ONTAP architecture
 image:image3.png["Image"]
 
 Some key aspects of the ONTAP architecture:
@@ -77,7 +77,7 @@ NetApp AFX delivers disaggregated architecture for NAS and object workloads whil
 
 Because no controller node independently owns disks, there are also no physical aggregates with their own capacity and performance constraints. Instead, the capacity is presented as a shared model that all nodes can interact with, and ONTAP can automatically manage.
 
-.Figure 2) Disaggregated ONTAP
+.Disaggregated ONTAP
 image:image4.png["Image"]
 
 == Key terms and concepts
