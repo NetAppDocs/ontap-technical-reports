@@ -211,7 +211,7 @@ NetApp AFX is designed for high-performance NAS and object workloads – particu
 * Disaggregated is synonymous to de-aggregated, which means that aggregates (at least as a physical storage administration concept) have been removed. Removal of the physical aggregate not only simplifies the management of capacity in ONTAP, but it also provides the mechanism to allow for a single pool of capacity. 
 * Aggregates being removed means that aggregate-specific features are also removed. Metrocluster, for instance, leverages aggregate-level mirroring for its site failover capabilities. As such, Metrocluster is also removed from NetApp AFX. Site failover functionality will instead be provided by the new SnapMirror Active-Sync for NAS feature offered in ONTAP 9.19.1GA.
 * The cold data tiering feature called FabricPool is also currently unavailable to NetApp AFX since it is also aggregate-specific. 
-* Copy-based volume moves are also no longer necessary in NetApp AFX, due to the new capacity architecture. For more information on that, see "Zero-copy volume moves."
+* Copy-based volume moves are also no longer necessary in NetApp AFX, due to the new capacity architecture. For more information, see <<Zero-copy volume moves>>.
 * Feature removal also means some CLI/GUI/REST API changes, so any commands or API calls for features no longer supported will also be removed.
 * ZAPI is currently unavailable to NetApp AFX.
 * NFS copy offload for virtualization (FlexGroup volumes with Granular Data Distribution only)
