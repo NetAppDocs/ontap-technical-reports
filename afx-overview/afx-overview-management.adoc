@@ -58,7 +58,7 @@ image:image41.png["Image"]
 
 == REST APIs
 
-NetApp AFX also makes a concerted effort to retain a majority of the ONTAP REST API calls, which means if you've created a suite of automation tools based on REST API, they should still be able to be used in most cases. The main exceptions include aggregates, Metrocluster, SAN, and some performance counters. Complete REST API documentation can be found within the NetApp AFX cluster's System Manager by navigating to https://clus_mgmt_ip/docs/api. 
+NetApp AFX also makes a concerted effort to retain a majority of the ONTAP REST API calls, which means if you've created a suite of automation tools based on REST API, they should still be able to be used in most cases. The main exceptions include aggregates, Metrocluster, SAN, and some performance counters. Complete REST API documentation can be found within the NetApp AFX cluster's System Manager by navigating to \https://clus_mgmt_ip/docs/api. 
 
 == Off-box ONTAP management tools
 
