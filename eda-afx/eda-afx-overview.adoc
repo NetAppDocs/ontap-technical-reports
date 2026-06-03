@@ -1,3 +1,21 @@
-= Main Overview
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-overview.html
+keywords: netapp afx, eda, electronic design automation, ontap, flexgroup, nfs, semiconductor
+summary: "This technical report covers storage architecture best practices for Electronic Design Automation (EDA) workloads using NetApp AFX."
+---
 
-Main overview document.
+= Electronic Design Automation with NetApp AFX
+Justin Parisi, NetApp
+:doctype: article
+:toc: left
+:toclevels: 2
+:toc-title: Table of Contents
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media
+:experimental:
+
+[.lead]
+This technical report covers storage architecture best practices for Electronic Design Automation (EDA) workloads using NetApp AFX. It provides guidance on infrastructure design, performance tuning, and data management to help semiconductor organizations maximize developer productivity and license utilization.

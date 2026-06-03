@@ -1,3 +1,13 @@
-= EDA Overview
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-eda-overview.html
+keywords: eda, electronic design automation, semiconductor, chip design, nre cost, metadata, scale, storage challenges
+summary: "An overview of Electronic Design Automation workloads, the scale challenge at leading-edge process nodes, storage economics, and the specific storage demands EDA creates."
+---
 
-Enterprise Data Architecture overview.
+= EDA overview
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+Electronic Design Automation (EDA) workloads combine some of the highest metadata rates, largest file counts, and most complex data lifecycle requirements of any enterprise workload. Understanding what makes EDA unique is essential context for storage architecture decisions.

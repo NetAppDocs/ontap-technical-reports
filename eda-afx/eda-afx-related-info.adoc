@@ -1,3 +1,13 @@
-= Related Information
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-related-info.html
+keywords: related information, resources, links, netapp, eda, ontap, afx, tech ontap podcast, asianometry
+summary: "Links to ONTAP documentation, NetApp EDA resources, AFX product information, and related reference material."
+---
 
-Related documentation and resources.
+= Related information
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+The following resources provide additional context, technical detail, and reference material for EDA deployments on NetApp AFX.

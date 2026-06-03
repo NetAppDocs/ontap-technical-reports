@@ -1,3 +1,13 @@
-= Storage Design
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-storage-design.html
+keywords: eda storage design, tiered storage, afx tier 1, aff c-series tier 2, fabricpool, cold data, reference architecture, networking, nfs
+summary: "Three-tier storage design for EDA workloads, including the correct cold-data tiering model, a reference architecture, and networking best practices."
+---
 
-Storage architecture and design.
+= Storage design
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+EDA storage architectures require a tiered approach that aligns storage resource characteristics to workload requirements. Different datasets have fundamentally different performance profiles, access patterns, and retention requirements. A well-designed tiered architecture delivers extreme performance where it matters, controlled cost where it does not, and correct cold-data lifecycle management throughout.

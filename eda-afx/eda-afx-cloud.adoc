@@ -1,3 +1,13 @@
-= Cloud
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-cloud.html
+keywords: cloud bursting, eda, flexcache, snapmirror cloud, svm migration, hybrid cloud, disaster recovery, aws, azure, gcs
+summary: "Cloud bursting for EDA, FlexCache for remote library caching, SnapMirror Cloud for data staging and long-term archive, SVM migration, and disaster recovery design."
+---
 
-Cloud capabilities and integration.
+= Hybrid cloud
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+On-premises compute clusters have finite capacity, but EDA tape-out milestones concentrate simulation load in short, intense bursts. Hybrid cloud integration lets EDA organizations expand their effective compute and storage footprint during peak periods and maintain off-site data protection without permanently provisioning infrastructure for peak load.

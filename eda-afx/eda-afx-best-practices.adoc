@@ -1,3 +1,13 @@
-= Best Practices
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-best-practices.html
+keywords: best practices, eda, afx, nfs tuning, volume configuration, security, data lifecycle, hpc, job scheduler, monitoring, harvest, grafana
+summary: "Actionable best practices for hardware sizing, volume configuration, NFS tuning, security, data lifecycle management, HPC scheduler integration, and monitoring."
+---
 
-Best practices for EDA-AFX deployment.
+= Best practices
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+The following best practices reflect deployment experience and design guidance for EDA workloads on AFX. They cover hardware sizing, volume configuration, NFS client tuning, security, data lifecycle, HPC scheduler integration, and monitoring. Each recommendation is specific and actionable; adapt them to your environment's particular workload profile and organizational requirements.

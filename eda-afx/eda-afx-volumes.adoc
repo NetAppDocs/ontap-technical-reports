@@ -1,3 +1,13 @@
-= Volumes
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-volumes.html
+keywords: flexgroup, flexclone, advanced capacity balancing, eda workspace, constituent, volume sizing, ontap 9.19.1
+summary: "FlexGroup volume design for EDA workloads, Advanced Capacity Balancing, constituent sizing, the 512-constituent limit in ONTAP 9.19.1, and FlexClone workspace provisioning."
+---
 
-Volume management and configuration.
+= FlexGroup volumes and workspaces
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+FlexGroup volumes are the primary volume type for EDA workloads on AFX. They distribute a single namespace across multiple constituent member volumes spread across all nodes and shelves in the cluster, enabling metadata rates and sustained bandwidth that no single-volume design can match. FlexClone provides near-instantaneous workspace provisioning that eliminates the hours of copy time that conventional workspace management requires.

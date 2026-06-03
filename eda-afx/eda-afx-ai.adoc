@@ -1,3 +1,13 @@
-= AI and Machine Learning
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-ai.html
+keywords: ai, eda, machine learning, reinforcement learning, opc, gpu, s3, agentic ai, data services, verification ml
+summary: "How AI is transforming EDA workflows, storage implications for AI-guided design flows, S3 object access patterns, and agentic AI data services."
+---
 
-AI and ML capabilities in EDA-AFX.
+= AI in EDA
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+Artificial intelligence is becoming embedded at every stage of the chip design process. From ML-guided verification to GPU-accelerated optical proximity correction to reinforcement learning for physical placement, AI-driven EDA tools change both what storage must deliver and how much data it must manage.

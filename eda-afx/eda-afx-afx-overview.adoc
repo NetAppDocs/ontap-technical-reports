@@ -1,3 +1,13 @@
-= EDA-AFX Overview
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-afx-overview.html
+keywords: netapp afx, ontap, disaggregated, storage availability zone, saz, nvram, raid group, deduplication, hardware, afx 1k, nsm140, nvme
+summary: "AFX hardware platform overview, the Storage Availability Zone, NVRAM replication changes, RAID group improvements, global deduplication, and feature caveats for EDA deployments."
+---
 
-This overview covers EDA for AFX.
+= AFX architecture
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+NetApp AFX is a purpose-built high-performance storage platform that runs ONTAP software in a disaggregated architecture. It introduces fundamental changes to how storage resources are managed, deduplication is applied, and capacity is protected — changes that have significant implications for EDA deployments.

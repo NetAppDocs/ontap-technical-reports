@@ -1,2 +1,23 @@
-sidebar:
-  - name: EDA-AFX
+section: eda-afx
+title: EDA with NetApp AFX
+entries:
+    - title: Overview
+      url: /eda-afx/eda-afx-overview.html
+    - title: EDA overview
+      url: /eda-afx/eda-afx-eda-overview.html
+    - title: AFX architecture
+      url: /eda-afx/eda-afx-afx-overview.html
+    - title: Storage design
+      url: /eda-afx/eda-afx-storage-design.html
+    - title: FlexGroup volumes and workspaces
+      url: /eda-afx/eda-afx-volumes.html
+    - title: Data protection
+      url: /eda-afx/eda-afx-data-protection.html
+    - title: AI in EDA
+      url: /eda-afx/eda-afx-ai.html
+    - title: Hybrid cloud
+      url: /eda-afx/eda-afx-cloud.html
+    - title: Best practices
+      url: /eda-afx/eda-afx-best-practices.html
+    - title: Related information
+      url: /eda-afx/eda-afx-related-info.html

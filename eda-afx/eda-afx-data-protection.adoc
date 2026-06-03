@@ -1,3 +1,13 @@
-= Data Protection
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-data-protection.html
+keywords: snapshots, snapmirror, arp, ransomware, data protection, eda, snapmirror active sync, svm dr, disaster recovery
+summary: "Snapshot scheduling, SnapMirror replication, SnapMirror Active-Sync for NAS as a MetroCluster replacement on AFX, and autonomous ransomware protection for EDA workloads."
+---
 
-Data protection features.
+= Data protection
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+Chip design data is irreplaceable intellectual property. The combination of Snapshots, SnapMirror replication, and autonomous ransomware protection provides layered defense against data loss, site failure, and malicious encryption. AFX supports all of these capabilities with a few architectural differences from unified ONTAP that EDA teams must understand.
