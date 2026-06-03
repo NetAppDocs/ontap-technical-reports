@@ -1,0 +1,457 @@
+= Electronic Design Automation with NetApp AFX
+Justin Parisi, NetApp
+:doctype: article
+:toc: left
+:toclevels: 3
+:toc-title: Table of Contents
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media
+:experimental:
+
+[.lead]
+This technical report covers storage architecture best practices for Electronic Design Automation (EDA) workloads using NetApp AFX. It provides guidance on infrastructure design, performance tuning, and data management to help semiconductor organizations maximize developer productivity and license utilization.
+
+== Abstract
+
+Electronic Design Automation workloads are among the most demanding use cases in enterprise storage. High metadata rates, massive file counts, mixed I/O profiles, and the ever-increasing complexity of leading-edge chip designs push conventional storage systems to their limits. NetApp AFX, built on disaggregated ONTAP, is purpose-built to address these challenges. This technical report describes the AFX architecture as it relates to EDA, covers tiered storage design for semiconductor workflows, and provides best practices for deployment, data management, and hybrid cloud integration.
+
+== Overview
+
+=== Electronic Design Automation
+
+Electronic Design Automation (EDA) software automates critical phases of the integrated circuit (IC) design process. That includes layout, device placement, synthesis, functional verification, physical design, power analysis, and manufacturing tape-out. Vendors such as Synopsys and Cadence provide end-to-end suites that combine tools, IP blocks, and managed services to help chip designers bring new silicon to production.
+
+The industry has evolved from a fragmented collection of point tools into tightly integrated platforms. Where companies once assembled their own toolchains from separate vendors, today's design flows typically rely on a single EDA supplier's stack from RTL synthesis through signoff. That consolidation has increased the depth of integration between storage, compute, and EDA software, making infrastructure selection a first-class design decision.
+
+=== The Scale Challenge
+
+Moving from 5nm to 3nm process nodes does not represent a linear change in resource consumption. A leading-edge chip design at 3nm typically demands four to six times more compute than an equivalent design at 5nm, and storage capacity per project grows roughly four times as well. Three-dimensional chip stacking adds another axis of complexity. Designs that arrange multiple dies vertically must solve thermal routing problems that two-dimensional layouts never encountered, and the simulation workloads required to model heat flow and signal integrity compound the data volumes involved.
+
+As Jon from the Asianometry YouTube channel described in a Tech ONTAP Podcast interview, EDA toolchains have accumulated over 30 years of incremental additions. The result is a tightly coupled ecosystem that chip designers are reluctant to change, because a single failed IP block can invalidate an entire design run. When EDA license time is expensive and design cycles run for days, the cost of a storage-induced failure is measured in engineering hours and missed tape-out windows.
+
+=== Storage Economics in EDA
+
+The economics of chip design frame why infrastructure matters. Non-recurring engineering (NRE) costs for a leading-edge chip design break down roughly as follows:
+
+* 70% developer salaries
+* 20% EDA tool licenses
+* 6% compute infrastructure
+* 4% storage infrastructure
+
+Storage is a small percentage of total NRE cost, but it has an outsized effect on the other three categories. Slower storage slows simulations, which means more license time consumed per job. More license time per job means fewer runs per day, which slows developers. Even a 10% improvement in developer productivity or license utilization translates to tens of millions of dollars in productivity gains across a large design organization. Infrastructure at 4% of cost can drive outcomes across 90% of cost.
+
+=== Storage Challenges in EDA
+
+EDA environments present a unique combination of storage demands:
+
+* **High metadata rates.** Build and verification jobs generate millions of small files in rapid succession. The storage system must sustain high metadata throughput without becoming the scheduling bottleneck for the HPC job scheduler.
+
+* **Large file counts.** A single tape-out project can produce hundreds of millions of files across scratch, library, and results directories. Legacy NAS systems with single-namespace volumes hit inode limits and directory-level lock contention at these scales.
+
+* **Mixed I/O profiles.** Simulation runs are largely sequential and read-heavy from a library perspective, but scratch writes are highly random and latency-sensitive. Tools, design libraries, and scratch storage have different performance requirements and data lifecycle characteristics.
+
+* **Security.** Chip designs represent some of the most valuable intellectual property a company holds. Recipe data -- the thousands of parameters that define a manufacturing process -- can run to a thousand pages or more. Protecting that data from ransomware, insider threats, and supply-chain compromise is not optional.
+
+* **Data lifecycle complexity.** Results from a completed run may need to be retained for months or years for compliance and re-spin analysis. Keeping that data on primary storage is expensive; migrating it introduces cost, latency, and risk.
+
+== NetApp AFX
+
+=== What Is AFX
+
+AFX is NetApp's newest storage platform, designed for the most performance-intensive workloads. It runs ONTAP software in a disaggregated architecture that separates compute nodes from storage shelves, allowing each to scale independently. The result is a system that can be tuned to match the specific resource imbalances that EDA workflows create, without forcing customers to overbuy either capacity or controllers.
+
+AFX complements the existing NetApp portfolio. It is not a replacement for the AFF A-series or C-series platforms -- it sits above them in the performance tier. Organizations that already run ONTAP can introduce AFX into their environment with the same management tools, data protection policies, and data services they use today.
+
+=== Disaggregated Architecture
+
+Traditional all-flash systems couple compute and storage tightly. When a workload needs more IOPS or throughput, the customer must add a full controller shelf, bringing capacity they may not need. When a workload needs more raw capacity, adding shelves without controllers leaves cycles idle. EDA creates exactly these imbalances: scratch workloads are compute-bound while cold project data is capacity-bound.
+
+AFX separates these dimensions:
+
+* **Compute nodes** handle NFS protocol termination, ONTAP metadata services, deduplication, encryption, and data services. Adding nodes increases throughput and IOPS.
+* **Storage shelves** hold NVMe SSDs and provide raw capacity and disk-level throughput. Adding shelves increases usable capacity and sequential bandwidth.
+
+AFX scales to 64 nodes, compared to 24 nodes in unified ONTAP platforms. It supports up to 25 shelves for independent capacity expansion. This means an organization can right-size a cluster for today's workloads and add exactly the resource that the next project wave demands, rather than adding symmetric hardware.
+
+=== Key Features
+
+AFX runs the full ONTAP feature set. The following capabilities are particularly relevant to EDA:
+
+**Performance**
+
+* NVMe storage throughout the data path
+* High-speed front-end networking at 40/50/100GbE
+* FlexGroup volumes for distributed namespace and parallel metadata
+* NFS load balancing across all cluster nodes
+
+**Data Efficiency**
+
+* Inline deduplication and compression
+* FlexClone for near-instant workspace provisioning (up to 40x faster than conventional copy)
+* FabricPool for automated cold data tiering to object storage
+
+**Data Protection**
+
+* Per-volume Snapshots with minimal performance overhead
+* SnapMirror replication to secondary sites or cloud
+* AI-backed ransomware detection and prevention
+
+**Multi-Tenancy and Security**
+
+* Storage Virtual Machine (SVM) isolation between design teams or projects
+* NFS Kerberos and TLS encryption
+* Volume-level encryption with external key management
+
+**Cloud Integration**
+
+* FlexCache for on-demand caching of library data from remote sites
+* SnapMirror Cloud to AWS S3, Azure Blob, and Google Cloud Storage
+* SVM migration for non-disruptive datacenter transitions
+
+**Observability**
+
+* REST API and Harvest/Grafana integration for storage-level metrics
+* Per-volume throughput and latency tracking
+* ONTAP System Manager and BlueXP for unified management
+
+=== AFX in the NetApp Portfolio
+
+AFX occupies the extreme-performance tier in the NetApp storage lineup. Understanding where it fits helps design teams select the right platform for each storage use case in an EDA environment.
+
+[cols="2,3,2,2",options="header"]
+|===
+| Platform | Best Use Case | Max Nodes | Primary Protocol
+
+| AFX
+| Extreme performance: tools, libraries, performance scratch
+| 64
+| NFS (NFSv3/NFSv4.x)
+
+| AFF A-Series
+| Performance-optimized general NAS: Perforce, builds, LSF data
+| 24
+| NFS, SMB, iSCSI, FC
+
+| AFF C-Series
+| Capacity-optimized: archive scratch, emulation, general builds
+| 24
+| NFS, SMB, iSCSI, FC
+
+| FAS
+| Hybrid flash: home directories, cold project data
+| 24
+| NFS, SMB
+
+|===
+
+== Storage Architecture for EDA
+
+=== Tiered Design
+
+EDA storage architectures are not one-size-fits-all. Different dataset categories have different performance requirements, retention periods, and cost profiles. A tiered design aligns storage resources to workload needs:
+
+**Tier 1 – Extreme Performance (AFX)**
+
+This tier handles the highest-demand datasets that directly gate EDA job throughput:
+
+* EDA tool installations
+* Process design kits (PDKs) and cell libraries
+* Performance scratch volumes for active simulation jobs
+* FlexClone workspaces for active design projects
+
+AFX FlexGroup volumes distribute the metadata workload across all nodes in the cluster, eliminating the single-namespace hotspots that appear when hundreds of EDA jobs simultaneously open and read library files.
+
+**Tier 2 – Balanced Performance (AFF A-Series or AFF C-Series)**
+
+This tier handles important but less latency-sensitive datasets:
+
+* HPC job scheduler data (LSF, Slurm)
+* Source control repositories (Perforce, Git)
+* Build artifacts and regression results
+* Emulation platform storage
+* Home directories
+
+**Tier 3 – Cold Data (FabricPool to Object)**
+
+Completed project data, old tapeout archives, and results that must be retained but are rarely accessed can be tiered automatically to object storage via FabricPool. ONTAP monitors access temperature per block and moves cold data to the capacity tier without administrator intervention.
+
+=== Reference Architecture
+
+The following describes a reference deployment for a midsize semiconductor design organization.
+
+----
+┌─────────────────────────────────────────────────────────────┐
+│                   EDA Compute Fabric                         │
+│   Bare metal HPC nodes · VDI · Login/X-terminal servers     │
+│                                                              │
+│              40/50/100GbE network switches                   │
+└────────────────────┬────────────────────────────────────────┘
+                     │  NFSv3 / NFSv4.x
+         ┌───────────┴──────────────────────────┐
+         │                                      │
+  ┌──────▼───────┐                    ┌─────────▼────────┐
+  │  Tier 1: AFX │                    │  Tier 2: AFF     │
+  │  (up to 64   │                    │  A-Series or     │
+  │   nodes)     │                    │  C-Series        │
+  │              │                    │                  │
+  │  FlexGroup   │                    │  FlexVol/        │
+  │  Tools       │                    │  FlexGroup       │
+  │  Libraries   │                    │  LSF/Perforce    │
+  │  Perf Scratch│                    │  Builds/Artifacts│
+  └──────────────┘                    └────────┬─────────┘
+                                               │ FabricPool
+                                      ┌────────▼─────────┐
+                                      │  Object Storage  │
+                                      │  (S3/Cloud)      │
+                                      │  Cold project    │
+                                      │  archive data    │
+                                      └──────────────────┘
+----
+
+=== Networking Considerations
+
+EDA jobs are highly parallel. A single verification run can launch hundreds of jobs simultaneously, all reading library files from the same NFS mount points. Without load balancing, individual LIFs can become throughput bottlenecks even if the aggregate cluster bandwidth is sufficient.
+
+AFX FlexGroup volumes spread data across all constituent member volumes, and ONTAP's DNS load balancing (or an external load balancer such as F5) distributes client connections across all cluster LIFs. Together, these mechanisms allow client throughput to scale linearly as nodes are added.
+
+NOTE: Configure at least one data LIF per node per data network for AFX clusters serving EDA workloads. This ensures that no single LIF becomes the choke point for large simulation jobs.
+
+For hosts running EDA tools, the following client-side tuning applies:
+
+* Set `nconnect` to 16 or higher on Linux NFSv4 mounts to allow parallel TCP connections per mount point.
+* Tune `rsize` and `wsize` to 1048576 (1MB) for large sequential workloads.
+* Enable `nocto` on library mount points to reduce close-to-open consistency overhead for read-only datasets.
+* Configure TCP slot tables to at least 128 per session to avoid queue saturation under heavy parallel workloads.
+
+For the cluster:
+
+* Use BGP ECMP or DNS round-robin to distribute NFS client sessions across LIFs.
+* Set per-LIF maximum connections according to the AFX node count and expected concurrent client load.
+* Enable jumbo frames (9000 MTU) end-to-end if the network fabric supports it.
+
+== FlexGroup Volumes on AFX
+
+FlexGroup is the primary volume type for EDA workloads on AFX. It distributes a single namespace across all constituent member volumes, which in turn are spread across all nodes and shelves in the cluster. The result is a volume that can sustain metadata rates far beyond what a single-node FlexVol can support.
+
+=== Why FlexGroup Matters for EDA
+
+The limiting factor for most EDA metadata benchmarks is not disk throughput; it is the rate at which the storage system can process file create, stat, and unlink operations. When a job scheduler launches 500 simultaneous EDA jobs, each opening 1,000 library files, the storage system must process 500,000 metadata operations in a short burst. A single FlexVol, backed by one node's CPU and memory, will saturate. A FlexGroup backed by 16 nodes distributes that load and handles it in a fraction of the time.
+
+The SPEC SFS 2014_swbuild benchmark was designed specifically to model this workload. FlexGroup volumes on ONTAP have demonstrated leading results in this benchmark, reflecting the real-world advantage that parallel metadata provides for EDA environments.
+
+=== FlexGroup Sizing
+
+When sizing FlexGroup volumes on AFX:
+
+* Use one constituent per node per aggregate as a starting point.
+* Size total capacity at least 1.5x the expected peak working set to allow Snapshots and deduplication savings headroom.
+* Avoid placing multiple FlexGroup volumes on the same set of nodes if their combined metadata rate approaches the per-node limit.
+
+TIP: Use ONTAP's `volume show -fields constituent-count,used,available` to monitor per-constituent utilization. Imbalanced constituents may indicate that inode distribution is skewed, which can be rebalanced using the `volume rebalance` command introduced in ONTAP 9.12.1.
+
+=== FlexClone for Workspace Provisioning
+
+EDA design teams often require private workspaces where an individual engineer or team can modify files without affecting the shared project baseline. Historically, provisioning these workspaces meant copying hundreds of gigabytes of design data, which could take hours and consume significant storage capacity.
+
+FlexClone creates a writable clone of a FlexGroup volume instantaneously, sharing unchanged blocks with the parent. A workspace that would require 500 GB of storage if copied conventionally may consume only a few gigabytes when first cloned, growing only as the engineer writes new data. Workspace creation that once took hours can complete in minutes or seconds.
+
+For a team of 50 engineers each running daily workspaces, FlexClone can reduce scratch storage consumption by 80% or more compared to full-copy provisioning.
+
+== Data Protection
+
+=== Snapshots
+
+ONTAP Snapshots capture a point-in-time image of a volume with no data copy. For EDA scratch volumes, configuring Snapshots at the beginning and end of each major simulation run provides a recovery point that can restore work lost to accidental deletion or data corruption without requiring a full backup restore.
+
+Recommended Snapshot schedule for active EDA volumes:
+
+* Hourly Snapshots retained for 24 hours
+* Daily Snapshots retained for 7 days
+* Weekly Snapshots retained for 4 weeks
+
+For scratch volumes used for single-use simulation runs, disable Snapshots to reclaim space overhead. FlexClone workspaces should have Snapshots enabled to provide individual engineer recovery points.
+
+=== SnapMirror Replication
+
+For organizations with a secondary datacenter or cloud landing zone, SnapMirror can replicate AFX volumes asynchronously to an AFF or cloud destination. This provides disaster recovery with recovery point objectives (RPOs) as low as one hour for critical design data.
+
+SVM DR replication captures the entire SVM configuration -- export policies, LIF definitions, and volume data -- so that a secondary site can take over serving EDA clients with no manual reconfiguration.
+
+=== Ransomware Protection
+
+Chip design data is a high-value target. ONTAP's autonomous ransomware protection (ARP) uses a machine learning model trained on normal I/O patterns to detect entropy changes that indicate encryption-in-progress. When ARP detects a potential attack, it:
+
+1. Generates an automatic Snapshot to preserve pre-attack data
+2. Alerts the administrator via SNMP, EMS, or Harvest/Grafana
+3. Optionally blocks writes to the affected volume pending administrator review
+
+ARP operates inline with no performance penalty during normal operation.
+
+NOTE: Enable ARP on all volumes containing proprietary design data, including tools, libraries, and scratch. The risk of an encrypted tape-out project significantly outweighs the minor overhead of maintaining ARP monitoring state.
+
+== AI in EDA
+
+=== The Convergence of AI and Chip Design
+
+Artificial intelligence is becoming embedded in EDA workflows at every stage of the design process. Verification tools use ML models to predict coverage gaps and prioritize test runs. Physical design tools use reinforcement learning to improve placement density beyond what manual floorplanning achieves. Optical proximity correction (OPC) tools, which adjust mask patterns to compensate for diffraction effects at photolithography, now use GPU-accelerated neural networks to reduce OPC runtimes by 15x or more.
+
+The AI acceleration of EDA workflows does not reduce storage demand; it increases it. Training corpora for EDA ML models are built from prior run results. AI-guided verification loops run 40 to 50 jobs, analyze coverage, then launch another 40 to 50 optimized jobs. The aggregate data generated per design cycle grows with each generation of AI tooling.
+
+NOTE: As Jon from Asianometry noted, these tools will not be optional for competitive design teams. Organizations that cannot provision the compute and storage to support AI-driven EDA flows will fall behind on design cycle time, regardless of the capability of their engineering teams.
+
+=== Storage Implications
+
+AI-driven EDA workflows place specific demands on storage:
+
+* **S3 access for training data.** Many ML pipelines consume training data from object storage. AFX supports native S3 protocol access alongside NFS, allowing AI pipelines to read from and write to the same namespace without data copies.
+* **GPU-local scratch.** Simulation jobs offloaded to GPU compute nodes require low-latency NFS mounts. AFX's disaggregated architecture keeps throughput high even as the number of GPU clients grows.
+* **Result archival.** AI-guided design loops generate far more intermediate results than traditional flows. FabricPool's automated tiering ensures that cold result data moves off primary storage without requiring manual lifecycle management.
+
+=== Agentic AI and Data Services
+
+Beyond the EDA tool stack itself, storage-level AI services are emerging as a complementary layer. NetApp's data infrastructure includes capabilities for metadata extraction, semantic search across file namespaces, and integration with AI orchestration frameworks. For EDA organizations building internal knowledge bases from prior run results -- analogous to the recipe management problem Jon described, where a thousand-page document captures every parameter of a manufacturing process -- storage-level data services can surface insights across years of accumulated simulation data that would be inaccessible in a conventional file hierarchy.
+
+== Hybrid Cloud
+
+=== Cloud Bursting for EDA
+
+On-premises compute clusters have finite capacity. Design cycles are not uniform; tape-out milestones concentrate simulation load in short, intense bursts. Cloud bursting allows an EDA shop to expand its effective compute pool during peak periods without permanently provisioning infrastructure for peak load.
+
+The storage implication is that cloud-based EDA jobs need access to the same library and tool data as on-premises jobs. Options include:
+
+* **FlexCache** -- A read-caching volume in the cloud that pulls data from the on-premises AFX source volume on demand. Cache misses incur WAN latency once; subsequent reads are served locally.
+* **SnapMirror Cloud** -- For organizations that want to stage a full copy of design data in cloud object storage before a burst event, SnapMirror Cloud pre-positions data without requiring a persistent FlexCache relationship.
+* **SVM Migration** -- For planned migration of a design project from on-premises to a cloud NAS, ONTAP's SVM migration moves the entire data management domain non-disruptively.
+
+=== Disaster Recovery
+
+A tape-out represents years of engineering effort. Losing that data to a datacenter outage or ransomware attack is an unacceptable business risk. AFX supports the same ONTAP DR capabilities as the broader platform family:
+
+* **SnapMirror** to a secondary AFX or AFF cluster provides block-level asynchronous replication with hourly RPOs.
+* **MetroCluster** (supported on select AFX configurations) provides zero-RPO synchronous replication for the most critical design data.
+* **SVM DR** captures the complete SVM configuration along with volume data, enabling recovery of NFS export policies, LIF configurations, and security settings alongside the data itself.
+
+== Best Practices
+
+=== Hardware Design
+
+* Deploy AFX as Tier 1 storage for tools, libraries, and performance scratch. Size the node count based on metadata throughput requirements rather than capacity.
+* Use AFF C-Series or FAS for general scratch, build artifacts, and infrequently accessed project data to minimize cost per terabyte.
+* Size the storage network at 100GbE per node for AFX clusters to avoid front-end network saturation on concurrent simulation jobs.
+* Plan for 4x storage growth per new chip design generation when forecasting capacity requirements.
+
+=== Volume Configuration
+
+* Use FlexGroup volumes for all EDA datasets accessed by HPC job scheduler compute nodes.
+* Set FlexGroup constituent count equal to the number of nodes in the AFX cluster for maximum metadata distribution.
+* Enable deduplication and compression on all volumes. Library data compresses well; simulation results benefit from deduplication across similar runs.
+* Use FabricPool tiering policies on scratch and results volumes with a 31-day cooling period to automatically move aged data to object storage.
+
+[cols="2,2,2,2,3",options="header"]
+|===
+| Dataset | Volume Type | Snapshot | FabricPool | Notes
+
+| EDA tools
+| FlexGroup
+| Daily/Weekly
+| No
+| Mount read-only on compute nodes; use `nocto` mount option
+
+| PDKs / Cell libraries
+| FlexGroup
+| Daily/Weekly
+| No
+| Version-controlled; snapshots cover point-in-time library releases
+
+| Performance scratch
+| FlexGroup
+| Per-run or disabled
+| No
+| High-churn data; minimize snapshot overhead for active jobs
+
+| Project workspaces
+| FlexClone of baseline
+| Hourly
+| No
+| FlexClone base from Snapshot of last known good baseline
+
+| Build artifacts
+| FlexGroup
+| Daily
+| Yes (31-day policy)
+| Tiered aggressively; most builds are referenced once then archived
+
+| Completed project archives
+| FlexVol or FlexGroup
+| Weekly
+| Yes (7-day policy)
+| Move to cold tier after tape-out completion
+
+|===
+
+=== Security
+
+* Enable ARP on all volumes containing design IP. Configure alert notifications to the security operations team.
+* Use SVM-level NFS Kerberos to authenticate compute nodes. Avoid AUTH_SYS for sensitive design namespaces.
+* Apply export policy rules that restrict each volume to the specific subnets or hosts that require access.
+* Enable NVE (NetApp Volume Encryption) with an external key manager (OKM or external KMIP) for all volumes storing proprietary design data.
+* Take a Snapshot immediately before any infrastructure change that could affect running EDA jobs.
+
+=== Data Lifecycle
+
+* Define tiering policies by dataset category at volume creation time rather than retroactively. Retroactive tiering scans add I/O load to production volumes.
+* Configure SnapMirror to replicate the full Tier 1 AFX dataset to a secondary site or cloud landing zone on a daily schedule.
+* Retain tape-out Snapshots for at least three years to support re-spin analysis.
+* Use FlexClone to provision engineer workspaces instead of full copies. Enforce a maximum workspace lifetime policy to prevent clone sprawl on the parent volume.
+
+=== HPC Integration
+
+* Configure the HPC job scheduler (LSF, Slurm, or PBS) to use separate queues for jobs that require Tier 1 AFX storage versus Tier 2 storage. This prevents low-priority jobs from consuming AFX bandwidth that high-priority simulation runs need.
+* Mount NFSv3 for parallel job workloads requiring maximum client compatibility. Use NFSv4.1 or 4.2 for workloads that benefit from delegations and pNFS.
+* Use `nconnect=16` on all NFSv4 mounts from HPC compute nodes to distribute client load across multiple TCP connections.
+* Monitor NFS latency at the job scheduler level. If average read latency from the AFX cluster exceeds 1ms during peak load, investigate LIF distribution and consider adding nodes.
+
+== Performance Considerations
+
+=== Metadata-Intensive Workloads
+
+The SPEC SFS 2014_swbuild benchmark models the software build workload that EDA infrastructure must support. It stresses metadata operations -- file create, stat, link, and unlink -- rather than sequential throughput, making it a more relevant benchmark for EDA than traditional IOPS or MB/s measurements.
+
+FlexGroup volumes on ONTAP consistently deliver leading SPEC SFS 2014_swbuild results because the workload scales linearly with constituent count. As AFX supports up to 64 nodes, the theoretical ceiling for FlexGroup metadata throughput on AFX exceeds that of any existing ONTAP platform.
+
+=== Sequential Throughput
+
+Library reads and result writes during simulation are predominantly sequential. AFX's NVMe-to-NVMe architecture, combined with high-speed front-end networking, delivers predictable sequential throughput that scales with the number of active nodes. Organizations should size the AFX cluster such that aggregate sequential bandwidth exceeds the maximum expected simultaneous throughput from all HPC compute nodes.
+
+=== FlexClone Performance
+
+FlexClone workspace provisioning is essentially instantaneous from a storage perspective -- the clone operation creates a metadata copy that shares physical blocks with the parent. The first write to any shared block triggers a copy-on-write, which adds one write I/O. For workloads that read predominantly from the baseline (such as an engineer opening a workspace and running a simulation before making changes), FlexClone delivers full sequential and random read performance from the first access.
+
+== Summary
+
+EDA workloads are fundamentally a storage performance problem. Metadata throughput, file count, data lifecycle complexity, and security requirements all converge in a way that demands a purpose-built approach. NetApp AFX addresses these requirements with a disaggregated architecture that allows independent scaling of compute and capacity, FlexGroup volumes that distribute metadata across all cluster nodes, and the full ONTAP data management stack that semiconductor organizations have relied on for over 30 years.
+
+For organizations designing at the leading edge -- managing the transition from 5nm to 3nm to angstrom-scale processes, adopting AI-driven verification and physical design tools, and building hybrid cloud burst capacity for tape-out sprints -- AFX provides a storage foundation capable of growing with the workload without forcing a platform change at each design generation.
+
+The guidance in this document represents a starting point. Every EDA environment reflects the unique combination of tools, design methodologies, team structure, and security requirements of the organization that runs it. The best practices documented here should be validated against actual workload profiles before production deployment, using ONTAP's native performance counters and, where possible, benchmark tools that reflect the specific metadata and throughput characteristics of the target design flow.
+
+== Where to Find Additional Information
+
+* link:https://docs.netapp.com/us-en/ontap/index.html[ONTAP Documentation]
+* link:https://docs.netapp.com/us-en/netapp-solutions/eda/eda-overview-concepts.html[NetApp Solutions for EDA]
+* link:https://www.netapp.com/data-storage/afx/[NetApp AFX Product Page]
+* link:https://techontappodcast.com[Tech ONTAP Podcast]
+* link:https://www.youtube.com/@Asianometry[Asianometry YouTube Channel]
+
+== Version History
+
+[cols="1,3",options="header"]
+|===
+| Version | Changes
+
+| 1.0
+| Initial release
+
+|===
