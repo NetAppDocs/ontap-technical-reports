@@ -38,6 +38,10 @@ sidebar:
         - title: Overview
           url: /security-hardening-guides.html
         - section: ontap-security-hardening
+    - title: Storage Systems
+      entries:
+        - title: AFX
+          section: afx-overview
     - title: SnapCenter
       url: /snapcenter.html
     - title: Tiering
