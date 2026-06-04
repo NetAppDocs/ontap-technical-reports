@@ -13,11 +13,15 @@ entries:
       url: /eda-afx/eda-afx-volumes.html
     - title: Data protection
       url: /eda-afx/eda-afx-data-protection.html
+    - title: Performance
+      url: /eda-afx/eda-afx-performance.html
     - title: AI in EDA
       url: /eda-afx/eda-afx-ai.html
     - title: Hybrid cloud
       url: /eda-afx/eda-afx-cloud.html
     - title: Best practices
       url: /eda-afx/eda-afx-best-practices.html
+    - title: Summary and conclusion
+      url: /eda-afx/eda-afx-conclusion.html
     - title: Related information
       url: /eda-afx/eda-afx-related-info.html
