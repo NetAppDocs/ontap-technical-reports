@@ -22,6 +22,9 @@ Organizations that provision on-premises infrastructure for peak tape-out load c
 
 Cloud bursting solves this by treating the public cloud as on-demand HPC capacity that activates during peak periods and releases when the sprint ends. EDA tool vendors — including Synopsys and Cadence — provide cloud-native licensing models that allow burst usage without requiring permanent cloud license pools.
 
+.EDA burst-to-cloud topology using FlexCache for library caching on cloud compute nodes
+image::afx-eda-cloud-burst-topology.png[EDA cloud burst topology using FlexCache for library caching,align="center"]
+
 === Storage requirements for cloud bursting
 
 Cloud-based EDA jobs need access to the same tool and library data as on-premises jobs. The options differ in cost, latency, and complexity:
@@ -49,6 +52,9 @@ For EDA tool and library data that is read many times by many jobs:
 . The origin AFX cluster does not see repeated reads of the same cached data — only the initial fill traffic.
 
 Once a tool tree or PDK is cached in the cloud FlexCache volume, it remains available for all subsequent cloud burst jobs until the cache evicts it or the data at the origin changes.
+
+.FlexCache topology for EDA cloud bursting: on-premises AFX origin with cloud cache volume
+image::afx-flexcache-architecture.png[FlexCache topology for EDA cloud bursting with origin on AFX,align="center"]
 
 === FlexCache for on-premises site replication
 

@@ -14,6 +14,9 @@ EDA storage architectures require a tiered approach that aligns storage resource
 
 == Tiered design
 
+.EDA workload taxonomy on AFX: tools, PDKs, scratch, design data, and archives
+image::afx-eda-workload-targets.jpg[EDA workload categories and their storage tier assignments,align="center"]
+
 === Tier 1 — Extreme performance (AFX)
 
 Tier 1 handles the datasets that directly gate EDA job throughput. Every running simulation job reads from this tier simultaneously, so metadata rate, sequential bandwidth, and read latency on this tier have a multiplying effect on the entire HPC cluster's throughput.

@@ -99,6 +99,9 @@ AFX separates the compute and capacity dimensions:
 
 Each resource type can scale independently. An organization can expand node count to handle a higher concurrency phase or expand shelf count to accommodate a larger design dataset, without over-provisioning the complementary resource.
 
+.AFX cluster: nodes and shelves scale independently to balance throughput and capacity
+image::afx-cluster-expansion-rack.png[AFX cluster expansion showing independent node and shelf scaling,align="center"]
+
 == Storage Availability Zone
 
 The Storage Availability Zone (SAZ) is the single most architecturally significant difference between AFX and unified ONTAP. In unified ONTAP, each HA controller pair owns specific disk aggregates, and volumes reside within those aggregates. Data mobility between nodes requires copying data from one aggregate to another.
@@ -109,6 +112,12 @@ AFX replaces that model with the SAZ: a single shared pool that encompasses all 
 * *No physical aggregates.* ONTAP internally manages capacity borrowing and returning at the cluster level. Administrators create and manage volumes, not aggregates.
 * *Zero-copy volume moves.* Because all nodes share the same SAZ, moving a volume from one node to another does not require copying data. The metadata pointer changes; the blocks stay in place. This eliminates the multi-hour data copy operations that volume moves require in unified ONTAP.
 * *Global deduplication domain.* As of ONTAP 9.19.1, the SAZ enables deduplication fingerprints to be shared across all volumes and all nodes in the cluster simultaneously.
+
+.The AFX Storage Availability Zone: a single shared capacity domain across all nodes and shelves
+image::afx-saz-architecture.png[AFX Storage Availability Zone architecture diagram,align="center"]
+
+.AFX shared-pool model versus the per-node aggregate model in unified ONTAP
+image::afx-saz-vs-aggregates.png[Comparison of AFX SAZ model versus unified ONTAP aggregate model,align="center"]
 
 You can view SAZ status with the following CLI command:
 
@@ -124,6 +133,12 @@ AFX moves NVRAM replication to the backend cluster network. Write data is replic
 
 . *Flexible rack placement.* AFX HA pair nodes no longer need to be physically adjacent. They can be separated up to the maximum Ethernet distance supported by the backend fabric, enabling more flexible datacenter topology.
 . *Backend network dependency.* The backend network carries NVRAM replication traffic in addition to data traffic. The backend switch design — 400GbE Cisco Nexus with 4x100GbE breakout cables per node — must account for this combined load.
+
+.AFX FlexAggr internal read/write path via NVRAM replication over the backend cluster network
+image::afx-flexaggr-read-path.jpg[AFX FlexAggr read path showing NVRAM replication,align="center"]
+
+.Cisco Nexus 9300-GX2B 400GbE switch used for the AFX backend fabric
+image::afx-nexus-cluster-switch.jpg[Cisco Nexus 9300-GX2B cloud-scale ToR switch for AFX backend,align="center"]
 
 == RAID group improvements
 
@@ -172,6 +187,9 @@ These per-node figures scale with additional nodes up to the 32-node cluster lim
 === NSM140 drive shelves
 
 AFX uses NSM140 NVMe drive shelves. Each shelf carries up to 24 NVMe SSDs and provides 16x100GbE RoCE Ethernet ports for backend connectivity. The back-end network uses 400GbE Cisco Nexus switches.
+
+.NSM140 NVMe drive shelf (right) compared to the NS224 shelf used in unified ONTAP AFF systems (left)
+image::afx-nsm140-shelf.png[NSM140 NVMe drive shelf comparison to NS224,align="center"]
 
 Shelf performance (per shelf):
 
@@ -224,6 +242,9 @@ IMPORTANT: FabricPool is not supported on AFX. Any documentation or guidance tha
 == Management tools
 
 AFX clusters are managed through the same toolset as unified ONTAP, with a small number of additions and exceptions.
+
+.AFX participates in the full ONTAP data mobility ecosystem without protocol translation
+image::afx-ontap-ecosystem.png[AFX ONTAP data mobility ecosystem including FlexCache SnapMirror XCP and CloudSync,align="center"]
 
 === Supported management tools
 

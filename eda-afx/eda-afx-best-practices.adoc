@@ -24,6 +24,9 @@ The following best practices reflect deployment experience and design guidance f
 
 * *Size the front-end storage network at 100GbE per node* for AFX clusters to avoid front-end network saturation on concurrent simulation jobs. A 16-node AFX cluster requires a front-end switch fabric capable of sustaining 16 × 100GbE simultaneously.
 
+.AFX cluster switch fabric showing front-end 100GbE client ports and back-end 400GbE NVRAM replication ports
+image::afx-cluster-switch-label.jpg[AFX Cisco Nexus switch port labeling for front-end and back-end fabric,align="center"]
+
 * *Plan for 4x storage capacity growth per new chip design generation* when forecasting capacity requirements. Each process node step roughly quadruples the storage intensity of the design flow.
 
 * *Use TLC drives for high-write volumes* (scratch, simulation results) and *QLC drives for high-read, high-capacity volumes* (tools, PDKs, completed project data). QLC drives provide excellent read performance at lower cost per terabyte; TLC drives provide better write throughput where needed.
@@ -205,15 +208,27 @@ NOTE: Home directory mounts on Tier 2 systems use 256 KiB rsize/wsize and Kerber
 
 * *Use NFS Kerberos* for authentication on sensitive design namespaces. Avoid AUTH_SYS (Unix UID/GID) for volumes containing PDKs, cell libraries, or tape-out data, where the risk of unauthorized access is highest.
 
+.Zero Trust security architecture for EDA storage: identity-verified NFS, micro-segmented export policies, encrypted data paths
+image::zero-trust-architecture.png[Zero Trust architecture for EDA storage protecting chip design IP,align="center"]
+
 * *Apply export policy rules that restrict each volume* to the specific subnets or host IP ranges that require access. A PDK volume should not be accessible from the corporate LAN; it should only be exportable to the HPC cluster's storage VLAN.
 
+.Attribute-Based Access Control architecture for fine-grained access policy enforcement across EDA volumes
+image::abac-access-architecture.png[ABAC architecture for EDA storage access control by role project and sensitivity,align="center"]
+
 * *Enable NVE (NetApp Volume Encryption)* with an external key manager (OKM or external KMIP-compatible KMS) for all volumes containing proprietary design data. This ensures that physical drive theft does not result in a data breach.
+
+.Two-layer encryption model: NVE at the volume level and NAE at the storage layer for EDA data protection
+image::zero-trust-two-layer-encryption-solution-aff-fas.png[NVE and NAE two-layer encryption for EDA data at rest,align="center"]
 
 * *Take a Snapshot immediately before any infrastructure change* that could affect running EDA jobs. This provides a rollback point if a tool update, export policy change, or volume configuration modification has unintended consequences.
 
 * *Configure SNMP traps or Harvest/Grafana alerts* for ARP events, volume capacity thresholds (>80% full), and NFS latency exceedances. Route these alerts to the storage operations team and, for ARP events, to the security operations center.
 
 * *Audit NFS access logs* periodically to identify unusual access patterns, such as an individual account accessing large quantities of library or PDK data outside normal working hours.
+
+.FPolicy-based Zero Trust enforcement: real-time audit logging and access policy decisions for EDA NFS operations
+image::zero-trust-fpolicy-architecture.png[FPolicy Zero Trust enforcement for EDA NFS volume operations,align="center"]
 
 == Data lifecycle
 

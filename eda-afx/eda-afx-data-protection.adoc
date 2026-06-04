@@ -113,9 +113,15 @@ Chip design data is one of the most targeted categories of intellectual property
 
 The financial impact extends beyond data recovery costs to include the NRE time lost while recovering, the license costs consumed during recovery, and the competitive exposure from a potential data leak.
 
+.Ransomware attacks target EDA data at multiple layers; AFX defense combines Snapshots, SnapMirror, and ARP
+image::ransomware-solution-layers.png[Ransomware attack layers and AFX multi-layer defense,align="center"]
+
 === ARP operation
 
 ONTAP Autonomous Ransomware Protection (ARP) uses a machine learning model trained on normal I/O patterns for each protected volume. ARP monitors entropy changes in incoming write data — a key indicator of active encryption — and cross-references those changes against the established normal write pattern for that volume.
+
+.ARP builds a volume-specific write-pattern baseline; deviations trigger anomaly detection
+image::ransomware-solution-workload-characteristics2.png[ARP write-pattern baseline and entropy anomaly detection,align="center"]
 
 When ARP detects activity that matches the entropy profile of ransomware encryption:
 
@@ -125,7 +131,10 @@ When ARP detects activity that matches the entropy profile of ransomware encrypt
 
 The administrator receives the alert, reviews the Snapshot to confirm or deny the suspected attack, and either restores from the pre-attack Snapshot (if confirmed) or clears the alert and adjusts the model (if false positive).
 
-ARP operates inline with no performance penalty during normal operation. The ML model inference runs in the ONTAP process without adding measurable latency to normal I/O.
+.The ONTAP ARP alert interface showing the detected anomaly and the automatically created recovery Snapshot
+image::ransomware-solution-dashboard.jpg[ONTAP ARP alert dashboard showing anomaly event and recovery Snapshot,align="center"]
+
+ARP operates inline with no performance penalty during normal operation.The ML model inference runs in the ONTAP process without adding measurable latency to normal I/O.
 
 === ARP configuration recommendations for EDA
 
@@ -154,10 +163,19 @@ vserver modify -vserver <svm> -anti-ransomware-default-volume-state enabled
 | Project archives | Enabled | Archival data represents years of NRE investment
 |===
 
-NOTE: ARP requires a learning period of typically 30 days before it activates full detection. During this period, ARP observes normal write patterns to establish a baseline. New volumes should be placed in learning mode (`anti-ransomware-state dry-run`) during the initial 30-day period before switching to active mode.
+.ARP detection results showing volume state, alert severity, and Snapshot generated at anomaly detection
+image::ransomware-solution-attack-results.png[ARP attack detection results with volume alert and Snapshot,align="center"]
+
+NOTE: ARP requires a learning period of typically 30 days before it activates full detection.During this period, ARP observes normal write patterns to establish a baseline. New volumes should be placed in learning mode (`anti-ransomware-state dry-run`) during the initial 30-day period before switching to active mode.
+
+.ARP volume protection status showing enabled volumes, learning-mode progress, and alert history
+image::ransomware-solution-dashboard2.png[ARP volume protection status dashboard across EDA environment,align="center"]
 
 === Snapshot locking for immutable recovery points
 
 For environments that require immutable Snapshot protection against ransomware that has gained administrative credentials, ONTAP SnapLock Compliance can be applied to Snapshots on SnapMirror destinations to create tamper-proof recovery points. These locked Snapshots cannot be deleted by any user, including cluster administrators, until their retention period expires.
+
+.Combined ARP and SnapLock Compliance benefits: tamper-proof recovery points and full design data restoration
+image::ransomware-solution-benefits.png[ARP and SnapLock combined benefits for EDA ransomware protection,align="center"]
 
 For critical project milestone Snapshots, consider replicating to a SnapLock Compliance volume on a secondary system to ensure that at least one recovery point per milestone is permanently protected.

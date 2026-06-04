@@ -28,6 +28,9 @@ These figures are per-node and scale approximately linearly with additional node
 
 (Measured using ElBencho benchmark)
 
+.SPEC Storage 2020 benchmark results demonstrating AFX throughput at scale
+image::afx-spec-storage-benchmark.png[SPEC Storage 2020 benchmark results for AFX,align="center"]
+
 === NSM140 shelf performance
 
 Individual NSM140 shelf performance:
@@ -40,6 +43,9 @@ The node-to-shelf saturation ratio in ONTAP 9.19.1 is approximately 4:1. Four AF
 * *Read-dominant workloads* (library reads, tool execution): Target a 4:1 node-to-shelf ratio.
 * *Write-dominant workloads* (scratch output, simulation results): TLC shelves provide higher write bandwidth per shelf; adjust the ratio accordingly.
 * *Mixed workloads* (typical EDA): Size for the more demanding dimension and validate with workload profiling.
+
+.Node-to-shelf saturation guidance for read-dominant EDA workloads
+image::afx-cluster-node-shelf-ratio.png[AFX node to shelf saturation ratio guidance,align="center"]
 
 Example cluster configurations:
 

@@ -24,7 +24,13 @@ As Jon from the Asianometry YouTube channel described in a Tech ONTAP Podcast in
 
 Moving from 5nm to 3nm process nodes does not represent a linear change in resource consumption. A leading-edge chip design at 3nm typically demands four to six times more compute than an equivalent design at 5nm, and storage capacity per project grows roughly four times as well. Three-dimensional chip stacking adds another axis of complexity.
 
+.Exponential infrastructure growth from 5nm to 3nm and beyond
+image::eda-scale-5nm-to-3nm.jpg[EDA scale challenge at 5nm to 3nm node transitions,align="center"]
+
 Designs that arrange multiple dies vertically must solve thermal routing problems that two-dimensional layouts never encountered. The simulation workloads required to model heat flow and signal integrity compound the data volumes involved. An angstrom-class design that incorporates 3D stacking may produce an order of magnitude more simulation data than a comparable 5nm design from a few years earlier.
+
+.The semiconductor roadmap toward trillion-transistor systems
+image::eda-trillion-transistor-roadmap.png[Semiconductor transistor count roadmap,align="center"]
 
 Job counts grow with complexity. A typical verification run at a leading-edge node may dispatch thousands of EDA jobs simultaneously across an HPC cluster. Each job opens hundreds to thousands of library files. The aggregate file open rate at the storage layer during peak simulation load exceeds what most NAS systems were designed to sustain, even when the individual file sizes are small.
 

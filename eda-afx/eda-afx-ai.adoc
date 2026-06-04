@@ -18,17 +18,26 @@ The traditional EDA tool flow was largely deterministic: a design engineer invok
 
 Modern EDA increasingly replaces or supplements deterministic tool steps with AI-driven optimization:
 
+.Synopsys AI-powered EDA portfolio spanning synthesis, verification, physical design, and signoff
+image::ai-eda-synopsys-genai-capabilities.png[Synopsys AI-powered EDA portfolio overview,align="center"]
+
 === Verification: ML-guided test prioritization
 
 Functional verification is one of the most resource-intensive phases of chip design. Verification teams run thousands of simulation jobs to achieve coverage targets, and the job of determining which tests to run next — to maximize coverage gain per CPU-hour — has historically relied on engineering intuition.
 
 ML models trained on prior run results can predict which test scenarios are most likely to expose uncovered design states given the current coverage report. AI-guided verification loops run 40 to 50 jobs, analyze coverage, then launch the next 40 to 50 jobs targeted at the remaining coverage gaps. The same coverage target that might require 10,000 random jobs with a traditional approach may be achievable with 3,000 AI-guided jobs.
 
+.Synopsys AI-enabled EDA tools and data analytics platform for ML-guided verification
+image::ai-eda-synopsys-ai-tools.png[Synopsys AI EDA tools for ML-guided test prioritization,align="center"]
+
 The storage implication is significant: AI-guided verification loops generate the same quantity of simulation output data as traditional verification, but with a higher rate of coverage progress per unit of data generated. However, the AI model itself requires access to training data built from prior run results, and the model's predictions improve with more historical data. This creates a retention pressure: older simulation results that would otherwise be candidates for cold data archival may be valuable as AI training material.
 
 === Physical design: reinforcement learning for placement
 
 Physical placement — deciding where each logic cell is physically located on the die — directly affects timing, power, and routability. Manual floorplanning is an iterative art form that consumes substantial engineering time at leading-edge nodes.
+
+.Cadence Generative AI capabilities for physical design, routing, and reinforcement learning placement
+image::ai-eda-cadence-generative-ai.png[Cadence generative AI for EDA physical design and placement,align="center"]
 
 Reinforcement learning (RL) approaches to placement treat the chip canvas as a policy optimization problem. The RL agent makes placement decisions, evaluates the resulting timing and routability metrics, and adjusts its policy to improve outcomes in the next iteration. Google Brain's "chip placement with deep reinforcement learning" work demonstrated that RL agents can produce placement results competitive with expert human designers in a fraction of the manual design time.
 
@@ -37,6 +46,9 @@ For storage, RL-based placement generates a stream of candidate layout files tha
 === Optical proximity correction: GPU neural networks
 
 Optical proximity correction (OPC) adjusts the shapes on a photolithography mask to compensate for diffraction effects that would otherwise cause the printed pattern on the wafer to deviate from the desired circuit geometry. At leading-edge process nodes, OPC is a computationally intensive phase that can consume weeks of CPU time for a full chip layer.
+
+.NVIDIA cuLitho GPU-accelerated computational lithography for optical proximity correction
+image::ai-eda-nvidia-culitho-opc.png[NVIDIA cuLitho GPU-accelerated OPC neural network,align="center"]
 
 GPU-accelerated neural networks trained on the specific optical model of the lithography process can perform OPC inference at 15x or greater speedup compared to traditional model-based OPC. The neural network learns to predict the required mask shape corrections directly, without iteratively solving the full physical model.
 
@@ -100,11 +112,20 @@ AI capabilities are beginning to emerge at the storage layer itself, complementi
 
 *Semantic search:* An engineer searching for "all verification results from LPDDR5 interface subsystem runs in the Q3 tapeout sprint" in a conventional filesystem must know the exact directory structure and naming conventions used at the time. A storage system with semantic search capabilities can answer that query by traversing indexed metadata.
 
+.NetApp intelligent data infrastructure stack for AI workloads on AFX
+image::afx-ai-data-services-overview.png[NetApp intelligent data infrastructure for EDA AI workloads,align="center"]
+
 === EDA knowledge bases
 
 For EDA organizations building internal knowledge bases from prior run results — analogous to the recipe management challenge Jon from Asianometry described, where a single process recipe may span a thousand pages of parameters that define a manufacturing process — storage-level data services can surface insights from years of accumulated simulation data that would be inaccessible in a conventional file hierarchy.
 
+.NetApp Metadata Engine: metadata extraction, indexing, and semantic search across the EDA file namespace
+image::afx-ai-metadata-engine.png[NetApp Metadata Engine for EDA knowledge base and semantic search,align="center"]
+
 Every successful tape-out embeds engineering decisions — tool parameter choices, library version selections, timing closure approaches — that represent hard-won expertise. Capturing and making that knowledge accessible for future designs is a competitive advantage. Storage systems with AI-assisted metadata services can help extract and surface that embedded knowledge.
+
+.NetApp Data Curator: semantic discovery and curation of EDA datasets across the storage namespace
+image::afx-ai-data-curator.png[NetApp Data Curator for EDA dataset discovery and curation,align="center"]
 
 === Agentic AI workflows and storage
 
@@ -120,5 +141,11 @@ These agentic workflows require storage to be a capable data services platform, 
 * Efficient random read of historical result data (S3, high concurrency)
 * Metadata query capabilities for provenance tracking
 * Access controls that allow AI agent identities to be audited and scoped appropriately
+
+.NetApp Data Sync: policy-driven synchronization for EDA AI pipeline data staging
+image::afx-ai-data-sync.png[NetApp Data Sync for EDA AI pipeline data staging and replication,align="center"]
+
+.NetApp Data Guardrails: continuous data governance and IP protection for EDA AI workflows
+image::afx-ai-data-guardrails.png[NetApp Data Guardrails for EDA data governance and AI data quality,align="center"]
 
 NetApp's data infrastructure roadmap includes capabilities for AI workload integration that position AFX as a foundational component in agentic EDA workflows as these architectures mature.
