@@ -1,0 +1,178 @@
+---
+sidebar: sidebar
+permalink: afx-overview/afx-overview-limits.html
+keywords: netapp afx, maximums, minimums, limits, capacity, nodes, volumes
+summary: "This page covers the maximums and minimums of a NetApp AFX cluster as compared to unified ONTAP."
+---
+
+= Maximums and limits
+:icons: font
+:imagesdir: ../media/afx-overview/
+
+[.lead]
+The following section covers the maximums and minimums of a NetApp AFX cluster as compared to unified ONTAP.
+
+For the most recent limits, see link:http://hwu.netapp.com/[Hardware Universe^].
+
+*NetApp AFX maximums and minimums*
+
+
+[options="header"]
+|===
+| Limit | Unified ONTAP | NetApp AFX
+| Volume count (cluster)
+a|
+* 30,000 
+(platform dependent)
+
+a|
+* 30,000
+
+| Aggregate size
+a|
+* 800TB
+
+a|
+* N/A
+
+| Node count
+a|
+* 24
+
+a|
+* 8 (9.17.1)
+* 32 (9.19.1RC1)
+
+| Total capacity
+a|
+* Node and drive dependent. See link:http://hwu.netapp.com[hwu.netapp.com^] for details.
+
+a|
+* 2PB (9.17.1)
+* 3PB (9.18.1RC1)
+* 16PB (9.18.1GA release)
+* 20PB (9.19.1RC0)
+* 32PB (9.19.1RC1)
+
+| Supported shelf count
+a|
+* 8 per HA pair
+* 192 per cluster
+
+a|
+* 12 per cluster (9.18.1GA)
+* 17 per cluster (9.19.1RC0)
+* 25 per cluster (9.19.1RC1)
+(no HA pair limitation)
+
+| Total supported drive count
+a|
+* 240 per HA pair
+* 2880 (24 nodes)
+
+a|
+* 288 per cluster 
+(based on shelf count limits; no HA pair limitation)
+* 408 per cluster (9.19.1RC0)
+* 600 per cluster (9.19.1RC1)
+
+| Volume size
+a|
+* 300TB (FlexVol)
+* 60PB (FlexGroup)
+
+a|
+* 300TB (FlexVol)
+* 60PB (FlexGroup)*
+
+| Maximum files per volume
+a|
+* 2 billion (FlexVol)
+* 400 billion (FlexGroup)
+
+a|
+* 2 billion (FlexVol)
+* 400 billion (FlexGroup)
+
+| Maximum files per directory  (default 320MB maxdirsize value)
+a|
+* ~4 million (FlexVol)
+* ~2 million (FlexGroup)
+
+a|
+* ~4 million (FlexVol)
+* ~2 million (FlexGroup)
+
+| SnapMirror concurrent transfers
+a|
+* 250
+
+a|
+* 250
+
+| Number of qtrees
+a|
+* 4096
+
+a|
+* 4096
+
+| Maximum TCP connections per node
+a|
+* 100,000
+
+a|
+* 100,000
+
+| Maximum locks per node
+a|
+* 3 million
+
+a|
+* 3 million
+
+| Maximum data interface count (cluster)
+a|
+* 4096
+
+a|
+* 4096
+
+| Maximum constituent count – FlexGroup
+a|
+* 200
+
+a|
+* 200
+* 512 in 9.19.1 RC1
+
+| Maximum number of intercluster LIFs
+a|
+* 8
+
+a|
+* 8
+
+| Maximum number of IP spaces
+a|
+* 512
+
+a|
+* 512
+
+| Maximum number of FlexCache per origin
+a|
+* 100
+
+a|
+* 100
+
+| Max number of FlexCache (node)
+a|
+* 400
+
+a|
+* 400
+
+|===
+

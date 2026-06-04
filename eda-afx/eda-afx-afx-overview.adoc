@@ -1,0 +1,268 @@
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-afx-overview.html
+keywords: netapp afx, ontap, disaggregated, storage availability zone, saz, nvram, raid group, deduplication, hardware, afx 1k, nsm140, nvme
+summary: "AFX hardware platform overview, the Storage Availability Zone, NVRAM replication changes, RAID group improvements, global deduplication, and feature caveats for EDA deployments."
+---
+
+= AFX architecture
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+NetApp AFX is a purpose-built high-performance storage platform that runs ONTAP software in a disaggregated architecture. It introduces fundamental changes to how storage resources are managed, deduplication is applied, and capacity is protected — changes that have significant implications for EDA deployments.
+
+== What is AFX
+
+AFX is NetApp's extreme-performance storage platform, designed for workloads that demand the highest possible metadata throughput, sequential bandwidth, and data efficiency. It runs ONTAP software, meaning that organizations already operating ONTAP can introduce AFX using the same management tools, data protection policies, APIs, and data services they use with AFF A-Series and AFF C-Series systems.
+
+AFX occupies the highest-performance tier in the NetApp storage portfolio. It is not a replacement for AFF platforms; it sits above them for workloads that have exhausted what unified ONTAP can deliver. In EDA environments, that typically means the tools, PDK, and performance scratch tier — the data that is read by every running simulation job simultaneously.
+
+*NetApp storage platform comparison*
+
+[options="header"]
+|===
+| Platform | Best Use Case | Max Nodes | Primary Protocols
+| AFX | Extreme performance: tools, libraries, performance scratch | 32 | NFS (NFSv3/NFSv4.x), S3
+| AFF A-Series | Performance-optimized general NAS: Perforce, builds, LSF data | 24 | NFS, SMB, iSCSI, FC
+| AFF C-Series | Capacity-optimized: archive scratch, emulation, cold data with FabricPool | 24 | NFS, SMB, iSCSI, FC
+| FAS | Hybrid flash: home directories, cold project data with FabricPool | 24 | NFS, SMB
+|===
+
+NOTE: AFX supports up to 32 nodes as of ONTAP 9.19.1RC1. This limit increased from 8 nodes in 9.17.1. AFX does not support block protocols (FCP, iSCSI, NVMe-oF) or FabricPool. See the link:eda-afx-afx-overview.html#feature-caveats-for-eda-deployments[Feature caveats for EDA deployments] section for the complete list of capabilities not available on AFX.
+
+== Key features for EDA
+
+AFX delivers a comprehensive set of ONTAP capabilities tuned to the unique demands of electronic design automation workloads.
+
+=== Performance
+
+* NVMe flash media throughout the storage shelf with NVMe-over-RoCE backend fabric
+* 40/50/100GbE front-end NFS networking with NFS session trunking via NFSv4.2
+* FlexGroup volumes distribute file metadata and data across all nodes and shelves simultaneously
+* NFS DNS load balancing distributes client connections across available data LIFs
+* NFSv4.1 and NFSv4.2 improvements in ONTAP 9.18.1 deliver sequential read performance within 7% of NFSv3 on FlexGroup while enabling session trunking
+
+=== Data efficiency
+
+* Inline deduplication and compression reduce flash consumption for EDA tool libraries, PDK data, and intermediate results
+* Global deduplication across the entire SAZ (ONTAP 9.19.1+) maximizes space savings for duplicate data shared across design teams
+* FlexClone creates writable workspace copies of any volume in seconds regardless of volume size, eliminating the need to copy tens of terabytes per engineer per run
+* Cold data management: replicate completed project archives from AFX to a Tier 2 system (AFF C-Series or FAS) via SnapMirror, where FabricPool can tier cold data to object storage
+
+=== Data protection
+
+* Snapshot copies provide zero-additional-storage-cost point-in-time recovery for all volume types
+* SnapMirror replication achieves RPOs as low as one hour for disaster recovery across data centers or cloud
+* Autonomous Ransomware Protection (ARP) uses an ML model to detect anomalous I/O entropy patterns and automatically creates a Snapshot on detection
+
+=== Multi-tenancy and security
+
+* Storage Virtual Machines (SVMs) provide complete namespace, network, and credential isolation between design teams or projects
+* NFS Kerberos (krb5, krb5i, krb5p) and NFS over TLS provide strong authentication and in-flight encryption
+* NetApp Volume Encryption (NVE) with external KMIP-compliant key management server protects data at rest
+* Per-subnet export policies restrict NFS access to authorized compute hosts only
+
+=== Cloud integration
+
+* FlexCache volumes extend the AFX namespace to cloud or remote compute clusters, serving reads locally to eliminate WAN latency
+* SnapMirror Cloud replicates data to AWS S3, Azure Blob, and Google Cloud Storage for long-term archive and burst compute staging
+* SVM migration enables live, non-disruptive workload movement between on-premises clusters or to cloud
+
+=== Observability
+
+* REST API provides full programmatic control and monitoring of all storage resources
+* NetApp Harvest (v25.11.0+) exports per-volume and per-node metrics to Prometheus/Grafana dashboards
+* Per-volume latency, throughput, and IOPS tracking down to the constituent level on FlexGroup volumes
+* ONTAP System Manager and BlueXP provide GUI-based administration and capacity planning
+
+== ONTAP personalities
+
+AFX nodes run ONTAP with a special node personality called "AFX." You can verify the personality of nodes in a cluster with the following CLI command:
+
+----
+node show -fields personality
+----
+
+A node with the AFX personality returns `AFX` in the personality field. Mixing AFX nodes with unified ONTAP nodes in the same cluster is not supported. All nodes in an AFX cluster must run the AFX personality.
+
+== Disaggregated architecture
+
+Traditional all-flash systems couple compute and storage tightly. Controller pairs own specific disk shelves. When a workload needs more IOPS or throughput, a customer must add a full HA controller pair, which brings additional capacity regardless of need. When a workload needs more raw capacity, adding shelves to an existing controller pair eventually exhausts that pair's processing headroom.
+
+EDA creates exactly these imbalances: scratch workloads are compute-intensive while cold project archives are capacity-intensive. The same cluster that needs 32 nodes to sustain peak metadata rates during a tapeout sprint may need only 8 nodes to handle the steady-state throughput during a design ramp.
+
+AFX separates the compute and capacity dimensions:
+
+* *Compute nodes* handle NFS and S3 protocol termination, ONTAP metadata services, inline deduplication and compression, encryption, and data services. Adding nodes increases throughput, IOPS, and metadata processing capacity.
+* *Drive shelves* hold NVMe SSDs and provide raw capacity and disk-level bandwidth. Adding shelves increases usable capacity and aggregate sequential bandwidth.
+
+Each resource type can scale independently. An organization can expand node count to handle a higher concurrency phase or expand shelf count to accommodate a larger design dataset, without over-provisioning the complementary resource.
+
+.AFX cluster: nodes and shelves scale independently to balance throughput and capacity
+image::afx-cluster-expansion-rack.png[AFX cluster expansion showing independent node and shelf scaling,align="center"]
+
+.AFX performance scales linearly with each additional compute node
+image::afx-overview/image13.png[AFX node count versus sequential throughput linear scaling chart,align="center"]
+
+== Storage Availability Zone
+
+The Storage Availability Zone (SAZ) is the single most architecturally significant difference between AFX and unified ONTAP. In unified ONTAP, each HA controller pair owns specific disk aggregates, and volumes reside within those aggregates. Data mobility between nodes requires copying data from one aggregate to another.
+
+AFX replaces that model with the SAZ: a single shared pool that encompasses all drives in the cluster. Key properties of the SAZ:
+
+* *No node disk ownership.* All AFX nodes can read and write to any drive in the SAZ. There is no concept of "this shelf belongs to this controller pair."
+* *No physical aggregates.* ONTAP internally manages capacity borrowing and returning at the cluster level. Administrators create and manage volumes, not aggregates.
+* *Zero-copy volume moves.* Because all nodes share the same SAZ, moving a volume from one node to another does not require copying data. The metadata pointer changes; the blocks stay in place. This eliminates the multi-hour data copy operations that volume moves require in unified ONTAP.
+* *Global deduplication domain.* As of ONTAP 9.19.1, the SAZ enables deduplication fingerprints to be shared across all volumes and all nodes in the cluster simultaneously.
+
+.The AFX Storage Availability Zone: a single shared capacity domain across all nodes and shelves
+image::afx-saz-architecture.png[AFX Storage Availability Zone architecture diagram,align="center"]
+
+.AFX shared-pool model versus the per-node aggregate model in unified ONTAP
+image::afx-saz-vs-aggregates.png[Comparison of AFX SAZ model versus unified ONTAP aggregate model,align="center"]
+
+You can view SAZ status with the following CLI command:
+
+----
+storage availability-zone show
+----
+
+== NVRAM replication
+
+In unified ONTAP, NVRAM is physically connected between HA pair nodes. Write acknowledgment to the client requires that the data be present on both NVRAM modules in the HA pair, which requires the two nodes to be in close physical proximity — typically adjacent in the same rack or adjacent racks with short NVRAM interconnect cables.
+
+AFX moves NVRAM replication to the backend cluster network. Write data is replicated to a partner node over the same 400GbE backend fabric that carries all other cluster traffic. This change has two practical implications for EDA infrastructure planners:
+
+. *Flexible rack placement.* AFX HA pair nodes no longer need to be physically adjacent. They can be separated up to the maximum Ethernet distance supported by the backend fabric, enabling more flexible datacenter topology.
+. *Backend network dependency.* The backend network carries NVRAM replication traffic in addition to data traffic. The backend switch design — 400GbE Cisco Nexus with 4x100GbE breakout cables per node — must account for this combined load.
+
+.AFX FlexAggr internal read/write path via NVRAM replication over the backend cluster network
+image::afx-flexaggr-read-path.jpg[AFX FlexAggr read path showing NVRAM replication,align="center"]
+
+.Cisco Nexus 9300-GX2B 400GbE switch used for the AFX backend fabric
+image::afx-nexus-cluster-switch.jpg[Cisco Nexus 9300-GX2B cloud-scale ToR switch for AFX backend,align="center"]
+
+== RAID group improvements
+
+AFX introduces significantly larger RAID group sizes compared to unified ONTAP. This change has direct implications for usable capacity efficiency.
+
+*RAID group size comparison*
+
+[options="header"]
+|===
+| Platform | Max drives per RAID group | Parity + spare | Data drives
+| Unified ONTAP | 28 | 3 parity + 1 spare | 24 data drives
+| AFX | 96 | 3 parity + 1 spare | 92 data drives
+|===
+
+The practical impact is significant. With 84 drives loaded with 15.3TB NVMe SSDs:
+
+* *Unified ONTAP:* Three RAID groups of 28 (with remainder): approximately 1,101.6TB usable
+* *AFX:* One RAID group of 84 drives (within the 96-drive limit): approximately 1,224TB usable
+
+AFX provides more usable capacity from the same drive count. Rebuild operations also benefit: because the SAZ pools all nodes together, a drive rebuild can spread its I/O across all nodes in the cluster rather than being constrained to the two nodes in the owning HA pair.
+
+== Deduplication improvements
+
+=== Before ONTAP 9.19.1
+
+In AFX 9.18.1, deduplication operates at the volume or node level. A 10GB PDK cell library stored in four separate volumes across four different nodes is deduplicated within each volume, but the same 10GB file consuming space in all four volumes results in 40GB total on-disk consumption across the cluster.
+
+=== Global deduplication in ONTAP 9.19.1
+
+ONTAP 9.19.1 introduces SAZ-level global deduplication. Deduplication fingerprints are now shared across all volumes and all nodes in the entire cluster. The same 10GB PDK cell library stored in four separate volumes consumes only 10GB on-disk cluster-wide, regardless of which nodes or volumes hold the duplicates.
+
+For EDA environments that maintain multiple copies of the same tool installation or PDK across separate SVMs or volumes for isolation purposes, global deduplication can reduce the on-disk footprint of those shared datasets dramatically. Tool trees that are nominally 1TB in total volume allocation may consume a small fraction of that on disk if the tool binaries are highly duplicated across volumes.
+
+.Global deduplication in ONTAP 9.19.1: a single fingerprint domain spans all nodes and volumes in the SAZ
+image::afx-overview/image18.png[AFX global deduplication domain in ONTAP 9.19.1 showing SAZ-level fingerprint sharing,align="center"]
+
+== Hardware
+
+=== AFX 1K nodes
+
+The AFX 1K is the compute node for AFX clusters. It is based on the AFF A1K platform, in a 2U rackmount form factor with no on-board storage drives. Node specifications relevant to EDA sizing:
+
+* *Sequential read performance:* approximately 35GB/s per node
+* *Sequential write performance:* approximately 10GB/s per node
+* *Backend connectivity:* 4x100GbE breakout cables to 400GbE backend switches
+
+These per-node figures scale with additional nodes up to the 32-node cluster limit.
+
+=== NSM140 drive shelves
+
+AFX uses NSM140 NVMe drive shelves. Each shelf carries up to 24 NVMe SSDs and provides 16x100GbE RoCE Ethernet ports for backend connectivity. The back-end network uses 400GbE Cisco Nexus switches.
+
+.NSM140 NVMe drive shelf (right) compared to the NS224 shelf used in unified ONTAP AFF systems (left)
+image::afx-nsm140-shelf.png[NSM140 NVMe drive shelf comparison to NS224,align="center"]
+
+Shelf performance (per shelf):
+
+* *Sequential read:* 140GB/s (TLC drives and QLC drives deliver equivalent read bandwidth)
+* *Sequential write:* 70GB/s (TLC drives); 35GB/s (QLC drives)
+
+The node-to-shelf saturation ratio in ONTAP 9.19.1 is approximately 4:1. Four nodes can fully saturate a single shelf's read bandwidth. This ratio should inform the balance of nodes and shelves in an EDA cluster design.
+
+AFX clusters support up to 25 shelves per cluster as of ONTAP 9.19.1RC1. This limit has increased across releases:
+
+* 9.18.1GA: 12 shelves
+* 9.19.1RC0: 17 shelves
+* 9.19.1RC1: 25 shelves
+
+=== Supported drive types
+
+*Supported NVMe SSD drive types*
+
+[options="header"]
+|===
+| Drive Type | Capacity | NAND Type | EDA Use Case
+| NVMe SSD | 7.6TB | TLC | Latency-sensitive scratch and metadata-intensive tool storage
+| NVMe SSD | 15.3TB | TLC | High-performance tool and library storage; balanced capacity and write performance
+| NVMe SSD | 30.1TB | QLC | High-capacity scratch and project storage; strong read performance
+| NVMe SSD | 60.6TB | QLC | Maximum-density project and archive storage; strong read performance
+|===
+
+TLC and QLC drives provide nearly identical read performance. QLC drives have somewhat lower write performance than TLC. For EDA workloads that are predominantly read-heavy (library reads, tool execution), QLC drives are a cost-effective choice for large-capacity volumes. For high-write scratch workloads, TLC drives provide better write throughput.
+
+== Feature caveats for EDA deployments
+
+AFX is a purpose-built platform and trades some unified ONTAP capabilities for its architectural advantages. Before designing an AFX deployment for EDA, infrastructure teams must be aware of the following capabilities that are *not available* on AFX:
+
+*AFX feature caveats for EDA deployments*
+
+[options="header"]
+|===
+| Feature | Availability on AFX | EDA Impact and Alternative
+| Block protocols (FCP, iSCSI, NVMe-oF) | Not supported | EDA is an NFS workload. No practical impact for EDA environments that use NFS exclusively.
+| FabricPool | Not supported (aggregate-dependent) | Cold data tiering from AFX-hosted volumes is not available. Use SnapMirror to replicate cold data to a Tier 2 AFF C-Series or FAS system, which then uses FabricPool to tier to object storage. See link:eda-afx-storage-design.html[Storage design].
+| MetroCluster | Not supported (aggregate-dependent) | Replace with SnapMirror Active-Sync for NAS (introduced in ONTAP 9.19.1GA) for synchronous, near-zero RPO protection of NAS data. See link:eda-afx-data-protection.html[Data protection].
+| ZAPI | Not supported | Use the ONTAP REST API for automation and integration. Most ONTAP tooling that used ZAPI has been updated to REST API.
+| NetApp ActiveIQ Unified Manager | Not supported | Use Grafana Harvest (version 25.11.0 or later) for monitoring and alerting. See link:eda-afx-best-practices.html[Best practices].
+| Copy-based volume moves | Not available (replaced by zero-copy moves) | Not a limitation — zero-copy volume moves are faster and simpler. No customer action required.
+| NFS copy offload for virtualization | Not available on FlexGroup with Granular Data Distribution | Limited impact for EDA environments; EDA workloads do not rely on NFS copy offload.
+|===
+
+IMPORTANT: FabricPool is not supported on AFX. Any documentation or guidance that references FabricPool tiering from AFX-hosted volumes is incorrect. Cold data archival from AFX requires SnapMirror replication to a Tier 2 system that supports FabricPool.
+
+== Management tools
+
+AFX clusters are managed through the same toolset as unified ONTAP, with a small number of additions and exceptions.
+
+.AFX participates in the full ONTAP data mobility ecosystem without protocol translation
+image::afx-ontap-ecosystem.png[AFX ONTAP data mobility ecosystem including FlexCache SnapMirror XCP and CloudSync,align="center"]
+
+=== Supported management tools
+
+* *ONTAP CLI:* Nearly identical to unified ONTAP. New `dcn` and `data-engine` command directories support AFX-specific AIDE (Autonomous Infrastructure Design Engine) operations.
+* *ONTAP System Manager:* Nearly identical GUI experience with AFX-specific additions, including a new cabling view for the backend network topology.
+* *ONTAP REST API:* Full REST API support with exceptions for aggregates, MetroCluster, SAN protocols, and some performance counters that are not applicable to AFX.
+* *Grafana Harvest:* Full monitoring support in version 25.11.0 and later. Recommended for EDA environments requiring per-volume latency and throughput dashboards.
+* *NetApp Trident:* Container storage integration supported in version 25.10 and later.
+* *NetApp Console:* Supported for cluster management.
+
+=== Not supported
+
+* *NetApp ActiveIQ Unified Manager:* Not supported on AFX. Use Grafana Harvest for equivalent monitoring capability.
+
+NOTE: When integrating AFX with existing ONTAP automation scripts or infrastructure-as-code pipelines, verify that all automation uses REST API calls, not ZAPI. ZAPI is not supported on AFX.

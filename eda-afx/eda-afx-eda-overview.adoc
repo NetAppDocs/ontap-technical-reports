@@ -1,0 +1,85 @@
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-eda-overview.html
+keywords: eda, electronic design automation, semiconductor, chip design, nre cost, metadata, scale, storage challenges
+summary: "An overview of Electronic Design Automation workloads, the scale challenge at leading-edge process nodes, storage economics, and the specific storage demands EDA creates."
+---
+
+= EDA overview
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+Electronic Design Automation (EDA) workloads combine some of the highest metadata rates, largest file counts, and most complex data lifecycle requirements of any enterprise workload. Understanding what makes EDA unique is essential context for storage architecture decisions.
+
+== Electronic Design Automation
+
+Electronic Design Automation software automates the critical phases of the integrated circuit (IC) design process: layout, device placement, synthesis, functional verification, physical design, power analysis, timing closure, and manufacturing tape-out. Vendors such as Synopsys and Cadence provide end-to-end suites that combine tools, IP blocks, and managed services to help chip designers bring new silicon to production.
+
+The industry has evolved from a fragmented collection of point tools into tightly integrated platforms. Where companies once assembled their own toolchains from separate vendors, today's design flows typically rely on a single EDA supplier's stack from RTL synthesis through signoff. That consolidation has increased the depth of integration between storage, compute, and EDA software, making infrastructure selection a first-class design decision rather than an afterthought.
+
+As Jon from the Asianometry YouTube channel described in a Tech ONTAP Podcast interview, EDA toolchains have accumulated over 30 years of incremental additions. The result is a tightly coupled ecosystem that chip designers are extremely reluctant to change, because a single failed IP block can invalidate an entire design run. When EDA license time is expensive and design cycles run for days, the cost of a storage-induced failure is measured in engineering hours and missed tape-out windows.
+
+== The scale challenge
+
+Moving from 5nm to 3nm process nodes does not represent a linear change in resource consumption. A leading-edge chip design at 3nm typically demands four to six times more compute than an equivalent design at 5nm, and storage capacity per project grows roughly four times as well. Three-dimensional chip stacking adds another axis of complexity.
+
+.Exponential infrastructure growth from 5nm to 3nm and beyond
+image::eda-scale-5nm-to-3nm.jpg[EDA scale challenge at 5nm to 3nm node transitions,align="center"]
+
+Designs that arrange multiple dies vertically must solve thermal routing problems that two-dimensional layouts never encountered. The simulation workloads required to model heat flow and signal integrity compound the data volumes involved. An angstrom-class design that incorporates 3D stacking may produce an order of magnitude more simulation data than a comparable 5nm design from a few years earlier.
+
+.The semiconductor roadmap toward trillion-transistor systems
+image::eda-trillion-transistor-roadmap.png[Semiconductor transistor count roadmap,align="center"]
+
+Job counts grow with complexity. A typical verification run at a leading-edge node may dispatch thousands of EDA jobs simultaneously across an HPC cluster. Each job opens hundreds to thousands of library files. The aggregate file open rate at the storage layer during peak simulation load exceeds what most NAS systems were designed to sustain, even when the individual file sizes are small.
+
+== Storage economics in EDA
+
+The economics of chip design frame why infrastructure investment matters. Non-recurring engineering (NRE) costs for a leading-edge chip design break down roughly as follows:
+
+* *70%* developer salaries
+* *20%* EDA tool licenses
+* *6%* compute infrastructure
+* *4%* storage infrastructure
+
+Storage is a small percentage of total NRE cost, but it has an outsized effect on the other three categories. Slower storage slows simulations, which means more license time consumed per job. More license time per job means fewer runs per day, which slows developers. Conversely, faster storage runs jobs faster, freeing license slots sooner and allowing more iterations per day.
+
+Even a 10% improvement in developer productivity or license utilization translates to tens of millions of dollars in productivity gains across a large design organization. Infrastructure that represents 4% of NRE cost can drive outcomes across 90% of cost. The conversation about storage investment should be framed in those terms.
+
+== Storage challenges in EDA
+
+EDA environments present a unique combination of storage demands that do not map well to conventional general-purpose NAS design:
+
+=== High metadata rates
+
+Build and verification jobs generate millions of small files in rapid succession. When a scheduler dispatches 500 simultaneous EDA jobs, each opening 1,000 library files in the first seconds of execution, the storage system must sustain 500,000 metadata operations in a short burst. Operations include file open, stat, readdir, close, create, unlink, and rename. The storage system must process these without becoming the scheduling bottleneck for the HPC job scheduler.
+
+Legacy NAS systems that serialize metadata operations at the volume level saturate quickly under this load. Even well-tuned single-volume NAS can present latency spikes that the job scheduler interprets as node unavailability, causing failed job submissions and wasted license time.
+
+=== Large file counts
+
+A single tape-out project can produce hundreds of millions of files across scratch, library, and results directories. The directory and inode structures that hold these files must be navigable at low latency even as counts grow. Legacy NAS systems with single-namespace volumes hit inode limits and directory-level lock contention at these scales, requiring administrators to manually shard data across multiple mount points and then maintain the mapping between logical namespaces and physical volumes.
+
+=== Mixed I/O profiles
+
+Simulation runs are largely sequential and read-heavy from a library and tools perspective, but scratch writes are highly random and latency-sensitive. A single EDA job may:
+
+* Read library cells sequentially at high bandwidth
+* Write scratch files in small random bursts as intermediate results accumulate
+* Stat and open hundreds of configuration files at high metadata rate
+* Append to log files with small synchronous writes
+
+These behaviors occur simultaneously across hundreds or thousands of concurrent jobs. A storage system optimized for only one I/O profile — throughput or IOPS — will underperform for the others. EDA requires a platform that handles all simultaneously.
+
+=== Security requirements
+
+Chip designs represent some of the most valuable intellectual property a company holds. Recipe data — the thousands of parameters that define a manufacturing process — can run to a thousand pages or more, as Jon from Asianometry described when discussing TSMC's process knowledge. Protecting that data from ransomware, insider threats, and supply-chain compromise is not optional.
+
+A tape-out failure caused by corrupted library data, or a design leak caused by insufficient access controls, can cost hundreds of millions of dollars and years of competitive advantage. Security in EDA storage is not a checkbox compliance exercise; it is a fundamental business requirement.
+
+=== Data lifecycle complexity
+
+Results from a completed run may need to be retained for months or years for compliance and re-spin analysis. A re-spin — a minor revision to an already-taped-out chip — requires access to the original design baseline, the specific library versions used, and the simulation results that validated the original design decisions. Keeping that data on primary storage indefinitely is expensive. Migrating it to slower storage introduces risk if the migration process is not tracked carefully.
+
+The lifecycle challenge compounds as AI-driven EDA tools begin generating significantly more intermediate result data per design cycle than traditional flows. Each AI-guided verification loop generates result sets that the AI model consumes in the next iteration. Those results cannot be deleted until the current design phase is complete, inflating the working set on primary storage beyond what traditional capacity planning models predict.

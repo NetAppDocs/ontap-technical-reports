@@ -1,0 +1,21 @@
+section: afx-overview
+title: NetApp AFX
+entries:
+    - title: Overview
+      url: /afx-overview/afx-overview-learn-about.html
+    - title: What's new
+      url: /afx-overview/afx-overview-whats-new.html
+    - title: Architecture
+      url: /afx-overview/afx-overview-architecture.html
+    - title: Performance
+      url: /afx-overview/afx-overview-performance.html
+    - title: Management
+      url: /afx-overview/afx-overview-management.html
+    - title: Capabilities
+      url: /afx-overview/afx-overview-capabilities.html
+    - title: Hardware
+      url: /afx-overview/afx-overview-hardware.html
+    - title: Maximums and limits
+      url: /afx-overview/afx-overview-limits.html
+    - title: Related information
+      url: /afx-overview/afx-overview-related-info.html

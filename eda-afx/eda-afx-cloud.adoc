@@ -1,0 +1,162 @@
+---
+sidebar: sidebar
+permalink: eda-afx/eda-afx-cloud.html
+keywords: cloud bursting, eda, flexcache, snapmirror cloud, svm migration, hybrid cloud, disaster recovery, aws, azure, gcs
+summary: "Cloud bursting for EDA, FlexCache for remote library caching, SnapMirror Cloud for data staging and long-term archive, SVM migration, and disaster recovery design."
+---
+
+= Hybrid cloud
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+On-premises compute clusters have finite capacity, but EDA tape-out milestones concentrate simulation load in short, intense bursts. Hybrid cloud integration lets EDA organizations expand their effective compute and storage footprint during peak periods and maintain off-site data protection without permanently provisioning infrastructure for peak load.
+
+== Cloud bursting for EDA
+
+=== The tape-out sprint problem
+
+EDA workload demand is not uniform across a design cycle. Early design phases involve relatively small teams and moderate compute demand. As a chip approaches tape-out, simulation, physical verification, and sign-off runs concentrate into a sprint that can push an organization's entire HPC cluster to 100% utilization for days or weeks.
+
+Organizations that provision on-premises infrastructure for peak tape-out load carry significant idle capacity during the majority of the design cycle. Organizations that provision for average load face a crunch at tape-out that delays delivery or forces engineers to wait for compute slots.
+
+Cloud bursting solves this by treating the public cloud as on-demand HPC capacity that activates during peak periods and releases when the sprint ends. EDA tool vendors — including Synopsys and Cadence — provide cloud-native licensing models that allow burst usage without requiring permanent cloud license pools.
+
+.EDA burst-to-cloud topology using FlexCache for library caching on cloud compute nodes
+image::afx-eda-cloud-burst-topology.png[EDA cloud burst topology using FlexCache for library caching,align="center"]
+
+=== Storage requirements for cloud bursting
+
+Cloud-based EDA jobs need access to the same tool and library data as on-premises jobs. The options differ in cost, latency, and complexity:
+
+*Cloud bursting storage approach comparison*
+
+[options="header"]
+|===
+| Approach | Mechanism | Best For
+| FlexCache | A caching volume in the cloud reads data from the on-premises AFX source on demand. Cache misses incur WAN latency once; subsequent reads are served from the cloud cache. | Recurring bursts to the same cloud region where tool/library data stabilizes in the cache across burst events
+| SnapMirror Cloud | A full Snapshot copy of design data is staged to cloud object storage before the burst event. Cloud jobs read from a cloud NAS volume fed from that object store. | Large planned burst events with predictable data sets; also the mechanism for long-term archive from Tier 2
+| SVM migration | The entire ONTAP SVM — including volume data, LIF configuration, and export policies — migrates non-disruptively from on-premises to a cloud ONTAP instance. | Planned permanent or long-term migration of a design project or team from on-premises to cloud
+|===
+
+== FlexCache for cloud bursting
+
+=== How FlexCache works
+
+FlexCache creates a caching volume in a remote ONTAP instance (on-premises or cloud-based NetApp Cloud Volumes ONTAP) that fronts a source volume on the origin AFX cluster. Client reads that hit the FlexCache volume are served locally if the data is cached, or fetched from the origin and then cached for future access.
+
+For EDA tool and library data that is read many times by many jobs:
+
+. The first cloud job to read a particular library file incurs the WAN fetch latency.
+. Every subsequent job that reads the same file receives it from the local FlexCache, at the cache's local read speed.
+. The origin AFX cluster does not see repeated reads of the same cached data — only the initial fill traffic.
+
+Once a tool tree or PDK is cached in the cloud FlexCache volume, it remains available for all subsequent cloud burst jobs until the cache evicts it or the data at the origin changes.
+
+.FlexCache topology for EDA cloud bursting: on-premises AFX origin with cloud cache volume
+image::afx-flexcache-architecture.png[FlexCache topology for EDA cloud bursting with origin on AFX,align="center"]
+
+=== FlexCache for on-premises site replication
+
+FlexCache is also valuable for organizations with multiple on-premises sites where EDA teams share common tools and libraries. A secondary site running a FlexCache volume pointing to the primary AFX cluster can serve local EDA jobs from cached library data without requiring each site to maintain a full local copy.
+
+When tools are updated at the primary site, FlexCache automatically invalidates cached data and refetches the updated version on the next access — no manual synchronization required.
+
+NOTE: FlexCache is a read-caching technology. Write operations go directly to the origin volume. This makes it suitable for read-heavy datasets like tools, libraries, and PDKs, but not for scratch volumes where jobs write results.
+
+=== FlexCache configuration
+
+Create a FlexCache relationship from a destination SVM to the source AFX volume:
+
+----
+volume flexcache create -vserver <dest-svm> -volume <cache-vol-name> \
+  -origin-vserver <source-svm> -origin-volume <afx-source-volume> \
+  -size 10TB -junction-path /<cache-junction>
+----
+
+Prepopulate the cache before burst jobs start to reduce initial cache-miss latency:
+
+----
+volume flexcache prepopulate start -cache-vserver <dest-svm> \
+  -cache-volume <cache-vol-name> \
+  -origin-path /<path-to-prepopulate>
+----
+
+== SnapMirror Cloud for data staging and archive
+
+=== Data staging for burst events
+
+For large planned burst events where the full tool and library dataset should be available at the cloud site before jobs start, SnapMirror Cloud can pre-position data in cloud object storage. Cloud Volumes ONTAP or a cloud-hosted ONTAP instance can then serve that data to cloud EDA nodes.
+
+The workflow:
+
+. Run a SnapMirror Cloud transfer from the Tier 2 AFF system to a cloud object store (AWS S3, Azure Blob, or GCS).
+. In the cloud, create a Cloud Volumes ONTAP (CVO) instance and restore volumes from the object store.
+. Mount the CVO volumes on cloud compute nodes using NFS.
+. Run burst EDA jobs against the cloud-hosted data.
+. At burst completion, SnapMirror the changed scratch data back to on-premises for archival.
+
+IMPORTANT: SnapMirror Cloud from AFX is not directly supported. Cold data archival from AFX requires SnapMirror to a Tier 2 AFF C-Series or FAS first. SnapMirror Cloud relationships should be configured on the Tier 2 system, not on AFX. This is a consequence of AFX not supporting FabricPool or direct object store tiering.
+
+=== Long-term archive
+
+SnapMirror Cloud from Tier 2 to cloud object storage also serves as a long-term archive mechanism for completed tapeout projects. The workflow:
+
+. At project completion, SnapMirror the final project Snapshot from Tier 2 to cloud object store.
+. Verify data integrity of the cloud copy.
+. Apply a retention policy to the cloud object to prevent accidental deletion.
+. Release the Tier 2 storage for reuse.
+. Restore from cloud object store if re-spin analysis requires access to the archived project data.
+
+Cloud object storage costs for long-term archive are orders of magnitude lower than on-premises NVMe NAS, making cloud archive economically attractive for data that is accessed rarely but must be retained for years.
+
+== SVM migration
+
+ONTAP SVM migration provides non-disruptive movement of an entire SVM — including all volume data, LIF configuration, export policies, and security settings — from one ONTAP cluster to another. For EDA environments, SVM migration enables:
+
+* *Datacenter migrations:* Move a design team's entire EDA storage namespace from an old datacenter to a new one without quiescing running jobs.
+* *Cloud migration:* Migrate an on-premises ONTAP SVM to a Cloud Volumes ONTAP instance in the cloud, enabling a planned transition of a design project to a cloud-hosted infrastructure.
+* *Platform upgrades:* Migrate from an older AFF platform to a new AFX cluster while maintaining continuous availability of NFS mount points.
+
+NFS clients connected to the migrating SVM maintain their connections throughout the migration. Mount points do not change. Running EDA jobs continue without interruption.
+
+== Disaster recovery design
+
+=== Recovery objectives for EDA data
+
+EDA organizations should define recovery objectives for each category of design data:
+
+*Disaster recovery objectives by data category*
+
+[options="header"]
+|===
+| Data Category | Recommended RPO | Recommended RTO | DR Mechanism
+| Active design data (tape-out phase) | 1 hour | 1–4 hours | Hourly SnapMirror to secondary cluster; SVM DR for rapid export re-configuration
+| EDA tool installations | 24 hours | 1–2 hours | Daily SnapMirror to secondary; restore and re-export on DR activation
+| PDKs and cell libraries | 24 hours | 2–4 hours | Daily SnapMirror to secondary; validate checksums before re-export
+| Completed project archives | 24 hours | Best-effort | Daily SnapMirror or SnapMirror Cloud; restore on demand
+| Near-zero RPO (critical IP) | Near-zero | Near-zero | SnapMirror Active-Sync for NAS (ONTAP 9.19.1GA); requires two sites plus mediator
+|===
+
+=== SnapMirror for DR
+
+SnapMirror async DR for AFX to a secondary cluster provides the recommended baseline DR posture for most EDA environments:
+
+. Configure SnapMirror relationships from AFX to a secondary AFX or AFF cluster for each critical volume.
+. Set replication schedule based on RPO requirements (typically hourly for active design volumes).
+. For SVM DR, replicate the entire SVM to preserve export policy and LIF configuration.
+. Test DR failover at least annually to validate that RTO targets can be met.
+
+=== SnapMirror Active-Sync for NAS (zero-RPO option)
+
+For organizations that require near-zero RPO protection — such as those approaching tape-out where any data loss would require expensive re-simulation — SnapMirror Active-Sync for NAS (ONTAP 9.19.1GA) provides synchronous protection without MetroCluster hardware.
+
+SnapMirror Active-Sync for NAS requires:
+
+* Two ONTAP clusters (either AFX or a mix of AFX and AFF) at two separate sites
+* A ONTAP mediator deployed at a third site (or cloud) for quorum decisions
+* Adequate WAN bandwidth between sites to sustain synchronous write acknowledgment latency within acceptable bounds
+
+When SnapMirror Active-Sync for NAS is active, writes to the source volume are not acknowledged to the NFS client until the data has been received at the destination site. If the primary site fails, the destination site automatically becomes the active site and NFS clients reconnect without requiring manual administrator action.
+
+NOTE: Synchronous replication imposes write latency equal to the round-trip time between the two sites. For EDA scratch workloads with small synchronous writes, this latency must be factored into storage design. Test with representative write workloads before committing to a synchronous replication topology.
