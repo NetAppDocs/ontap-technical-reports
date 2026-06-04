@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: eda-afx/eda-afx-performance.html
-keywords: afx performance, nfsv4, nfsv4.1, concurrent open close, coc, metadata performance, sequential throughput, aggressive read-ahead, benchmark, elbencho, linux tuning, nconnect, read-ahead, slot table, vm.dirty
-summary: "Per-node and per-cluster AFX performance numbers, NFSv4.x improvements for EDA, aggressive read-ahead, benchmark results, and Linux client performance tuning."
+keywords: afx performance, nfsv4, nfsv4.1, concurrent open close, coc, metadata performance, sequential throughput, aggressive read-ahead, benchmark, elbencho
+summary: "Per-node and per-cluster AFX performance numbers, NFSv4.x improvements that make it viable for EDA, Concurrent Open Close metadata optimization, aggressive read-ahead, and benchmark results."
 ---
 
 = Performance
@@ -10,7 +10,7 @@ summary: "Per-node and per-cluster AFX performance numbers, NFSv4.x improvements
 :imagesdir: ./media
 
 [.lead]
-AFX delivers substantial performance improvements over unified ONTAP platforms at every layer: per-node throughput, RAID efficiency, deduplication scope, and — critically for EDA — NFS protocol performance that has been fundamentally improved in ONTAP 9.18.1 and later. Realizing the full performance potential of AFX also requires correctly tuned Linux NFS clients on the compute nodes that mount it.
+AFX delivers substantial performance improvements over unified ONTAP platforms at every layer: per-node throughput, RAID efficiency, deduplication scope, and — critically for EDA — NFS protocol performance that has been fundamentally improved in ONTAP 9.18.1 and later.
 
 == Per-node and per-cluster throughput
 
@@ -43,33 +43,18 @@ The node-to-shelf saturation ratio in ONTAP 9.19.1 is approximately 4:1. Four AF
 
 Example cluster configurations:
 
-[cols="2,2,2,3",options="header"]
+*Example AFX cluster configurations*
+
+[options="header"]
 |===
 | Nodes | Shelves | Theoretical Peak Read | Primary Use Case
-
-| 4
-| 1
-| ~134GB/s
-| Small cluster, metadata-heavy with moderate capacity needs
-
-| 8
-| 2
-| ~268GB/s
-| Mid-range simulation farm: tools, PDKs, active scratch
-
-| 16
-| 4
-| ~536GB/s
-| Large EDA environment with high concurrent job counts
-
-| 32
-| 8
-| ~1TB/s
-| Extreme-scale tapeout environment or large multi-team EDA site
-
+| 4 | 1 | ~134GB/s | Small cluster, metadata-heavy with moderate capacity needs
+| 8 | 2 | ~268GB/s | Mid-range simulation farm: tools, PDKs, active scratch
+| 16 | 4 | ~536GB/s | Large EDA environment with high concurrent job counts
+| 32 | 8 | ~1TB/s | Extreme-scale tapeout environment or large multi-team EDA site
 |===
 
-NOTE: These throughput figures reflect aggregate cluster bandwidth. Individual NFS client throughput depends on client-side nconnect settings, network topology, and mount configuration. See xref:eda-afx-best-practices.html[Best practices] for NFS client tuning guidance.
+NOTE: These throughput figures reflect aggregate cluster bandwidth. Individual NFS client throughput depends on client-side nconnect settings, network topology, and mount configuration. See link:eda-afx-storage-design.html[Storage design] for NFS client tuning guidance.
 
 == NFSv4.x improvements for EDA
 
@@ -123,7 +108,7 @@ The practical result for EDA: the metadata performance gap between NFSv4.1 and N
 For new EDA deployments on AFX, use NFSv4.2 with session trunking:
 
 ----
-mount -t nfs -o vers=4.2,nconnect=8,rsize=1048576,wsize=1048576,nocto,actimeo=600,trunkdiscovery \
+mount -t nfs -o vers=4.2,nconnect=16,rsize=1048576,wsize=1048576,nocto,trunkdiscovery \
   <afx-lif-ip>:<volume-junction-path> /mnt/<mountpoint>
 ----
 
@@ -133,30 +118,15 @@ NOTE: For existing EDA environments already running well-tuned NFSv3, migrating 
 
 === Performance comparison summary
 
-[cols="3,2,2,3",options="header"]
+*NFSv4.1 vs NFSv3 performance comparison on ONTAP 9.18.1+*
+
+[options="header"]
 |===
 | Workload | NFSv3 | NFSv4.1 on ONTAP 9.18.1+ | Notes
-
-| Sequential reads
-| Baseline
-| +30%
-| MPIO bypasses WAFL, reduces context switches
-
-| Random reads (FlexGroup, cached)
-| Baseline
-| -7% (within margin)
-| Multipart read path improvement closes historical gap
-
-| Sequential writes
-| Baseline
-| +10%
-| NVLOG replication improvement
-
-| Metadata (open/close/stat)
-| Baseline
-| Within -15%
-| Concurrent Open Close eliminates OPEN/CLOSE serialization
-
+| Sequential reads | Baseline | +30% | MPIO bypasses WAFL, reduces context switches
+| Random reads (FlexGroup, cached) | Baseline | -7% (within margin) | Multipart read path improvement closes historical gap
+| Sequential writes | Baseline | +10% | NVLOG replication improvement
+| Metadata (open/close/stat) | Baseline | Within -15% | Concurrent Open Close eliminates OPEN/CLOSE serialization
 |===
 
 == Aggressive read-ahead
@@ -221,34 +191,17 @@ NFS read-ahead predictively fetches blocks from a file in advance of application
 
 Red Hat Enterprise Linux 8.3+ and Ubuntu 18.04+ reduced the default NFS read-ahead from 15× rsize to a fixed 128 KiB, regardless of the mounted filesystem's `rsize` setting. This was a significant regression for sequential workloads that previously benefited from the larger prefetch window.
 
-[cols="2,2,2",options="header"]
+*Default NFS read-ahead by Linux distribution*
+
+[options="header"]
 |===
 | Distribution | Release | Default read-ahead
-
-| RHEL
-| 7.x, 8.0–8.2
-| 15 × `rsize`
-
-| RHEL
-| 8.3 and later
-| 128 KiB (fixed)
-
-| SLES
-| 12.x – at least 15SP2
-| 15 × `rsize`
-
-| Ubuntu
-| 16.04
-| 15 × `rsize`
-
-| Ubuntu
-| 18.04 and later
-| 128 KiB (fixed)
-
-| Debian
-| Up to at least 10
-| 15 × `rsize`
-
+| RHEL | 7.x, 8.0–8.2 | 15 × `rsize`
+| RHEL | 8.3 and later | 128 KiB (fixed)
+| SLES | 12.x – at least 15SP2 | 15 × `rsize`
+| Ubuntu | 16.04 | 15 × `rsize`
+| Ubuntu | 18.04 and later | 128 KiB (fixed)
+| Debian | Up to at least 10 | 15 × `rsize`
 |===
 
 With a 1 MiB `rsize` mount option, the historical default would have been 15,360 KiB (15 × 1024 KiB). RHEL 8.3+ systems will default to 128 KiB — a 120× reduction that can visibly degrade sequential read performance for EDA library and tool mounts.
@@ -259,7 +212,6 @@ For EDA workloads with sequential read patterns (tool binaries, PDK reads, simul
 
 To set read-ahead dynamically for a specific mount point, use the following script:
 
-[source,bash]
 ----
 #!/bin/bash
 # Set or show NFS read-ahead for a specific mount point.
@@ -340,35 +292,19 @@ In NFSv3, concurrency is governed by the `sunrpc.tcp_max_slot_table_entries` ker
 
 For EDA farms, this means:
 
-[cols="2,2,2,3",options="header"]
+*NFSv3 sunrpc slot table sizing by client count*
+
+[options="header"]
 |===
 | Client count | Recommended slots/client | Total slots | Notes
-
-| 1–10
-| 128
-| ≤ 1,280
-| Small cluster or single benchmark host
-
-| 50–100
-| 32–64
-| ≤ 6,400
-| Mid-size EDA team; nconnect increases effective concurrency
-
-| 250+
-| 8
-| ≤ 2,000
-| Large EDA farm; 2,000 slots supports >4 GB/s workloads
-
-| 1,250+
-| 2–4
-| ≤ 5,000
-| Very large HPC farm; tune per measured latency and I/O rate
-
+| 1–10 | 128 | ≤ 1,280 | Small cluster or single benchmark host
+| 50–100 | 32–64 | ≤ 6,400 | Mid-size EDA team; nconnect increases effective concurrency
+| 250+ | 8 | ≤ 2,000 | Large EDA farm; 2,000 slots supports >4 GB/s workloads
+| 1,250+ | 2–4 | ≤ 5,000 | Very large HPC farm; tune per measured latency and I/O rate
 |===
 
 To set `sunrpc.tcp_max_slot_table_entries` persistently:
 
-[source,bash]
 ----
 # Add to /etc/sysctl.conf
 echo "sunrpc.tcp_max_slot_table_entries=128" >> /etc/sysctl.conf
@@ -384,7 +320,6 @@ In NFSv4.1, concurrency is negotiated per session between client and server. The
 
 To maximize NFSv4.1 concurrency, increase `max_session_slots` to 180 on the client:
 
-[source,bash]
 ----
 # Create /etc/modprobe.d/nfsclient.conf (no quotes around the value)
 echo "options nfs max_session_slots=180" > /etc/modprobe.d/nfsclient.conf
@@ -407,7 +342,7 @@ IMPORTANT: A single NFSv4.1 connection is capped at 128 outstanding commands. To
 * *High-performance mounts* (tools, libraries, scratch): Use `nconnect=8` or higher with `sec=sys`.
 * *Security-sensitive mounts with Kerberos*: Use `sec=krb5p` without `nconnect`, and ensure the network layer provides adequate security (dedicated storage VLAN with access controls).
 
-Also note that all mounts from a single NFS endpoint (LIF IP address) inherit the `nconnect` connection count of the *first* export mounted from that endpoint. Always mount the most performance-critical volume first — with the desired `nconnect` value — to ensure all subsequent mounts from the same LIF inherit the correct connection count.
+Also note that all mounts from a single NFS endpoint inherit the `nconnect` setting of the *first export mounted* from that endpoint. Mount the most performance-critical volume first — with the desired `nconnect` value — to ensure all subsequent mounts from the same LIF inherit the correct connection count.
 
 === Linux filesystem cache tuning
 
@@ -422,7 +357,6 @@ For EDA workloads that write to scratch or project volumes, the Linux virtual me
 
 Monitor dirty buffer state:
 
-[source,bash]
 ----
 while true; do
   echo "###"; date
@@ -435,31 +369,19 @@ When `Writeback` is substantially larger than expected write throughput × 5 sec
 
 ==== Recommended filesystem cache tunables
 
-[cols="2,2,3",options="header"]
+*Recommended filesystem cache tunables*
+
+[options="header"]
 |===
 | Tunable | Recommended value | Rationale
-
-| `vm.dirty_bytes`
-| 30 MiB (`31457280`)
-| Caps dirty buffer size at a fixed amount regardless of RAM. Default (20–30% of RAM) is excessive on modern HPC nodes and causes write bursts.
-
-| `vm.dirty_background_bytes`
-| 6 MiB (`6291456`)
-| Set to ~1/5 of `vm.dirty_bytes`. Begins asynchronous write-back early to smooth I/O.
-
-| `vm.dirty_expire_centisecs`
-| 300 (3 seconds)
-| How old a dirty buffer can be before forced flush. Default is 3000 (30 seconds), which is too long for write-dominant EDA scratch workloads.
-
-| `vm.dirty_writeback_centisecs`
-| 100 (1 second)
-| How often the kernel flusher thread wakes. Set to 1/3 of `dirty_expire_centisecs` to ensure timely flush.
-
+| `vm.dirty_bytes` | 30 MiB (`31457280`) | Caps dirty buffer size at a fixed amount regardless of RAM. Default (20–30% of RAM) is excessive on modern HPC nodes and causes write bursts.
+| `vm.dirty_background_bytes` | 6 MiB (`6291456`) | Set to ~1/5 of `vm.dirty_bytes`. Begins asynchronous write-back early to smooth I/O.
+| `vm.dirty_expire_centisecs` | 300 (3 seconds) | How old a dirty buffer can be before forced flush. Default is 3000 (30 seconds), which is too long for write-dominant EDA scratch workloads.
+| `vm.dirty_writeback_centisecs` | 100 (1 second) | How often the kernel flusher thread wakes. Set to 1/3 of `dirty_expire_centisecs` to ensure timely flush.
 |===
 
 Apply these settings persistently:
 
-[source,bash]
 ----
 cat >> /etc/sysctl.conf << 'EOF'
 vm.dirty_bytes=31457280
@@ -474,19 +396,14 @@ NOTE: Set `vm.dirty_bytes` and `vm.dirty_background_bytes` (absolute values) rat
 
 ==== Workload-specific guidance
 
-[cols="2,3",options="header"]
+*vm.dirty_* recommendations by EDA workload type*
+
+[options="header"]
 |===
 | EDA workload type | vm.dirty_* recommendation
-
-| Mixed read/write (typical simulation jobs)
-| `vm.dirty_bytes=31457280` (30 MiB). Good overall balance of latency and throughput.
-
-| Write-dominant scratch output
-| Reduce `vm.dirty_expire_centisecs` to 300 and `vm.dirty_writeback_centisecs` to 100. Flush aggressively to keep latency low on the write path.
-
-| Read-dominant (library reads, tool execution)
-| Default settings are acceptable since dirty buffer pressure is minimal. Focus tuning effort on `rsize` and read-ahead instead.
-
+| Mixed read/write (typical simulation jobs) | `vm.dirty_bytes=31457280` (`30 MiB`). Good overall balance of latency and throughput.
+| Write-dominant scratch output | Reduce `vm.dirty_expire_centisecs` to 300 and `vm.dirty_writeback_centisecs` to 100. Flush aggressively to keep latency low on the write path.
+| Read-dominant (library reads, tool execution) | Default settings are acceptable since dirty buffer pressure is minimal. Focus tuning effort on `rsize` and read-ahead instead.
 |===
 
 === Direct I/O and benchmarking considerations
@@ -500,4 +417,4 @@ Practical implications:
 * *Benchmark results with `--direct`* represent the storage hardware ceiling. They are useful for validating that the storage system is delivering its rated throughput, but they will exceed what any individual EDA job sees in production.
 * *Benchmark results without `--direct`* test the combined performance of storage and client-side cache. Run both and understand the gap.
 * *Size compute-node memory* with cache warming in mind. An EDA compute node with 256 GiB RAM can hold the entire PDK cell library and most of a tool suite in cache across a job series, dramatically reducing AFX bandwidth demand per node.
-* *nocto tuning for library mounts* (covered in xref:eda-afx-best-practices.html[Best practices]) reduces unnecessary server round-trips for data that is already correctly cached on the client — this is particularly valuable when library reads are cache-warm.
+* *nocto tuning for library mounts* (covered in link:eda-afx-best-practices.html[Best practices]) reduces unnecessary server round-trips for data that is already correctly cached on the client — this is particularly valuable when library reads are cache-warm.

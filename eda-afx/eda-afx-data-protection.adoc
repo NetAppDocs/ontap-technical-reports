@@ -11,3 +11,153 @@ summary: "Snapshot scheduling, SnapMirror replication, SnapMirror Active-Sync fo
 
 [.lead]
 Chip design data is irreplaceable intellectual property. The combination of Snapshots, SnapMirror replication, and autonomous ransomware protection provides layered defense against data loss, site failure, and malicious encryption. AFX supports all of these capabilities with a few architectural differences from unified ONTAP that EDA teams must understand.
+
+== Snapshots
+
+ONTAP Snapshots capture a point-in-time image of a volume with no data copy and minimal space overhead. For EDA scratch volumes, configuring Snapshots at the beginning and end of each major simulation run provides a recovery point that can restore work lost to accidental deletion or corruption without requiring a full backup restore.
+
+=== Recommended Snapshot schedules
+
+*Recommended Snapshot schedules by volume type*
+
+[options="header"]
+|===
+| Volume Type | Snapshot Frequency | Retention | Rationale
+| EDA tools | Daily and weekly | 7 daily, 4 weekly | Tool installations change infrequently; weekly retention covers rollback from a bad tool update
+| PDKs and cell libraries | Daily and weekly | 7 daily, 4 weekly; plus per-release snapshots retained indefinitely | PDK releases are milestone events; retain each release snapshot permanently for re-spin support
+| Performance scratch (active jobs) | Per-run start, or disabled | 24 hours or disabled | High-churn data; snapshots covering a full run provide recovery if job output is accidentally deleted
+| FlexClone workspaces | Hourly | 24 hours | Gives individual engineers self-service recovery from accidental file deletions during the workday
+| Build artifacts and results | Daily | 7 daily, 4 weekly | Build artifacts support re-run analysis; weekly snapshots cover longer-term regression investigation
+| Completed project archives | Weekly | 4 weekly, 12 monthly, 3 years annual | Tape-out project data must be retained for re-spin and compliance; long-term snapshots support this
+|===
+
+=== Space efficiency of Snapshots
+
+ONTAP Snapshots share unchanged blocks with the active volume, consuming space only for changed data. For largely static volumes such as tool installations and PDK libraries, Snapshot overhead is minimal — the Snapshot tree may consume less than 1% of the volume's allocated capacity for months at a time.
+
+For high-churn scratch volumes, Snapshot overhead can be significant because new simulation results constantly generate new blocks. For single-use scratch volumes where the output data is either consumed immediately or discarded, disabling Snapshots is appropriate.
+
+NOTE: Retain at minimum the Snapshot taken at the start of each tape-out project phase. This Snapshot represents the "last known good" state of the design baseline and is required if a re-spin requires returning to exactly the state of the design at a specific milestone.
+
+== SnapMirror replication
+
+=== Asynchronous SnapMirror for disaster recovery
+
+SnapMirror asynchronously replicates Snapshot copies from a source volume to a destination volume on a secondary cluster. For critical EDA design data on Tier 1 AFX, SnapMirror to a secondary AFX or AFF cluster provides disaster recovery with recovery point objectives (RPOs) that match the SnapMirror replication schedule.
+
+Typical SnapMirror configuration for EDA:
+
+* *Replication schedule:* Hourly for active design volumes; daily for stable libraries and tool installations.
+* *RPO:* One hour for active design data (matches hourly replication interval).
+* *RTO:* Minutes to hours depending on volume count and the time required to re-export volumes at the secondary site.
+* *Destination:* Secondary on-premises AFX or AFF cluster, or cloud (see link:eda-afx-cloud.html[Hybrid cloud]).
+
+=== SVM DR replication
+
+SVM DR replication captures not just the volume data but the entire SVM configuration:
+
+* Export policies and export policy rules
+* LIF IP address assignments and routing
+* Security policy settings (Kerberos, LDAP, NIS configuration)
+* Volume layout and junction path tree
+
+When SnapMirror replicates an SVM in DR mode, a secondary site can take over serving EDA NFS clients by activating the DR SVM with no manual reconfiguration of the volume export structure. NFS clients can reconnect to the same mount paths at the DR site without changes to /etc/fstab or autofs configuration.
+
+SVM DR is the recommended replication mode for EDA environments where rapid failover is required.
+
+=== SnapMirror for cold data migration from AFX
+
+Because FabricPool is not available on AFX, SnapMirror serves a secondary purpose beyond disaster recovery: it provides the mechanism for moving cold design data from Tier 1 AFX to Tier 2 AFF C-Series, where FabricPool can then tier cold blocks to object storage.
+
+Configure SnapMirror relationships from AFX to Tier 2 at project milestones:
+
+. At project phase completion, update the project's SnapMirror relationship to replicate the final Snapshot to Tier 2.
+. Verify data integrity at the Tier 2 destination.
+. Place the Tier 2 volume under a FabricPool tiering policy (7-day or 31-day cooling period depending on re-access likelihood).
+. Delete or archive the source volume on Tier 1 AFX to free capacity for the next project phase.
+
+== SnapMirror Active-Sync for NAS
+
+=== MetroCluster is not available on AFX
+
+Unified ONTAP MetroCluster provides zero-RPO synchronous replication by mirroring data at the aggregate level between two sites. Because AFX has no physical aggregates (data is managed at the SAZ level), MetroCluster's aggregate-mirroring mechanism has no foundation to operate on. MetroCluster is therefore not supported on AFX.
+
+IMPORTANT: Any reference to MetroCluster support on AFX is incorrect. If synchronous near-zero RPO protection is required for AFX-hosted EDA data, use SnapMirror Active-Sync for NAS as described below.
+
+=== SnapMirror Active-Sync for NAS
+
+SnapMirror Active-Sync for NAS was introduced in ONTAP 9.19.1GA and provides synchronous, near-zero RPO protection for NAS (NFS and SMB) volumes across two sites without requiring MetroCluster hardware.
+
+Key characteristics relevant to EDA:
+
+* *Protocol:* NFS (relevant for EDA NFS mounts)
+* *RPO:* Near-zero (synchronous replication acknowledges to the client only after both sites have the data)
+* *RTO:* Near-zero for automated failover scenarios
+* *Topology:* Two sites with a SnapMirror Active-Sync relationship and a mediator for quorum decisions
+* *Transparency:* NFS clients can continue accessing data following a site failure without remounting
+
+For EDA environments where tapeout data or critical library volumes must be available even if a primary site becomes unavailable — such as organizations with a business continuity requirement for tape-out windows — SnapMirror Active-Sync for NAS provides the near-zero RPO protection that MetroCluster provided on unified ONTAP.
+
+NOTE: SnapMirror Active-Sync for NAS is available beginning in ONTAP 9.19.1GA. Verify that your AFX cluster is running 9.19.1GA or later before designing a deployment that relies on this capability.
+
+== Autonomous ransomware protection
+
+=== The threat to EDA data
+
+Chip design data is one of the most targeted categories of intellectual property in ransomware attacks. A successful ransomware event against an EDA environment can:
+
+* Encrypt months of accumulated simulation results
+* Corrupt tool installations that dozens of concurrent engineers depend on
+* Destroy PDK and library data that cannot easily be reconstructed
+* Contaminate FlexClone workspaces that share blocks with the parent baseline
+
+The financial impact extends beyond data recovery costs to include the NRE time lost while recovering, the license costs consumed during recovery, and the competitive exposure from a potential data leak.
+
+=== ARP operation
+
+ONTAP Autonomous Ransomware Protection (ARP) uses a machine learning model trained on normal I/O patterns for each protected volume. ARP monitors entropy changes in incoming write data — a key indicator of active encryption — and cross-references those changes against the established normal write pattern for that volume.
+
+When ARP detects activity that matches the entropy profile of ransomware encryption:
+
+. It generates an automatic Snapshot immediately to preserve the pre-attack state of the data.
+. It generates an alert via SNMP trap, EMS event, or Harvest/Grafana notification to the operations team.
+. Optionally, it blocks further writes to the affected volume pending administrator review and confirmation.
+
+The administrator receives the alert, reviews the Snapshot to confirm or deny the suspected attack, and either restores from the pre-attack Snapshot (if confirmed) or clears the alert and adjusts the model (if false positive).
+
+ARP operates inline with no performance penalty during normal operation. The ML model inference runs in the ONTAP process without adding measurable latency to normal I/O.
+
+=== ARP configuration recommendations for EDA
+
+Enable ARP on all volumes containing proprietary design data:
+
+----
+volume modify -vserver <svm> -volume <vol-name> -anti-ransomware-state enabled
+----
+
+Enable ARP globally for all new volumes in an SVM:
+
+----
+vserver modify -vserver <svm> -anti-ransomware-default-volume-state enabled
+----
+
+*ARP recommendations by volume type*
+
+[options="header"]
+|===
+| Volume Type | ARP Recommendation | Rationale
+| EDA tools | Enabled | Tool corruption from ransomware can disable all running jobs simultaneously
+| PDKs and cell libraries | Enabled | PDK data is irreplaceable IP; attack on libraries affects all current and future designs
+| Performance scratch (active jobs) | Enabled | Scratch encryption in progress stops active simulation runs and destroys current-run results
+| FlexClone workspaces | Enabled | Engineer workspaces may contain design changes not yet committed to source control
+| Build artifacts | Enabled | Build artifact loss requires expensive recompilation runs
+| Project archives | Enabled | Archival data represents years of NRE investment
+|===
+
+NOTE: ARP requires a learning period of typically 30 days before it activates full detection. During this period, ARP observes normal write patterns to establish a baseline. New volumes should be placed in learning mode (`anti-ransomware-state dry-run`) during the initial 30-day period before switching to active mode.
+
+=== Snapshot locking for immutable recovery points
+
+For environments that require immutable Snapshot protection against ransomware that has gained administrative credentials, ONTAP SnapLock Compliance can be applied to Snapshots on SnapMirror destinations to create tamper-proof recovery points. These locked Snapshots cannot be deleted by any user, including cluster administrators, until their retention period expires.
+
+For critical project milestone Snapshots, consider replicating to a SnapLock Compliance volume on a secondary system to ensure that at least one recovery point per milestone is permanently protected.

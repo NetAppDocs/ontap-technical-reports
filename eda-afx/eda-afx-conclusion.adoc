@@ -3,12 +3,33 @@ sidebar: sidebar
 permalink: eda-afx/eda-afx-conclusion.html
 keywords: EDA, electronic design automation, NetApp, AFX, ONTAP, summary, conclusion
 summary: EDA workloads are fundamentally a storage performance problem. This section summarizes the key findings and recommendations of this technical report.
----= Summary and conclusion
-:hardbreaks-option:[.lead]
-EDA workloads are fundamentally a storage performance problem. Metadata throughput, file count, data lifecycle complexity, and security requirements all converge in a way that demands a purpose-built approach. The transition from 5nm to 3nm and below has multiplied compute requirements fourfold to sixfold and storage requirements by an equivalent factor. No conventional NAS architecture can absorb that rate of growth without becoming the bottleneck that delays tapeout.AFX addresses the EDA storage problem at its root. By disaggregating compute from flash storage in a shared pool architecture, AFX eliminates disk ownership boundaries, expands RAID protection to 92 data drives per group, and enables global deduplication across the entire cluster domain. FlexGroup volumes distribute file metadata and data across every node and shelf simultaneously, replacing serialized metadata operations with parallel execution at the scale EDA job schedulers demand.== What this document coversThis technical report documents:* The architectural reasons conventional NAS fails at EDA scale
+---
+
+= Summary and conclusion
+:icons: font
+:imagesdir: ./media
+
+[.lead]
+EDA workloads are fundamentally a storage performance problem. Metadata throughput, file count, data lifecycle complexity, and security requirements all converge in a way that demands a purpose-built approach. The transition from 5nm to 3nm and below has multiplied compute requirements fourfold to sixfold and storage requirements by an equivalent factor. No conventional NAS architecture can absorb that rate of growth without becoming the bottleneck that delays tapeout.
+
+AFX addresses the EDA storage problem at its root. By disaggregating compute from flash storage in a shared pool architecture, AFX eliminates disk ownership boundaries, expands RAID protection to 92 data drives per group, and enables global deduplication across the entire cluster domain. FlexGroup volumes distribute file metadata and data across every node and shelf simultaneously, replacing serialized metadata operations with parallel execution at the scale EDA job schedulers demand.
+
+== What this document covers
+
+This technical report documents:
+
+* The architectural reasons conventional NAS fails at EDA scale
 * How AFX's Storage Availability Zone design eliminates the constraints that limit traditional systems
 * FlexGroup volume design and sizing for EDA datasets from scratch to archive
 * Data protection strategies appropriate to each EDA data category and its recovery requirements
 * Performance measurement, NFSv4.x improvements, and Linux client tuning that together close the gap between raw hardware capability and observable workload throughput
 * Hybrid cloud integration for tape-out burst capacity, long-term archive, and disaster recovery
-* Best practices drawn from production EDA deployments that can be validated against actual workload profiles before production rollout== A starting point, not a prescriptionFor organizations designing at the leading edge — managing the transition from 5nm to 3nm to angstrom-scale processes, adopting AI-driven verification and physical design tools, and building hybrid cloud burst capacity for tape-out sprints — AFX provides a storage foundation capable of growing with the workload. As design complexity increases and AI-assisted tools multiply the number of concurrent simulation jobs, the storage infrastructure must scale without requiring architectural redesign.The guidance in this document represents a starting point. Every EDA environment reflects a unique combination of tools, design methodologies, team structure, and security requirements. Mount option values, FlexGroup constituent counts, Snapshot retention schedules, and data lifecycle policies should all be validated against actual workload profiles before production deployment. The monitoring instrumentation described in the best practices section exists precisely to make that validation measurable and ongoing.NOTE: For questions about specific AFX sizing, configuration validation, or EDA workload assessment, contact your NetApp account team or NetApp Professional Services.
+* Best practices drawn from production EDA deployments that can be validated against actual workload profiles before production rollout
+
+== A starting point, not a prescription
+
+For organizations designing at the leading edge — managing the transition from 5nm to 3nm to angstrom-scale processes, adopting AI-driven verification and physical design tools, and building hybrid cloud burst capacity for tape-out sprints — AFX provides a storage foundation capable of growing with the workload. As design complexity increases and AI-assisted tools multiply the number of concurrent simulation jobs, the storage infrastructure must scale without requiring architectural redesign.
+
+The guidance in this document represents a starting point. Every EDA environment reflects a unique combination of tools, design methodologies, team structure, and security requirements. Mount option values, FlexGroup constituent counts, Snapshot retention schedules, and data lifecycle policies should all be validated against actual workload profiles before production deployment. The monitoring instrumentation described in the best practices section exists precisely to make that validation measurable and ongoing.
+
+NOTE: For questions about specific AFX sizing, configuration validation, or EDA workload assessment, contact your NetApp account team or NetApp Professional Services.

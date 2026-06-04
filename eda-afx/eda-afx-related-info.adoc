@@ -11,3 +11,105 @@ summary: "Links to ONTAP documentation, NetApp EDA resources, AFX product inform
 
 [.lead]
 The following resources provide additional context, technical detail, and reference material for EDA deployments on NetApp AFX.
+
+== NetApp documentation
+
+* link:https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]
++
+Full ONTAP product documentation including release notes, CLI reference, System Manager guides, and REST API reference.
+
+* link:https://docs.netapp.com/us-en/netapp-solutions/eda/eda-overview-concepts.html[NetApp Solutions for EDA^]
++
+EDA-specific solution content including deployment guides and reference architectures on the NetApp Solutions portal.
+
+* link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes management with ONTAP CLI^]
++
+Complete FlexGroup management guide including Advanced Capacity Balancing, constituent management, rebalancing, and performance tuning.
+
+* link:https://docs.netapp.com/us-en/ontap/nfs-config/index.html[NFS configuration with ONTAP^]
++
+NFS protocol configuration guide including NFSv4.x, Kerberos, export policies, and performance tuning.
+
+* link:https://docs.netapp.com/us-en/ontap/anti-ransomware/index.html[Autonomous Ransomware Protection^]
++
+ARP configuration, monitoring, and alert management documentation.
+
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html[SnapMirror active sync^]
++
+SnapMirror Active-Sync configuration guide, including the NAS support introduced in ONTAP 9.19.1GA.
+
+== NetApp AFX resources
+
+* link:https://www.netapp.com/data-storage/afx/[NetApp AFX product page^]
++
+Product overview, datasheet, and ordering information for the AFX platform.
+
+* link:https://docs.netapp.com/us-en/ontap-systems/afx-a1k/index.html[AFX 1K hardware documentation^]
++
+Hardware installation, cabling, and maintenance documentation for the AFX 1K node.
+
+== Monitoring and management
+
+* link:https://netapp.github.io/harvest/[NetApp Harvest^]
++
+Open-source ONTAP monitoring framework that feeds Grafana dashboards. Required for AFX monitoring (ActiveIQ Unified Manager is not supported on AFX).
+
+* link:https://docs.netapp.com/us-en/trident/index.html[NetApp Trident^]
++
+Kubernetes container storage interface (CSI) driver for ONTAP, supporting AFX in version 25.10 and later.
+
+== EDA and semiconductor reference
+
+* link:https://techontappodcast.com[Tech ONTAP Podcast^]
++
+The Tech ONTAP Podcast covers NetApp storage technology in depth. Episode 392 (Talking EDA with Jon from Asianometry) provides valuable context on the EDA industry, design economics, and the storage challenges faced by leading-edge chip designers.
+
+* link:https://www.youtube.com/@Asianometry[Asianometry YouTube channel^]
++
+Jon's channel covers semiconductor industry history, EDA tool ecosystems, chip manufacturing processes, and the geopolitics of the semiconductor supply chain. Recommended viewing for infrastructure teams supporting EDA environments who want to understand the business context behind their customers' infrastructure requirements.
+
+* link:https://www.spec.org/sfs2014/[SPEC SFS 2014 benchmark^]
++
+The SPEC SFS 2014_swbuild workload models software build patterns that are representative of EDA metadata loads. Published SPEC SFS results for ONTAP and AFX provide a reference for expected metadata throughput at different cluster configurations.
+
+* link:https://github.com/breuner/elbencho[ElBencho benchmark^]
++
+Open-source distributed I/O benchmark tool used for throughput and latency testing of NFS storage systems. Used for the AFX 4-node benchmark results in this TR.
+
+== Linux NFS performance tuning references
+
+* link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-mount-options[Linux NFS mount options best practices (Microsoft/Azure NetApp Files)^]
++
+Covers `nconnect`, `rsize`/`wsize`, `nocto`, `actimeo`, and attribute cache timer tuning with worked examples from SAS GRID and SAP HANA deployments. Applies broadly to ONTAP NFS regardless of deployment model.
+
+* link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-nfs-read-ahead[Linux NFS read-ahead best practices (Microsoft/Azure NetApp Files)^]
++
+Covers the RHEL 8.3+/Ubuntu 18.04+ read-ahead regression (128 KiB default), how to tune read-ahead per mount dynamically, and how to persist it using `udev` rules. Includes the Red Hat read-ahead script.
+
+* link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-concurrency-session-slots[Linux NFS concurrency and session slots best practices (Microsoft/Azure NetApp Files)^]
++
+Covers `sunrpc.tcp_max_slot_table_entries` for NFSv3 and `max_session_slots` for NFSv4.1, with Little's Law calculations and worked EDA farm examples (250-client and 1,250-client scenarios).
+
+* link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-filesystem-cache[Linux filesystem cache best practices (Microsoft/Azure NetApp Files)^]
++
+Covers `vm.dirty_ratio`/`vm.dirty_bytes` and related write-back tunables, with SAS GRID and SAS Viya case study values and a monitoring snippet for observing dirty buffer state.
+
+* link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-direct-io[Linux direct I/O best practices (Microsoft/Azure NetApp Files)^]
++
+Explains when direct I/O is appropriate (benchmarking and databases) vs. when filesystem cache should be leveraged (most EDA applications), and the implications for interpreting benchmark results.
+
+== Related NetApp technical reports
+
+* link:https://www.netapp.com/pdf.html?item=/media/17239-tr4617.pdf[TR-4617: Electronic Design Automation Best Practices in ONTAP^]
++
+The predecessor technical report covering EDA best practices on unified ONTAP AFF platforms. Provides useful comparison context for organizations migrating from AFF to AFX.
+
+== Version history
+
+*Version history*
+
+[options="header"]
+|===
+| Version | Changes
+| 1.1 | Added Linux client performance tuning section (NFS read-ahead, sunrpc slot tables, NFSv4.1 max_session_slots, filesystem cache vm.dirty_* tunables, direct I/O guidance, nconnect+Kerberos incompatibility warning, actimeo attribute cache tuning). Corrected ElBencho link. Added Microsoft Linux NFS performance tuning references.
+|===
