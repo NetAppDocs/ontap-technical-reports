@@ -21,6 +21,12 @@ image::afx-eda-workload-targets.jpg[EDA workload categories and their storage ti
 
 Tier 1 handles the datasets that directly gate EDA job throughput. Every running simulation job reads from this tier simultaneously, so metadata rate, sequential bandwidth, and read latency on this tier have a multiplying effect on the entire HPC cluster's throughput.
 
+.Unified ONTAP: node throughput is bounded by the disks it directly owns
+image::afx-overview/image32.png[Unified ONTAP performance density showing per-node performance division,align="center"]
+
+.AFX: all nodes share the Storage Availability Zone for maximum performance density
+image::afx-overview/image33.png[AFX performance density showing all nodes sharing all disks via the SAZ,align="center"]
+
 Datasets for Tier 1 (AFX):
 
 * EDA tool installations

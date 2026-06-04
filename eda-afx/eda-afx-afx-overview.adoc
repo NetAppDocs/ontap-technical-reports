@@ -102,6 +102,9 @@ Each resource type can scale independently. An organization can expand node coun
 .AFX cluster: nodes and shelves scale independently to balance throughput and capacity
 image::afx-cluster-expansion-rack.png[AFX cluster expansion showing independent node and shelf scaling,align="center"]
 
+.AFX performance scales linearly with each additional compute node
+image::afx-overview/image13.png[AFX node count versus sequential throughput linear scaling chart,align="center"]
+
 == Storage Availability Zone
 
 The Storage Availability Zone (SAZ) is the single most architecturally significant difference between AFX and unified ONTAP. In unified ONTAP, each HA controller pair owns specific disk aggregates, and volumes reside within those aggregates. Data mobility between nodes requires copying data from one aggregate to another.
@@ -171,6 +174,9 @@ In AFX 9.18.1, deduplication operates at the volume or node level. A 10GB PDK ce
 ONTAP 9.19.1 introduces SAZ-level global deduplication. Deduplication fingerprints are now shared across all volumes and all nodes in the entire cluster. The same 10GB PDK cell library stored in four separate volumes consumes only 10GB on-disk cluster-wide, regardless of which nodes or volumes hold the duplicates.
 
 For EDA environments that maintain multiple copies of the same tool installation or PDK across separate SVMs or volumes for isolation purposes, global deduplication can reduce the on-disk footprint of those shared datasets dramatically. Tool trees that are nominally 1TB in total volume allocation may consume a small fraction of that on disk if the tool binaries are highly duplicated across volumes.
+
+.Global deduplication in ONTAP 9.19.1: a single fingerprint domain spans all nodes and volumes in the SAZ
+image::afx-overview/image18.png[AFX global deduplication domain in ONTAP 9.19.1 showing SAZ-level fingerprint sharing,align="center"]
 
 == Hardware
 

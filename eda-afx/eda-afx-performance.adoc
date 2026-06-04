@@ -60,6 +60,12 @@ Example cluster configurations:
 | 32 | 8 | ~1TB/s | Extreme-scale tapeout environment or large multi-team EDA site
 |===
 
+.ElBencho benchmark: ~134GB/s sequential read throughput on a 4-node AFX cluster
+image::afx-overview/image34.png[ElBencho sequential read benchmark results on a 4-node AFX cluster,align="center"]
+
+.ElBencho benchmark: ~40GB/s sequential write throughput on a 4-node AFX cluster
+image::afx-overview/image35.png[ElBencho sequential write benchmark results on a 4-node AFX cluster,align="center"]
+
 NOTE: These throughput figures reflect aggregate cluster bandwidth. Individual NFS client throughput depends on client-side nconnect settings, network topology, and mount configuration. See link:eda-afx-storage-design.html[Storage design] for NFS client tuning guidance.
 
 == NFSv4.x improvements for EDA
@@ -109,6 +115,9 @@ COC eliminates this serialization bottleneck. In ONTAP 9.18.1+, OPEN and CLOSE o
 
 The practical result for EDA: the metadata performance gap between NFSv4.1 and NFSv3 — which previously made NFSv4 a non-starter for EDA shops — is reduced to within 15%. For workloads that also benefit from NFSv4.1's MPIO sequential read improvement and write improvements, the combined picture makes NFSv4.2 the recommended default for new EDA deployments on AFX.
 
+.NFSv4.1 metadata I/O performance versus NFSv3 on ONTAP 9.18.1: EDA, AI, and software build benchmarks
+image::afx-overview/image37.png[NFSv4.1 vs NFSv3 metadata operations benchmark for EDA and AI workloads,align="center"]
+
 === NFSv4.2 mount recommendation
 
 For new EDA deployments on AFX, use NFSv4.2 with session trunking:
@@ -134,6 +143,9 @@ NOTE: For existing EDA environments already running well-tuned NFSv3, migrating 
 | Sequential writes | Baseline | +10% | NVLOG replication improvement
 | Metadata (open/close/stat) | Baseline | Within -15% | Concurrent Open Close eliminates OPEN/CLOSE serialization
 |===
+
+.NFSv4.1 sequential I/O throughput improvement versus NFSv3 on ONTAP 9.18.1
+image::afx-overview/image36.png[NFSv4.1 vs NFSv3 sequential read and write improvement chart on ONTAP 9.18.1,align="center"]
 
 == Aggressive read-ahead
 
