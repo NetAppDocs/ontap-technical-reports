@@ -7,7 +7,7 @@ summary: "This technical report covers storage architecture best practices for E
 
 = Electronic Design Automation with NetApp AFX
 :icons: font
-:imagesdir: ./media
+:imagesdir: ../media
 
 [.lead]
 This technical report covers storage architecture best practices for Electronic Design Automation (EDA) workloads using NetApp AFX. It provides guidance on infrastructure design, performance tuning, and data management to help semiconductor organizations maximize developer productivity and license utilization.
