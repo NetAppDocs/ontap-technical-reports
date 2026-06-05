@@ -39,10 +39,7 @@ System Manager is still the GUI interface to interact with NetApp AFX clusters f
 *Side-by-side look at unified ONTAP and NetApp AFX System Manager landing pages*
 
 
-[options="header"]
-|===
-| Unified ONTAP System Manager dashboard image:image38.png["Image"] | NetApp AFX System Manager dashboard image:image39.png["Image"]
-|===
+image:side-by-side-system-manager.png["Side-by-side view of unified ONTAP and NetApp AFX System Manager dashboards"]
 
 As you can see from the above, there aren't many obvious differences in System Manager for unified ONTAP and NetApp AFX. There are a few tells, however.
 
