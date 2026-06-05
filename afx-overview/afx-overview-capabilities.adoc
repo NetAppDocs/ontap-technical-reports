@@ -1,0 +1,82 @@
+---
+sidebar: sidebar
+permalink: afx-overview/afx-overview-capabilities.html
+keywords: netapp afx, networking, security, data protection, nondisruptive, volumes
+summary: "NetApp AFX supports the same networking stack, security features, data protection technologies, nondisruptive operations, and volume types as unified ONTAP, with some adjustments."
+---
+
+= Networking, security, and operations
+:icons: font
+:imagesdir: ../media/afx-overview/
+
+[.lead]
+NetApp AFX supports the same networking stack, security features, data protection technologies, nondisruptive operations, and volume types as unified ONTAP, with some adjustments unique to the disaggregated architecture.
+
+== Networking
+
+The networking stack in NetApp AFX is identical to unified ONTAP. 
+
+* Data LIFs are still used to present network addresses to internal and external services. 
+* Each node has its own set of physical and virtual ports. 
+* VLANs, ifgroups, and BGP are all still supported. 
+* LIFs can still failover between physical nodes and ports in the cluster. 
+* IPspaces/broadcast domains are still configured the same. 
+* Each SVM can have its own dedicated data network.
+* Management networks can be segmented from data networks.
+* Client data networks don't change outside of the new addition of 400GB networking support. 
+* Backend cluster switches are still configured via a "golden configuration" file provided by NetApp.
+
+Some key network differences include:
+
+* Backend cluster network ports now support only 100GB connections to the cluster switches.
+* Because the cluster switches are 400GB capable, the backend node connections use 4 x 100GB breakout cables to reduce the number of ports used on the switches.
+* NVRAM is now mirrored between HA pairs across the backend cluster network via a new HA VLAN configuration on the switches.
+* A new DCN network is added by default for the AI Data Engine. These IP addresses are automatically generated and can be changed as needed.
+
+== Security
+
+NetApp AFX runs ONTAP, which means it uses the same security as ONTAP. All of the cryptomods are identical, which means that security certifications will be identical once the certification processes are completed. NetApp AFX also leverages the same support for security ciphers as unified ONTAP.
+
+In addition, NetApp AFX supports many of the security features provided by unified ONTAP, including (but not limited to):
+
+* Autonomous Ransomware Protection 
+* Secure Multi-tenancy
+* Encryption at-rest (volume encryption) and in-flight (TLS 1.3)
+* Self-encrypting drives (SEDs)
+* NFS and SMB Kerberos authentication and encryption
+* Multi-admin verification
+* SnapLock
+
+For information on which certifications unified ONTAP has received (as well as other security hardening information), see:
+
+* link:https://security.netapp.com/certifications[NetApp Product Security^]  
+* link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/security-hardening-overview.html[ONTAP security hardening overview^]
+
+== Snapshots and Data Protection
+
+NetApp AFX leverages the same snapshot and replication technologies as unified ONTAP, with no major changes to the way these features work. In fact, AFX can replicate to and from unified ONTAP systems with the same link:https://docs.netapp.com/us-en/ontap/data-protection/compatible-ontap-versions-snapmirror-concept.html[rules and configurations^] you are familiar with.
+
+The only exception in AFX for replication has to do with FlexGroup volumes replicating to a unified ONTAP system. In that case, the destination unified ONTAP system must be running ONTAP 9.16.1 or later to provide Advanced Capacity Balancing support.
+
+== Nondisruptive operations
+
+ONTAP provides nondisruptive operations, such as volume moves, upgrades, cluster maintenance, storage failovers, and more. NetApp AFX provides the same nondisruptive operations, with some adjustments.
+
+* Volume moves are still nondisruptive, but no longer require a copy.
+* Storage failovers are still nondisruptive, but after initial failover, volumes rebalance across all surviving nodes in the cluster.
+* LIF migrations are identical.
+* Hardware maintenance and upgrades are identical.
+
+== Volume types
+
+Unified ONTAP supports several different volume types, such as:
+
+* FlexVols
+* FlexGroup volumes
+* FlexCache
+* FlexClone
+* Object buckets
+
+NetApp AFX provides full support for each of these volume types, as well as full interoperability for FlexCache volumes with unified ONTAP systems.
+
+For more information on how FlexGroup volumes benefit from AFX architecture, see link:afx-overview-architecture.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements].

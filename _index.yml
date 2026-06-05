@@ -1,7 +1,7 @@
 indexpage:
-  title: ONTAP Technical Reports
-  lead: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
-  summary: ONTAP technical reports provide additional context for planning and optimizing ONTAP deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  title: NetApp Technical Reports
+  lead: NetApp technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  summary: NetApp technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   keywords: ONTAP 9, ONTAP, Technical Reports, TR
   tiles:
     - title: Applications and databases

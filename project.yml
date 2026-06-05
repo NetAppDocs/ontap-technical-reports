@@ -1,15 +1,15 @@
 settings:
-  name: "ONTAP Technical Reports"
+  name: "NetApp Technical Reports"
   search: ontap-technical-reports, ontap-apps-dbs, netapp-solutions-sap
   internal:
-    pdf_enabled: true
+    pdf_enabled: false
   prod:
     pdf_enabled: true
     harmony_enabled: true
 
 sidebar:
   entries:
-    - title: ONTAP Technical Reports
+    - title: NetApp Technical Reports
       url: /index.html
     - title: Applications and databases
       url: /apps-dbs.html
@@ -37,6 +37,10 @@ sidebar:
         - title: Overview
           url: /security-hardening-guides.html
         - section: ontap-security-hardening
+    - title: Storage Systems
+      entries:
+        - title: AFX
+          section: afx-overview
     - title: SnapCenter
       url: /snapcenter.html
     - title: Tiering
