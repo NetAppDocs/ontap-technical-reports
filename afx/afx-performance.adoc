@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-performance.html
+permalink: afx/afx-performance.html
 keywords: netapp afx, performance, nfsv4, benchmarks, read-ahead, throughput
 summary: "NetApp AFX was built with performance and scale in mind, specifically geared towards workloads that require high read and write throughput."
 ---
 
 = Performance
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 [.lead]
 NetApp AFX was built with performance and scale in mind – specifically geared towards workloads that require high read and write throughput and can provide simple, linear scale.
@@ -33,7 +33,7 @@ NOTE: For the most up-to-date performance estimates, check with your NetApp sale
 
 == Per-shelf performance
 
-Each shelf contains high performance shelf modules with 16 x 100GB Ethernet ports that leverage RoCEv2 communication for high bandwidth storage interaction with the compute nodes in the cluster. Like any physical resource, these shelves have maximums that can be achieved – particularly since NetApp AFX can present multiple nodes pointing to the same set of disks. The following table shows the estimated maximum read and write performance for a single shelf for TLC and QLC drives. For more information on TLC and QLC differences, see link:afx-overview-hardware.html#tlc-vs-qlc[TLC vs. QLC].
+Each shelf contains high performance shelf modules with 16 x 100GB Ethernet ports that leverage RoCEv2 communication for high bandwidth storage interaction with the compute nodes in the cluster. Like any physical resource, these shelves have maximums that can be achieved – particularly since NetApp AFX can present multiple nodes pointing to the same set of disks. The following table shows the estimated maximum read and write performance for a single shelf for TLC and QLC drives. For more information on TLC and QLC differences, see link:afx-hardware.html#tlc-vs-qlc[TLC vs. QLC].
 
 *Per-shelf performance estimates*
 

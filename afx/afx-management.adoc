@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar
-permalink: afx-overview/afx-overview-management.html
+permalink: afx/afx-management.html
 keywords: netapp afx, cli, system manager, rest api, management tools, gui
 summary: "While there are some fairly large architectural differences in how storage is presented in NetApp AFX, the feature set and the way ONTAP is managed is virtually unchanged."
 ---
 
 = Management tools
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 [.lead]
 While there are some fairly large architectural differences in how storage is presented in NetApp AFX, the feature set and the way ONTAP is managed is virtually unchanged. This is entirely by design. ONTAP is ONTAP and there should be little to no learning curve when possible. And in this case, NetApp AFX is still running ONTAP.

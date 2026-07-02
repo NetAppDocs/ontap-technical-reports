@@ -40,7 +40,7 @@ sidebar:
     - title: Storage Systems
       entries:
         - title: AFX
-          section: afx-overview
+          section: afx
     - title: SnapCenter
       url: /snapcenter.html
     - title: Tiering
