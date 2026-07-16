@@ -14,7 +14,7 @@ Zero Trust traditionally has been a network-centric approach of architecting mic
 
 NOTE: Beginning in July 2024, content from the technical report _TR-4829: NetApp and Zero Trust: Enabling a data-centric Zero Trust model_, which was previously published as a PDF, is available on docs.netapp.com.
 
-Data is the most important asset your organization has. Insider threats are the cause of 18% of data breaches, according to the 2022 https://enterprise.verizon.com/resources/reports/dbir/[Verizon Data Breach Investigations Report^]. Organizations can ramp up their vigilance by deploying industry-leading Zero Trust controls around data with NetApp ONTAP data management software.
+Data is the most important asset your organization has. Insider threats are the cause of 18% of data breaches, according to the 2022 https://www.verizon.com/business/resources/[Verizon Data Breach Investigations Report^]. Organizations can ramp up their vigilance by deploying industry-leading Zero Trust controls around data with NetApp ONTAP data management software.
 
 == What Is Zero Trust?
 
