@@ -133,7 +133,7 @@ IdPs that have been validated by NetApp are Microsoft ADFS, Cisco DUO, and open-
 
 Beginning with ONTAP 9.14.1, Cisco DUO can be used as a second authentication factor for SSH.
 
-For more information about MFA for ONTAP System Manager, Active IQ Unified Manager, and SSH, see link:http://www.netapp.com/us/media/tr-4647.pdf[TR-4647: Multifactor Authentication in ONTAP 9^].
+For more information about MFA for ONTAP System Manager, Active IQ Unified Manager, and SSH, see link:https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[TR-4647: Multifactor Authentication in ONTAP 9^].
 
 === ONTAP System Manager insights
 Beginning with ONTAP 9.11.1, ONTAP System Manager provides insights to help cluster administrators streamline their day-to-day tasks. The security insights are based on the recommendations of this technical report.
