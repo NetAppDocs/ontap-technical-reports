@@ -1,4 +1,4 @@
 ---
 permalink: afx-overview/afx-overview-whats-new.html
-redirect: afx/afx-whats-new.html
+redirect: ontap-technical-reports/afx/afx-whats-new.html
 ---

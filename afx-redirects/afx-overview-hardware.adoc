@@ -1,4 +1,4 @@
 ---
 permalink: afx-overview/afx-overview-hardware.html
-redirect: afx/afx-hardware.html
+redirect: ontap-technical-reports/afx/afx-hardware.html
 ---
