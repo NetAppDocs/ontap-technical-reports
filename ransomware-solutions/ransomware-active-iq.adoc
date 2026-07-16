@@ -12,7 +12,7 @@ summary: "NetApp's ransomware protection includes Digital Advisor, a digital adv
 [.lead]
 Digital Advisor powered by Active IQ simplifies the proactive care and optimization of NetApp storage with actionable intelligence for optimal data management. Fueled by telemetry data from our highly diverse installed base, it uses advanced AI and ML techniques to uncover opportunities to reduce risk and improve the performance and efficiency of your storage environment. 
 
-Not only can https://www.netapp.com/services/support/active-iq/[NetApp Digital Advisor^] help https://www.netapp.com/blog/fix-security-vulnerabilities-with-active-iq/[eliminate security vulnerabilities^], but it also provides insights and guidance specific to protecting against ransomware. A dedicated wellness card shows the actions needed and the risks addressed, so you can be sure that your systems are meeting those best practices recommendations.
+Not only can https://www.netapp.com/data-services/digital-advisor/[NetApp Digital Advisor^] help https://www.netapp.com/blog/fix-security-vulnerabilities-with-active-iq/[eliminate security vulnerabilities^], but it also provides insights and guidance specific to protecting against ransomware. A dedicated wellness card shows the actions needed and the risks addressed, so you can be sure that your systems are meeting those best practices recommendations.
 
 image:ransomware-solution-dashboard.jpg[Wellness monitors on the NetApp Digital Advisor Dashboard]
 
@@ -21,7 +21,7 @@ Risks and actions tracked on the Ransomware Defense Wellness page include the fo
 * Volume snapshot count is low, decreasing potential ransomware protection.
 * FPolicy is not enabled for all storage virtual machines (SVMs) configured for NAS protocols.
 
-To see ransomware protection in action, see link:https://www.netapp.com/services/support/active-iq/[Digital Advisor^].
+To see ransomware protection in action, see link:https://www.netapp.com/data-services/digital-advisor/[Digital Advisor^].
 
 // 2026-1-23 issue 53
 // 2025-4-14 gh-53
