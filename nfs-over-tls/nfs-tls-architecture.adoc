@@ -1,0 +1,53 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-architecture.html
+keywords: nfs, tls, architecture, data flow, ha takeover, svm-dr, metrocluster
+summary: "NFS over TLS is a per-LIF transport-security feature of the ONTAP NFS server, configured per SVM and replicated cluster-wide."
+---
+
+= Architecture
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+== Component overview
+
+NFS over TLS is a per-LIF transport-security feature of the ONTAP NFS server. It applies TLS protection to NFS traffic between the client and the ONTAP NFS server. Configuration is managed through the `vserver nfs tls interface` command family and the corresponding `/api/protocols/nfs/tls/interfaces` REST resource.
+
+Configuration is SVM-scoped, applied per LIF, and replicated cluster-wide. Any node currently hosting the LIF applies the same TLS settings. There is no cluster-wide on/off knob. Enable and disable are per-LIF operations.
+
+== External dependencies
+
+No outbound calls to an external Certificate Authority (CA) or OCSP responder are made from the NFS TLS handshake path in 9.19.1. Chain and Subject Alternative Name (SAN) validation are performed locally against the SVM's installed certificate material.
+
+== Data flow
+
+NFSv3 and NFSv4 both encrypt the entire NFS payload after the first NULL Call/Response pair to TCP port 2049. The NULL call has the new `AUTH_TLS` credential flavor defined in RFC 9289 that signals the client's intention to use TLS. The server responds with a NULL reply that either accepts or rejects the TLS upgrade. If the client receives acceptance, it proceeds with the TLS 1.3 handshake over the same TCP connection. If the handshake completes successfully, all subsequent NFS RPCs are encapsulated in TLS records and encrypted in transit.
+
+There is one difference between NFSv3 and NFSv4.x: NFSv3 relies on ancillary protocols--`rpcbind` (portmapper), `mountd`, NLM (Network Lock Manager), and NSM (Network Status Monitor)--that are not carried over the TLS-protected connection and are transmitted in the clear. Organizations with compliance requirements that mandate full encryption of storage traffic should account for this when choosing between NFSv3 and NFSv4.x. NFSv4.x eliminates these side-channel protocols; all NFSv4.x traffic is consolidated onto port 2049 and encrypted after the TLS handshake.
+
+image:nfs-tls-v3-handshake.png[caption="NFS over TLS handshake sequence diagram", alt="Sequence diagram showing the NFS over TLS handshake flow between a client and the ONTAP NFS server."]
+
+NFSv4.x does not use ancillary protocols, so all NFSv4.x RPCs are encrypted after the TLS handshake.
+
+image:nfs-tls-v4-handshake.png[caption="NFSv4.1 over TLS handshake sequence diagram", alt="Sequence diagram showing the NFSv4.1 over TLS handshake flow between a client and the ONTAP NFS server."]
+
+ONTAP terminates TLS at the NFS server on the node currently hosting the LIF. Above the transport, the NFS server processes RPCs identically to a non-TLS NFS connection.
+
+== HA takeover behavior
+
+Existing NFS-over-TLS sessions do not survive an HA takeover or unplanned node panic. TLS is a session-level transport built on TCP. When TCP connections drop with the node, the TLS sessions drop with them.
+
+After takeover, clients reconnect and complete a fresh TLS 1.3 handshake. The partner node uses the same replicated TLS configuration--certificate binding, host-auth setting, and SAN-validation setting--because the configuration record is replicated cluster-wide.
+
+TLS session tickets and pre-shared keys (PSKs) are node-local and do not transfer to the partner. Expect a reconnect storm with full TLS handshakes on takeover.
+
+== MetroCluster and SVM-DR behavior
+
+The TLS interface certificate and configuration replicate with the SVM via the standard SVM-DR and MetroCluster SVM-level replication path. After an identity-preserve switchover, the destination SVM carries the same per-LIF TLS configuration.
+
+The `-allow-nfs-tls-only` field on the export-policy rule replicates with the rest of the export-policy rule through the standard export-policy replication path. In SVM-DR, the rule rides with the policy when the policy is replicated with the SVM.

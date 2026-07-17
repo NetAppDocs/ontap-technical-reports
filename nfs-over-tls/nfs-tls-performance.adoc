@@ -1,0 +1,46 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-performance.html
+keywords: nfs, tls, performance, cpu, offload, ktls, connectx, handshake latency
+summary: "TLS adds CPU, memory, and network overhead. Hardware offload on CX6-Dx and CX7 NICs significantly reduces the steady-state CPU cost."
+---
+
+= Performance
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+TLS adds cost in three resource dimensions: CPU, memory, and network.
+
+== Resource cost overview
+
+*CPU* is the primary cost. The TLS 1.3 handshake is a one-time, per-connection expense covering asymmetric cryptography, certificate parsing, and key exchange. Once a connection is established, steady-state overhead is symmetric record encryption using AES-GCM or ChaCha20-Poly1305. On platforms equipped with Mellanox ConnectX-6 Dx (CX6-Dx) or ConnectX-7 (CX7) NICs, the NIC itself performs encryption and decryption via kernel TLS (KTLS) offload, materially reducing the steady-state CPU cost.
+
+*Memory* impact is low. TLS adds per-connection session state and a per-node TLS configuration cache. Cache size is bounded; entries are aged by Time-To-Live (TTL) and refreshed in the background.
+
+*Network* overhead is small. TLS 1.3 record framing adds a fixed per-record overhead and an authentication tag. The handshake adds round-trips at connection setup only, not per RPC.
+
+== TLS performance penalty
+
+There are two distinct paths for NFS over TLS in ONTAP: the hardware offload path and the software TLS path. The hardware offload path is available on platforms with CX6-Dx or CX7 NICs. The software TLS path is used on platforms without offload-capable NICs.
+
+On platforms with offload-capable NICs, performance was observed to be within approximately 10% of plain-text NFS across a range of workloads. On platforms without offload-capable NICs, the software TLS path is more workload-sensitive and can show throughput reductions of approximately 30% compared to plain-text NFS in the worst case. These are characterization numbers, not guaranteed specs. Your results will vary based on workload type, I/O size, and connection count. If you're mixing TLS and non-TLS traffic on the same node, expect some impact on non-TLS throughput as well.
+
+== Scaling factors
+
+The following factors increase aggregate TLS CPU cost or handshake latency:
+
+*Connection churn.* Every new connection pays the handshake cost. Workloads that frequently open and close TCP connections to the NFS server see higher aggregate TLS CPU than workloads with long-lived connections.
+
+*Mount storms after takeover or network event.* Workloads where many clients reconnect simultaneously--such as after an HA takeover--pay the full TLS 1.3 handshake cost per connection. Monitor `nfs_tls:tls_handshake_average_latency` and plan connection headroom accordingly.
+
+*Large numbers of distinct client identities (mutual TLS).* Mutual TLS (mTLS) deployments scale handshake CPU with the number of unique client certificates being validated.
+
+*mTLS vs. server-only TLS.* Enabling host authentication (mTLS) adds client-certificate validation on the server side, making each handshake moderately more expensive than server-only TLS. Steady-state per-RPC cost is unchanged.
+
+*TLS configuration churn.* Frequent changes to TLS interface configuration--certificate rotation, enable/disable cycles--invalidate the per-node TLS configuration cache and force lookups back to the management host, briefly raising handshake latency.

@@ -54,6 +54,8 @@ indexpage:
           url: nas.html
         - title: NFS Kerberos in ONTAP
           url: nas.html
+        - title: NFS over TLS
+          url: nfs-over-tls/nfs-tls-overview.html
         - title: Additional NAS technical reports
           url: nas.html
 #    - title: Networking

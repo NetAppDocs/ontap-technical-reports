@@ -1,0 +1,48 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-interoperability.html
+keywords: nfs, tls, interoperability, svm-dr, metrocluster, snapmirror, export policy
+summary: "NFS over TLS composes with standard ONTAP export-policy controls and replicates through SVM-DR and MetroCluster."
+---
+
+= Interoperability
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NFS over TLS composes with standard ONTAP export-policy controls and replicates through SVM-DR and MetroCluster.
+
+== Supported co-existing features
+
+*Export policies, qtree exports, and junction paths.*
+The export-policy rule gains the `-allow-nfs-tls-only` field, which can require TLS on a per-rule basis. It composes with existing client-match, protocol, read-only/read-write, superuser, anonymous, chown-mode, allow-suid, and NTFS-UNIX security controls. Qtree exports and junction-path mounts inherit the TLS requirement through the same export-policy mechanism. System Manager surfaces the `-allow-nfs-tls-only` setting in the NFS access picker.
+
+NFS over TLS replication and DR support is summarized in the table below. For background on the replication mechanism, see link:nfs-tls-architecture.html[Architecture].
+
+.Replication and DR support matrix
+[cols="2,3",options="header"]
+|===
+| Replication / DR | NFS over TLS at 9.19.1 
+
+| SVM-DR
+| *Supported.* TLS interface row replicates at SVM scope (status, certificate name and UUID, enforce-host-auth). The `-allow-nfs-tls-only` export-rule field replicates with the export policy.
+
+| MetroCluster (SVM-level replication)
+| *Supported.* Same replication path as SVM-DR. Certificate-material lifecycle on the destination SVM is owned by the certificate manager.
+
+| SnapMirror (volume replication)
+| *Supported.* Orthogonal to client-side TLS transport.
+
+| Cloud-hosted ONTAP variants
+| *Not supported* at 9.19.1.
+|===
+
+== Features with constraints
+
+*Client requirements.*
+The NFS client must implement TLS for ONC RPC per link:https://www.rfc-editor.org/rfc/rfc9289.html[RFC 9289]. On Linux, this is provided by an in-kernel NFS client that supports the `xprtsec=tls` (or `xprtsec=mtls`) mount option, used in combination with the userspace TLS handshake helper `tlshd` from the `ktls-utils` package. For the definitive client matrix--including minimum kernel versions, userspace package versions, and supported Linux distributions--consult the Interoperability Matrix Tool (IMT).

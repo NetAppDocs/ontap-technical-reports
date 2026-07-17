@@ -1,0 +1,20 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-overview.html
+keywords: nfs, tls, encryption, ontap, rfc9289, in-transit
+summary: "ONTAP 9.19.1 introduces native NFS over TLS, enabling in-transit encryption of NFS RPC traffic per RFC 9289 without Kerberos or IPsec."
+---
+
+= NFS over TLS overview
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+ONTAP 9.19.1 introduces NFS over TLS, the much-anticipated 'easy button' for encrypting your NFS traffic.
+
+Prior to this feature, encrypting your NFS payload in flight was limited to IPsec or Kerberos. While both are effective, configuration was cumbersome and performance penalties could soar high. Both methods were 'bolt-on' solutions--solutions not defined in an RFC specifically for NFS. link:https://www.rfc-editor.org/rfc/rfc9289.html[RFC 9289], titled "Toward Remote Procedure Call Encryption by Default" changed that. Now NFSv3 and NFSv4.x can encrypt NFS RPC traffic in flight using TLS 1.3. No Kerberos required. No IPsec required.

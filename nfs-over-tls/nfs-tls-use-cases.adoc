@@ -1,0 +1,27 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-use-cases.html
+keywords: nfs, tls, use cases, kerberos, mtls, enforcement, zero trust
+summary: "NFS over TLS addresses on-wire encryption without Kerberos, per-client TLS enforcement, and mutual client authentication."
+---
+
+= Use cases
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NFS over TLS is a good fit for three common deployment scenarios: on-wire encryption without a Kerberos infrastructure, per-client TLS enforcement on a shared export, and mutual client authentication.
+
+*On-the-wire NFS encryption without a Kerberos infrastructure.*
+If you need NFS data-in-transit encryption but don't want to deploy and operate a Key Distribution Center (KDC), distribute keytabs to clients, or extend a Kerberos realm to cover your NAS clients, NFS over TLS solves this directly. You install a server certificate per Storage Virtual Machine (SVM), enable NFS over TLS on each data Logical Interface (LIF) that should carry encrypted NFS, and clients negotiate TLS 1.3 in-band on the standard NFS port. No new authentication service required.
+
+*Per-client TLS-only enforcement on a shared NFS export.*
+If you have a mix of encryption-required clients and clients that don't need encryption, you need a way to force the regulated clients onto the encrypted path without breaking the others. The export-policy rule option `-allow-nfs-tls-only true` does exactly that. It denies non-TLS mounts from matching clients over TCP while leaving other export-policy rules untouched.
+
+*Mutual client authentication (mTLS) for storage-to-client trust.*
+If you're operating under zero-trust networking principles or have hardening requirements that mandate the storage controller verify the host identity of every connecting client, use the per-LIF mutual TLS option. Set `-enforce-host-auth true` on `vserver nfs tls interface enable` or `vserver nfs tls interface modify`. ONTAP then validates each connecting client's X.509 certificate against the SVM's installed Certificate Authority (CA) trust chain at TLS handshake time and rejects clients that don't present a trusted certificate. This gives you cryptographic enforcement of "only my registered host fleet can reach this NFS LIF" and operates in addition to existing export-policy host filters.

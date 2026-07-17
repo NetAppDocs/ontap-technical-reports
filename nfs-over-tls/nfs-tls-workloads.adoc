@@ -1,0 +1,32 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-workloads.html
+keywords: nfs, tls, workloads, performance, connection churn, mount storm
+summary: "Not every workload is a good fit for NFS over TLS. Long-lived mounts with stable clients absorb the handshake cost cleanly; high-churn environments do not."
+---
+
+= Workloads
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Encryption is not free. The TLS handshake has a measurable cost, and TLS record encryption adds overhead to every RPC.
+
+The performance impact varies widely based on workload, platform, and whether hardware offload is available. For details, see link:nfs-tls-performance.html[Performance]. Knowing which workload patterns fit--and which don't--will help you plan your deployment.
+
+== Workload patterns
+
+Long-lived NFS mounts with a stable client population are a great fit. The TLS handshake is a per-connection cost paid at mount time and at session re-establishment--if you have a small, stable set of clients that mount once and stay mounted for hours or days, you'll absorb that cost cleanly.
+
+If you already manage LIF-to-hostname mapping cleanly--for example, with DNS records under your control--you'll find NFS over TLS straightforward to provision. The feature is configured per-LIF: you install a server certificate whose Common Name (CN) matches the LIF's Fully Qualified Domain Name (FQDN) and whose Subject Alternative Name (SAN) list contains the LIF's IP address.
+
+NFS over TLS is the right tool when on-wire confidentiality, server identity, and optionally client host identity are your security requirements--exactly the properties TLS delivers.
+
+== Workload anti-patterns
+
+High connection churn or large mount storms are a poor fit. Every new TLS connection pays the TLS 1.3 handshake cost, including asymmetric cryptography, certificate validation, and optional mTLS chain validation. If many clients mount, do a small amount of work, unmount, and reconnect repeatedly, you'll pay that handshake cost over and over rather than amortizing it.

@@ -1,0 +1,58 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-limits.html
+keywords: nfs, tls, limits, connection limit, per-node, enforcement, recommendations
+summary: "Known limitations, connection ceilings, per-LIF constraints, enforcement behavior, and operational recommendations for NFS over TLS at ONTAP 9.19.1."
+---
+
+= Limitations and caveats
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+This page covers known limitations, connection ceilings, per-LIF configuration constraints, enforcement behavior, and operational recommendations for NFS over TLS at ONTAP 9.19.1.
+
+* *Cloud-hosted ONTAP variants.* Cloud Volumes ONTAP and other cloud-hosted ONTAP variants are not supported at ONTAP 9.19.1.
+* *NFS over Remote Direct Memory Access (RDMA).* NFS-over-RDMA and NFS over TLS are mutually exclusive on the same LIF.
+
+
+== Per-node limits
+
+IMPORTANT: There are currently no hard-coded connection limits for NFS-over-TLS in ONTAP. For the latest information on supported limits, refer to link:https://hwu.netapp.com[Hardware Universe]. 
+
+
+*BEST PRACTICE:* Keep the per-node NFS-over-TLS connection count below 10,000 to maintain headroom for mount storms and HA takeovers.
+
+== Per-cluster limits
+
+There's no separate cluster-wide aggregate cap enforced in code.
+
+== Per-LIF and per-object limits
+
+* The configuration table is keyed on the `(SVM, LIF)` tuple. Each LIF carries either zero or one NFS-over-TLS configuration row.
+* Exactly one server certificate is bound per NFS-over-TLS-enabled LIF. The certificate is specified at `vserver nfs tls interface enable` time and can be changed with `... modify -certificate-name`.
+* `-allow-nfs-tls-only` is a single boolean per export-policy rule. This feature adds no separate rule-count ceiling; standard per-policy and per-SVM export-rule maximums apply.
+
+== Enforcement behavior
+
+**`-allow-nfs-tls-only true` enforcement.**
+When this field is `true` on a matched export-policy rule, NFS connection attempts from matched clients that are not using TLS for ONC RPC per RFC 9289 are rejected at export-rule evaluation. Existing TLS connections from those clients are unaffected.
+
+**`-enforce-host-auth true` enforcement.**
+When `true` on a `(SVM, LIF)`, TLS handshakes whose client certificate identity does not match the configured host identity for the LIF are rejected during the TLS handshake. The EMS event `Nblade.TLSHandshakeFailed` (severity `ERR`, rate-limited once per 10 minutes per event source) is emitted for each failed handshake.
+
+**EMS rate limits.**
+`Nblade.TLSConfigError` and `Nblade.TLSHandshakeFailed` are rate-limited to once per 10 minutes per event source. `Nblade.NfsTlsDisabled` is rate-limited to once per 24 hours per event source. These are intentional ceilings on event-log volume during sustained failure conditions. During a burst, only the first occurrence within each rate-limit window is recorded.
+
+== Soft limits and recommendations
+
+The following are recommendations, not hard maximums.
+
+* *Maintain headroom below 10,000 NFS-over-TLS connections per node.* There's no hard-coded cap, but keep your per-node NFS-over-TLS connection count at or below 10,000.
+
+* *Plan for full TLS re-handshake after HA takeover.* TLS sessions are TCP-scoped and don't survive a takeover. Every client will reconnect with a fresh TLS 1.3 handshake on the surviving or destination node, so plan for a mount storm. Keeping your connection count well below 10,000 gives you headroom to absorb that burst.

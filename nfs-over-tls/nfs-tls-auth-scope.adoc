@@ -1,0 +1,20 @@
+---
+sidebar: sidebar
+permalink: nfs-over-tls/nfs-tls-auth-scope.html
+keywords: nfs, tls, authentication, auth_sys, krb5, user authentication
+summary: "NFS over TLS secures the transport layer and does not replace existing NFS user authentication mechanisms."
+---
+
+= What it doesn't do
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NFS over TLS secures the transport layer -- it does not change how NFS authenticates users.
+
+*Certificate-based user authentication.* NFS over TLS *does not provide a new user authentication mechanism*. You still need either `auth_sys` or `krb5` for user authentication. You can still use `krb5i` and `krb5p`, but TLS makes their integrity and privacy protections redundant--and you'll still take the performance hit.
