@@ -20,7 +20,10 @@ sidebar:
     - title: FlexCache and FlexGroup volumes
       url: /nas-containers.html
     - title: NAS
-      url: /nas.html
+      entries:
+        - title: Overview
+          url: /nas.html
+        - section: nfs-over-tls
     - title: Networking
       url: /networking.html
     - title: SAN
