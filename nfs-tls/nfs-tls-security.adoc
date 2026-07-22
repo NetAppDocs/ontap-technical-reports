@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-security.html
+permalink: nfs-tls/nfs-tls-security.html
 keywords: nfs, tls, security, rbac, encryption, auditing, certificates, mtls
 summary: "NFS over TLS uses standard ONTAP RBAC, requires an X.509 server certificate per LIF, and supports TLS 1.3 only."
 ---

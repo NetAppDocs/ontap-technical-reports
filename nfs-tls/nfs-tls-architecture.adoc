@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-architecture.html
+permalink: nfs-tls/nfs-tls-architecture.html
 keywords: nfs, tls, architecture, data flow, ha takeover, svm-dr, metrocluster
 summary: "NFS over TLS is a per-LIF transport-security feature of the ONTAP NFS server, configured per SVM and replicated cluster-wide."
 ---

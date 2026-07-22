@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-use-cases.html
+permalink: nfs-tls/nfs-tls-use-cases.html
 keywords: nfs, tls, use cases, kerberos, mtls, enforcement, zero trust
 summary: "NFS over TLS addresses on-wire encryption without Kerberos, per-client TLS enforcement, and mutual client authentication."
 ---

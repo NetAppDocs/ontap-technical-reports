@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-limits.html
+permalink: nfs-tls/nfs-tls-limits.html
 keywords: nfs, tls, limits, connection limit, per-node, enforcement, recommendations
 summary: "Known limitations, connection ceilings, per-LIF constraints, enforcement behavior, and operational recommendations for NFS over TLS at ONTAP 9.19.1."
 ---

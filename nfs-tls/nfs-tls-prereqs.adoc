@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-prereqs.html
+permalink: nfs-tls/nfs-tls-prereqs.html
 keywords: nfs, tls, prerequisites, requirements, ontap, imt
 summary: "Before you configure NFS over TLS, confirm your ONTAP version, NFS license, and client compatibility."
 ---

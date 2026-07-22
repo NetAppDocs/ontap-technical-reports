@@ -17,13 +17,13 @@ sidebar:
       url: /business-continuity.html
     - title: Data protection and disaster recovery
       url: /data-protection-disaster-recovery.html
-    - title: FlexCache and FlexGroup volumes
-      url: /nas-containers.html
-    - title: NAS
+    - title: File Protocols
       entries:
         - title: Overview
           url: /nas.html
-        - section: nfs-over-tls
+        - title: FlexCache and FlexGroup volumes
+          url: /nas-containers.html
+        - section: nfs-tls
     - title: Networking
       url: /networking.html
     - title: SAN

@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-auth-scope.html
+permalink: nfs-tls/nfs-tls-auth-scope.html
 keywords: nfs, tls, authentication, auth_sys, krb5, user authentication
 summary: "NFS over TLS secures the transport layer and does not replace existing NFS user authentication mechanisms."
 ---

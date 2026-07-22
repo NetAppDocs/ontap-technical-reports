@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-overview.html
+permalink: nfs-tls/nfs-tls-overview.html
 keywords: nfs, tls, encryption, ontap, rfc9289, in-transit
 summary: "ONTAP 9.19.1 introduces native NFS over TLS, enabling in-transit encryption of NFS RPC traffic per RFC 9289 without Kerberos or IPsec."
 ---

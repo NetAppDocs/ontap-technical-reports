@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-performance.html
+permalink: nfs-tls/nfs-tls-performance.html
 keywords: nfs, tls, performance, cpu, offload, ktls, connectx, handshake latency
 summary: "TLS adds CPU, memory, and network overhead. Hardware offload on CX6-Dx and CX7 NICs significantly reduces the steady-state CPU cost."
 ---

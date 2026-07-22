@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-monitor.html
+permalink: nfs-tls/nfs-tls-monitor.html
 keywords: nfs, tls, monitor, counters, ems, events, statistics, observability
 summary: "NFS over TLS exposes Counter Manager counters on the nfs_tls object and four EMS events for tracking connection health and enforcement behavior."
 ---

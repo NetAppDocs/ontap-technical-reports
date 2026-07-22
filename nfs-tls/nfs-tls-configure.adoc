@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-configure.html
+permalink: nfs-tls/nfs-tls-configure.html
 keywords: nfs, tls, configure, certificate, ca, lif, linux, mount, mtls
 summary: "Step-by-step procedure for enabling NFS over TLS on an ONTAP SVM, installing certificates, mounting from a Linux client, and optionally configuring mutual TLS."
 ---

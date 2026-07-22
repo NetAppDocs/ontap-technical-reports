@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: nfs-over-tls/nfs-tls-interoperability.html
+permalink: nfs-tls/nfs-tls-interoperability.html
 keywords: nfs, tls, interoperability, svm-dr, metrocluster, snapmirror, export policy
 summary: "NFS over TLS composes with standard ONTAP export-policy controls and replicates through SVM-DR and MetroCluster."
 ---
