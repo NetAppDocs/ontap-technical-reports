@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: nfs-tls/nfs-tls-workloads.html
 keywords: nfs, tls, workloads, performance, connection churn, mount storm
-summary: "Not every workload is a good fit for NFS over TLS. Long-lived mounts with stable clients absorb the handshake cost cleanly; high-churn environments do not."
+summary: "Not every workload is a good fit for NFS over TLS. Long-lived mounts with stable clients absorb the handshake cost cleanly high-churn environments do not."
 ---
 
 = Workloads
