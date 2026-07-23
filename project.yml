@@ -40,8 +40,10 @@ sidebar:
         - title: Overview
           url: /security-hardening-guides.html
         - section: ontap-security-hardening
+    - title: S3
+      url: /s3.html
     - title: SMB
-      url: /smb.adoc
+      url: /smb.html
     - title: Storage Systems
       entries:
         - title: AFX
