@@ -9,7 +9,7 @@ settings:
 
 sidebar:
   entries:
-    - title: NetApp Technical Reports
+    - title: Technical Reports
       url: /index.html
     - title: Applications and databases
       url: /apps-dbs.html
