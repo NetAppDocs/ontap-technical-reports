@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
 permalink: nfs-tls/nfs-tls-use-cases.html
-keywords: nfs, tls, use cases, kerberos, mtls, enforcement, zero trust
-summary: "NFS over TLS addresses on-wire encryption without Kerberos, per-client TLS enforcement, and mutual client authentication."
+keywords: nfs, tls, use cases, kerberos, mtls, enforcement, zero trust, workloads, performance, connection churn
+summary: "NFS over TLS addresses on-wire encryption without Kerberos, per-client TLS enforcement, and mutual client authentication. Not every workload is a good fit."
 ---
 
-= Use cases
+= Use cases and workloads
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -17,6 +17,10 @@ summary: "NFS over TLS addresses on-wire encryption without Kerberos, per-client
 [.lead]
 NFS over TLS is a good fit for three common deployment scenarios: on-wire encryption without a Kerberos infrastructure, per-client TLS enforcement on a shared export, and mutual client authentication.
 
+Not every workload benefits equally -- knowing the patterns that fit and the ones that don't will help you plan your deployment.
+
+== Use cases
+
 *On-the-wire NFS encryption without a Kerberos infrastructure.*
 If you need NFS data-in-transit encryption but don't want to deploy and operate a Key Distribution Center (KDC), distribute keytabs to clients, or extend a Kerberos realm to cover your NAS clients, NFS over TLS solves this directly. You install a server certificate per Storage Virtual Machine (SVM), enable NFS over TLS on each data Logical Interface (LIF) that should carry encrypted NFS, and clients negotiate TLS 1.3 in-band on the standard NFS port. No new authentication service required.
 
@@ -25,3 +29,19 @@ If you have a mix of encryption-required clients and clients that don't need enc
 
 *Mutual client authentication (mTLS) for storage-to-client trust.*
 If you're operating under zero-trust networking principles or have hardening requirements that mandate the storage controller verify the host identity of every connecting client, use the per-LIF mutual TLS option. Set `-enforce-host-auth true` on `vserver nfs tls interface enable` or `vserver nfs tls interface modify`. ONTAP then validates each connecting client's X.509 certificate against the SVM's installed Certificate Authority (CA) trust chain at TLS handshake time and rejects clients that don't present a trusted certificate. This gives you cryptographic enforcement of "only my registered host fleet can reach this NFS LIF" and operates in addition to existing export-policy host filters.
+
+== Workloads
+
+Encryption is not free. The TLS handshake has a measurable cost, and TLS record encryption adds overhead to every RPC. The performance impact varies widely based on workload, platform, and whether hardware offload is available. For details, see link:nfs-tls-performance.html[Performance].
+
+=== Workload patterns
+
+Long-lived NFS mounts with a stable client population are a great fit. The TLS handshake is a per-connection cost paid at mount time and at session re-establishment--if you have a small, stable set of clients that mount once and stay mounted for hours or days, you'll absorb that cost cleanly.
+
+If you already manage LIF-to-hostname mapping cleanly--for example, with DNS records under your control--you'll find NFS over TLS straightforward to provision. The feature is configured per-LIF: you install a server certificate whose Common Name (CN) matches the LIF's Fully Qualified Domain Name (FQDN) and whose Subject Alternative Name (SAN) list contains the LIF's IP address.
+
+NFS over TLS is the right tool when on-wire confidentiality, server identity, and optionally client host identity are your security requirements--exactly the properties TLS delivers.
+
+=== Workload anti-patterns
+
+High connection churn or large mount storms are a poor fit. Every new TLS connection pays the TLS 1.3 handshake cost, including asymmetric cryptography, certificate validation, and optional mTLS chain validation. If many clients mount, do a small amount of work, unmount, and reconnect repeatedly, you'll pay that handshake cost over and over rather than amortizing it.

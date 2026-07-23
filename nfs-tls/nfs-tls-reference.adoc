@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
-permalink: nfs-tls/nfs-tls-limits.html
-keywords: nfs, tls, limits, connection limit, per-node, enforcement, recommendations
-summary: "Known limitations, connection ceilings, per-LIF constraints, enforcement behavior, and operational recommendations for NFS over TLS at ONTAP 9.19.1."
+permalink: nfs-tls/nfs-tls-reference.html
+keywords: nfs, tls, interoperability, svm-dr, metrocluster, snapmirror, limits, connection limit, enforcement, recommendations
+summary: "NFS over TLS composes with standard ONTAP export-policy controls and replicates through SVM-DR and MetroCluster. This page also covers connection limits, enforcement behavior, and operational recommendations."
 ---
 
-= Limitations and caveats
+= Interoperability and limits
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -15,30 +15,64 @@ summary: "Known limitations, connection ceilings, per-LIF constraints, enforceme
 :imagesdir: ../media/
 
 [.lead]
-This page covers known limitations, connection ceilings, per-LIF configuration constraints, enforcement behavior, and operational recommendations for NFS over TLS at ONTAP 9.19.1.
+NFS over TLS composes with standard ONTAP export-policy controls, replicates through SVM-DR and MetroCluster, and carries a small set of hard platform limitations and operational recommendations you should know before deploying.
+
+== Interoperability
+
+=== Supported co-existing features
+
+*Export policies, qtree exports, and junction paths.*
+The export-policy rule gains the `-allow-nfs-tls-only` field, which can require TLS on a per-rule basis. It composes with existing client-match, protocol, read-only/read-write, superuser, anonymous, chown-mode, allow-suid, and NTFS-UNIX security controls. Qtree exports and junction-path mounts inherit the TLS requirement through the same export-policy mechanism. System Manager surfaces the `-allow-nfs-tls-only` setting in the NFS access picker.
+
+NFS over TLS replication and DR support is summarized in the table below. For background on the replication mechanism, see link:nfs-tls-architecture.html[Architecture].
+
+.Replication and DR support matrix
+[cols="2,3",options="header"]
+|===
+| Replication / DR | NFS over TLS at 9.19.1 
+
+| SVM-DR
+| *Supported.* TLS interface row replicates at SVM scope (status, certificate name and UUID, enforce-host-auth). The `-allow-nfs-tls-only` export-rule field replicates with the export policy.
+
+| MetroCluster (SVM-level replication)
+| *Supported.* Same replication path as SVM-DR. Certificate-material lifecycle on the destination SVM is owned by the certificate manager.
+
+| SnapMirror (volume replication)
+| *Supported.* Orthogonal to client-side TLS transport.
+
+| Cloud-hosted ONTAP variants
+| *Not supported* at 9.19.1.
+|===
+
+=== Features with constraints
+
+*Client requirements.*
+The NFS client must implement TLS for ONC RPC per link:https://www.rfc-editor.org/rfc/rfc9289.html[RFC 9289]. On Linux, this is provided by an in-kernel NFS client that supports the `xprtsec=tls` (or `xprtsec=mtls`) mount option, used in combination with the userspace TLS handshake helper `tlshd` from the `ktls-utils` package. For the definitive client matrix--including minimum kernel versions, userspace package versions, and supported Linux distributions--consult the Interoperability Matrix Tool (IMT).
+
+== Limitations and caveats
 
 * *Cloud-hosted ONTAP variants.* Cloud Volumes ONTAP and other cloud-hosted ONTAP variants are not supported at ONTAP 9.19.1.
 * *NFS over Remote Direct Memory Access (RDMA).* NFS-over-RDMA and NFS over TLS are mutually exclusive on the same LIF.
 
 
-== Per-node limits
+=== Per-node limits
 
 IMPORTANT: There are currently no hard-coded connection limits for NFS-over-TLS in ONTAP. For the latest information on supported limits, refer to link:https://hwu.netapp.com[Hardware Universe]. 
 
 
 *BEST PRACTICE:* Keep the per-node NFS-over-TLS connection count below 10,000 to maintain headroom for mount storms and HA takeovers.
 
-== Per-cluster limits
+=== Per-cluster limits
 
 There's no separate cluster-wide aggregate cap enforced in code.
 
-== Per-LIF and per-object limits
+=== Per-LIF and per-object limits
 
 * The configuration table is keyed on the `(SVM, LIF)` tuple. Each LIF carries either zero or one NFS-over-TLS configuration row.
 * Exactly one server certificate is bound per NFS-over-TLS-enabled LIF. The certificate is specified at `vserver nfs tls interface enable` time and can be changed with `... modify -certificate-name`.
 * `-allow-nfs-tls-only` is a single boolean per export-policy rule. This feature adds no separate rule-count ceiling; standard per-policy and per-SVM export-rule maximums apply.
 
-== Enforcement behavior
+=== Enforcement behavior
 
 **`-allow-nfs-tls-only true` enforcement.**
 When this field is `true` on a matched export-policy rule, NFS connection attempts from matched clients that are not using TLS for ONC RPC per RFC 9289 are rejected at export-rule evaluation. Existing TLS connections from those clients are unaffected.
@@ -49,7 +83,7 @@ When `true` on a `(SVM, LIF)`, TLS handshakes whose client certificate identity 
 **EMS rate limits.**
 `Nblade.TLSConfigError` and `Nblade.TLSHandshakeFailed` are rate-limited to once per 10 minutes per event source. `Nblade.NfsTlsDisabled` is rate-limited to once per 24 hours per event source. These are intentional ceilings on event-log volume during sustained failure conditions. During a burst, only the first occurrence within each rate-limit window is recorded.
 
-== Soft limits and recommendations
+=== Soft limits and recommendations
 
 The following are recommendations, not hard maximums.
 

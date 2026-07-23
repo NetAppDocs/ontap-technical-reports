@@ -3,14 +3,8 @@ title: NFS over TLS
 entries:
   - title: Overview
     url: /nfs-tls/nfs-tls-overview.html
-  - title: Prerequisites
-    url: /nfs-tls/nfs-tls-prereqs.html
-  - title: Use cases
+  - title: Use cases and workloads
     url: /nfs-tls/nfs-tls-use-cases.html
-  - title: What it doesn't do
-    url: /nfs-tls/nfs-tls-auth-scope.html
-  - title: Workloads
-    url: /nfs-tls/nfs-tls-workloads.html
   - title: Architecture
     url: /nfs-tls/nfs-tls-architecture.html
   - title: Configure NFS over TLS
@@ -21,7 +15,5 @@ entries:
     url: /nfs-tls/nfs-tls-monitor.html
   - title: Performance
     url: /nfs-tls/nfs-tls-performance.html
-  - title: Interoperability
-    url: /nfs-tls/nfs-tls-interoperability.html
-  - title: Limitations and caveats
-    url: /nfs-tls/nfs-tls-limits.html
+  - title: Interoperability and limits
+    url: /nfs-tls/nfs-tls-reference.html
