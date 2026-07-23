@@ -2,9 +2,9 @@
 permalink: smb.html
 sidebar: sidebar
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, NAS, best practices, best-practices
-summary: "These technical reports provide an overview of the NFS, SMB/CIFS, S3, name services in NetApp ONTAP as well as recommended practices."
+summary: "These technical reports provide an overview of SMB/CIFS in ONTAP as well as recommended practices."
 ---
-= ONTAP NAS technical reports
+= ONTAP SMB technical reports
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,12 +12,8 @@ summary: "These technical reports provide an overview of the NFS, SMB/CIFS, S3, 
 :imagesdir: ./media/
 
 [.lead]
-NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. ONTAP NAS solutions provide for nondisruptive operations, efficiency, and seamless scalability within a unified architecture. Powered by NetApp ONTAP, scale-out NAS leverages the massive ONTAP ecosystem, with a significant innovation lead and vision for aggressive future innovation.
+NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. 
 
-[NOTE]
-====
-These technical reports expand on the link:https://docs.netapp.com/us-en/ontap/nas-management/index.html[ONTAP NAS storage management^] and link:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html[ONTAP S3 storage management^] product documentation.
-====
 == SMB
 link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]
 Microsoft introduced Multichannel in the SMB 3.0 protocol with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. Learn about the Multichannel feature in ONTAP, including its capabilities, recommended practices, and performance test results.
