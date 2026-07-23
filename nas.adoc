@@ -49,6 +49,3 @@ Learn how to configure Lightweight Directory Access Protocol (LDAP) identity man
 == NAS security
 link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf[TR-4616: NFS Kerberos in ONTAP^]
 Learn about NFS Kerberos in ONTAP including configuration steps with Active Directory and Red Hat Enterprise Linux (RHEL) clients.
-
-link:https://docs.netapp.com/us-en/ontap-technical-reports/nfs-tls/nfs-tls-overview.html[NFS over TLS in ONTAP^]
-Learn how to encrypt NFS traffic in flight using TLS 1.3 without Kerberos or IPsec.
