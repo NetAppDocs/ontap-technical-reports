@@ -1,0 +1,19 @@
+---
+permalink: s3.html
+sidebar: sidebar
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, NAS, best practices, best-practices
+summary: "These technical reports provide an overview of S3 in ONTAP as well as recommended practices."
+---
+= ONTAP NAS technical reports
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ./media/
+
+[.lead]
+NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. 
+
+== ONTAP S3
+link:https://docs.netapp.com/us-en/ontap/s3-config/index.html[TR-4814: S3 in ONTAP best practices^]
+Learn about recommended practices for using the Amazon Simple Storage Service (S3) with ONTAP software as well as capabilities and configurations for using ONTAP as an object store with native S3 applications or as a tiering destination for FabricPool.

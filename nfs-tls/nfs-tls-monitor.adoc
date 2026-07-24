@@ -1,0 +1,55 @@
+---
+sidebar: sidebar
+permalink: nfs-tls/nfs-tls-monitor.html
+keywords: nfs, tls, monitor, counters, ems, events, statistics, observability
+summary: "NFS over TLS exposes Counter Manager counters on the nfs_tls object and four EMS events for tracking connection health and enforcement behavior."
+---
+
+= Monitor NFS over TLS
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NFS over TLS exposes Counter Manager counters on the `nfs_tls` object and four EMS events you can use to track connection health and enforcement behavior.
+
+== Counter Manager counters
+
+All NFS-over-TLS Counter Manager counters live on the admin-scope object `nfs_tls`. View them with `statistics show -object nfs_tls`. Use `-counter <name>` to filter to a single counter, or `-instance` to scope to a specific SVM or node row.
+
+*Identifier / label counters (string):*
+
+* `nfs_tls:instance_name`--instance name (constituent SVM name) for the row.
+* `nfs_tls:instance_uuid`--instance UUID for the row (constituent SVM identifier).
+* `nfs_tls:vserver_id`--SVM identifier label for an aggregated row.
+* `nfs_tls:vserver_name`--SVM name label for an aggregated row.
+* `nfs_tls:node_name`--node name label for an aggregated row.
+
+*Connection-volume counters (rate):*
+
+* `nfs_tls:tls_total_connection_requests`--total NFS-over-TLS connection requests processed (success + failure).
+* `nfs_tls:tls_connection_success`--successful NFS-over-TLS connections.
+* `nfs_tls:tls_disabled_connection_failures`--connections rejected because NFS over TLS is disabled on the SVM.
+* `nfs_tls:tls_connection_handshake_failures`--connections that failed during the TLS handshake.
+* `nfs_tls:tls_configuration_not_found`--connection attempts rejected because no TLS configuration exists for the SVM/LIF pair.
+* `nfs_tls:tls_connection_mismatch`--connections that failed because the in-memory connection identifier did not match the connection observed during handshake completion.
+
+*Latency counter (average):*
+
+* `nfs_tls:tls_handshake_average_latency`--average TLS handshake latency in microseconds. Base counter: `tls_connection_success`.
+
+== Event Management System (EMS) messages
+
+Four customer-visible EMS events are emitted by the NFS server on the NFS-over-TLS data path. View them with `event log show`.
+
+`Nblade.TLSConfigError`:: Severity `ERR`, rate-limited 10 minutes. Triggered when a client attempts NFS over TLS on an SVM/LIF that has no TLS configuration. Fields logged: client IP address, SVM name, LIF IP address. To resolve, enable the configuration with `vserver nfs tls interface enable`.
+
+`Nblade.TLSHandshakeFailed`:: Severity `ERR`, rate-limited 10 minutes. Triggered when the TLS handshake between client and server fails. Fields logged: SVM name, LIF IP address, client (remote) IP address, server certificate UUID. To resolve, verify the TLS configuration on the LIF and check network health. If the issue persists, contact NetApp Support.
+
+`Nblade.NfsTlsDisabled`:: Severity `ALERT`, rate-limited 24 hours. Triggered when a client attempts NFS over TLS on an SVM where the feature is disabled. Fields logged: SVM name.
+
+`Nblade.nfsTLSAccessErr`:: Severity `ERR`. Triggered when a client matched by an export-policy rule with `-allow-nfs-tls-only true` attempts to mount or access the NFS path without TLS. Use this event to confirm that non-TLS clients are being blocked as intended.

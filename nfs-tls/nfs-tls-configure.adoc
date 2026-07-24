@@ -1,0 +1,467 @@
+---
+sidebar: sidebar
+permalink: nfs-tls/nfs-tls-configure.html
+keywords: nfs, tls, configure, certificate, ca, lif, linux, mount, mtls
+summary: "Step-by-step procedure for enabling NFS over TLS on an ONTAP SVM, installing certificates, mounting from a Linux client, and optionally configuring mutual TLS."
+---
+
+= Configure NFS over TLS
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NFS over TLS is configured per LIF using the `vserver nfs tls interface` command family, the `/api/protocols/nfs/tls/interfaces` REST endpoints, or System Manager's NFS settings.
+
+Export-policy rules gain a companion field that lets you enforce TLS-only access for matched clients. For command references, see link:https://docs.netapp.com[docs.netapp.com]. You can explore the REST API interactively via the built-in Swagger docs--just point your browser to `https://<cluster-mgmt-ip>/api/docs`.
+
+== ONTAP prerequisites
+
+The procedure outlined below assumes the following prerequisites are met:
+
+* ONTAP 9.19.1 or later
+* An SVM with the NFS protocol enabled
+* At least one data LIF configured for basic NFS access
+
+== Step 1: Create a root CA on ONTAP
+
+
+NOTE: *External CA option.* If your organization uses an external CA, skip this step. You will submit CSRs from Step 2 and Step 5 to your external CA and install the resulting signed certificates on ONTAP. The rest of the procedure remains the same.
+
+
+ONTAP can act as an internal Certificate Authority (CA) for lab and internal deployments. This step creates a self-signed root CA on the SVM that will be used to sign the server certificate (and optionally client certificates for mutual TLS).
+
+----
+ontap9::> security certificate create -vserver <svm> -common-name <ca-name> -type root-ca -size 2048 -hash-function SHA256 -expire-days 3652 -country US -state <state> -locality <city> -organization <org> -unit <unit>
+----
+
+After the command completes, retrieve and record the CA serial number. It is required in step 2 and, if using mutual TLS, step 5.
+
+----
+ontap9::> security certificate show -vserver <svm> -common-name <ca-name> -type root-ca -fields serial
+----
+
+Record the serial number: this becomes `<ca-serial>` in later steps.
+
+== Step 2: Generate the server certificate for the data LIF
+ONTAP presents this certificate to NFS clients during the TLS handshake. The certificate Common Name (CN) and Subject Alternative Name (SAN) must match the LIF's FQDN and IP address, because tlshd on the client validates the server identity against both.
+
+IMPORTANT: *IP SAN requirement.* If you plan to configure NFSv4.1 session trunking with NFS over TLS, or if any mount command uses a raw IP address instead of a hostname, the certificate must include an IP SAN entry for every LIF IP that clients will connect to. Without it, the TLS handshake fails with "Certificate owner unexpected" for IP-addressed paths.
+
+The ONTAP CSR generator (security certificate generate-csr) supports IP SANs directly via `-ipaddr`, which accepts a comma-separated list of IP addresses.
+
+*2a. Generate the CSR and private key.*
+
+Include `-ipaddr` with a comma-separated list of every LIF IP that will carry NFS over TLS traffic. Include `-dns-name` for the hostname or hostnames used in mount commands.
+
+----
+ontap9::> security certificate generate-csr -common-name <lif-fqdn> -security-strength 128 -hash-function SHA256 -extended-key-usage serverAuth -dns-name <lif-fqdn> -ipaddr <lif-ip>[,<lif-ip-2>,...] -country US -state <state> -locality <city> -organization <org> -unit <unit>
+----
+
+Example, for a single LIF:
+
+----
+ontap9::> security certificate generate-csr -common-name nfs.example.com -security-strength 128 -hash-function SHA256 -extended-key-usage serverAuth -dns-name nfs.example.com -ipaddr 192.0.2.130 -country US -state CA -locality SanJose -organization "MyOrg" -unit "Storage"
+----
+
+For session trunking across two LIF IPs, supply both in a comma-separated list:
+
+----
+ontap9::> security certificate generate-csr -common-name nfs.example.com -security-strength 128 -hash-function SHA256 -extended-key-usage serverAuth -dns-name nfs.example.com -ipaddr 192.0.2.130,192.0.2.131 -country US -state CA -locality SanJose -organization "MyOrg" -unit "Storage"
+----
+
+The command outputs a Certificate Signing Request (CSR) PEM block and a private key PEM block. Copy both and save them — the private key is displayed only once.
+
+To verify the CSR contains the expected SANs before signing, run on any client with OpenSSL:
+
+----
+echo <paste CSR PEM> | openssl req -noout -text | grep -A3 "Subject Alternative"
+----
+
+Expected output:
+
+----
+X509v3 Subject Alternative Name: critical
+    DNS:nfs.example.com, IP Address:192.0.2.130
+----
+
+*2b. Sign the CSR with the ONTAP CA.*
+
+----
+ontap9::> security certificate sign -vserver <svm> -ca <ca-name> -ca-serial <ca-serial> -expire-days 365 -hash-function SHA256
+----
+
+Paste the CSR PEM block when prompted. Copy the signed certificate PEM from the output.
+
+
+*2c. Install the signed server certificate.*
+
+----
+ontap9::> security certificate install -vserver <svm> -type server -cert-name <cert-name>
+----
+
+When prompted:
+
+* Paste the signed certificate PEM.
+* Paste the private key PEM.
+* When asked for intermediate or root certificates, paste the CA certificate PEM and press
+Enter, then answer n to stop adding certificates.
+
+*2d. Verify the installed certificate.*
+
+----
+ontap9::> security certificate show -vserver <svm> -type server -common-name <cert-name>
+----
+
+Confirm the expiry date and that the entry is present.
+
+
+== Step 3: Enable NFS over TLS on the data LIF
+
+With the server certificate installed, enable NFS over TLS on the target LIF.
+
+----
+ontap9::> vserver nfs tls interface enable -vserver <svm> -lif <lif> -certificate-name <cert-name>
+----
+
+Verify the LIF is TLS-enabled.
+
+----
+ontap9::> vserver nfs tls interface show -vserver <svm>
+----
+
+Expected output:
+
+----
+Vserver:              <svm>
+Logical Interface:    <lif>
+IP Address:           <lif-ip>
+TLS Status:           enabled
+TLS Certificate Name: <cert-name>
+Enforce Host Authentication: false
+----
+
+`TLS Status: enabled` confirms that ONTAP will negotiate TLS on port 2049 for this LIF. Clients using `xprtsec=tls` or `xprtsec=mtls` will now receive a TLS-protected connection. Clients that do not request TLS still connect in cleartext unless enforcement is added in Step 7.
+
+== Step 4: Install the CA certificate on the Linux client
+
+The Linux client must trust the CA that signed ONTAP's server certificate. Without this, `tlshd` rejects the TLS handshake because the server's certificate is not trusted.
+
+*If you used the ONTAP CA (Step 1)*
+
+Export the CA certificate from ONTAP:
+
+----
+ontap9::> security certificate show -vserver <svm> -common-name <ca-name> -type root-ca -fields cert
+----
+
+Copy the certificate PEM from the output and save it to a file (for example, `nfs-ca.crt`). Transfer this file to the Linux client.
+
+*If you used an external CA*
+
+Obtain the CA certificate PEM from your external CA infrastructure and save it to a file (for example, `nfs-ca.crt`). Transfer this file to the Linux client.
+
+*Install the CA certificate in the system trust store*
+
+.RHEL / Rocky / AlmaLinux / Fedora:
+----
+sudo cp nfs-ca.crt /etc/pki/ca-trust/source/anchors/nfs-tls-ca.crt
+sudo update-ca-trust
+----
+
+.Debian / Ubuntu:
+----
+sudo cp nfs-ca.crt /usr/local/share/ca-certificates/nfs-tls-ca.crt
+sudo update-ca-certificates
+----
+
+*Configure tlshd to use this CA as its trust store*
+
+Edit `/etc/tlshd.conf`:
+
+----
+[debug]
+loglevel=1
+tls=1
+nl=0
+
+[authenticate]
+
+[authenticate.client]
+x509.truststore=/etc/pki/ca-trust/source/anchors/nfs-tls-ca.crt
+----
+
+Adjust the `x509.truststore` path to match where you placed the CA certificate.
+
+Restart tlshd to apply the configuration:
+
+----
+sudo systemctl restart tlshd
+----
+
+Verify tlshd started cleanly:
+
+----
+journalctl -u tlshd -n 20 --no-pager
+----
+
+There should be no error lines in the output.
+
+
+== Step 5: Resolve the LIF FQDN on the client
+
+`tlshd` validates the server certificate against the hostname used in the mount command. Confirm that `<lif-fqdn>` resolves to `<lif-ip>` on the client before mounting.
+
+----
+getent hosts <lif-fqdn>
+----
+
+If the hostname does not resolve via DNS, add a static entry:
+
+----
+echo <lif-ip> <lif-fqdn> | sudo tee -a /etc/hosts
+----
+
+
+== Step 6: Mount with NFS over TLS
+
+Load the kernel TLS module if it is not already loaded:
+
+----
+sudo modprobe tls
+----
+
+Create the mount point and mount:
+
+----
+sudo mkdir -p <mountpoint>
+sudo mount -t nfs \
+  -o vers=4.1,xprtsec=tls \
+  <lif-fqdn>:<export-path> <mountpoint>
+----
+
+== Step 7: Verify the TLS connection
+
+*Client Side*
+
+Confirm the mount is active and shows `xprtsec=tls`:
+
+----
+mount | grep nfs
+----
+
+Expected output (line containing the mount):
+
+----
+<lif-fqdn>:<export-path> on <mountpoint> type nfs4 (rw,...,xprtsec=tls,...)
+----
+
+Confirm `tlshd` completed a successful TLS handshake:
+
+----
+journalctl -u tlshd -n 10 --no-pager
+----
+
+Look for a line containing:
+
+----
+Handshake with '<lif-fqdn>' (...) was successful
+----
+
+*ONTAP Side*
+
+Confirm the connection is listed as `TLS/nfs` (generate a small amount of I/O first if the connection was just established):
+
+----
+ontap9::> network connections active show -vserver <svm>
+----
+
+Expected entry:
+
+----
+<lif>:2049  <client-fqdn>:<port>  TLS/nfs
+----
+
+Check that no TLS handshake errors occurred:
+
+----
+ontap9::> event log show -severity error -message-name Nblade.TLSHandshakeFailed
+----
+
+No new entries since the mount attempt means the handshake succeeded.
+
+== Optional: Require TLS for specific clients (export policy enforcement)
+
+By default, NFS over TLS is opt-in: clients that do not request TLS can still connect in cleartext on a TLS-enabled LIF. To enforce TLS for a specific export rule, set `-allow-nfs-tls-only true`.
+
+----
+ontap9::> vserver export-policy rule modify -vserver <svm> -policyname <policy-name> -ruleindex <rule-index> -allow-nfs-tls-only true
+----
+
+After setting this, any NFS client matched by that rule that does **not** use TLS will be rejected at the export-rule evaluation point. Existing TLS connections are unaffected.
+
+Verify:
+
+----
+ontap9::> vserver export-policy rule show -vserver <svm> -policyname <policy-name> -fields allow-nfs-tls-only
+----
+
+
+
+== Optional: Mutual TLS (client authentication)
+
+Standard NFS over TLS authenticates the server to the client (server-only TLS). Mutual TLS (`xprtsec=mtls`) additionally requires the client to present a certificate that ONTAP validates. This provides cryptographic host authentication on both sides.
+
+IMPORTANT: *Client OS requirement.* Mutual TLS requires `ktls-utils` 0.12 or later. The version shipped with RHEL 9.7 (`ktls-utils 0.11`) does *not* work--it never sends the client certificate regardless of configuration. RHEL 10.1 (`ktls-utils 1.2.1`) is validated. Verify your `ktls-utils` version before proceeding.
+
+IMPORTANT: *Mount option.* Use `xprtsec=mtls`, *not* `xprtsec=tls`. With `xprtsec=tls`, the kernel sends authentication mode `HANDSHAKE_AUTH_UNAUTH` to `tlshd`, which follows the anonymous handshake path and does not present a client certificate even if one is configured.
+
+=== Step 1: Create a CA for client certificates (ONTAP)
+
+This can be the same CA as in Step 1 or a separate one. Using a separate CA is recommended for production so that the server and client certificate chains are distinct.
+
+----
+ontap9::> security certificate create -vserver <svm> -common-name "NFS-mTLS-CA" -type root-ca -expire-days 3652 -hash-function SHA256
+----
+
+Record the serial number as `<mtls-ca-serial>`.
+
+=== Step 2: Install the CA as a client-ca trust anchor (ONTAP)
+
+Export the CA certificate:
+
+----
+ontap9::> security certificate show -vserver <svm> -common-name "NFS-mTLS-CA" -type root-ca -fields cert
+----
+
+Install it as type `client-ca`:
+
+----
+ontap9::> security certificate install -vserver <svm> -type client-ca
+----
+
+Paste the CA certificate PEM when prompted. Verify:
+
+----
+ontap9::> security certificate show -vserver <svm> -type client-ca
+----
+
+=== Step 3: Enable enforce-host-auth on the LIF (ONTAP)
+
+----
+ontap9::> vserver nfs tls interface modify -vserver <svm> -lif <lif> -enforce-host-auth true
+----
+
+Verify:
+
+----
+ontap9::> vserver nfs tls interface show -vserver <svm> -instance
+----
+
+Confirm: `Enforce Host Authentication: true`.
+
+=== Step 4: Generate the client key and CSR (Linux client)
+
+----
+sudo mkdir -p /etc/nfs
+sudo openssl genrsa -out /etc/nfs/client.key 2048
+sudo chmod 600 /etc/nfs/client.key
+
+sudo openssl req -new \
+  -key /etc/nfs/client.key \
+  -subj "/CN=<client-fqdn>/C=US" \
+  -addext "subjectAltName=DNS:<client-fqdn>,IP:<client-ip>" \
+  -out /tmp/client.csr
+
+cat /tmp/client.csr
+----
+
+=== Step 5: Sign the client CSR with the ONTAP CA
+
+On the ONTAP cluster:
+
+----
+ontap9::> security certificate sign -vserver <svm> -ca "NFS-mTLS-CA" -ca-serial <mtls-ca-serial> -expire-days 365 -hash-function SHA256
+----
+
+Paste the contents of `/tmp/client.csr` when prompted. Copy the signed certificate PEM from the output.
+
+=== Step 6: Build the client certificate chain file (Linux client)
+
+Save the signed certificate to `/tmp/client-signed.crt`. Also obtain the CA certificate PEM (`nfs-mtls-ca.crt`). Concatenate them into a chain file:
+
+----
+sudo bash -c "cat /tmp/client-signed.crt /path/to/nfs-mtls-ca.crt \
+  > /etc/nfs/client-chain.crt"
+sudo chmod 600 /etc/nfs/client-chain.crt
+----
+
+IMPORTANT: **Why a chain file?** `tlshd` 1.2.1 uses `gnutls_pcert_list_import_x509_raw` and requires the full certificate chain (leaf followed by CA) for GnuTLS to resolve the issuer correctly during the `find_x509_client_cert` callback. A leaf-only file causes a GnuTLS assertion failure.
+
+=== Step 7: Update /etc/tlshd.conf with the client certificate (Linux client)
+
+----
+[debug]
+loglevel=1
+tls=1
+nl=0
+
+[authenticate]
+
+[authenticate.client]
+x509.truststore=/etc/pki/ca-trust/source/anchors/nfs-tls-ca.crt
+x509.certificate=/etc/nfs/client-chain.crt
+x509.private_key=/etc/nfs/client.key
+----
+
+Restart tlshd:
+
+----
+sudo systemctl restart tlshd
+----
+
+=== Step 8: Mount with xprtsec=mtls
+
+----
+sudo mount -t nfs \
+  -o vers=4.1,xprtsec=mtls \
+  <lif-fqdn>:<export-path> <mountpoint>
+----
+
+=== Step 9: Verify mutual TLS
+
+*Client:*
+
+----
+mount | grep nfs
+# Confirm: xprtsec=mtls in mount options
+
+journalctl -u tlshd -n 5 --no-pager
+# Confirm: "Handshake with '<lif-fqdn>' (...) was successful"
+----
+
+*ONTAP:*
+
+----
+ontap9::> network connections active show -vserver <svm>
+# Confirm: <lif>:2049  <client-fqdn>:<port>  TLS/nfs
+
+ontap9::> event log show -severity error -message-name Nblade.TLSHandshakeFailed
+# No new entries = success
+----
+
+== Defaults that matter
+
+* `-enforce-host-auth = false`--NFS over TLS does not enforce host-based authentication by default. This is the looser posture. Setting it to `true` rejects TLS connections whose certificate identity does not match the LIF's host identity.
+* `-skip-san-validation = false`--the SAN check is performed by default. Setting it to `true` relaxes certificate-to-LIF identity binding. This parameter is write-only: subsequent `show` or `GET` does not echo the value, so admins cannot determine after the fact whether SAN validation was skipped at enable or modify time.
+* `-allow-nfs-tls-only = false`--an export-policy rule does not require TLS by default. Enabling NFS over TLS on a LIF does not by itself reject plaintext NFS. If you want a hard TLS-only posture, opt in per rule and make sure TLS is enabled on all data LIFs serving those clients first--otherwise you'll deny access.
+
+The `vserver export-policy rule create` and `vserver export-policy rule modify` commands gain a new field, `-allow-nfs-tls-only`, that restricts matched clients to NFS-over-TLS connections only.
+
+== REST endpoints
+
+You can explore the REST API interactively via the built-in Swagger docs--just point your browser to `https://<cluster-mgmt-ip>/api/docs`. The NFS over TLS endpoints are under the `/api/protocols/nfs/tls/interfaces` path for the LIF configuration and under `/api/protocols/nfs/export-policies/{policy.id}/rules` for the export-policy rule field.
