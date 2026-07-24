@@ -1,0 +1,35 @@
+---
+sidebar: sidebar
+permalink: nfs-tls/nfs-tls-overview.html
+keywords: nfs, tls, encryption, ontap, rfc9289, in-transit, prerequisites, requirements
+summary: "ONTAP 9.19.1 introduces native NFS over TLS, enabling in-transit encryption of NFS RPC traffic per RFC 9289 without Kerberos or IPsec."
+---
+
+= NFS over TLS overview
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+ONTAP 9.19.1 introduces NFS over TLS, the much-anticipated 'easy button' for encrypting your NFS traffic.
+
+Prior to this feature, encrypting your NFS payload in flight was limited to IPsec or Kerberos. While both are effective, configuration was cumbersome and performance penalties could soar high. Both methods were 'bolt-on' solutions--solutions not defined in an RFC specifically for NFS. link:https://www.rfc-editor.org/rfc/rfc9289.html[RFC 9289], titled "Toward Remote Procedure Call Encryption by Default" changed that. Now NFSv3 and NFSv4.x can encrypt NFS RPC traffic in flight using TLS 1.3. No Kerberos required. No IPsec required.
+
+== Prerequisites
+
+To use ONTAP NFS over TLS, you must meet the following requirements.
+
+* ...be running ONTAP 9.19.1
+** ONTAP cloud personalities are not supported at this time
+* ...have NFS licensed
+* ...have an NFS client found in the link:https://imt.netapp.com[NetApp Interoperability Matrix]
+
+== What it doesn't do
+
+NFS over TLS secures the transport layer -- it does not change how NFS authenticates users.
+
+*Certificate-based user authentication.* NFS over TLS *does not provide a new user authentication mechanism*. You still need either `auth_sys` or `krb5` for user authentication. You can still use `krb5i` and `krb5p`, but TLS makes their integrity and privacy protections redundant--and you'll still take the performance hit.

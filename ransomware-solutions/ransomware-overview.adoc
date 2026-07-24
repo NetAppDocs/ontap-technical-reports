@@ -57,7 +57,7 @@ NetApp link:ransomware-bluexp-protection.html[NetApp ransomware protection] redu
 
 As a native, built-in ONTAP solution for protecting unauthorized access to your data, link:https://docs.netapp.com/us-en/ontap/multi-admin-verify/index.html[multi-admin verification (MAV)^] has a robust set of capabilities that ensure that operations such as deleting volumes, creating additional administrative users, or deleting snapshots can be executed only after approvals from at least a second designated administrator. This prevents compromised, malicious, or inexperienced administrators from making undesirable changes or deleting data. You can configure as many designated administrator approvers as you want before a snapshot can be deleted.
 
-NOTE: NetApp ONTAP addresses the requirement for web-based https://www.netapp.com/pdf.html?item=/media/17055-tr4647pdf.pdf[multi-factor authentication (MFA)^] in System Manager and for SSH CLI authentication.
+NOTE: NetApp ONTAP addresses the requirement for web-based https://www.netapp.com/pdf.html?item=/media/17055-tr4647.pdf[multi-factor authentication (MFA)^] in System Manager and for SSH CLI authentication.
 
 NetApp's ransomware protection offers peace of mind in an ever-evolving threat landscape. Its comprehensive approach not only defends against current ransomware variants but also adapts to emerging threats, providing long-term security for your data infrastructure.
 
