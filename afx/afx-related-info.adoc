@@ -19,6 +19,6 @@ https://www.netapp.com/afx/
 * NetApp AFX: Scalable, secure AI data infrastructure
 link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/[https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/^]
 * Deciding between NFSv3 or NFSv4.x? The choice is getting clearer…
-link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer[https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer^]
+link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer[https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963]
 * NetApp AFX Data Sheet
 link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf^]  
