@@ -18,6 +18,6 @@ To learn more about the information that is described in this document, review t
 
 * link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/[Building the AI-powered enterprise: Why the infrastructure matters]
 
-* link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963[Blog:Deciding between NFSv3 and NFSv4.X]
+* link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963[Blog: Deciding between NFSv3 and NFSv4.X]
 
 * link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX Datasheet]  
