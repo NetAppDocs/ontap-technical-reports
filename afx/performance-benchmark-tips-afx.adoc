@@ -1,0 +1,15 @@
+---
+sidebar: sidebar
+permalink: afx/performance-benchmark-tips-afx.html
+keywords: netapp afx, performance, benchmarks, elbencho, best practices
+summary: "Guidance for reproducing NetApp AFX performance benchmark results."
+---
+
+= Performance benchmark tips
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+Content forthcoming.
+
+This page will provide guidance for reproducing the NetApp AFX performance benchmark results described in link:afx-performance.html#benchmark-results[Benchmark results].

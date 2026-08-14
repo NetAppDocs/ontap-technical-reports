@@ -142,7 +142,6 @@ The following table approximates the amount of usable raw capacity for 84 disks 
 [options="header"]
 |===
 | Drive size | Approximate raw capacity (Unified) | Approximate raw capacity (AFX)
-| 7.6TB | ~547.2TB | ~608TB (+60.8TB)
 | 15.3TB | ~1101.6TB | ~1224TB (+122.4TB)
 | 30.6TB | ~2203.2TB | ~2448TB (+244.7TB)
 | 60.1TB | ~4327.2TB | ~4808TB (+480.8TB)
@@ -203,7 +202,7 @@ The table below shows the capacity behaviors for duplicated data in different sc
 | Four copies of same 10GB file, 4 different volumes, 4 different nodes (cross-volume deduplication enabled) | 40GB (9.18.1) 10GB (9.19.1)
 |===
 
-== Features that have been removed/are unsupported
+== ONTAP Features that have been removed/are unsupported with AFX
 
 NetApp AFX is designed for high-performance NAS and object workloads – particularly (but not exclusive to) those in the AI training and inference space. With the design of NetApp AFX, some decisions were made to disable some of the features in ONTAP.
 

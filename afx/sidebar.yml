@@ -9,6 +9,8 @@ entries:
       url: /afx/afx-architecture.html
     - title: Performance
       url: /afx/afx-performance.html
+    - title: Performance benchmark tips
+      url: /afx/performance-benchmark-tips-afx.html
     - title: Management
       url: /afx/afx-management.html
     - title: Capabilities
