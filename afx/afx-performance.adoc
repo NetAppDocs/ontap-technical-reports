@@ -74,7 +74,7 @@ Unified ONTAP nodes require at least one set of disks per node and can have mult
 
 NetApp AFX presents all disk shelves to all nodes. Each shelf contains modules with 16 x 100GB RoCE-capable interfaces to increase the total amount of performance allowed per shelf. Because of this, you can saturate a single shelf with multiple nodes that will be reading and writing to the same set of disks.
 
-As of ONTAP 9.19.1, the node:shelf saturation ratio is around 4:1.
+As of ONTAP 9.19.1, the node:shelf saturation ratio is at least 4:1, and 8:3 is possible.
 
 == Benchmark results
 
