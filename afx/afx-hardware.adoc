@@ -68,7 +68,7 @@ image:image44.png["Image"]
 
 === Cluster switch connectivity
 
-NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. The cluster switches are 400GB capable. Backend cluster network ports support only 100GB connections to the cluster switches on the AFX 1K platform and support 400GB connections on the AFX 2K. As a result, AFX 1K backend node connections use 4 x 100GB breakout cables to reduce the number of ports used on the switches. The AFX 2K will use a 1:1 400GB connection to the switches. Storage shelf modules still use 100GB interfaces; for instance, 16 x 100GB storage shelf module ports use just 4 ports on the switches, while the 8 total ports on AFX 1K nodes use 2 switch ports.
+NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. The cluster switches are 400GB capable. Backend cluster network ports support only 100GB connections to the cluster switches on the AFX 1K platform and support 400GB connections on the AFX 2K. As a result, AFX 1K backend node connections use 4 x 100GB breakout cables to reduce the number of ports used on the switches. The AFX 2K uses a 1:1 400GB connection to the switches, with 6 ports per node (2 HA, 2 cluster, 2 storage). Storage shelf modules still use 100GB interfaces; for instance, 16 x 100GB storage shelf module ports use just 4 ports on the switches, while the 8 total ports on AFX 1K nodes use 2 switch ports.
 
 *NetApp AFX switch cabling*
 
@@ -76,21 +76,45 @@ image:image45.png["Image"]
 
 === Switch selection guidance
 
-Add up the 400GbE ports required on each switch for AFX 1K nodes, AFX 2K nodes, and shelves (see <<Cluster switch connectivity>>), then select the smallest switch class that covers that total. NetApp AFX uses a pair of cluster switches; size each switch independently, including two ports reserved for ISL.
+Add up the 400GbE ports required on each switch, then select the smallest switch class that covers that total. NetApp AFX uses a pair of cluster switches; size each switch independently. Two ports on each switch are reserved for ISL (9332: ports 31–32; 9364: ports 63–64), which leaves 30 usable ports on the 9332 and 62 usable ports on the 9364.
+
+Port counts per switch:
+
+* AFX 1K: 1 × 400GbE port per node (four 100GB node ports on a 4 x 100GB breakout)
+* AFX 2K: 3 × 400GbE ports per node per switch (6 ports per node at 1:1 400GB: 2 HA, 2 cluster, 2 storage)
+* Shelves: 2 × 400GbE ports per shelf (eight 100GB shelf ports per switch on 4 x 100GB breakouts)
 
 [options="header"]
 |===
 | Combined 400GbE ports required (per switch) | Switch
-| Fits in 32 ports (30 usable after ISL on ports 31–32) | Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE)
-| Fits in 64 ports (62 usable after ISL on ports 63–64) | Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE)
+| Fits in 32 ports (30 usable after ISL) | Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE)
+| Fits in 64 ports (62 usable after ISL) | Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE)
 | More than 64 ports | Cisco Nexus 9808, or as specified in link:https://hwu.netapp.com[Hardware Universe^]
 |===
 
-Port-count reminders:
+==== 32-node clusters
 
-* AFX 1K: four 100GB node ports consume one 400GbE switch port (4 x 100GB breakout).
-* AFX 2K: one 400GB node port consumes one 400GbE switch port (1:1).
-* Shelves: 16 x 100GB shelf-module ports consume four 400GbE switch ports.
+A 32-node cluster (the current node maximum; see link:afx-limits.html[Maximums and limits]) consumes 32 × 400GbE ports per switch on AFX 1K and 96 × 400GbE ports per switch on AFX 2K (32 × 3), before shelves.
+
+[options="header"]
+|===
+| Switch | AFX 1K (32 nodes) | AFX 2K (32 nodes)
+| Cisco Nexus 9332D-GX2B | Not supported (32 node ports exceed 30 usable ports) | Not supported
+| Cisco Nexus 9364D-GX2A | 32 nodes and 15 shelves (32 + 15×2 = 62 ports) | Not supported (96 node ports exceed 62 usable ports)
+| Cisco Nexus 9808 | 32 nodes and up to 25 shelves (platform shelf maximum) | 32 nodes and up to 25 shelves (platform shelf maximum)
+|===
+
+==== Maximum node count per switch
+
+If the cluster is smaller than 32 nodes, the following combinations fill each switch's usable ports while keeping even node counts (HA pairs) and a minimum of 2 shelves. Remaining ports are used for additional shelves. Shelf count cannot exceed the platform maximum (25 as of ONTAP 9.19.1).
+
+[options="header"]
+|===
+| Switch | AFX 1K (max nodes + shelves) | AFX 2K (max nodes + shelves)
+| Cisco Nexus 9332D-GX2B | 26 nodes + 2 shelves | 8 nodes + 3 shelves
+| Cisco Nexus 9364D-GX2A | 32 nodes + 15 shelves | 18 nodes + 4 shelves
+| Cisco Nexus 9808 | 32 nodes + 25 shelves | 32 nodes + 25 shelves
+|===
 
 For the latest supported switch models and limits, see link:https://hwu.netapp.com[Hardware Universe^] and the link:https://docs.netapp.com/us-en/ontap-afx/install-setup/afx-cable-overview.html[AFX cabling documentation^].
 
