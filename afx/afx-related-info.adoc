@@ -14,10 +14,14 @@ To learn more about the information that is described in this document, review t
 
 * link:https://hwu.netapp.com/[Hardware Universe]
 
+* link:https://docs.netapp.com/us-en/ontap-afx/index.html[AFX documentation]
+
+* link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[What's new in ONTAP 9.19.1 for AFX storage systems]
+
 * link:https://www.netapp.com/afx/[AFX product page]
 
 * link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/[Building the AI-powered enterprise: Why the infrastructure matters]
 
 * link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963[Blog: Deciding between NFSv3 and NFSv4.X]
 
-* link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX Datasheet]  
+* link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX Datasheet] 

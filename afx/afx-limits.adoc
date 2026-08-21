@@ -41,7 +41,7 @@ a|
 
 a|
 * 8 (9.17.1)
-* 32 (9.19.1RC1)
+* 32 (9.19.1GA)
 
 | Total capacity
 a|
@@ -52,7 +52,7 @@ a|
 * 3PB (9.18.1RC1)
 * 16PB (9.18.1GA release)
 * 20PB (9.19.1RC0)
-* 32PB (9.19.1RC1)
+* 32PB (9.19.1GA)
 
 | Supported shelf count
 a|
@@ -62,7 +62,7 @@ a|
 a|
 * 12 per cluster (9.18.1GA)
 * 17 per cluster (9.19.1RC0)
-* 25 per cluster (9.19.1RC1)
+* 25 per cluster (9.19.1GA)
 (no HA pair limitation)
 
 | Total supported drive count
@@ -74,7 +74,7 @@ a|
 * 288 per cluster 
 (based on shelf count limits; no HA pair limitation)
 * 408 per cluster (9.19.1RC0)
-* 600 per cluster (9.19.1RC1)
+* 600 per cluster (9.19.1GA)
 
 | Volume size
 a|
@@ -144,7 +144,7 @@ a|
 
 a|
 * 200
-* 512 in 9.19.1 RC1
+* 512 in 9.19.1GA
 
 | Maximum number of intercluster LIFs
 a|

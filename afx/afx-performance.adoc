@@ -81,8 +81,8 @@ As of ONTAP 9.19.1, the node:shelf saturation ratio is at least 4:1, and 8:3 is 
 The following section covers benchmark results using a NetApp AFX cluster with the following configuration parameters.
 
 * 4 nodes, 4 data interfaces
-* 2 shelves (7.6TB drives)
-* ONTAP 9.19.1
+* 2 shelves
+* ONTAP 9.19.1GA
 * NFSv4.2 (pNFS, session trunking)
 * FlexGroup volume
 * link:https://github.com/breuner/elbencho[ElBencho^] benchmark
