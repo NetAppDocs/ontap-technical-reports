@@ -46,6 +46,8 @@ NetApp AFX supports larger scale for clusters. Starting in 9.19.1, AFX clusters 
 
 image:image31.png["Image"]
 
+For maximum cluster size information, see the link:afx-limits.html[Limits] page.
+
 [cols="1,1",frame=none,grid=none]
 |===
 | link:afx-architecture-volume-moves.html[Previous: Volume moves]

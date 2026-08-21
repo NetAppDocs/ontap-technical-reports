@@ -12,11 +12,9 @@ summary: "Learn how NetApp AFX uses zero-copy volume moves for automated adminis
 [.lead]
 NetApp AFX moves volume ownership between nodes without copying volume data, enabling fast automation and performance-driven balancing.
 
-== Automated storage administration tasks
+== How the Storage Availability Zone changes volume behavior
 
-With the Storage Availability Zone in NetApp AFX, all capacity is shared across all nodes. While nodes still own volumes, ONTAP manages the capacity usage of each node automatically by borrowing and releasing capacity based on what each node needs at any given time. That means storage administrators no longer need to be concerned with how best to balance usable space.
-
-Additionally, RAID group management is automated by ONTAP, where newly added disks will be added to existing or new RAID groups without admin intervention. ONTAP also manages volume moves across nodes without needing to copy data.
+With the Storage Availability Zone in NetApp AFX, all capacity is shared across all nodes. While nodes still own volumes, ONTAP manages the capacity usage of each node automatically by borrowing and releasing capacity based on what each node needs at any given time. That means storage administrators no longer need to be concerned with how best to balance usable space. This new approach also provides a method for volumes to move more freely across nodes.
 
 [[zero-copy-volume-moves]]
 == Zero-copy volume moves

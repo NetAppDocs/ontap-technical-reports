@@ -24,18 +24,6 @@ Deduplication allows a storage system to find duplicate blocks in its file syste
 
 image:image17.png["Image"]
 
-The table below shows the capacity behaviors for duplicated data in different scenarios in unified ONTAP. As file copies span nodes and aggregates (and thus, deduplication domains), space savings get reduced.
-
-*Deduplication behaviors in different scenarios for identical 10GB files – unified ONTAP*
-
-[options="header"]
-|===
-| Scenario | Space used
-| Four copies of same 10GB file, same volume (volume deduplication) | 10GB
-| Four copies of same 10GB file, different volumes, same aggregate (cross-volume deduplication enabled) | 10GB
-| Four copies of same 10GB file, 4 different volumes, 4 different aggregates (cross-volume deduplication enabled) | 40GB
-|===
-
 Because NetApp AFX removes physical aggregates and moves capacity management to the new Storage Availability Zone, the deduplication domain boundaries also change. In AFX, the deduplication domain is at the volume-level (like unified ONTAP) and the node (rather than the aggregate) prior to 9.19.1.
 
 Starting in ONTAP 9.19.1, AFX supports a global deduplication domain at the Storage Availability Zone level, so all duplicated blocks in the cluster storage pool are treated the same.
@@ -44,28 +32,16 @@ Starting in ONTAP 9.19.1, AFX supports a global deduplication domain at the Stor
 
 image:image18.png["Image"]
 
-The table below shows the capacity behaviors for duplicated data in different scenarios in NetApp AFX.
+The table below compares capacity behaviors for duplicated data in different scenarios. As file copies span nodes and aggregates (and thus, deduplication domains) in unified ONTAP, space savings get reduced. In AFX prior to 9.19.1, the same happens when copies span nodes. Starting in 9.19.1, global deduplication applies the same savings across the Storage Availability Zone.
 
-*Deduplication behaviors in different scenarios for identical 10GB files – NetApp AFX*
+*Deduplication behaviors for identical 10GB files – unified ONTAP and NetApp AFX*
 
-[options="header",cols="2,1"]
+[options="header",cols="3,1,1,1"]
 |===
-| Scenario | Space used
-
-| Four copies of same 10GB file, same volume (volume deduplication)
-a|
-* 10GB (9.18.1)
-* 10GB (9.19.1)
-
-| Four copies of same 10GB file, different volumes, same node (cross-volume deduplication enabled)
-a|
-* 10GB (9.18.1)
-* 10GB (9.19.1)
-
-| Four copies of same 10GB file, 4 different volumes, 4 different nodes (cross-volume deduplication enabled)
-a|
-* 40GB (9.18.1)
-* 10GB (9.19.1)
+| Scenario | Unified ONTAP | AFX 9.18.1 | AFX 9.19.1
+| Four copies of same 10GB file, same volume (volume deduplication) | 10GB | 10GB | 10GB
+| Four copies of same 10GB file, different volumes, same aggregate (unified ONTAP) or same node (AFX); cross-volume deduplication enabled | 10GB | 10GB | 10GB
+| Four copies of same 10GB file, 4 different volumes, 4 different aggregates (unified ONTAP) or 4 different nodes (AFX); cross-volume deduplication enabled | 40GB | 40GB | 10GB
 |===
 
 [cols="1,1",frame=none,grid=none]

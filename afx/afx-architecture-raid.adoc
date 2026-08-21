@@ -39,6 +39,8 @@ The following table approximates the amount of usable raw capacity for 84 disks 
 | 60.1TB | ~4327.2TB | ~4808TB (+480.8TB)
 |===
 
+Additionally, RAID group management is automated by ONTAP, where newly added disks will be added to existing or new RAID groups without admin intervention. ONTAP also manages volume moves across nodes without needing to copy data.
+
 [[faster-disk-failure-rebuild-times]]
 == Faster disk failure rebuild times
 
