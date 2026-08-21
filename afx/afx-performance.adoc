@@ -180,3 +180,10 @@ Our performance engineering teams compared performance of standard AI image, EDA
 *NetApp AFX – NFSv4.1 metadata IO performance in NetApp AFX*
 
 image:image37.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture.html[Previous]
+>| link:performance-benchmark-tips-afx.html[Next: Performance benchmark tips]
+|===
+

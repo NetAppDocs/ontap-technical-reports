@@ -135,3 +135,10 @@ All drives used with NetApp AFX are performance-rated drives, and both QLC and T
 For performance numbers, see link:afx-performance.html#per-shelf-performance[Per-shelf performance].
 
 When choosing the drive type in use, consider what workloads the storage will be hosting and the performance/capacity density tradeoffs involved.
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-capabilities.html[Previous]
+>| link:afx-limits.html[Next: Maximums and limits]
+|===
+

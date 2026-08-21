@@ -377,4 +377,11 @@ NetApp AFX removes physical aggregates from the equation, and as a result, remov
 
 === Onboard boot media
 
-NetApp AFX nodes leverage on-board boot media, which is an NVMe attached M.2 device roughly 3.8TB in size. These boot devices contain boot image files and replicated databases that are separate from the storage enclosures, which provides extra redundancy in the case of disk access issues. If the boot media fails, the node will be taken over by its HA partner and the boot media can be replaced. Once replaced, a new ONTAP image would be loaded to the device by a storage administrator and ONTAP will automatically rebuild the cluster database to restore full functionality. 
+NetApp AFX nodes leverage on-board boot media, which is an NVMe attached M.2 device roughly 3.8TB in size. These boot devices contain boot image files and replicated databases that are separate from the storage enclosures, which provides extra redundancy in the case of disk access issues. If the boot media fails, the node will be taken over by its HA partner and the boot media can be replaced. Once replaced, a new ONTAP image would be loaded to the device by a storage administrator and ONTAP will automatically rebuild the cluster database to restore full functionality.
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-whats-new.html[Previous]
+>| link:afx-performance.html[Next: Performance]
+|===
+ 

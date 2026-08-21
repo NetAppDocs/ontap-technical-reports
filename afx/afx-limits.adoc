@@ -181,3 +181,10 @@ a|
 [.small]
 _*FlexGroup maximum size will be limited to 32PB physical size._
 
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-hardware.html[Previous]
+>| link:afx-related-info.html[Next: Related information]
+|===
+
+

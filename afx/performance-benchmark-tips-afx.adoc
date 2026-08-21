@@ -248,3 +248,10 @@ aggr efficiency wise-tsse modify -aggregate data* -enable-workload-informed-tsse
 === Aggressive readahead
 
 Aggressive readahead can help improve read performance for specific workloads (such as sequentially named files). Feature configuration, caveats, and statistics are covered in link:afx-performance.html#aggressive-read-ahead[Aggressive read-ahead]. See also link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#cross-file-sequential-read[Cross File Sequential Read in AFX SVM administration^].
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-performance.html[Previous]
+>| link:afx-management.html[Next: Management]
+|===
+
