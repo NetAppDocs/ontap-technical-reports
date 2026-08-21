@@ -12,6 +12,8 @@ summary: "Guidance for reproducing NetApp AFX performance benchmark results, inc
 [.lead]
 This page provides configuration guidance for reproducing the NetApp AFX performance benchmark results described in link:afx-performance.html#benchmark-results[Benchmark results]. These are general considerations and configuration guidelines rather than a complete test procedure.
 
+For NFS protocol background and recommended practices, see link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf[TR-4067: NFS in ONTAP best practice and implementation guide^] and link:afx-performance.html#nfsv4x-performance-enhancements[NFSv4.x performance enhancements].
+
 NAS benchmarking scripts for volume creation, LIF management, and client tuning are available in the link:https://github.com/whyistheinternetbroken/Benchmarking/tree/main/ONTAP[Benchmarking/ONTAP^] repository.
 
 == Performance testing considerations
@@ -20,7 +22,7 @@ Performance testing is generally intended to find the edges of what a system can
 
 == NFS export policy configuration
 
-Export policies in ONTAP are how access to NFS exports are controlled. Every volume requires an export policy to be set, with rules configured in the policy. If no rules are configured in a policy, that will be considered as "no access."
+Export policies in ONTAP are how access to NFS exports are controlled. Every volume requires an export policy to be set, with rules configured in the policy. If no rules are configured in a policy, that will be considered as "no access." For more information, see link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/securing-nfs.html[NFS securing^] and the link:https://docs.netapp.com/us-en/ontap/nfs-admin/export-policies-concept.html[ONTAP export policies documentation^].
 
 For performance benchmarking, we are likely less concerned with permissions to the clients being used for testing and instead would like to avoid any permission-related errors. As a result, it is recommended to ensure that any export policy rule is set to wide-open access for the data volume, but only to the clients being used to access datasets. In addition, the vsroot policy *must* allow read access in the policy for path traversal.
 
@@ -39,7 +41,7 @@ export-policy rule create -policyname [name] -clientmatch [client1],[client2],..
 
 == NFS server configuration
 
-The following NFS server options were used for internal AFX performance benchmark runs. Other NFS server options can be enabled as well (for example, NFSv4 ACL support), but they are outside the scope of these benchmark tips.
+The following NFS server options were used for internal AFX performance benchmark runs. Other NFS server options can be enabled as well (for example, NFSv4 ACL support), but they are outside the scope of these benchmark tips. For NFSv4.1, pNFS, and session trunking performance context on AFX, see link:afx-performance.html#nfsv4x-performance-enhancements[NFSv4.x performance enhancements].
 
 [options="header"]
 |===
@@ -76,7 +78,7 @@ NOTE: If those commands do not work, you likely have not installed the proper NF
 
 The following CLI command applies the NFS server configuration used for internal performance benchmark runs. A script that connects to the cluster via SSH and applies this configuration is available at link:https://github.com/whyistheinternetbroken/Benchmarking/blob/main/ONTAP/NAS/configure-nfs-server.sh[ONTAP/NAS/configure-nfs-server.sh^].
 
-NOTE: RDMA reduces latency and increases throughput for most workloads -- roughly 10-30%.
+NOTE: RDMA reduces latency and increases throughput for most workloads -- roughly 10-30%. For NFS over RDMA, see the link:https://docs.netapp.com/us-en/ontap/nfs-rdma/index.html[ONTAP NFS over RDMA documentation^].
 
 ----
 set advanced; nfs modify -vserver [SVM] -v3 enabled -v4.1 enabled -v4.0 disabled -v4-id-domain [yourdomain.com] -v4.1-pnfs enabled -v4.1-trunking enabled -v4-64bit-identifiers enabled -v3-64bit-identifiers enabled -chown-mode unrestricted -tcp-max-xfer-size 262144 -mount-rootonly disabled -nfs-rootonly disabled -v3-hide-snapshot enabled -rdma [enabled optional]
@@ -84,7 +86,7 @@ set advanced; nfs modify -vserver [SVM] -v3 enabled -v4.1 enabled -v4.0 disabled
 
 == Volume configuration
 
-The following section covers volume creation and configuration considerations and shows what options should be used during the initial creation.
+The following section covers volume creation and configuration considerations and shows what options should be used during the initial creation. For how FlexGroup volumes work in AFX, see link:afx-architecture.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements], link:afx-capabilities.html#volume-types[Volume types], and link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^].
 
 [options="header"]
 |===
@@ -116,7 +118,7 @@ If the workload creates many large files (>1GB) in a single folder, modify the v
 AFX::> set advanced; vol modify -vserver [SVM] -volume [FlexGroup name] -workflow data
 ----
 
-If the workload is VMware datastores hosted on a FlexGroup volume, disable the `-gdd` option:
+If the workload is VMware datastores hosted on a FlexGroup volume, disable the `-gdd` option (Granular Data Distribution). GDD is not supported with NFS copy offload for virtualization on AFX; see link:afx-architecture.html#ontap-features-that-have-been-removedare-unsupported-with-afx[ONTAP Features that have been removed/are unsupported with AFX].
 
 ----
 AFX::> set diag; vol modify -vserver [SVM] -volume [FlexGroup name] -granular-data disabled
@@ -124,7 +126,7 @@ AFX::> set diag; vol modify -vserver [SVM] -volume [FlexGroup name] -granular-da
 
 === Why snapshots are disabled
 
-In general, snapshots in ONTAP are not detrimental to overall system performance. However, in benchmarking, we would disable snapshots for two reasons:
+In general, snapshots in ONTAP are not detrimental to overall system performance. For how snapshots and replication work on AFX, see link:afx-capabilities.html#snapshots-and-data-protection[Snapshots and Data Protection]. However, in benchmarking, we would disable snapshots for two reasons:
 
 * Granular control over the environment -- We can create snapshots when we want to create them to better control the scenarios when snapshots are created and make it easier to measure their impact.
 * Data churn -- Many benchmark tests will create a lot of data and then subsequently delete that data, which will rapidly grow the size of any existing snapshots on the volume. To avoid space allocation issues, we disable snapshots.
@@ -143,6 +145,8 @@ Base options (applies to all clients/scenarios):
 
 *Session trunking (OS-specific)*
 
+Session trunking is also listed in the link:afx-performance.html#benchmark-results[Benchmark results] configuration (`trunkdiscovery`). For NFSv4.x multipath IO context, see link:afx-performance.html#nfsv4x-performance-enhancements[NFSv4.x performance enhancements].
+
 ----
 RHEL: trunkdiscovery
 Ubuntu (depends on version): trunkdiscovery (newer releases)
@@ -150,6 +154,8 @@ Ubuntu (depends on version): trunkdiscovery (newer releases)
 ----
 
 *RDMA specific options*
+
+For NFS over RDMA, see the link:https://docs.netapp.com/us-en/ontap/nfs-rdma/index.html[ONTAP NFS over RDMA documentation^].
 
 ----
 rdma,write=eager
@@ -182,6 +188,8 @@ Client configuration used for internal benchmarking, including NIC and OS tuning
 
 === NFS readahead
 
+Client NFS read-ahead (below) is a Linux mount-point setting. It is separate from ONTAP volume-level link:afx-performance.html#aggressive-read-ahead[aggressive readahead] (Cross File Sequential Read) on AFX.
+
 From: link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-nfs-read-ahead[Linux NFS read-ahead best practices for Azure NetApp Files^]
 
 NFS read-ahead predictively requests blocks from a file in advance of I/O requests by the application. It's designed to improve client sequential read throughput. Until recently, all modern Linux distributions set the read-ahead value to be equivalent of 15 times the mounted filesystem's rsize.
@@ -195,11 +203,11 @@ NFS read-ahead is defined at the mount point for an NFS filesystem. To display t
 # cat /sys/class/bdi/<device>/read_ahead_kb
 ----
 
-A convenience script for viewing or dynamically setting read-ahead is provided in the Microsoft article linked above.
+A convenience script for viewing or dynamically setting read-ahead is provided in link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-nfs-read-ahead[Linux NFS read-ahead best practices for Azure NetApp Files^].
 
 == Network configuration
 
-The following section covers some general networking guidance for client and storage networking. These are based on the internal benchmark tests we have done.
+The following section covers some general networking guidance for client and storage networking. These are based on the internal benchmark tests we have done. For AFX networking differences, see link:afx-capabilities.html#networking[Networking] and link:afx-hardware.html#switches[Hardware: Switches].
 
 === Storage network considerations
 
@@ -227,6 +235,8 @@ The following covers specific ONTAP feature configuration modifications that are
 
 In general, storage efficiencies are one of the selling points for a production workload, as they can generate large space savings across a variety of workloads. However, in performance benchmarking, they offer less value (as many simulated workloads are either uncompressible or are zero-byte workloads and always deduplicating). As a result, we recommend disabling all storage efficiencies while performing benchmark tests.
 
+For how storage efficiency works on AFX, including global deduplication, see link:afx-architecture.html#deduplication-domains[Deduplication domains], link:https://docs.netapp.com/us-en/ontap-technical-reports/storage-efficiency.html[ONTAP storage efficiency technical reports^], and link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[Dynamic Storage Efficiency in ONTAP 9.19.1^].
+
 ----
 vol efficiency off -volume [name] -vserver [SVM]
 
@@ -237,4 +247,4 @@ aggr efficiency wise-tsse modify -aggregate data* -enable-workload-informed-tsse
 
 === Aggressive readahead
 
-Aggressive readahead can help improve read performance for specific workloads (such as sequentially named files). Feature configuration, caveats, and statistics are covered in link:afx-performance.html#aggressive-read-ahead[Aggressive read-ahead].
+Aggressive readahead can help improve read performance for specific workloads (such as sequentially named files). Feature configuration, caveats, and statistics are covered in link:afx-performance.html#aggressive-read-ahead[Aggressive read-ahead]. See also link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#cross-file-sequential-read[Cross File Sequential Read in AFX SVM administration^].
