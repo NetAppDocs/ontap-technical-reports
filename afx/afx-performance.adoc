@@ -127,7 +127,7 @@ NFS version 3 has been a gold standard for NFS applications for decades – star
 
 However, NFSv3 is not without its limitations. Statelessness of the protocol, while great for performance and for minimizing disruptions on storage failover, is not so great for data consistency and lock management. An NFS server doesn't really keep track of lock states, so if there is a failure, the NFS server may or may not release the locks, and the NFS client may not know whether a file is locked or not.
 
- Security for NFSv3 is also a bit lacking. The protocol requires multiple open firewall ports to function properly and numeric IDs are sent in plaintext over the wire. Furthermore, NFS does not have robust ACL support, and does not include native file and folder auditing. As a result of these limitations, NFSv4 was created in 2003 via link:https://datatracker.ietf.org/doc/html/rfc3530[RFC-3530^] (obsoleted in 2015 by link:https://datatracker.ietf.org/doc/html/rfc7530[RFC-7530^]).
+Security for NFSv3 is also a bit lacking. The protocol requires multiple open firewall ports to function properly and numeric IDs are sent in plaintext over the wire. Furthermore, NFS does not have robust ACL support, and does not include native file and folder auditing. As a result of these limitations, NFSv4 was created in 2003 via link:https://datatracker.ietf.org/doc/html/rfc3530[RFC-3530^] (obsoleted in 2015 by link:https://datatracker.ietf.org/doc/html/rfc7530[RFC-7530^]).
 
 While NFSv4.x has been around for over 20 years, there still hasn't been widespread adoption of it for a few reasons.
 
