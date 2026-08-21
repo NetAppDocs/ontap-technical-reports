@@ -194,12 +194,24 @@ The table below shows the capacity behaviors for duplicated data in different sc
 *Deduplication behaviors in different scenarios for identical 10GB files – NetApp AFX*
 
 
-[options="header"]
+[options="header",cols="2,1"]
 |===
 | Scenario | Space used
-| Four copies of same 10GB file, same volume (volume deduplication) | 10GB (9.18.1) 10GB (9.19.1)
-| Four copies of same 10GB file, different volumes, same node (cross-volume deduplication enabled) | 10GB (9.18.1) 10GB (9.19.1)
-| Four copies of same 10GB file, 4 different volumes, 4 different nodes (cross-volume deduplication enabled) | 40GB (9.18.1) 10GB (9.19.1)
+
+| Four copies of same 10GB file, same volume (volume deduplication)
+a|
+* 10GB (9.18.1)
+* 10GB (9.19.1)
+
+| Four copies of same 10GB file, different volumes, same node (cross-volume deduplication enabled)
+a|
+* 10GB (9.18.1)
+* 10GB (9.19.1)
+
+| Four copies of same 10GB file, 4 different volumes, 4 different nodes (cross-volume deduplication enabled)
+a|
+* 40GB (9.18.1)
+* 10GB (9.19.1)
 |===
 
 == ONTAP Features that have been removed/are unsupported with AFX
