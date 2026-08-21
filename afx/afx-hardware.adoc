@@ -18,11 +18,15 @@ For the latest information on supported hardware for NetApp AFX, check link:http
 
 == Nodes
 
-NetApp AFX nodes are based on the AFF A1K model of nodes provided for unified ONTAP clusters. These nodes have no on-board disk for storage and are intended to be modular to easily add and remove nodes based on performance requirements. Each node uses 2U of rack space and increases performance linearly as they are added to an AFX cluster.
+NetApp AFX nodes include the AFX 1K (based on the AFF A1K) and the AFX 2K. These nodes have no on-board disk for storage and are intended to be modular to easily add and remove nodes based on performance requirements. Each node uses 2U of rack space and increases performance linearly as they are added to an AFX cluster.
 
 *NetApp AFX 1K node details*
 
 image:image42.png["Image"]
+
+*NetApp AFX 2K node details*
+
+image:image46.png["Image"]
 
 === Hardware slots
 
@@ -31,6 +35,12 @@ NetApp AFX 1K nodes use the following slot assignments.
 * Slot 1 is dedicated to HA replication
 * Slot 7 is dedicated to cluster replication
 * Slots 10 and 11 are dedicated to storage shelf communication
+
+NetApp AFX 2K nodes use the following slot assignments.
+
+* Slot 1 is dedicated to HA replication
+* Slot 2 is dedicated to cluster replication
+* Slots 8B and 10A are dedicated to storage shelf communication
 
 == Shelves
 
@@ -58,24 +68,41 @@ image:image44.png["Image"]
 
 === Cluster switch connectivity
 
-NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. Currently, all of these interfaces support 100GB communication only, while the switches support 400GB. As a result, the 100GB interfaces plug into the 400GB interfaces on the switch by way of 4 x 100GB breakout cables. This approach reduces the number of ports used on the switches. For instance, 16 x 100GB storage shelf module ports will use just 4 ports on the switches, while the 8 total ports on the nodes use 2 switch ports.
+NetApp AFX heavily leverages backend cluster switches for many of its major architectural concepts. For instance, cluster interfaces, storage adapters, storage shelves, and NVRAM cards all plug into the cluster switches. The cluster switches are 400GB capable. Backend cluster network ports support only 100GB connections to the cluster switches on the AFX 1K platform and support 400GB connections on the AFX 2K. As a result, AFX 1K backend node connections use 4 x 100GB breakout cables to reduce the number of ports used on the switches. The AFX 2K will use a 1:1 400GB connection to the switches. Storage shelf modules still use 100GB interfaces; for instance, 16 x 100GB storage shelf module ports use just 4 ports on the switches, while the 8 total ports on AFX 1K nodes use 2 switch ports.
 
 *NetApp AFX switch cabling*
 
 image:image45.png["Image"]
 
+=== Switch selection guidance
+
+After you account for AFX 1K breakout cabling, AFX 2K 1:1 400GB connections, and shelf 100GB connections as described in <<Cluster switch connectivity>>, use the following chart to select a cluster switch. Locate the intersection of the two axis values that represent the 400GbE port counts in your design. The value in the cell is the combined 400GbE port requirement, and the shading indicates the switch class.
+
+*NetApp AFX switch selection guidance*
+
+image:image47.png["Switch selection chart by combined 400GbE port count"]
+
+How to read the chart:
+
+* One axis is a 400GbE port count for one part of the configuration (for example, AFX 1K nodes); the other axis is the port count for the remainder (for example, AFX 2K nodes and shelves).
+* Find the cell at that intersection. The number is the total 400GbE ports required.
+* Unshaded region: totals that fit a 32-port switch — Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE). Ports 31 and 32 are reserved for ISL.
+* Light-shaded region: totals that fit a 64-port switch — Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE). Ports 63 and 64 are reserved for ISL.
+* Dark-shaded region: totals that exceed a 64-port switch — Cisco Nexus 9808, or as specified in link:https://hwu.netapp.com[Hardware Universe^].
+
+NOTE: NetApp AFX uses a pair of cluster switches. Size each switch for the ports connected to that switch, including the two ISL ports. For the latest supported switch models and limits, see link:https://hwu.netapp.com[Hardware Universe^] and the link:https://docs.netapp.com/us-en/ontap-afx/install-setup/afx-cable-overview.html[AFX cabling documentation^].
+
 == Disk types and sizes
 
 NetApp AFX currently only supports NVMe attached SSDs in the following sizes:
 
-* 7.6TB
 * 15.3TB
 * 30.1TB
 * 60.6TB
 
 === TLC vs. QLC
 
-NetApp AFX can leverage both TLC and QLC flash types. The 7.6 and 15.3TB drives are TLC models, while drives larger than 30.1TB will be QLC. Regardless of media type, the NVIDIA SuperPod certification performance standards can be met.
+NetApp AFX can leverage both TLC and QLC flash types. The 15.3TB drives are TLC models, while drives larger than 30.1TB will be QLC. Regardless of media type, the NVIDIA SuperPod certification performance standards can be met.
 
 All drives used with NetApp AFX are performance-rated drives, and both QLC and TLC will perform nearly identically for read traffic. QLC lags a bit behind write performance as compared to TLC and can experience slightly more wear-leveling with write-heavy workloads. 
 
