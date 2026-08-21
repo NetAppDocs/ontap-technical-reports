@@ -76,21 +76,23 @@ image:image45.png["Image"]
 
 === Switch selection guidance
 
-After you account for AFX 1K breakout cabling, AFX 2K 1:1 400GB connections, and shelf 100GB connections as described in <<Cluster switch connectivity>>, use the following chart to select a cluster switch. Locate the intersection of the two axis values that represent the 400GbE port counts in your design. The value in the cell is the combined 400GbE port requirement, and the shading indicates the switch class.
+Add up the 400GbE ports required on each switch for AFX 1K nodes, AFX 2K nodes, and shelves (see <<Cluster switch connectivity>>), then select the smallest switch class that covers that total. NetApp AFX uses a pair of cluster switches; size each switch independently, including two ports reserved for ISL.
 
-*NetApp AFX switch selection guidance*
+[options="header"]
+|===
+| Combined 400GbE ports required (per switch) | Switch
+| Fits in 32 ports (30 usable after ISL on ports 31–32) | Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE)
+| Fits in 64 ports (62 usable after ISL on ports 63–64) | Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE)
+| More than 64 ports | Cisco Nexus 9808, or as specified in link:https://hwu.netapp.com[Hardware Universe^]
+|===
 
-image:image47.png["Switch selection chart by combined 400GbE port count"]
+Port-count reminders:
 
-How to read the chart:
+* AFX 1K: four 100GB node ports consume one 400GbE switch port (4 x 100GB breakout).
+* AFX 2K: one 400GB node port consumes one 400GbE switch port (1:1).
+* Shelves: 16 x 100GB shelf-module ports consume four 400GbE switch ports.
 
-* One axis is a 400GbE port count for one part of the configuration (for example, AFX 1K nodes); the other axis is the port count for the remainder (for example, AFX 2K nodes and shelves).
-* Find the cell at that intersection. The number is the total 400GbE ports required.
-* Unshaded region: totals that fit a 32-port switch — Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE). Ports 31 and 32 are reserved for ISL.
-* Light-shaded region: totals that fit a 64-port switch — Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE). Ports 63 and 64 are reserved for ISL.
-* Dark-shaded region: totals that exceed a 64-port switch — Cisco Nexus 9808, or as specified in link:https://hwu.netapp.com[Hardware Universe^].
-
-NOTE: NetApp AFX uses a pair of cluster switches. Size each switch for the ports connected to that switch, including the two ISL ports. For the latest supported switch models and limits, see link:https://hwu.netapp.com[Hardware Universe^] and the link:https://docs.netapp.com/us-en/ontap-afx/install-setup/afx-cable-overview.html[AFX cabling documentation^].
+For the latest supported switch models and limits, see link:https://hwu.netapp.com[Hardware Universe^] and the link:https://docs.netapp.com/us-en/ontap-afx/install-setup/afx-cable-overview.html[AFX cabling documentation^].
 
 == Disk types and sizes
 
