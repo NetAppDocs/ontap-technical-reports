@@ -1,0 +1,62 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-volume-moves.html
+keywords: netapp afx, volume moves, zero-copy, performance balancing, automated storage administration
+summary: "Learn how NetApp AFX uses zero-copy volume moves for automated administration and performance balancing."
+---
+
+= Volume moves
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+NetApp AFX moves volume ownership between nodes without copying volume data, enabling fast automation and performance-driven balancing.
+
+== Automated storage administration tasks
+
+With the Storage Availability Zone in NetApp AFX, all capacity is shared across all nodes. While nodes still own volumes, ONTAP manages the capacity usage of each node automatically by borrowing and releasing capacity based on what each node needs at any given time. That means storage administrators no longer need to be concerned with how best to balance usable space.
+
+Additionally, RAID group management is automated by ONTAP, where newly added disks will be added to existing or new RAID groups without admin intervention. ONTAP also manages volume moves across nodes without needing to copy data.
+
+[[zero-copy-volume-moves]]
+== Zero-copy volume moves
+
+Unified ONTAP provides a way to nondisruptively move volumes across nodes or aggregates as a way to manage performance and capacity usage across the cluster.
+
+When a volume move is started, the following happens:
+
+* A new empty volume is created on the specified destination aggregate
+* Volume metadata (such as storage efficiency information, file handles, etc.) are replicated to the new destination volume
+* Volume data is replicated to the destination volume over the backend cluster network via SnapMirror technology--destination aggregate needs to have available free space for the move, or the move job will fail
+* Volume replication happens again to ensure both volumes are consistent with any data changes
+* A cutover process is initiated to bring the origin volume offline and promote the destination volume as the new origin volume for clients
+* Client IO experiences a brief pause during cutover, but no remounts are required
+
+In NetApp AFX, the Storage Availability Zone presents all capacity to all nodes, and all nodes can write to any disk in that pool. Once the data is placed, it stays where it lands – even if the volume is moved. That means no data copy is required. The volume move process is identical to unified ONTAP, minus the need to replicate data via SnapMirror. No extra capacity required.
+
+*Zero copy volume moves in NetApp AFX*
+
+image:image24.png["Image"]
+
+Having lightweight volume mobility allows AFX to automate away many of the administration tasks without the performance or capacity constraints, and these volume moves are used in a few new features provided by NetApp AFX, as described in topics seen below.
+
+[[performance-driven-volume-moves]]
+== Performance-driven volume moves
+
+NetApp AFX's zero-copy volume move functionality means that it can rebalance volumes as needed without copying data, which allows it to perform quickly and without needing added capacity. This means that volume moves can become a greater part of the automated load balancing available to ONTAP clusters. Now that it costs relatively nothing to move a volume, ONTAP can leverage this valuable tool to incorporate features like performance-driven load balancing of volumes.
+
+In NetApp AFX running ONTAP 9.18.1 and later, node, HA pair, and volume utilization is being constantly monitored, while performance data is collected and analyzed. If a node's utilization falls outside of the defined thresholds, then ONTAP will automatically select a volume to move to a less utilized node in an effort to keep balanced performance across the cluster.
+
+*Performance-driven volume moves in NetApp AFX – high utilization triggers a volume move*
+
+image:image28.png["Image"]
+
+*Performance-driven volume moves in NetApp AFX – Balanced node utilization after volume move*
+
+image:image29.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-flexgroup.html[Previous: FlexGroup management improvements]
+>| link:afx-architecture-cluster-scale.html[Next: Cluster scale]
+|===

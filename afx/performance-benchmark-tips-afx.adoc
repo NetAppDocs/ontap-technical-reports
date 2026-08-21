@@ -86,7 +86,7 @@ set advanced; nfs modify -vserver [SVM] -v3 enabled -v4.1 enabled -v4.0 disabled
 
 == Volume configuration
 
-The following section covers volume creation and configuration considerations and shows what options should be used during the initial creation. For how FlexGroup volumes work in AFX, see link:afx-architecture.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements], link:afx-capabilities.html#volume-types[Volume types], and link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^].
+The following section covers volume creation and configuration considerations and shows what options should be used during the initial creation. For how FlexGroup volumes work in AFX, see link:afx-architecture-flexgroup.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements], link:afx-capabilities.html#volume-types[Volume types], and link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^].
 
 [options="header"]
 |===
@@ -118,7 +118,7 @@ If the workload creates many large files (>1GB) in a single folder, modify the v
 AFX::> set advanced; vol modify -vserver [SVM] -volume [FlexGroup name] -workflow data
 ----
 
-If the workload is VMware datastores hosted on a FlexGroup volume, disable the `-gdd` option (Granular Data Distribution). GDD is not supported with NFS copy offload for virtualization on AFX; see link:afx-architecture.html#ontap-features-that-have-been-removedare-unsupported-with-afx[ONTAP Features that have been removed/are unsupported with AFX].
+If the workload is VMware datastores hosted on a FlexGroup volume, disable the `-gdd` option (Granular Data Distribution). GDD is not supported with NFS copy offload for virtualization on AFX; see link:afx-architecture-feature-support.html#ontap-features-that-have-been-removedare-unsupported-with-afx[ONTAP features that have been removed or are unsupported with AFX].
 
 ----
 AFX::> set diag; vol modify -vserver [SVM] -volume [FlexGroup name] -granular-data disabled
@@ -235,7 +235,7 @@ The following covers specific ONTAP feature configuration modifications that are
 
 In general, storage efficiencies are one of the selling points for a production workload, as they can generate large space savings across a variety of workloads. However, in performance benchmarking, they offer less value (as many simulated workloads are either uncompressible or are zero-byte workloads and always deduplicating). As a result, we recommend disabling all storage efficiencies while performing benchmark tests.
 
-For how storage efficiency works on AFX, including global deduplication, see link:afx-architecture.html#deduplication-domains[Deduplication domains], link:https://docs.netapp.com/us-en/ontap-technical-reports/storage-efficiency.html[ONTAP storage efficiency technical reports^], and link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[Dynamic Storage Efficiency in ONTAP 9.19.1^].
+For how storage efficiency works on AFX, including global deduplication, see link:afx-architecture-storage-efficiency.html#deduplication-domains[Deduplication domains], link:https://docs.netapp.com/us-en/ontap-technical-reports/storage-efficiency.html[ONTAP storage efficiency technical reports^], and link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[Dynamic Storage Efficiency in ONTAP 9.19.1^].
 
 ----
 vol efficiency off -volume [name] -vserver [SVM]

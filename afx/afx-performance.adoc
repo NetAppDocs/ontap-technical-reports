@@ -14,7 +14,7 @@ NetApp AFX was built with performance and scale in mind – specifically geared 
 
 == Per-node performance
 
-Each NetApp AFX storage node provides a specific amount of throughput for reads and writes. As nodes are added to the cluster, they linearly increase that performance, as covered in the "Linear scaling of node performance" section in this document. 
+Each NetApp AFX storage node provides a specific amount of throughput for reads and writes. As nodes are added to the cluster, they linearly increase that performance, as covered in link:afx-architecture-independent-scale.html#linear-scaling-of-node-performance[Linear scaling of node performance].
 
 Currently, the node types are link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX 1K^] and link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX 2K^] and provide throughput for reads and writes at roughly the amounts below*. As newer hardware is available to NetApp AFX, these limits may change.
 
@@ -183,7 +183,7 @@ image:image37.png["Image"]
 
 [cols="1,1",frame=none,grid=none]
 |===
-| link:afx-architecture.html[Previous]
+| link:afx-architecture-root-volume.html[Previous: Root volume changes]
 >| link:performance-benchmark-tips-afx.html[Next: Performance benchmark tips]
 |===
 

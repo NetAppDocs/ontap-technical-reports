@@ -1,0 +1,66 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-nvram-ha.html
+keywords: netapp afx, nvram replication, high availability, ha failover, volume rebalance
+summary: "Learn how NetApp AFX replicates NVRAM over the backend network and rebalances volumes during HA failover."
+---
+
+= Replicated NVRAM and HA failover behavior
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+NetApp AFX moves NVRAM replication to the backend cluster network and uses zero-copy volume mobility to rebalance work after a node failure.
+
+[[nvram-moved-from-direct-connection-to-switched-replication]]
+== NVRAM moved from direct connection to switched replication
+
+ONTAP uses NVRAM as a staging to protect incoming writes to a cluster. Each node in an ONTAP cluster has a battery-backed NVRAM card. When a write is sent to a volume from a client, it is stored in NVRAM first. NVRAM contents are then flushed to disk when the NVRAM is filled or when a 10s timer expires (whichever comes first). This is known as a consistency point.
+
+The NVRAM contents are also constantly replicating between HA pairs, which further helps protect data consistency, because in the event of a node failure, the NVRAM contents will be preserved on the surviving node and be committed to disk.
+
+In unified ONTAP clusters, the NVRAM cards between HA pairs are connected directly to one another. NetApp AFX moves NVRAM replication to the backend cluster network. As a result, HA partner nodes don't have such a strict distance requirement for nodes. Instead, HA pairs can be separated up to the maximum distance of ethernet.
+
+*NetApp AFX NVRAM replication*
+
+image:image10.png["Image"]
+
+[[ha-failover-behavior]]
+== HA failover behavior
+
+In unified ONTAP, nodes own disks and aggregates, where data is served via volumes. Writes are performed using a local node's NVRAM to flush to the disks the node owns. When a node is rebooted or fails, ONTAP will trigger a takeover of the failed node's resources, where disk and aggregate ownership is transferred to the partner node. Network interfaces are also failed over to ports in the IP space, and since NVRAM contents are constantly replicating across the HA pair, the node will flush the NVRAM contents to commit the failed node's writes to disks. After that, the surviving node will own the failed node's aggregates and volumes until giveback of the node occurs. That means that all traffic to those volumes – as well as the volumes already owned by the surviving node – will be processed on a single node until the failover issue is resolved.
+
+As part of the initial unified ONTAP cluster deployment, it is recommended to plan ahead for failovers to help avoid a single node overloading its partner. That in itself presents a challenge, as it is difficult to predict what volumes might be performance bullies, but features such as nondisruptive volume move and volume quality of service policies can aid in mitigation.
+
+The images below show how unified ONTAP clusters can incur uneven performance balance across nodes, as well as how a failover can create performance degradation in some cases.
+
+*Unified ONTAP – potential imbalances in node utilization*
+
+image:image25.png["Image"]
+
+When an HA pair's nodes become imbalanced with volume count and performance utilization, node failovers will impact overall performance, since the surviving node will now own all of the failed node's volumes. Meanwhile, other nodes in the cluster may have room to take on additional work.
+
+*Unified ONTAP – Failover impact on node utilization*
+
+image:image26.png["Image"]
+
+In the above, when an HA partner has to take on additional work, it can potentially become overloaded and impact performance for all volumes on that node. Volume moves can help alleviate the situation, but those require copies across nodes (which requires available free space), and the time that takes may exceed the time it takes for the nodes to fail back. Additionally, if you relocate a volume, it will not fail back to the original node. Instead, it will remain on the node you moved it to.
+
+With NetApp AFX, node failovers take on some different behaviors.
+
+* Since nodes don't own disks and there are no physical aggregates, a node failover won't require transfer of those resources. Instead, only the network interfaces and volume ownership transfer to other nodes.
+* NVRAM commits still happen, but over the HA network instead of a direct connection.
+* Once volumes conduct the initial failover to the partner node, AFX will re-distribute the volumes across other surviving nodes in the cluster. This is made possible by zero-copy volumes moves.
+* When the node is recovered, the volumes will move back to the original node.
+
+NetApp AFX already maintains performance balance across nodes in the cluster to keep a relatively even utilization, so when a failover happens and volumes are rebalanced, the node utilization should be roughly the same across the cluster.
+
+*NetApp AFX - Volume rebalance after failover*
+
+image:image27.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-capacity-pool.html[Previous: Single capacity pool]
+>| link:afx-architecture-independent-scale.html[Next: Independent, linear scale]
+|===

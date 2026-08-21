@@ -79,7 +79,7 @@ Unified ONTAP supports several different volume types, such as:
 
 NetApp AFX provides full support for each of these volume types, as well as full interoperability for FlexCache volumes with unified ONTAP systems.
 
-For more information on how FlexGroup volumes benefit from AFX architecture, see link:afx-architecture.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements].
+For more information on how FlexGroup volumes benefit from AFX architecture, see link:afx-architecture-flexgroup.html#flexgroup-volume-management-improvements[FlexGroup volume management improvements].
 
 [cols="1,1",frame=none,grid=none]
 |===

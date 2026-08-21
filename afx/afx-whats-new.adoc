@@ -20,10 +20,10 @@ ONTAP 9.19.1GA (as of August 2026)
 
 New features in NetApp AFX:
 
-* link:afx-architecture.html#deduplication-domains[Global deduplication] (also see link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#global-deduplication[AFX SVM administration^])
+* link:afx-architecture-storage-efficiency.html#deduplication-domains[Global deduplication] (also see link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#global-deduplication[AFX SVM administration^])
 * link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[Dynamic storage efficiency^]
 * link:afx-performance.html#aggressive-read-ahead[Advanced readahead] (Cross File Sequential Read; also see link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#cross-file-sequential-read[AFX SVM administration^])
-* link:afx-architecture.html#cluster-scale-and-expansion[32 node support] (see also link:afx-limits.html[Maximums and limits])
+* link:afx-architecture-cluster-scale.html#cluster-scale-and-expansion[32 node support] (see also link:afx-limits.html[Maximums and limits])
 * link:afx-limits.html[32PB support]
 * link:afx-limits.html[512 constituent volumes per FlexGroup volume]
 
