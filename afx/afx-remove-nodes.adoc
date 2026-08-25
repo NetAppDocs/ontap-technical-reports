@@ -10,13 +10,12 @@ summary: "Learn how to remove storage nodes from a NetApp AFX cluster, including
 :imagesdir: ../media/afx/
 
 [.lead]
-This page describes how to remove storage nodes from a NetApp AFX cluster. Because AFX uses a shared Storage Availability Zone and link:afx-architecture-volume-moves.html#zero-copy-volume-moves[zero-copy volume moves], node removal differs from unified ONTAP: volumes leave a node without a data copy, FlexAggrs stay in the cluster as defunct objects, and HA partners must be removed as a pair. For architectural background, see link:afx-architecture-cluster-scale.html#node-additions-and-removals[Node additions and removals].
+This page describes how to remove storage nodes from a NetApp AFX cluster. Because AFX uses a shared Storage Availability Zone and link:afx-architecture-volume-moves.html#zero-copy-volume-moves[zero-copy volume moves], node removal differs from unified ONTAP: volumes leave a node without a data copy, and HA partners must be removed as a pair. For architectural background, see link:afx-architecture-cluster-scale.html#node-additions-and-removals[Node additions and removals].
 
 == What is different in NetApp AFX
 
 * Multiple HA pairs can share one Storage Availability Zone (SAZ). After you remove a pair, other nodes stay in the cluster.
 * Volumes can leave the node with zero-copy volume move (ZCVM) (no data copy).
-* FlexAggrs are not deleted. They are marked defunct (no new volumes) and rehosted.
 * Unjoin is `cluster remove-node`. After one node is gone, the only node you may remove next is its HA partner.
 
 == Prerequisites (check before you start)
@@ -111,7 +110,6 @@ Unjoin does the following:
 
 * Marks the node ineligible / out of CLAM quorum
 * Cleanly shuts the node down (fails if shutdown is not clean)
-* Marks rootFA + dataFA defunct and moves ownership to a surviving node (prefers a node that is not the HA partner and that has the fewest defunct FAs)
 * Cleans RAID/HA per-node state and deletes the site from the cluster DB
 
 === Remove the HA partner next
@@ -124,7 +122,7 @@ Repeat the previous steps for the partner. Then you can remove a different pair.
 
 From each removed node's boot menu: option 4 — Clean configuration and initialize all disks.
 
-To reuse the pair in the same cluster: `cluster add-node` after both nodes of the pair are gone and reinitialized. Join will reuse previous FlexAggrs.
+To reuse the pair in the same cluster: `cluster add-node` after both nodes of the pair are removed and reinitialized.
 
 [cols="1,1",frame=none,grid=none]
 |===
