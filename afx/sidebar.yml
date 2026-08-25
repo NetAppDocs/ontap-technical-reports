@@ -30,6 +30,8 @@ entries:
         url: /afx/afx-architecture-cluster-scale.html
       - title: Root volume changes
         url: /afx/afx-architecture-root-volume.html
+    - title: How to remove AFX nodes
+      url: /afx/afx-remove-nodes.html
     - title: Performance
       url: /afx/afx-performance.html
     - title: Performance benchmark tips

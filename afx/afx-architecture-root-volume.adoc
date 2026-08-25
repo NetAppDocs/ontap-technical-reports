@@ -29,5 +29,5 @@ NetApp AFX nodes leverage on-board boot media, which is an NVMe attached M.2 dev
 [cols="1,1",frame=none,grid=none]
 |===
 | link:afx-architecture-cluster-scale.html[Previous: Cluster scale]
->| link:afx-performance.html[Next: Performance]
+>| link:afx-remove-nodes.html[Next: How to remove AFX nodes]
 |===

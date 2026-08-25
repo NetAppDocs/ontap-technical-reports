@@ -17,6 +17,7 @@ NetApp AFX is still ONTAP — it's simply a different way to leverage the benefi
 * link:afx-learn-about.html[Overview]
 * link:afx-whats-new.html[What's new]
 * link:afx-architecture.html[Architecture]
+* link:afx-remove-nodes.html[How to remove AFX nodes]
 * link:afx-performance.html[Performance]
 * link:performance-benchmark-tips-afx.html[Performance benchmark tips]
 * link:afx-management.html[Management]
