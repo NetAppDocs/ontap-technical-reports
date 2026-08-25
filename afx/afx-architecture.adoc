@@ -59,7 +59,6 @@ AFX::> storage availability-zone show
 * link:afx-architecture-volume-moves.html[Volume moves]
 * link:afx-architecture-cluster-scale.html[Cluster scale]
 * link:afx-architecture-root-volume.html[Root volume changes]
-* link:afx-remove-nodes.html[How to remove AFX nodes]
 
 [cols="1,1",frame=none,grid=none]
 |===

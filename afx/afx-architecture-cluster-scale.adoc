@@ -29,7 +29,7 @@ We've already learned that unified ONTAP has a direct node to disk ownership and
 We've also learned that NetApp AFX doesn't leverage the standard node to disk ownership and does not use physical aggregates to present capacity to the cluster. Because of that, node additions and removals behave a bit differently.
 
 * Node additions in NetApp AFX will not require the same up-front volume analysis, nor will it require administrative intervention to ensure that each node has an even balance of volumes. Instead, ONTAP automatically balances volume counts across newly added nodes to maintain relatively even performance profiles. ONTAP automatically will move volumes across nodes without copying anything, reducing the time, capacity, and effort required for adding nodes to a cluster.
-* Node removals in NetApp AFX also don't require much – if any – manual intervention. When a node is tagged for removal, ONTAP automatically moves volumes across nodes (again, without copying) to evacuate the nodes being removed. And because there are no disks owned by the nodes, there is no need to reinitialize disks after removing nodes. This makes nodes in AFX modular in nature and easy to scale up or down. For the procedure, see link:afx-remove-nodes.html[How to remove AFX nodes].
+* Node removals in NetApp AFX also don't require much – if any – manual intervention. When a node is tagged for removal, ONTAP automatically moves volumes across nodes (again, without copying) to evacuate the nodes being removed. And because there are no disks owned by the nodes, there is no need to reinitialize disks after removing nodes. This makes nodes in AFX modular in nature and easy to scale up or down.
 
 [[cluster-scale-and-expansion]]
 == Cluster scale and expansion

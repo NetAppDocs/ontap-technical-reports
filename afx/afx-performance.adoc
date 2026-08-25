@@ -183,7 +183,7 @@ image:image37.png["Image"]
 
 [cols="1,1",frame=none,grid=none]
 |===
-| link:afx-remove-nodes.html[Previous: How to remove AFX nodes]
+| link:afx-architecture-root-volume.html[Previous: Root volume changes]
 >| link:performance-benchmark-tips-afx.html[Next: Performance benchmark tips]
 |===
 
