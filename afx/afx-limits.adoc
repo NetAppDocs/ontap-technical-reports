@@ -33,7 +33,7 @@ a|
 * 800TB
 
 a|
-* N/A
+* N/A (no physical aggregates)
 
 | Node count
 a|
@@ -41,7 +41,7 @@ a|
 
 a|
 * 8 (9.17.1)
-* 32 (9.19.1RC1)
+* 32 (9.19.1GA)
 
 | Total capacity
 a|
@@ -52,7 +52,7 @@ a|
 * 3PB (9.18.1RC1)
 * 16PB (9.18.1GA release)
 * 20PB (9.19.1RC0)
-* 32PB (9.19.1RC1)
+* 32PB (9.19.1GA)
 
 | Supported shelf count
 a|
@@ -62,7 +62,7 @@ a|
 a|
 * 12 per cluster (9.18.1GA)
 * 17 per cluster (9.19.1RC0)
-* 25 per cluster (9.19.1RC1)
+* 27 per cluster (9.19.1GA)
 (no HA pair limitation)
 
 | Total supported drive count
@@ -74,7 +74,7 @@ a|
 * 288 per cluster 
 (based on shelf count limits; no HA pair limitation)
 * 408 per cluster (9.19.1RC0)
-* 600 per cluster (9.19.1RC1)
+* 648 per cluster (9.19.1GA)
 
 | Volume size
 a|
@@ -83,7 +83,16 @@ a|
 
 a|
 * 300TB (FlexVol)
-* 60PB (FlexGroup)*
+* 60PB (FlexGroup - prior to 9.19.1)*
+* ~153PB (FlexGroup - 9.19.1 and later)*
+
+| Maximum FlexGroup constituent count
+a|
+* 200
+
+a|
+* 200 (9.18.1 and prior)
+* 512 (9.19.1GA)
 
 | Maximum files per volume
 a|
@@ -93,6 +102,7 @@ a|
 a|
 * 2 billion (FlexVol)
 * 400 billion (FlexGroup)
+* 1 trillion (FlexGroup - 9.19.1GA and later)
 
 | Maximum files per directory  (default 320MB maxdirsize value)
 a|
@@ -138,14 +148,6 @@ a|
 a|
 * 4096
 
-| Maximum constituent count – FlexGroup
-a|
-* 200
-
-a|
-* 200
-* 512 in 9.19.1 RC1
-
 | Maximum number of intercluster LIFs
 a|
 * 8
@@ -175,4 +177,14 @@ a|
 * 400
 
 |===
+
+[.small]
+_*FlexGroup maximum size will be limited to 32PB physical size._
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-hardware.html[Previous]
+>| link:afx-related-info.html[Next: Related information]
+|===
+
 

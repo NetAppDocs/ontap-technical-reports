@@ -12,6 +12,19 @@ summary: "NetApp AFX delivers disaggregated architecture for NAS and object work
 [.lead]
 NetApp AFX is still ONTAP — it's simply a different way to leverage the benefits of ONTAP. NetApp AFX delivers disaggregated architecture for NAS and object workloads while still providing the feature-rich ONTAP software you know and love.
 
+== Contents
+
+* link:afx-learn-about.html[Overview]
+* link:afx-whats-new.html[What's new]
+* link:afx-architecture.html[Architecture]
+* link:afx-performance.html[Performance]
+* link:performance-benchmark-tips-afx.html[Performance benchmark tips]
+* link:afx-management.html[Management]
+* link:afx-capabilities.html[Capabilities]
+* link:afx-hardware.html[Hardware]
+* link:afx-limits.html[Maximums and limits]
+* link:afx-related-info.html[Related information]
+
 == An Evolution of Innovation: NetApp ONTAP
 
 NetApp ONTAP was created in 1992 as a new way to serve NFS workloads to multiple clients, while revolutionizing performance, data resiliency, point in time copies, and more. It originally only supported NFSv2, but as demand grew for newer NFS versions, other data protocols, more data protection features, NetApp ONTAP had to evolve.
@@ -105,3 +118,10 @@ A compute node in NetApp AFX refers to the storage controller node (and is often
 === Storage Availability Zone
 
 A Storage Availability Zone (SAZ) is the single pool of capacity in a NetApp AFX cluster, where all disks are shared across all nodes. The SAZ enables functionality such as shared capacity, enhanced performance, global deduplication, and more.
+
+[cols="1,1",frame=none,grid=none]
+|===
+|
+>| link:afx-whats-new.html[Next: What's new]
+|===
+

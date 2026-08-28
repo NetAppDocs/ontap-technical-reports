@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: afx/afx-management.html
-keywords: netapp afx, cli, system manager, rest api, management tools, gui
-summary: "While there are some fairly large architectural differences in how storage is presented in NetApp AFX, the feature set and the way ONTAP is managed is virtually unchanged."
+keywords: netapp afx, capacity management, storage availability zone, cli, system manager, rest api, management tools, gui
+summary: "Learn how the NetApp AFX Storage Availability Zone simplifies capacity management while familiar ONTAP management tools remain available."
 ---
 
 = Management tools
@@ -53,6 +53,30 @@ As you drill down into menus and dashboards, most everything remains the same. V
 
 image:image41.png["Image"]
 
+== Capacity management
+
+The NetApp AFX Storage Availability Zone reduces the management endpoints from a node and aggregate-based approach to a single pool of capacity available to the entire cluster. As volumes grow and shrink, ONTAP automatically borrows and returns capacity to and from the Storage Availability Zone.
+
+Because of this, storage administrators no longer need to worry about locating and managing available free space across up to 24 nodes and potentially hundreds of aggregates. Instead, there is only one place where capacity is managed and viewed.
+
+For instance, in the CLI of unified ONTAP, if you wanted to see total physical capacity information for a cluster, you would use "`aggregate show-space`," which would then print out every aggregate entry. In NetApp AFX, you have "`cluster space show`," which will show only the single Storage Availability Zone.
+
+*Side by side comparison of capacity CLI commands in unified ONTAP and NetApp AFX*
+
+image:image19.png["Image"]
+
+In the Unified ONTAP System Manager GUI, tiers are used to show capacity. In fact, the GUI does attempt to show holistic capacity for the cluster by adding up totals, but it still will show the overall usage on a per-aggregate basis.
+
+*System Manager capacity views – Unified ONTAP*
+
+image:image20.png["Image"]
+
+In NetApp AFX System Manager, the view is virtually the same for cluster space, but because there are no aggregates, there's no extra math to be done. The capacity you see is the capacity you get.
+
+*System Manager capacity views – NetApp AFX*
+
+image:image21.png["Image"]
+
 == REST APIs
 
 NetApp AFX also makes a concerted effort to retain a majority of the ONTAP REST API calls, which means if you've created a suite of automation tools based on REST API, they should still be able to be used in most cases. The main exceptions include aggregates, Metrocluster, SAN, and some performance counters. Complete REST API documentation can be found within the NetApp AFX cluster's System Manager by navigating to \https://clus_mgmt_ip/docs/api. 
@@ -69,3 +93,10 @@ NetApp AFX provides some support for off-box ONTAP management tools, such as:
 NetApp AFX does not currently support:
 
 * NetApp ActiveIQ Unified Manager
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:performance-benchmark-tips-afx.html[Previous]
+>| link:afx-capabilities.html[Next: Capabilities]
+|===
+
