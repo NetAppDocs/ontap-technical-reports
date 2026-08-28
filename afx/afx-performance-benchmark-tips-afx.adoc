@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx/performance-benchmark-tips-afx.html
+permalink: afx/afx-performance-benchmark-tips-afx.html
 keywords: netapp afx, performance, benchmarks, elbencho, nfs, mount options, best practices
 summary: "Guidance for reproducing NetApp AFX performance benchmark results, including export policy, volume, mount, client, and network considerations."
 ---
