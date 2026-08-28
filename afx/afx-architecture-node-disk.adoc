@@ -1,0 +1,39 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-node-disk.html
+keywords: netapp afx, node-to-disk relationships, disk ownership, storage availability zone
+summary: "Learn how NetApp AFX gives every storage node visibility to every disk and removes disk ownership."
+---
+
+= Node-to-disk relationships
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+NetApp AFX changes the relationship between storage nodes and disks by connecting all nodes and shelves through the same backend network.
+
+In the unified ONTAP architecture, reads and writes get directed to a specific subset of disks. So even if you have 24 shelves of disks in a 24-node cluster (one shelf per node), at any given time each node can only directly access one shelf of disks, which limits the capacity and performance available in the cluster.
+
+image:image5.png["Image"]
+
+In addition, because NVRAM is directly connected between HA pairs, nodes must physically reside next to one another and are more tightly coupled as failover targets. For instance, when one node fails over to its partner node, the only disks it physically has access to are the disks in the HA pair domain.
+
+*Unified ONTAP cluster during HA failover*
+
+image:image6.png["Image"]
+
+In NetApp AFX, there are some major shifts in how disks are presented to compute nodes.
+
+== All disks are visible to all storage nodes--no disk ownership
+
+In NetApp AFX, nodes and shelves are all connected to the same backend switch, which makes it possible for ONTAP to extend the overall visibility domain for disks to the entire stack. As a result, no nodes own any specific disks. Rather, all disks participate in a single capacity pool called a Storage Availability Zone, which provides simpler capacity management and increased performance potential (more available disks means more available performance).
+
+*NetApp AFX Storage Availability Zone*
+
+image:image7.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture.html[Previous: Architecture]
+>| link:afx-architecture-capacity-pool.html[Next: Single capacity pool]
+|===

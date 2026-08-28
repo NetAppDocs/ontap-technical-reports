@@ -1,0 +1,37 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-independent-scale.html
+keywords: netapp afx, independent scale, linear scale, compute, capacity, performance
+summary: "Learn how NetApp AFX independently scales compute and capacity while delivering linear node performance."
+---
+
+= Independent, linear scale
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+The disaggregated NetApp AFX architecture enables capacity and compute resources to scale independently and node performance to scale linearly.
+
+[[independent-scale-of-capacity-and-compute-nodes]]
+== Independent scale of capacity and compute nodes
+
+With hardware resources decoupled in the NetApp AFX architecture, nodes no longer require associated disks to be added alongside one another. When a cluster is running low on performance-related resources such as RAM, CPU, or network throughput, only storage nodes need to be added to the cluster and can leverage the existing Storage Availability Zone. Conversely, if the requirement is capacity, only shelves would need to be added to the mix. This flexibility ensures that you only buy the resources you will need, thus avoiding overprovisioning.
+
+*NetApp AFX – Independent scale*
+
+image:image12.png["Image"]
+
+[[linear-scaling-of-node-performance]]
+== Linear scaling of node performance
+
+As nodes are added to an AFX cluster, more CPU, RAM, and network resources are introduced into the workload. As these resources are incorporated into the environment, performance increases are linear in nature. The graphic below shows how that performance would increase as nodes are added.
+
+*Linear performance increases with NetApp AFX node additions*
+
+image:image13.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-nvram-ha.html[Previous: Replicated NVRAM and HA failover behavior]
+>| link:afx-architecture-raid.html[Next: RAID changes]
+|===

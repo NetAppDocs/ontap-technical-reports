@@ -14,10 +14,13 @@ NetApp AFX was built with performance and scale in mind – specifically geared 
 
 == Per-node performance
 
-Each NetApp AFX storage node provides a specific amount of throughput for reads and writes. As nodes are added to the cluster, they linearly increase that performance, as covered in the "Linear scaling of node performance" section in this document. 
+Each NetApp AFX storage node provides a specific amount of throughput for reads and writes. As nodes are added to the cluster, they linearly increase that performance, as covered in link:afx-architecture-independent-scale.html#linear-scaling-of-node-performance[Linear scaling of node performance].
 
-Currently, the node types are link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX 1K^] and provide throughput for reads and writes at roughly the amounts below. As newer hardware is available to NetApp AFX, these limits may change.
-NOTE: Maximum performance was reached using multiple clients reading and writing multiple files as shown in the "Benchmark results" section below.
+Currently, the node types are link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX 1K^] and link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf[AFX 2K^] and provide throughput for reads and writes at roughly the amounts below*. As newer hardware is available to NetApp AFX, these limits may change.
+
+* Performance numbers obtained using the link:https://github.com/breuner/elbencho[ElBencho^] benchmark tool and sequential read/write.
+
+NOTE: Maximum performance was reached using multiple clients reading and writing multiple files as shown in the link:#benchmark-results[Benchmark results] section below.
 
 
 *Per-node performance estimates*
@@ -27,6 +30,7 @@ NOTE: Maximum performance was reached using multiple clients reading and writing
 |===
 | Node type | Read performance max | Write performance max
 | AFX 1K | ~35GB/s | ~10GB/s
+| AFX 2K | ~35GB/s | ~17GB/s (+70% increase)
 |===
 
 NOTE: For the most up-to-date performance estimates, check with your NetApp sales team.
@@ -52,17 +56,17 @@ Decoupling storage nodes from shelves in the disaggregated ONTAP architecture al
 
 This concept of "performance density" enables storage administrators to get the most out of the hardware they have while never having to overprovision their storage environment.
 
-For instance, in a unified ONTAP cluster, since each node has its own set of disks, the performance is directed only to the disks owned by the node, and since only one node can access one set of disks, it can't necessarily saturate the available disks and achieve its maximum performance.
-
 *Unified ONTAP – How performance is divided up*
 
 image:image32.png["Image"]
 
-NetApp AFX pools all the disks into a single Storage Availability Zone, so all nodes can leverage all the disks. And because the disks and nodes are decoupled, you won't need as many shelves to get the same performance. This condenses down the performance and maximizes the shelf's maximum performance potential.
+For instance, in a unified ONTAP cluster, each node has its own set of dedicated disks. As a result, the performance is directed only to the disks owned by the node. Since only one node can access one set of disks, performance would be limited to the disks it can access directly.
 
 *NetApp AFX – Performance density*
 
 image:image33.png["Image"]
+
+NetApp AFX pools all the available disks into a single capacity pool called the Storage Availability Zone (SAZ). As a result, all nodes can leverage all the available disks for reads and writes. Since the disks and nodes are decoupled, you won't necessarily need as many shelves to get the same (or better) throughput performance compared to the unified ONTAP architecture. NetApp AFX's disaggregated architecture maximizes a disk shelf's performance potential.
 
 == Node to shelf ratios
 
@@ -70,15 +74,15 @@ Unified ONTAP nodes require at least one set of disks per node and can have mult
 
 NetApp AFX presents all disk shelves to all nodes. Each shelf contains modules with 16 x 100GB RoCE-capable interfaces to increase the total amount of performance allowed per shelf. Because of this, you can saturate a single shelf with multiple nodes that will be reading and writing to the same set of disks.
 
-As of ONTAP 9.19.1, the node:shelf saturation ratio is around 4:1.
+As of ONTAP 9.19.1, the node:shelf saturation ratio is at least 4:1, and 8:3 is possible.
 
 == Benchmark results
 
 The following section covers benchmark results using a NetApp AFX cluster with the following configuration parameters.
 
 * 4 nodes, 4 data interfaces
-* 2 shelves (7.6TB drives)
-* ONTAP 9.19.1
+* 2 shelves
+* ONTAP 9.19.1GA
 * NFSv4.2 (pNFS, session trunking)
 * FlexGroup volume
 * link:https://github.com/breuner/elbencho[ElBencho^] benchmark
@@ -88,6 +92,8 @@ The following section covers benchmark results using a NetApp AFX cluster with t
 * NFS mount options: rw,vers=4.2,rsize=1048576,wsize=1048576,trunkdiscovery,proto=tcp
 
 The configuration above achieved very near the maximum reads available to the 4-node cluster (~134GB/s) and was right at the maximum writes allowed per node (40GB/s).
+
+NOTE: See the link:afx-performance-benchmarks.html[Performance benchmark tips] section for guidance on reproducing these results.
 
 *NetApp AFX – ElBencho read performance, 4 nodes*
 
@@ -121,7 +127,7 @@ NFS version 3 has been a gold standard for NFS applications for decades – star
 
 However, NFSv3 is not without its limitations. Statelessness of the protocol, while great for performance and for minimizing disruptions on storage failover, is not so great for data consistency and lock management. An NFS server doesn't really keep track of lock states, so if there is a failure, the NFS server may or may not release the locks, and the NFS client may not know whether a file is locked or not.
 
- Security for NFSv3 is also a bit lacking. The protocol requires multiple open firewall ports to function properly and numeric IDs are sent in plaintext over the wire. Furthermore, NFS does not have robust ACL support, and does not include native file and folder auditing. As a result of these limitations, NFSv4 was created in 2003 via link:https://datatracker.ietf.org/doc/html/rfc3530[RFC-3530^] (obsoleted in 2015 by link:https://datatracker.ietf.org/doc/html/rfc7530[RFC-7530^]).
+Security for NFSv3 is also a bit lacking. The protocol requires multiple open firewall ports to function properly and numeric IDs are sent in plaintext over the wire. Furthermore, NFS does not have robust ACL support, and does not include native file and folder auditing. As a result of these limitations, NFSv4 was created in 2003 via link:https://datatracker.ietf.org/doc/html/rfc3530[RFC-3530^] (obsoleted in 2015 by link:https://datatracker.ietf.org/doc/html/rfc7530[RFC-7530^]).
 
 While NFSv4.x has been around for over 20 years, there still hasn't been widespread adoption of it for a few reasons.
 
@@ -171,6 +177,13 @@ With the changes in AFX ONTAP 9.18.1, NFSv4.x performance for these types of wor
 
 Our performance engineering teams compared performance of standard AI image, EDA, and software build benchmarks and found massive gains from the previous ONTAP release.
 
-*NetApp AFX – NFSv4.1 metadata IO performance in ONTAP 9.18.1*
+*NetApp AFX – NFSv4.1 metadata IO performance in NetApp AFX*
 
 image:image37.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-root-volume.html[Previous: Root volume changes]
+>| link:afx-performance-benchmarks.html[Next: Performance benchmark tips]
+|===
+

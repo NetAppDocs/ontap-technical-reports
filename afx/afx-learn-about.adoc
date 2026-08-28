@@ -105,3 +105,10 @@ A compute node in NetApp AFX refers to the storage controller node (and is often
 === Storage Availability Zone
 
 A Storage Availability Zone (SAZ) is the single pool of capacity in a NetApp AFX cluster, where all disks are shared across all nodes. The SAZ enables functionality such as shared capacity, enhanced performance, global deduplication, and more.
+
+[cols="1,1",frame=none,grid=none]
+|===
+|
+>| link:afx-whats-new.html[Next: What's new]
+|===
+

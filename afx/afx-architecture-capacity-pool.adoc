@@ -1,0 +1,44 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-capacity-pool.html
+keywords: netapp afx, single capacity pool, storage availability zone, aggregates, capacity
+summary: "Learn how the NetApp AFX Storage Availability Zone replaces physical aggregates with a single cluster-wide capacity pool."
+---
+
+= Single capacity pool
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+NetApp AFX replaces per-node physical aggregates with a single Storage Availability Zone available to the entire cluster.
+
+[[no-more-physical-aggregates]]
+== No more physical aggregates
+
+Unified ONTAP collects disks into RAID groups and then combines them into a capacity construct known as an aggregate. This aggregate is how physical capacity is presented to the storage and is the boundary of space available for creating volumes to serve data to end users. Every node must have at least one aggregate assigned to it and these aggregates have a current limit of 800TB. Once that limit is reached, there is no more space available for additional writes.
+
+Physical aggregates can also present some capacity management challenges, as storage admins will sometimes need to manually shuffle volumes around to keep a balance of capacity across cluster nodes. These challenges can also become magnified when leveraging a scale-out volume architecture (such as a FlexGroup volume). Aggregates can also vary in size, disk counts, disk types, etc., which can also creates some performance differences as you traverse nodes.
+
+*Aggregates in unified ONTAP*
+
+image:image8.png["Image"]
+
+NetApp AFX takes the concept of a physical aggregate and virtualizes it, makes it ONTAP-managed, and then moves physical capacity management from a per-node methodology to per-cluster via the new Storage Availability Zone. This single pool of capacity provides a "what you see is what you get" approach to space management.
+
+*NetApp AFX Storage Availability Zone*
+
+image:image9.png["Image"]
+
+== Data written to any (and all) disks in the availability zone
+
+NetApp AFX removes the concept of disk ownership and moves the physical aggregate construct to a virtualized approach managed by ONTAP, where the capacity purchased for the cluster is all available to the nodes attached to the cluster. With AFX, all nodes have the ability to write to any and all disks in the Storage Availability Zone, regardless of what the node:volume ownership is. Nodes still have a concept of volume ownership since writes still have a path through the NVRAM, but that data can land anywhere in the available capacity. This means that a higher number of disks can participate in a single workload, which provides performance benefits.
+
+*How data lands in a Storage Availability Zone*
+
+image:image11.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-node-disk.html[Previous: Node-to-disk relationships]
+>| link:afx-architecture-nvram-ha.html[Next: Replicated NVRAM and HA failover behavior]
+|===

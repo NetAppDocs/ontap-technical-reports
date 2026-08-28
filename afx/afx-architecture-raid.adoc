@@ -1,0 +1,59 @@
+---
+sidebar: sidebar
+permalink: afx/afx-architecture-raid.html
+keywords: netapp afx, raid-tec, raid groups, parity, disk rebuild
+summary: "Learn how larger RAID groups in NetApp AFX improve usable capacity and enable faster disk rebuilds."
+---
+
+= RAID changes
+:icons: font
+:imagesdir: ../media/afx/
+
+[.lead]
+NetApp AFX uses larger RAID-TEC groups with fewer proportional parity drives and distributes disk rebuild work across the cluster.
+
+[[larger-raid-groups-fewer-parity-drives]]
+== Larger RAID groups, fewer parity drives
+
+ONTAP provides a blend of data protection and performance for disks via RAID groups – specifically RAID-TEC, which offers triple parity protection in the event of disk failures. RAID-TEC can survive up to three simultaneous drive failures in a RAID group. In unified ONTAP, RAID groups have a maximum disk count of 28, where 3 drives are spent on parity and 1 drive is reserved as a spare. As a result, 24 of the 28 drives are used for data operations/RAID stripes.
+
+*Unified ONTAP RAID groups*
+
+image:image14.png["Image"]
+
+NetApp AFX still leverages RAID-TEC, but increases the RAID group size to 96 drives while only requiring 3 parity drives and 1 spare. Larger RAID groups deliver greater overall performance, while drive failure exposure is minimized by a combination of low failure rates for SSD, more evenly distributed operations across a larger set of drives, as well as improvements to rebuilds of data drives from parity in NetApp AFX.
+
+*NetApp AFX Storage Availability Zone RAID group*
+
+image:image15.png["Image"]
+
+The following table approximates the amount of usable raw capacity for 84 disks in unified ONTAP and NetApp AFX with varying drive sizes.
+
+*Approximate raw capacity comparison, 84 drives – Unified ONTAP and NetApp AFX*
+
+[options="header"]
+|===
+| Drive size | Approximate raw capacity (Unified) | Approximate raw capacity (AFX)
+| 15.3TB | ~1101.6TB | ~1224TB (+122.4TB)
+| 30.6TB | ~2203.2TB | ~2448TB (+244.7TB)
+| 60.1TB | ~4327.2TB | ~4808TB (+480.8TB)
+|===
+
+Additionally, RAID group management is automated by ONTAP, where newly added disks will be added to existing or new RAID groups without admin intervention. ONTAP also manages volume moves across nodes without needing to copy data.
+
+[[faster-disk-failure-rebuild-times]]
+== Faster disk failure rebuild times
+
+In unified ONTAP, each node owns a subset of disks in the storage stack. This means that that node only writes to those disks, but also that disk rebuilds are only handled by a single node in the event of a disk failure.
+
+NetApp AFX eschews the need for disk ownership. As a result, all drives can be written to from a single node if needed. That also means that when a drive needs to be rebuilt from parity, all nodes in the cluster participate, so drive rebuilds can occur more quickly than if a single node had to do it alone.
+
+*Disk rebuilds in NetApp AFX*
+
+image:image16.png["Image"]
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-architecture-independent-scale.html[Previous: Independent, linear scale]
+>| link:afx-architecture-storage-efficiency.html[Next: Storage efficiency]
+|===

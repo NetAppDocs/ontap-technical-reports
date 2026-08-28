@@ -10,27 +10,34 @@ summary: "This page covers the latest updates for NetApp AFX and will be updated
 :imagesdir: ../media/afx/
 
 [.lead]
-This section covers the latest updates for NetApp AFX and will be updated for each new release. Check back here periodically for new information, but also check out the version release notes.
+This section covers the latest updates for NetApp AFX and will be updated for each new release. Check back here periodically for new information, but also check out the link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[ONTAP 9.19.1 AFX release notes^].
 
 == What's new in the latest release of NetApp ONTAP for AFX?
 
 Latest release: 
 
-ONTAP 9.19.1RC1 (as of May 2026)
+ONTAP 9.19.1GA (as of August 2026)
 
 New features in NetApp AFX:
 
-* Global deduplication
-* Dynamic storage efficiency
-* Advanced readahead
-* 32 node support
-* 32PB support
-* 512 constituent volumes per FlexGroup volume
+* link:afx-architecture-storage-efficiency.html#deduplication-domains[Global deduplication] (also see link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#global-deduplication[AFX SVM administration^])
+* link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html[Dynamic storage efficiency^]
+* link:afx-performance.html#aggressive-read-ahead[Advanced readahead] (Cross File Sequential Read; also see link:https://docs.netapp.com/us-en/ontap-afx/administer/additional-ontap-svm.html#cross-file-sequential-read[AFX SVM administration^])
+* link:afx-architecture-cluster-scale.html#cluster-scale-and-expansion[32 node support] (see also link:afx-limits.html[Maximums and limits])
+* link:afx-limits.html[32PB support]
+* link:afx-limits.html[512 constituent volumes per FlexGroup volume]
 
 == Version history
 
 [options="header"]
 |===
 | Version | Date | Document version history
+| Version 1.1 | August 2026 | Updated this technical report for ONTAP 9.19.1GA. Covers new AFX features, 32-node and 32PB scale, AFX 1K and AFX 2K performance and hardware, cluster switch and shelf sizing, updated platform limits, a performance benchmark tips page, and additional links to product documentation.
 | Version 1.0 | June 2026 | Initial release
+|===
+
+[cols="1,1",frame=none,grid=none]
+|===
+| link:afx-learn-about.html[Previous]
+>| link:afx-architecture.html[Next: Architecture]
 |===
