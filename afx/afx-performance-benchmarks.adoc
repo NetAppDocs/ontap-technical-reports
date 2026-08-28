@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: afx/afx-performance-benchmark-tips-afx.html
+permalink: afx/afx-performance-benchmarks.html
 keywords: netapp afx, performance, benchmarks, elbencho, nfs, mount options, best practices
 summary: "Guidance for reproducing NetApp AFX performance benchmark results, including export policy, volume, mount, client, and network considerations."
 ---
@@ -22,7 +22,7 @@ Performance testing is generally intended to find the edges of what a system can
 
 == NFS export policy configuration
 
-Export policies in ONTAP are how access to NFS exports are controlled. Every volume requires an export policy to be set, with rules configured in the policy. If no rules are configured in a policy, that will be considered as "no access." For more information, see link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/securing-nfs.html[NFS securing^] and the link:https://docs.netapp.com/us-en/ontap/nfs-admin/export-policies-concept.html[ONTAP export policies documentation^].
+Export policies in ONTAP are how access to NFS exports are controlled. Every volume requires an export policy to be set, with rules configured in the policy. If no rules are configured in a policy, that will be considered as "no access." For more information, see link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/securing-nfs.html[NFS securing^] and the link:https://docs.netapp.com/us-en/ontap/nfs-config/export-policies-concept.html[ONTAP export policies documentation^].
 
 For performance benchmarking, we are likely less concerned with permissions to the clients being used for testing and instead would like to avoid any permission-related errors. As a result, it is recommended to ensure that any export policy rule is set to wide-open access for the data volume, but only to the clients being used to access datasets. In addition, the vsroot policy *must* allow read access in the policy for path traversal.
 

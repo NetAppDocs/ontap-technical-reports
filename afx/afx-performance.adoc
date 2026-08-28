@@ -93,7 +93,7 @@ The following section covers benchmark results using a NetApp AFX cluster with t
 
 The configuration above achieved very near the maximum reads available to the 4-node cluster (~134GB/s) and was right at the maximum writes allowed per node (40GB/s).
 
-NOTE: See the link:afx-performance-benchmark-tips-afx.html[Performance benchmark tips] section for guidance on reproducing these results.
+NOTE: See the link:afx-performance-benchmarks.html[Performance benchmark tips] section for guidance on reproducing these results.
 
 *NetApp AFX – ElBencho read performance, 4 nodes*
 
@@ -184,6 +184,6 @@ image:image37.png["Image"]
 [cols="1,1",frame=none,grid=none]
 |===
 | link:afx-architecture-root-volume.html[Previous: Root volume changes]
->| link:afx-performance-benchmark-tips-afx.html[Next: Performance benchmark tips]
+>| link:afx-performance-benchmarks.html[Next: Performance benchmark tips]
 |===
 
