@@ -96,7 +96,7 @@ NetApp AFX does not currently support:
 
 [cols="1,1",frame=none,grid=none]
 |===
-| link:performance-benchmark-tips-afx.html[Previous]
+| link:afx-performance-benchmarks.html[Previous]
 >| link:afx-capabilities.html[Next: Capabilities]
 |===
 
