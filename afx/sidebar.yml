@@ -6,8 +6,9 @@ entries:
     - title: What's new
       url: /afx/afx-whats-new.html
     - title: Architecture
-      url: /afx/afx-architecture.html
       entries:
+      - title: Overview
+        url: /afx/afx-architecture.html
       - title: Node-to-disk relationships
         url: /afx/afx-architecture-node-disk.html
       - title: Single capacity pool
@@ -33,7 +34,7 @@ entries:
     - title: Performance
       url: /afx/afx-performance.html
     - title: Performance benchmark tips
-      url: /afx/performance-benchmark-tips-afx.html
+      url: /afx/afx-performance-benchmarks.html
     - title: Management
       url: /afx/afx-management.html
     - title: Capabilities
