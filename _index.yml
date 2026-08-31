@@ -1,7 +1,7 @@
 indexpage:
-  title: NetApp Technical Reports
-  lead: NetApp technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
-  summary: NetApp technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  title: ONTAP Technical Reports
+  lead: ONTAP technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
+  summary: ONTAP technical reports provide additional context for planning and optimizing deployments within different ecosystems or with different protocols. Some ONTAP technical reports provide architectural context and recommended practices for ONTAP features and capabilities.
   keywords: ONTAP 9, ONTAP, Technical Reports, TR
   tiles:
     - title: Applications and databases
@@ -55,7 +55,7 @@ indexpage:
         - title: NFS Kerberos in ONTAP
           url: nas.html
         - title: NFS over TLS
-          url: nfs-tls/
+          url: /nfs-tls/nfs-tls-overview.html
         - title: Additional NAS technical reports
           url: nas.html
 #    - title: Networking

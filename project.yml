@@ -1,5 +1,5 @@
 settings:
-  name: "NetApp Technical Reports"
+  name: "ONTAP Technical Reports"
   search: ontap-technical-reports, ontap-apps-dbs, netapp-solutions-sap
   internal:
     pdf_enabled: false
@@ -9,7 +9,7 @@ settings:
 
 sidebar:
   entries:
-    - title: NetApp Technical Reports
+    - title: ONTAP Technical Reports
       url: /index.html
     - title: Applications and databases
       url: /apps-dbs.html
