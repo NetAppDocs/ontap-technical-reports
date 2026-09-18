@@ -1,0 +1,11 @@
+section: high-file-count-workloads
+title: High-file-count NAS workloads
+entries:
+  - title: Overview
+    url: /high-file-count-workloads/high-file-count-workloads-overview.html
+  - title: Maxfiles and inode limits
+    url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
+  - title: Maxdirsize and large directories
+    url: /high-file-count-workloads/high-file-count-workloads-maxdirsize.html
+  - title: Best practices
+    url: /high-file-count-workloads/high-file-count-workloads-best-practices.html

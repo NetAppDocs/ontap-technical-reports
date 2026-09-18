@@ -1,0 +1,223 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-maxfiles.html
+keywords: ONTAP, NAS, maxfiles, files, inode, files-used, inodefile-public-capacity, FlexGroup
+summary: "Understand ONTAP public inode limits, maxfiles controls, capacity effects, release enhancements, and related EMS events."
+---
+
+= Maxfiles and ONTAP inode limits
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+ONTAP uses public inodes to represent files, directories, streams, ACLs, and other user-visible file-system objects. The volume `files` setting, commonly called maxfiles, controls the maximum number of public inodes that can be used. This page explains how to size, monitor, and manage that limit for high-file-count NAS workloads.
+
+== High file counts in ONTAP
+
+Every file-system object requires an inode containing identity and metadata such as type, ownership, timestamps, permissions, and pointers to file data. Public inodes represent the client-visible namespace. ONTAP also maintains a separate private inode space for internal metadata objects.
+
+Three values must be kept distinct:
+
+* `files` is the configured public inode ceiling.
+* `files-used` is the number of public inodes currently in use.
+* `inodefile-public-capacity` is the number of public inodes that the currently allocated inode file can hold.
+
+`inodefile-public-capacity` is an *inode count*, not bytes, KiB, or MiB. ONTAP grows the inode file as more inodes are needed, up to `files`. The allocated inode file is a high-water mark and does not shrink after files are deleted.
+
+== How high file counts affect NAS workloads
+
+High file counts increase the proportion of metadata work relative to data transfer. Common operations include:
+
+* Allocating and freeing inodes
+* Looking up directory names and file handles
+* Reading and updating attributes, permissions, and timestamps
+* Opening, closing, renaming, linking, and deleting files
+* Enumerating directories and walking directory trees
+* Scanning namespaces for analytics, backup, replication, or security features
+
+The performance effect depends on operation rate, concurrency, protocol behavior, namespace layout, cache state, and node resources. Total file count alone is not a performance forecast. Millions of files spread across many active directories can expose more parallelism than the same population concentrated behind a small number of namespace hot spots.
+
+== Metadata impact
+
+=== Public and private inodes
+
+Public inodes count toward the `files` limit. Private inodes do not. Private inode consumers include hidden WAFL metafiles, zombies retained while deletion completes, and directory-index inodes that reside in private inode space.
+
+When `-is-dir-index-transfer-enabled` moves directory indexes into public inode space, those indexes consume public inodes and increase `files-used` by approximately one inode for each indexed directory. Leave indexes in private inode space unless the replication or restore benefit justifies that public-inode consumption.
+
+Use these advanced fields to separate the two:
+
+[options="header"]
+|===
+| Field | Unit | Meaning
+
+| `files-used`
+| Inodes
+| Public inodes currently used
+
+| `inodefile-public-capacity`
+| Inodes
+| Public inode-file high-water capacity currently allocated
+
+| `files-private-used`
+| Inodes
+| Private system metadata inodes currently used, including private metafiles and zombies
+
+| `inodefile-private-capacity`
+| Inodes
+| Private inode-file high-water capacity currently allocated
+|===
+
+`files-private-used` is not free space and is not a byte count. It cannot be used to calculate how many additional client files can be created. An increase can reflect ONTAP metadata activity rather than growth in the visible namespace.
+
+=== Zombie inodes
+
+An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work are completed. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. This does not mean those private inodes consume the configured public `files` allowance.
+
+== Capacity impact
+
+Each inode in ONTAP 9 occupies 288 bytes in the inode file. A planning approximation for an inode population is:
+
+----
+inode-file bytes = inode count × 288
+----
+
+Examples:
+
+[options="header"]
+|===
+| Inodes | Approximate raw inode bytes | Approximate binary capacity
+
+| 1 million
+| 288,000,000
+| 274.7 MiB
+
+| 100 million
+| 28,800,000,000
+| 26.8 GiB
+
+| 1 billion
+| 288,000,000,000
+| 268.2 GiB
+|===
+
+These figures describe inode records and are useful for planning, but observed physical usage can also include inode-file structure, block rounding, Snapshot retention, and other metadata.
+
+Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. Because that file does not shrink, size for the peak historical inode allocation rather than only the current `files-used` value.
+
+To view inode-file space in capacity units, use `volume show-space` and inspect the `Inodes` line. Do not interpret `inodefile-public-capacity` as a byte value.
+
+== What happens when maxfiles is exceeded?
+
+When no public inode is available:
+
+* New files, directories, and other objects that require public inodes cannot be created.
+* A client can receive a no-space or file-creation error even when data capacity remains available.
+* Existing objects and read operations are generally unaffected by the lack of a free inode.
+* Deleting objects can make public inodes available for reuse, although inode-file capacity remains allocated.
+* Raising `files`, when the volume size and ONTAP maximum allow it, restores room for additional objects.
+
+In a FlexGroup volume, one constituent can approach or exhaust its inode supply before others. ONTAP reduces placement to a nearly full constituent, which can create imbalance and route more work to constituents with available inodes.
+
+== Maxfiles limits
+
+The maximum configurable value is constrained by both volume size and an absolute FlexVol limit.
+
+* The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
+* `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
+* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes.
+* A FlexGroup consists of multiple constituents, each with its own inode file and limit. Aggregate FlexGroup scale therefore depends on constituent count, constituent size, distribution, and release support.
+
+Always query the target system rather than assuming that a theoretical platform maximum is configurable on a particular volume:
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity
+----
+
+== Controlling maxfiles
+
+=== Set a specific ceiling
+
+Use `volume modify -files` when capacity planning calls for a specific value:
+
+----
+volume modify -vserver <svm> -volume <volume> -files <inode-count>
+----
+
+ONTAP validates the requested value against volume size, the maximum possible value, and inode-file capacity already allocated. A configured ceiling cannot be reduced below the inode-file capacity already reached.
+
+Some ONTAP commands accept a relative increase:
+
+----
+volume modify -vserver <svm> -volume <volume> -files +<additional-inodes>
+----
+
+Confirm the result with `volume show` instead of assuming that every requested value was accepted without adjustment.
+
+=== Set the maximum currently possible
+
+Beginning with ONTAP 9.9.1, the advanced `files-set-maximum` action sets `files` to the current `files-maximum-possible` value:
+
+----
+set -privilege advanced
+volume modify -vserver <svm> -volume <volume> -files-set-maximum true
+----
+
+This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` instead when you want a deliberate value below the maximum.
+
+== ONTAP functionality and enhancements related to maxfiles
+
+[options="header"]
+|===
+| ONTAP release | Functionality
+
+| Earlier ONTAP 9 releases
+| Administrators can inspect `files` and `files-used` and set a specific `-files` value. The default automatic value historically stopped growing at 21,251,126 when volume size reached approximately 680 GB; this was a default-sizing plateau, not the maximum configurable value.
+
+| ONTAP 9.9.1
+| Added `-files-set-maximum true`, a one-shot action that sets `files` to the current `files-maximum-possible`.
+
+| ONTAP 9.13.1
+| Automatic default inode sizing continues as volumes grow beyond the earlier approximately 21-million plateau.
+
+| ONTAP 9.17.1
+| Added the option to place and migrate directory-index inodes into public inode space for transfer by supported replication workflows. This is controlled by `-is-dir-index-transfer-enabled`; it does not enable directory indexing itself. Public indexes consume public inodes and can increase `files-used` by approximately one for each indexed directory.
+|===
+
+Release support and limits can vary by platform and volume type. Verify behavior in the command reference for the ONTAP release in use.
+
+== EMS messages related to maxfiles
+
+=== `callhome.no.inodes`
+
+This ERROR event indicates that a volume is out of inodes. New file-system objects cannot be created until inodes are made available or the configured maximum is increased. Check `files`, `files-used`, `files-maximum-possible`, and volume capacity before changing the limit.
+
+=== FlexGroup constituent events
+
+* `fg.inodes.member.nearlyFull` indicates that a constituent is almost out of inodes. ONTAP directs fewer creates to that constituent, potentially affecting distribution and performance.
+* `fg.inodes.member.full` indicates that a constituent has run out of inodes and cannot accept new files.
+* `fg.inodes.member.allOK` indicates that the conditions that raised the nearly-full or full events no longer apply.
+
+For FlexGroup events, investigate the constituent distribution as well as the FlexGroup-level totals. Raising the FlexGroup's file allowance is generally preferable to attempting to identify and delete files from one constituent.
+
+== Monitoring example
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,files-set-maximum,inodefile-public-capacity,files-private-used,inodefile-private-capacity
+
+volume show-space -vserver <svm> -volume <volume>
+----
+
+Track both current use and inode-file capacity. A low `files-used` value after a large deletion does not mean that the inode-file capacity has been returned.
+
+== Related information
+
+* link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
+* link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
+* link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
+* link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]

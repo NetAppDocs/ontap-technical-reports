@@ -54,6 +54,8 @@ indexpage:
           url: nas.html
         - title: NFS Kerberos in ONTAP
           url: nas.html
+        - title: High-file-count NAS workloads
+          url: high-file-count-workloads/high-file-count-workloads-overview.html
         - title: Additional NAS technical reports
           url: nas.html
 #    - title: Networking

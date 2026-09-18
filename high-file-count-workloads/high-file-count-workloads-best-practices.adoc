@@ -1,0 +1,269 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-best-practices.html
+keywords: ONTAP, NAS, high file count, best practices, maxfiles, maxdirsize, FlexGroup, NFS, SMB
+summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ONTAP."
+---
+
+= High-file-count NAS workload best practices
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+High-file-count workload design must account for total public inodes, entries in the largest directory, metadata operation rate, and lifecycle tasks. Use these recommendations to avoid treating file count as a single limit or relying on data capacity alone.
+
+== Profile the namespace before sizing storage
+
+Collect or estimate:
+
+* Current and peak total files, directories, streams, and ACL objects
+* Annual or project-phase growth
+* Peak files created and deleted per second
+* Peak entries in one directory
+* Filename-length distribution and character sets
+* Use of SMB DOS 8.3 or alternate NFS names
+* Read, write, lookup, attribute, enumeration, rename, and delete rates
+* Snapshot schedule and retention
+* Backup, replication, migration, analytics, and security scan frequency
+
+Use high-water values rather than daily averages. Build pipelines, analytics jobs, migrations, and temporary scratch workflows often create their largest namespace for a short period, but the inode and directory files can retain high-water capacity after cleanup.
+
+== Size maxfiles and maxdirsize independently
+
+Maintain two separate forecasts:
+
+. *Volume inode forecast:* all public file-system objects expected in the FlexVol or in each FlexGroup constituent.
+. *Largest-directory forecast:* on-disk directory-file bytes for the directory with the most or largest names.
+
+Do not derive either value from the other. A sharded namespace can exhaust `maxfiles` without creating a large directory. A single flat directory can reach `maxdirsize` while the volume has millions of free inodes.
+
+See link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits] and link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
+
+== Prefer a sharded directory structure
+
+Avoid placing millions of names at one level when the application can use a hierarchy. Common sharding keys include:
+
+* A hash prefix
+* Customer, project, or tenant
+* Date or time window
+* Dataset, job, or workflow stage
+* Object type or lifecycle state
+
+Choose enough shards to keep directory operations manageable, but do not create so many nearly empty directories that directory count itself becomes excessive. A deterministic scheme makes placement predictable and allows clients to locate files without scanning every shard.
+
+Wide and deep layouts can both work. Keep the complete path within the limits of the NAS protocol, client operating system, and application.
+
+== Select the appropriate volume architecture
+
+=== FlexVol
+
+Use a FlexVol when one volume's capacity, inode scale, and performance domain satisfy the workload. Keep enough node headroom for metadata bursts and HA takeover.
+
+=== FlexGroup
+
+Use FlexGroup when the workload benefits from greater aggregate capacity, file-count scale, and parallelism across constituents and nodes. Plan for:
+
+* Per-constituent inode limits and distribution
+* Aggregate and constituent capacity balance
+* Workload placement behavior
+* FlexGroup-specific directory-entry representation
+* Data protection compatibility
+* Application behavior when files are distributed
+
+A FlexGroup does not automatically parallelize operations on one logical directory. Sharding across directories remains valuable.
+
+== Leave operating margin
+
+Do not plan steady-state operation at 100% of any limit. Keep margin for:
+
+* Unexpected growth
+* Temporary files and application retries
+* Snapshot-retained metadata
+* ACLs, streams, and directories that also consume public inodes
+* Migration overlap
+* Backup and restore work
+* FlexGroup placement imbalance
+* Software changes that alter filename length or namespace layout
+
+Set `files` high enough to cover projected peak objects plus margin. Set `maxdir-size` from measured directory entry behavior plus margin. For average growth, public maxdirsize guidance recommends increases of approximately 2% of the current cap; for migration, it recommends approximately 2% above measured need. This is adjustment guidance, not a universal operating margin. Additional margin should reflect forecast uncertainty and response time.
+
+== Account for metadata capacity
+
+For ONTAP 9, use 288 bytes per inode as the base public inode-file estimate:
+
+----
+estimated inode bytes = peak allocated inodes × 288
+----
+
+This does not include all file-system metadata. Also budget for:
+
+* Directory-file blocks
+* Companion directory indexes
+* Indirect blocks and allocation rounding
+* Private metafiles
+* Snapshot-retained blocks
+* Volume and aggregate metadata
+
+Raising `files` does not allocate the entire inode file immediately. Actual creation grows the inode file, and deletion does not shrink it. Treat peak allocated inode capacity as persistent.
+
+Use `volume show-space` to inspect inode and metadata capacity rather than converting every CLI counter as though it were a byte value.
+
+== Use realistic filename scenarios
+
+Test at least:
+
+* Short ASCII-only names
+* The workload's median and high-percentile filename lengths
+* Non-ASCII or supplementary Unicode characters when used
+* SMB workloads that generate DOS 8.3 aliases
+* Multiprotocol access that can require alternate names
+* FlexGroup placement representative of production
+
+Path length and basename length are not interchangeable. A long path spread across several directories affects protocol limits and inode count, while each directory stores only its immediate component.
+
+== Test metadata operations, not only throughput
+
+Sequential bandwidth tests do not predict high-file-count behavior. Include:
+
+* File and directory create
+* Existing-name and missing-name lookup
+* `stat` or attribute operations
+* Open and close
+* Rename within and across directories
+* Unlink and recursive deletion
+* Full and partial directory enumeration
+* Wildcard searches
+* Cold-cache and warm-cache runs
+* Mixed NFS and SMB access when applicable
+
+Measure latency distributions, CPU, cache behavior, network load, and completion time. Repeat tests during Snapshot, replication, analytics, backup, and security scanning if those operations coexist in production.
+
+== Validate lifecycle operations
+
+Test more than initial ingest:
+
+* Expansion to the projected peak count
+* Large delete and asynchronous delete
+* Backup and restore
+* SnapMirror initialization, update, failover, and resync
+* Clone or Snapshot-heavy workflows
+* Volume move or storage failover
+* ONTAP upgrade and, when required, revert checks
+* Migration from FlexVol to FlexGroup or between protocol environments
+
+Directory indexes might need to be built or transferred at the destination. For supported ONTAP releases, evaluate `-is-dir-index-transfer-enabled` when avoiding index reconstruction materially improves recovery or restore behavior. Public indexes consume public inodes and can increase `files-used` by approximately one for each indexed directory, so include them in the inode forecast.
+
+== Monitor inode limits and allocation
+
+For a FlexVol or FlexGroup, track:
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity,files-private-used,inodefile-private-capacity
+----
+
+Interpret the fields correctly:
+
+* `files-used` is current public inode use.
+* `inodefile-public-capacity` is an inode count representing allocated high-water capacity, not bytes.
+* `files-private-used` is the count of private ONTAP metadata inodes currently used and does not consume the public `files` allowance.
+* `inodefile-private-capacity` is the private inode-file high-water count.
+
+Alert before `files-used` reaches `files`. For FlexGroup volumes, investigate constituent-level events even when the overall total appears to have room.
+
+== Monitor large directories
+
+View the configured cap:
+
+----
+volume show -vserver <svm> -volume <volume> -fields maxdir-size
+----
+
+Measure important directory objects from a GNU/Linux NFS client:
+
+----
+stat -c '%n %s bytes' /mount/path/directory
+----
+
+Do not substitute `du`; it measures content below the directory rather than the directory metadata file.
+
+Inventory known flat or churn-heavy directories before they generate warnings. When an EMS event provides a file ID, use `volume file show-inode` to resolve it to a path. For FlexGroup, run the command against the constituent named by the event rather than against the FlexGroup name.
+
+== Respond to warnings before failures
+
+For inode warnings:
+
+. Check `files-used`, `files`, `files-maximum-possible`, volume size, and capacity.
+. Determine whether growth is expected or anomalous.
+. Increase `files`, grow the volume, or remove unnecessary objects as appropriate.
+. For FlexGroup, check the affected constituent and placement balance.
+
+For directory-size warnings:
+
+. Resolve the directory inode to a path.
+. Measure the current directory-file size and analyze filename behavior.
+. Stop unbounded flat-directory growth.
+. Shard or migrate names into new directories when possible.
+. Increase `maxdir-size` only when the application cannot be restructured and performance risk is understood.
+
+Do not wait for `callhome.no.inodes` or `wafl.dir.size.max`; at that point client creates are already failing.
+
+== Manage delete behavior
+
+Deleting files frees public inodes for reuse but does not shrink the public inode file. Similarly, deleting names from a directory makes directory slots reusable but does not normally reduce the directory-file high-water size.
+
+Large deletes can be metadata-intensive and can temporarily increase private zombie inodes. Use supported asynchronous-delete capabilities where appropriate and monitor completion. Rate-limit client-side recursive deletes when they compete with production traffic.
+
+If a large sparse directory remains a problem, create a new directory and copy or move the remaining namespace into a compact layout. Do not assume that lowering `maxdir-size` will compact it.
+
+== Plan node and HA headroom
+
+High-file-count operations consume CPU, memory, cache, and storage I/O even when data throughput is low. Maintain headroom for:
+
+* Metadata bursts
+* Cold-cache lookup and enumeration
+* Scanners and data protection
+* Storage failover or takeover
+* FlexGroup remote operations
+* Other volumes sharing the node
+
+Balance workloads using observed metadata demand, not only capacity or throughput. A node can become metadata-bound while network and disk bandwidth appear available.
+
+== Use current ONTAP releases
+
+Later ONTAP releases include directory indexing, inode-management improvements, sparse-directory optimizations, directory-index transfer, and other high-file-count enhancements. Upgrade decisions must still consider platform support, data protection compatibility, and application qualification.
+
+Do not enable a feature solely because it is related to high file count:
+
+* Raise `maxdir-size` only for a demonstrated single-directory requirement.
+* Raise `files` before projected public inode exhaustion.
+* Use `-files-set-maximum true` only when the largest currently possible ceiling is appropriate.
+* Enable directory-index transfer only when replication or restore should preserve indexes.
+* Enable File System Analytics only when its insight justifies its scanning work.
+* Treat `-has-dir-index-public` and `-has-optimized-sparse-directories` as status, not enable switches.
+
+Beginning with ONTAP 9.17.1, File System Analytics can be enabled by default on new volumes in a newly created NAS SVM. Check `-analytics-state` rather than assuming it is disabled, and account for its namespace scan when qualifying a high-file-count workload.
+
+== Document assumptions and thresholds
+
+Record:
+
+* Workload and filename assumptions
+* Peak file and directory counts
+* Selected margins
+* Volume and constituent layout
+* `files` and `maxdir-size` values
+* Alert thresholds and response owners
+* Expected ingest and delete rates
+* Recovery and migration objectives
+* ONTAP release and platform dependencies
+
+Revisit the model when application versions, filename formats, retention, protocols, or data protection workflows change.
+
+== Related information
+
+* link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
+* link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
+* link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]
