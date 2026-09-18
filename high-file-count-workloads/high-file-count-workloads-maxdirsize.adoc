@@ -313,3 +313,8 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 * link:https://docs.netapp.com/us-en/ontap-cli/volume-file-show-inode.html[`volume file show-inode` command reference^]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-dir-events.html[WAFL directory EMS events^]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-maxdirsize-events.html[`wafl.maxdirsize` EMS events^]
+
+== Next and previous
+
+* Previous: link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
+* Next: link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]

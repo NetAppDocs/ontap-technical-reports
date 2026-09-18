@@ -271,3 +271,7 @@ Revisit the model when application versions, filename formats, retention, protoc
 * link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]
+
+== Next and previous
+
+* Previous: link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]

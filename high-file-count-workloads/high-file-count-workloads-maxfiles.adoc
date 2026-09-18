@@ -236,3 +236,8 @@ Track both current use and inode-file capacity. A low `files-used` value after a
 * link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
 * link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
 * link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]
+
+== Next and previous
+
+* Previous: link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* Next: link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]

@@ -160,3 +160,7 @@ For design and operational recommendations, see link:high-file-count-workloads-b
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html[Maximum directory size for FlexVol volumes^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volume management^]
+
+== Next and previous
+
+* Next: link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
