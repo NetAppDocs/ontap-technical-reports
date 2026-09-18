@@ -16,6 +16,8 @@ summary: "Understand how ONTAP directory files grow, how maxdirsize is calculate
 
 A WAFL directory is a metadata file that maps names to inode numbers. Its size is not the sum of the data stored in the files below that directory. A newly created directory starts at 4 KiB and grows in 4 KiB directory blocks as entries are added.
 
+The directory file is not the volume's inode file. The directory itself consumes one inode, whose record is stored in the volume-level inode file. The directory's names are stored in that directory's own data blocks. Adding more names grows the individual directory file and can approach `maxdirsize`; creating more file-system objects allocates more inode records and can grow the volume-level inode file toward `maxfiles`.
+
 The volume `maxdir-size` value is the maximum directory-file size allowed for every individual directory in that volume. Raising the value:
 
 * Applies to all directories in the volume
@@ -224,8 +226,8 @@ Do not assume that a FlexVol files-per-directory estimate transfers unchanged to
 | ONTAP 9.2
 | Added persistent indexing for directories at approximately 2 MiB, reducing the need to load an entire large directory for targeted lookup.
 
-| Releases supporting optimized sparse directories
-| Added hole punching for fully empty blocks in indexed directories. `READDIR` can skip holes and physical directory blocks can be reclaimed. `-has-optimized-sparse-directories` reports whether this format exists in a volume.
+| ONTAP 9.5 (documented)
+| The ONTAP 9.5 command reference includes `-has-optimized-sparse-directories`, establishing that optimized sparse directories are supported by this release. The optimization hole-punches fully empty blocks in indexed directories so `READDIR` can skip holes and physical blocks can be reclaimed. Available public documentation does not identify whether an earlier ONTAP 9 release introduced it.
 
 | ONTAP 9.14.1
 | Public guidance identifies 320 MiB as the default `maxdir-size`. Published guidance commonly describes increases up to approximately 1 GiB and cautions about higher settings. Supported maximums remain release- and platform-dependent; verify Hardware Universe and support guidance.

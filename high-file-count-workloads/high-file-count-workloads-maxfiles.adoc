@@ -22,7 +22,7 @@ Three values must be kept distinct:
 * `files-used` is the number of public inodes currently in use.
 * `inodefile-public-capacity` is the number of public inodes that the currently allocated inode file can hold.
 
-`inodefile-public-capacity` is an *inode count*, not bytes, KiB, or MiB. ONTAP grows the inode file as more inodes are needed, up to `files`. The allocated inode file is a high-water mark and does not shrink after files are deleted.
+`inodefile-public-capacity` is an *inode count*, not bytes, KiB, or MiB. ONTAP grows the inode file when its existing allocation has no free inode records and an operation needs another public inode, up to `files`. Examples include creating a file or directory, allocating an additional inode for a stream or ACL, and creating a public directory-index inode when directory-index transfer is enabled. The allocated inode file is a high-water mark and does not shrink after files are deleted.
 
 == How high file counts affect NAS workloads
 
@@ -126,7 +126,8 @@ The maximum configurable value is constrained by both volume size and an absolut
 * The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
 * `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
 * A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes.
-* A FlexGroup consists of multiple constituents, each with its own inode file and limit. Aggregate FlexGroup scale therefore depends on constituent count, constituent size, distribution, and release support.
+* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints.
+* The FlexGroup-wide total is not the only operational boundary. Uneven placement can cause one constituent to approach or exhaust its assigned inode count while other constituents still have room. Aggregate FlexGroup scale therefore depends on constituent count, constituent size, distribution, and release support.
 
 Always query the target system rather than assuming that a theoretical platform maximum is configurable on a particular volume:
 
@@ -146,6 +147,18 @@ volume modify -vserver <svm> -volume <volume> -files <inode-count>
 ----
 
 ONTAP validates the requested value against volume size, the maximum possible value, and inode-file capacity already allocated. A configured ceiling cannot be reduced below the inode-file capacity already reached.
+
+For a FlexGroup, specify the FlexGroup name and the desired FlexGroup-wide total. Do not set `files` independently on a constituent. ONTAP distributes the requested total evenly among the current constituents, and each constituent enforces its allocated portion:
+
+----
+volume modify -vserver <svm> -volume <flexgroup> -files <flexgroup-total-inodes>
+----
+
+After changing the value, inspect constituent-level `files` and `files-used` because usage does not necessarily remain as evenly distributed as the configured limits:
+
+----
+volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
+----
 
 Some ONTAP commands accept a relative increase:
 

@@ -49,11 +49,18 @@ Each file or directory requires an inode and namespace metadata. File creation, 
 
 === Capacity
 
-ONTAP stores public inodes in a hidden inode file. Each ONTAP 9 inode uses 288 bytes, and the inode file grows as the high-water mark of allocated inodes increases. Deleting files frees inodes for reuse but does not shrink the inode file. Directory files and their companion indexes also consume capacity as directories grow.
+ONTAP stores public inodes in a hidden, volume-level inode file. Each ONTAP 9 inode uses 288 bytes, and the inode file grows as the high-water mark of allocated inodes increases. Deleting files frees inodes for reuse but does not shrink the inode file.
+
+An inode file and a directory file are different structures:
+
+* The *inode file* stores inode records for the volume. It grows when ONTAP must allocate room for more public inodes.
+* A *directory file* is the metadata file for one directory. It stores that directory's names and mappings to inode numbers. Each directory has its own directory file, and `maxdirsize` limits each one independently.
+
+Directory files and their companion indexes consume capacity separately from the volume-level inode file.
 
 === Directory enumeration
 
-Large directories take longer to enumerate than smaller directories. A directory that grew large and later had many entries deleted can remain large at the directory-file high-water mark. ONTAP optimizes indexed sparse directories by hole-punching fully empty directory blocks so that `READDIR` can skip them, but applications should still avoid unnecessary full-directory scans.
+Large directories take longer to enumerate than smaller directories. A directory that grew large and later had many entries deleted can remain large at the *directory-file* high-water mark. This refers to the metadata file for that individual directory, not the volume's inode file. ONTAP optimizes indexed sparse directories by hole-punching fully empty directory blocks so that `READDIR` can skip them (the optimized sparse-directory format is documented in ONTAP 9.5 and later), but applications should still avoid unnecessary full-directory scans.
 
 === Failure-domain concentration
 
@@ -61,7 +68,11 @@ Concentrating millions of entries in one directory creates a single-directory sc
 
 === Data protection and recovery
 
-High object counts can extend namespace scans, backup cataloging, replication initialization, restore processing, and post-restore directory-index construction. Planning must consider both steady-state I/O and lifecycle operations.
+High object counts can extend namespace scans, backup cataloging, replication initialization, restore processing, and post-restore directory-index construction.
+
+SnapMirror replicates changed file-system metadata as well as file data. A baseline or update containing many created, deleted, renamed, or changed objects can therefore require substantial metadata processing even when the files are small. Historically, private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand after activation or restore. Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves indexes into public inode space so supported SnapMirror workflows can transfer them. This can reduce post-restore index construction, but public indexes consume public inodes and must be included in `maxfiles` planning.
+
+Measure SnapMirror baseline and update duration, destination activation, index rebuild behavior, and restore time with a representative object count. Planning must consider both steady-state I/O and lifecycle operations.
 
 == Maxfiles compared with maxdirsize
 
@@ -72,7 +83,7 @@ High object counts can extend namespace scans, backup cataloging, replication in
 | Attribute | Scope | Measures | Typical symptom at the limit
 
 | `maxfiles`
-| A FlexVol volume or each FlexGroup constituent
+| A FlexVol volume, or a FlexGroup as a whole with the configured total distributed across its constituents
 | Public inodes available for files, directories, streams, ACLs, and other user-visible file-system objects
 | New objects cannot be created because no public inode is available
 
@@ -94,9 +105,11 @@ For calculation details, directory indexing, capacity and performance effects, v
 
 == What is maxfiles?
 
-`maxfiles` is the configured ceiling for public inodes in a volume. It limits the total number of user-visible file-system objects rather than the number of regular files alone. The setting is not the same as current inode-file allocation: ONTAP allocates additional inode-file blocks as the namespace grows.
+`maxfiles` is the configured ceiling for public inodes in a volume. It limits the total number of user-visible file-system objects rather than the number of regular files alone. The setting is not the same as current inode-file allocation.
 
-The maximum value that can be configured depends on volume size and ONTAP limits. For FlexGroup volumes, file capacity is distributed across constituents, and constituent-level inode pressure can affect placement before the entire FlexGroup reaches its aggregate theoretical count.
+ONTAP allocates additional inode-file blocks when the existing inode file has no free inode records and an operation needs another public inode. Examples include creating a file or directory, creating an object that requires an additional stream or ACL inode, or creating a public directory-index inode after directory-index transfer is enabled. ONTAP can grow the inode file only while the configured `files` ceiling and available capacity permit it.
+
+The maximum value that can be configured depends on volume size and ONTAP limits. For a FlexGroup, set `-files` on the FlexGroup rather than directly on its constituents. ONTAP divides the configured FlexGroup total evenly across the constituent volumes. Each constituent then has its own inode file and enforced share of the limit; uneven file placement can cause one constituent to approach its share before the FlexGroup-wide total is exhausted.
 
 For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits].
 
@@ -108,6 +121,45 @@ Begin with four separate estimates:
 . Peak entries in the largest directory
 . Peak create, lookup, enumeration, and delete rates
 . Capacity for user data, inodes, directories, directory indexes, Snapshot copies, and growth
+
+Use the following methods to gather those inputs:
+
+=== Find total objects and inode headroom
+
+Compare application inventory with ONTAP's public-inode counters:
+
+----
+volume show -vserver <svm> -volume <volume> -fields files,files-used
+
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files-maximum-possible,inodefile-public-capacity
+----
+
+For FlexGroup, inspect both the configured total and every constituent's use:
+
+----
+volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
+----
+
+Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap. Use the application's inventory or migration assessment to forecast future growth; `files-used` describes the current namespace, not the future peak.
+
+=== Find the largest directories
+
+Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries. Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. On a GNU/Linux NFS client, inspect the directory object itself:
+
+----
+stat -c '%n %s bytes' /mount/path/directory
+----
+
+Do not substitute `du`; it reports the data below the directory rather than the directory metadata-file size. Model filename lengths and alternate names as described in link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
+
+=== Measure metadata operation rates
+
+Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates. Test representative concurrency and both warm- and cold-cache behavior. A bandwidth-only test does not characterize a metadata-heavy workload.
+
+=== Find metadata and Snapshot capacity
+
+Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve. Use `volume show-footprint` to review the volume's aggregate footprint. Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory files, companion indexes, block rounding, private metadata, Snapshot-retained blocks, and growth margin.
 
 Do not derive `maxdirsize` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
 
