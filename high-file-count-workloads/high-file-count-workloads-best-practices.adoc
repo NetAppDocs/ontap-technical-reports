@@ -41,7 +41,7 @@ See link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits
 
 == Prefer a sharded directory structure
 
-Avoid placing millions of names at one level when the application can use a hierarchy. Common sharding keys include:
+Avoid placing millions of names at one level when the application can use a hierarchy. Distributing files across a hierarchy means using more directories with fewer files in each directory. Common sharding keys include:
 
 * A hash prefix
 * Customer, project, or tenant
@@ -151,7 +151,11 @@ Test more than initial ingest:
 * ONTAP upgrade and, when required, revert checks
 * Migration from FlexVol to FlexGroup or between protocol environments
 
-Directory indexes might need to be built or transferred at the destination. For supported ONTAP releases, evaluate `-is-dir-index-transfer-enabled` when avoiding index reconstruction materially improves recovery or restore behavior. Public indexes consume public inodes and can increase `files-used` by approximately one for each indexed directory, so include them in the inode forecast.
+Directory indexes might need to be built or transferred at the destination. Historically, private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand. Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves indexes into public inode space so supported SnapMirror workflows can transfer them. This can reduce post-restore index construction, but public indexes consume public inodes and can increase `files-used` by approximately one inode for each indexed directory, so include them in `maxfiles` planning.
+
+Evaluate the option when avoiding index reconstruction materially improves recovery or restore behavior. Do not enable it merely to improve local lookup performance.
+
+For more information on this, see link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
 
 == Monitor inode limits and allocation
 

@@ -10,7 +10,7 @@ summary: "Understand how ONTAP directory files grow, how maxdirsize is calculate
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-`maxdirsize` limits the size of each directory file in an ONTAP volume. It does not directly specify a maximum number of names, and it is independent of the volume's `maxfiles` inode limit. This page explains directory-file packing, indexing, measurement, operational effects, release enhancements, and relevant EMS events.
+`maxdirsize` limits the size of each directory file in an ONTAP volume. It does not directly specify a maximum number of names, and it is independent of the volume's `maxfiles` inode limit. This page explains directory size behavior, indexing, measurement, operational effects, release enhancements, and relevant EMS events.
 
 == What maxdirsize measures
 
@@ -18,7 +18,11 @@ A WAFL directory is a metadata file that maps names to inode numbers. Its size i
 
 The directory file is not the volume's inode file. The directory itself consumes one inode, whose record is stored in the volume-level inode file. The directory's names are stored in that directory's own data blocks. Adding more names grows the individual directory file and can approach `maxdirsize`; creating more file-system objects allocates more inode records and can grow the volume-level inode file toward `maxfiles`.
 
-The volume `maxdir-size` value is the maximum directory-file size allowed for every individual directory in that volume. Raising the value:
+The volume `maxdir-size` value is the maximum directory-file size allowed for every individual directory in that volume. For instance, a setting of 320 MB means that no directory file in the volume can grow beyond 320 MB. That setting does not consume 320 MB of volume capacity. ONTAP does not reserve the cap; a new directory starts at 4 KiB and uses space only as entries are added. If a directory file later grows to 320 MB of directory-file blocks, those blocks use 320 MB of actual volume capacity. The companion index and related metadata consume additional capacity on top of that 320 MB.
+
+That directory-file capacity is not the volume inode file. The inode file grows with the high-water mark of allocated public inodes at about 288 bytes per inode, up to `maxfiles`. Creating many files therefore adds inode-file capacity even when no single directory is large. Conversely, adding many names to one directory grows that directory file toward `maxdirsize` while adding only a modest number of inode records to the inode file. The two sizes are independent.
+
+Raising the value:
 
 * Applies to all directories in the volume
 * Allows directory files to grow beyond the former cap
@@ -32,7 +36,7 @@ Directory files are high-water structures. Deleting names makes slots reusable, 
 
 === Directory-block layout
 
-An ONTAP directory file grows in 4 KiB blocks. The following implementation-level packing model is useful for estimation but is not a guaranteed public on-disk interface. In this model, each block contains:
+An ONTAP directory file grows in 4 KiB blocks. The following implementation-level directory size model is useful for estimation but is not a guaranteed public on-disk interface. In this model, each block contains:
 
 * 128 entry records of 12 bytes each
 * 160 name chunks of 16 bytes each
@@ -128,7 +132,9 @@ The index is separate from the directory file:
 
 === Private and public index inodes
 
-By default, directory indexes historically reside in private inode space. ONTAP 9.17.1 introduced `-is-dir-index-transfer-enabled`. When set to `true`, new indexes are created in public inode space and a scanner migrates existing private indexes so supported SnapMirror and SnapMirror Cloud workflows can transfer them.
+By default, directory indexes historically reside in private inode space. Private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand after activation or restore.
+
+Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves indexes into public inode space so supported SnapMirror and SnapMirror Cloud workflows can transfer them. When the option is `true`, new indexes are created in public inode space and a scanner migrates existing private indexes. This can reduce post-restore index construction, but public indexes consume public inodes and must be included in `maxfiles` planning.
 
 `-has-dir-index-public` is a read-only status field indicating that at least one public directory index exists. It is not the enable switch.
 
@@ -159,7 +165,7 @@ Changing the `maxdir-size` setting consumes no capacity by itself. Actual growth
 * Snapshot copies can retain older directory and index blocks.
 * A directory that reached a high-water mark can keep its logical size after deletion.
 
-For example, authorizing a 4 GiB cap does not allocate 4 GiB. A directory that actually grows to approximately 4 GiB has consumed roughly that amount in directory-file blocks, plus its index and other metadata overhead.
+For example, authorizing a 4 GiB cap does not allocate 4 GiB. A directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
 
 Do not include the data bytes of files below the directory when estimating `maxdirsize`. Include directory and index overhead in overall volume and aggregate capacity planning.
 
@@ -265,7 +271,7 @@ Do not present uncommitted future work as available functionality. Use the relea
 
 | `language`
 | Limited, admin
-| Controls name interpretation. Non-ASCII and alternate name forms can change directory packing.
+| Controls name interpretation. Non-ASCII and alternate name forms can change directory size behavior.
 
 | `analytics-state`
 | Yes, admin

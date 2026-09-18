@@ -103,7 +103,9 @@ Examples:
 
 These figures describe inode records and are useful for planning, but observed physical usage can also include inode-file structure, block rounding, Snapshot retention, and other metadata.
 
-Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. Because that file does not shrink, size for the peak historical inode allocation rather than only the current `files-used` value.
+Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If the inode file later holds one million public inodes, those inode-file blocks use about 288 MB of actual volume capacity. Because that file does not shrink, size for the peak historical inode allocation rather than only the current `files-used` value.
+
+This inode-file capacity is separate from `maxdirsize`. `maxdirsize` caps the byte size of each directory's name-mapping file. The inode file stores inode records for the volume as a whole. A 320 MB directory file uses 320 MB of directory-file blocks in that one directory; a similarly sized inode file would reflect a much larger public-inode high-water mark (on the order of a million inodes) and is not limited by `maxdirsize`.
 
 To view inode-file space in capacity units, use `volume show-space` and inspect the `Inodes` line. Do not interpret `inodefile-public-capacity` as a byte value.
 
