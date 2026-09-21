@@ -57,17 +57,17 @@ Each file or directory requires an inode, and the object's name lives in a direc
 
 ONTAP stores public inodes in a hidden, volume-level inode file. Each ONTAP 9 inode uses 288 bytes, so the inode file itself consumes usable capacity in the volume. One million allocated public inodes use about 288 MB. Deleting objects frees inodes for reuse, but the inode file does not shrink.
 
-In addition, directory files consume capacity when large numbers of names are stored in the same directory. Those directory files are not part of the inode file. They store names and mappings to inode numbers, and `maxdirsize` limits each one independently. A 320 MB setting is a cap, not a reservation; if one directory file grows to 320 MB of directory-file blocks, those blocks use 320 MB of actual volume capacity.
+In addition, directory files consume capacity when large numbers of names are stored in the same directory. Those directory files are not part of the inode file. They store names and mappings to inode numbers, and `maxdirsize` limits each one independently. The 320 MB default setting is a cap, not a reservation; if one directory file grows to 320 MB of directory-file blocks, those blocks use 320 MB of actual volume capacity.
 
-These two structures can add up. At high allocated inode counts, the inode file alone can reach multiple GB, and one or more large directory files can add hundreds of megabytes on top of that. A volume can also have a large inode file with every directory still small, or one large directory with a still-small inode file.
+These two structures can add up. At high allocated inode counts, the inode file alone can reach multiple GB, and one or more large directory files can add hundreds of megabytes on top of that. A volume can also have a large inode file with every directory size still small, or one large directory with a still-small inode file.
 
 === Directory enumeration
 
-Large directories (directories with many names in a single directory) take longer to enumerate than smaller ones. Even a directory that has had many files deleted can still be expensive to scan because the directory-file size stays at its high-water mark. Deletion makes slots reusable, but it does not compact the directory. Indexed directories can hole-punch fully empty 4 KiB blocks and reclaim those physical blocks, but the reported size does not normally shrink.
+Large directories (directories with many names in a single directory) take longer to enumerate than smaller ones. Even a directory that has had many files deleted can still be expensive to scan because the directory-file size stays at its high-water mark. Deletion makes slots reusable, but it does not compact the directory file. Indexed directories can hole-punch fully empty 4 KiB blocks and reclaim those physical blocks, but the reported size does not normally shrink.
 
 === Failure-domain concentration
 
-Concentrating millions of entries in one directory creates a single-directory scaling and serialization point that can impact performance not just for the directory itself, but also for the node (or FlexGroup constituent) that owns the directory. Distributing files across a directory hierarchy improves parallelism, reduces the scope of directory scans, and makes operational tasks easier.
+Concentrating millions of entries in one directory creates a single-directory scaling and serialization point that can impact performance not just for the directory itself, but also for the node (or volume) that owns the directory. Distributing files across a directory hierarchy improves parallelism, reduces the scope of directory scans, and makes operational tasks easier.
 
 === Data protection and recovery
 
@@ -79,11 +79,11 @@ For information on directory-index transfer with SnapMirror, see link:high-file-
 
 The concepts of `maxfiles` and `maxdirsize` protect different resources in ONTAP. Neither is a substitute for the other, but they often generate confusion. This section attempts to clear things up.
 
-A volume can have ample free inodes and still reach `maxdirsize` in one directory, or avoid large directories and still exhaust the public inode supply. The client symptoms look similar at first: NFS typically returns `ENOSPC`, and SMB typically returns `STATUS_DISK_FULL`. A full directory can also return `STATUS_CANNOT_MAKE` even when the volume still has free inodes and data capacity.
+A volume can have ample free inodes and still reach `maxdirsize` in one directory. In addition, a dataset could avoid large directory sizes and still exhaust the public inode supply in the volume. The client symptoms look similar at first: NFS typically returns `ENOSPC`, and SMB typically returns `STATUS_DISK_FULL`. A full directory can also return `STATUS_CANNOT_MAKE` even when the volume still has free inodes and data capacity.
 
 === What is maxdirsize?
 
-`maxdirsize` is the per-volume cap on how large any single WAFL directory file can grow. It is presented as a capacity value, rather than a fixed number of entries, even though the number of names in a single directory is one of the factors that can increase directory size. Filename length, Unicode character representation, SMB 8.3 aliases, NFS alternate names, and FlexGroup remote-entry representation all factor into directory size. Path length does not: `maxdirsize` accounts for the basename stored in that directory, not the full path. When you increase the `maxdirsize` value for a volume, the setting authorizes growth on a per-directory basis rather than preallocating space.
+`maxdirsize` is the per-volume cap on how large any single WAFL directory file can grow. It is presented as a capacity value, rather than a fixed number of entries, even though the number of names in a single directory is one of the factors that can increase directory size. Filename length, Unicode character representation, SMB 8.3 aliases, NFS alternate names, and FlexGroup remote-entry representation all factor into directory size. When you increase the `maxdirsize` value for a volume, the setting authorizes growth on a per-directory basis rather than preallocating space.
 
 * For maxdirsize calculation details, see link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories].
 * For directory indexing information, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
@@ -93,7 +93,7 @@ A volume can have ample free inodes and still reach `maxdirsize` in one director
 
 === What is maxfiles?
 
-`maxfiles` (configured as the volume-level option `-files`) is a configurable ceiling for the number of public inodes available in a single volume. That count includes files, directories, named streams, ACL inodes, and other public objects, not just the files a user can see in a directory listing. The volume contains a hidden inode file that holds those records. ONTAP grows the inode file when a new public inode is needed and no free record remains, up to `-files` and available capacity. The configurable maximum for `-files` depends on volume size and ONTAP limits. Visible file count is not enough to size it.
+`maxfiles` (configured as the volume-level option `-files`) is a configurable ceiling for the number of public inodes available in a single volume. That count includes not just files and directories, but also named streams, ACLs, and other public objects - sometimes objects that are not seen in a directory listing. The volume contains a hidden inode file that holds those records. ONTAP grows the inode file when a new public inode is needed and no free record remains, up to the files`setting and total volume size. The configurable maximum for `-files` depends on volume size and ONTAP limits.
 
 * For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits].
 * For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach].
