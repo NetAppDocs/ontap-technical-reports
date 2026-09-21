@@ -4,7 +4,15 @@ entries:
   - title: Overview
     url: /high-file-count-workloads/high-file-count-workloads-overview.html
   - title: Maxfiles and inode limits
-    url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
+    entries:
+      - title: Inode types
+        url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
+      - title: High file counts and inode capacity
+        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-high-file-counts.html
+      - title: Maxfiles limits and controls
+        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-limits.html
+      - title: Monitoring, EMS, and enhancements
+        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-monitoring.html
   - title: Maxdirsize and large directories
     url: /high-file-count-workloads/high-file-count-workloads-maxdirsize.html
   - title: Best practices

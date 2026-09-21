@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-maxfiles.html
-keywords: ONTAP, NAS, maxfiles, files, inode, files-used, inodefile-public-capacity, FlexGroup
-summary: "Understand ONTAP public inode limits, maxfiles controls, capacity effects, release enhancements, and related EMS events."
+keywords: ONTAP, NAS, maxfiles, files, inode, files-used, public inode, private inode
+summary: "Understand ONTAP inodes, public and private inode types, ACL inodes, and named streams."
 ---
 
 = Maxfiles and ONTAP inode limits
@@ -10,366 +10,139 @@ summary: "Understand ONTAP public inode limits, maxfiles controls, capacity effe
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see <<Maxfiles limits>>), and public inodes count against that limit in the file system.
+ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]), and public inodes count against that limit in the file system.
 
 == What is an inode?
 
-In general, an inode is the file-system record for an object. It stores identity and metadata such as type, ownership, timestamps, and permissions, and it points to the object's data. The object's name is stored in a directory, not in the inode itself. Several names (hard links) can refer to the same inode.
+In general, an inode is the file-system record for an object. It stores identity and metadata such as type, ownership, timestamps, and permissions, and it points to the object's data. The object's name is stored in a directory, not in the inode itself.
 
-In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Each ONTAP 9 inode uses 288 bytes in that file. Public inodes are the records that count toward the volume `files` setting, commonly called maxfiles. ONTAP also maintains a private inode space for internal metadata that does not consume that public ceiling. Creating a public inode can grow the public inode file; deleting an object frees the inode for reuse but does not shrink the inode file.
+In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Each ONTAP 9 inode uses 288 bytes in that file, which counts against the physical capacity used in the volume. See link:high-file-count-workloads-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
+
+Public inodes count toward the volume `files` setting, commonly called maxfiles. ONTAP also maintains a private inode space for internal metadata that does not consume that public ceiling. Creating a public object increases public inode use. If no free record remains in the currently allocated public inode file, ONTAP grows the inode file. Deleting an object frees its inode for reuse but does not shrink the inode file's size.
 
 == Types of inodes in ONTAP
 
-An inode's *type* describes what kind of object it represents. ONTAP also places each inode in *public* or *private* inode space. Public types count toward maxfiles. Private types do not. Directory-index inodes can be in either space depending on volume options.
+An inode's *type* describes what kind of object it represents. ONTAP also places each inode in *public* or *private* inode space. Public inodes count toward maxfiles; private inodes do not. A directory-index inode can be in either space depending on volume configuration.
 
 === Public inodes
 
-Public inodes are allocated from the volume's public inode file. They count toward `files` and `files-used`. That includes names clients see (files, directories, symlinks, special files) and public metadata objects that are not directory entries (ACL inodes, named streams, stream directories, and public directory indexes).
+Public inodes are allocated from the volume's public inode file and count toward `files` and `files-used`. They include client-visible objects and public metadata objects that do not appear as directory entries.
 
-`files-used` is the combined public total. Dump, restore, and some EMS messages count regular inodes, directory inodes, NT stream inodes, stream-directory inodes, and ACL inodes separately.
+During NDMP dump and restore processing, ONTAP identifies object classes such as regular files, directories, NT streams, stream directories, and ACL inodes separately so each object's data and metadata can be serialized, reported in dump statistics, and reconstructed correctly. This classification does not create separate maxfiles limits or separate `volume show` counters. `files-used` remains the combined public-inode total.
+
+The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-maxdirsize.html[`maxdirsize`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against `maxdirsize` | Counts toward `files`
+| Type | What it represents | Also counts against link:high-file-count-workloads-maxdirsize.html[`maxdirsize`]
 
 | Regular file
 | Default file contents and attributes
-| Yes. Creating the file adds a name in the parent directory.
-| Yes
+| *Yes.* Creating the file adds a name in the parent directory.
 
 | Directory
 | A directory's names and the directory's own inode
-| Yes. Creating the directory adds a name in the parent. The new directory also has its own directory file, which `maxdirsize` limits independently.
-| Yes
+| *Yes.* Creating the directory adds a name in the parent. The new directory also has its own directory file, which `maxdirsize` limits independently.
 
 | Symbolic link
 | A pathname pointer rather than file data
-| Yes. Creating the symlink adds a name in the parent directory.
-| Yes
+| *Yes.* ^{asterisk}^ Creating the symbolic link adds a name in the parent directory.
 
 | Special file
-| UNIX fifo, socket, or device node
-| Yes. Creating the special file adds a name in the parent directory.
-| Yes
+| UNIX FIFO, socket, or device node
+| *Yes.* Creating the special file adds a name in the parent directory.
 
 | Named stream
 | Extra data besides the file's default contents (NTFS alternate data stream)
-| No. The stream is not a name in the parent user directory.
-| Yes
+| *No.* The stream is not a name in the parent user directory.
 
 | Stream directory
 | Hidden container that holds the names of a file's named streams
-| No. It is not a user-visible directory entry.
-| Yes
+| *No.* It is not a user-visible directory entry.
 
 | ACL (xinode)
-| NTFS security descriptor or NFSv4 ACL stored as ACE data
-| No. The ACL is not a directory entry.
-| Yes
+| NTFS security descriptor or NFSv4 ACL stored as access control entry (ACE) data
+| *No.* The ACL is not a directory entry.
 
-| Directory index (when public)
+| Directory index (when public)^{asterisk}{asterisk}^
 | Companion B+tree used to look up names in a large directory
-| No. The index is not a directory entry.
-| Yes, when `-is-dir-index-transfer-enabled` is `true`
+| *No.* The index is not a directory entry.
 |===
 
-Hard links are additional names for the same regular-file inode, not a separate inode type. A hard link adds a directory entry (and therefore directory-file growth toward `maxdirsize`) without allocating another public inode.
+NOTE: ^{asterisk}^ A symbolic link is its own public inode and directory entry. A hard link is different: it is another directory name for an existing regular-file inode, not a separate inode type. Creating a hard link adds a directory entry and grows the parent directory file, but it does not allocate another public inode.
 
-When `-is-dir-index-transfer-enabled` moves directory indexes into public inode space, those indexes consume public inodes and increase `files-used` by approximately one inode for each indexed directory. Leave indexes in private inode space unless the replication or restore benefit justifies that public-inode consumption.
+NOTE: ^{asterisk}{asterisk}^ Directory-index inodes are private by default. Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves them into public inode space for supported SnapMirror and restore workflows. Public indexes count toward `files` and `files-used`.
 
 ==== ACL inodes
 
-UNIX mode bits are stored in the file or directory's own inode. They do not allocate an extra public inode.
+When a file or directory has an NTFS security descriptor or an NFSv4 ACL, ONTAP stores that ACL as a separate ACL inode (also called an extended inode, or xinode). The ACL inode contains the ACEs. ONTAP allocates it from public inode space, so it counts toward `files` and `files-used`. The file or directory inode references its ACL inode.
 
-When a file or directory has an NTFS security descriptor or an NFSv4 ACL, ONTAP stores that ACL as a separate ACL inode (also called an extended inode, or xinode). The ACL inode's data is the list of access control entries (ACEs). ONTAP allocates these inodes from public inode space, so they count toward `files` and `files-used`. The file or directory inode references its ACL inode.
+NOTE: UNIX mode bits are stored in the file or directory's own inode. They do not allocate an extra public inode.
 
-ACL inode use is not always one extra inode per object:
+ACL inode use is not always a 1:1 relationship with a file or directory:
 
-* Two files or directories with the same ACE set *can* share one ACL inode. That sharing is an optimization, not a guarantee; identical ACLs can still receive different ACL inodes.
-* A create can inherit the parent's ACL when the create does not supply its own ACEs and the parent ACL has inheritance attributes. Inherited ACLs still use public ACL inodes, subject to the same sharing behavior.
-* NTFS security-style volumes apply NTFS ACLs by default, so new files and directories commonly receive an ACL inode at create time.
-* UNIX security-style objects that remain on mode bits do not consume an ACL inode until an NFSv4 ACL is actually stored. Mixed security style can produce a mix of mode-bit-only objects and ACL'd objects, depending on which client last set permissions.
-
-Named streams are a separate public-inode consumer from ACLs. Stream inodes share the base file's ACL rather than each carrying a separate ACL inode. See <<Named streams>>.
-
-Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. `files-used` already includes those public ACL inodes; there is no separate CLI counter for ACL inode count in `volume show`.
+* Files or directories with the same stored security descriptor can share an ACL inode when ONTAP's ACL-sharing optimization coalesces them. Inheritance commonly produces identical descriptors that are candidates for sharing.
+* Sharing might not occur when ACEs, owner or group information, control flags, or inheritance results differ. Even identical descriptors are not guaranteed to be coalesced, for example when they are created or updated in separate operations before sharing is recognized.
+* A create can inherit the parent's ACL when the request does not supply its own ACEs and the parent ACL has inheritance attributes.
+* NTFS security-style volumes apply NTFS ACLs by default. New files and directories can share an ACL inode when their resulting stored descriptors are identical, but administrators must not assume that all default or inherited ACLs will share one inode.
+* UNIX security-style objects that remain on mode bits do not consume an ACL inode until an NFSv4 ACL is stored. Mixed security style can contain both mode-bit-only and ACL-protected objects.
+* Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
 
 ==== Named streams
 
-A named stream is extra data attached to a file besides the content users normally open. In ONTAP it is the WAFL form of an NTFS alternate data stream (ADS). The file's default, unnamed data lives in the base file inode. Each additional named stream is a separate public inode and counts toward `files` and `files-used`.
+A named stream is extra data attached to a file besides the content users normally open. In ONTAP it is the WAFL representation of an NTFS alternate data stream (ADS). The file's default, unnamed data lives in the base file inode. Each additional named stream is a separate public inode and counts toward `files` and `files-used`.
 
-SMB workloads create and use named streams. Windows clients address them as `filename:stream_name` (for example `report.docx:Zone.Identifier`). Common sources include browser Mark of the Web metadata (`Zone.Identifier`), some Office and backup tools, and applications that store sidecar data in ADS. Explorer and a simple directory listing usually show only the default stream, so public inode use can exceed the visible file count.
+SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. Common sources include browser metadata such as `Zone.Identifier`, backup and security applications, and other applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. An Office document downloaded from the internet can nevertheless have a `Zone.Identifier` stream attached by Windows or the browser.
 
-NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate those Windows streams as extra names. Streams that SMB already created still exist on the volume and still consume public inodes even when `ls` on an NFS mount does not show them. Beginning with ONTAP 9.12.1, NFSv4.2 extended attributes (xattrs) are a different feature from named streams; do not treat xattrs as ADS inodes when planning `maxfiles`.
+macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`. These streams remain associated with the base file and add public inode use without adding names to the parent user directory.
+
+Explorer and a simple directory listing usually show only the default stream, so public inode use can exceed the visible file count.
+
+NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate SMB named streams as extra names. Streams that SMB already created still exist and consume public inodes even when `ls` on an NFS mount does not show them.
+
+NFSv4.2 extended attributes (xattrs), supported beginning with ONTAP 9.12.1, are a different feature. They are not ACL inodes and should not be counted as ACL xinodes. A hidden file, swap file, or backup file created by `vi` (for example `.file.swp` or `file~`) is also an ordinary file and directory entry, not a named stream.
 
 === Private inodes
 
-Private inodes are ONTAP-internal metadata records. They do not count toward `files` or `files-used` and cannot be used as additional client files. They have their own private inode file and counters.
+Private inodes are ONTAP-internal metadata records. They reside in a separate private inode space, do not count toward `files` or `files-used`, and cannot be used as additional client files.
+
+The following table shows common private inode types.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against `maxdirsize` | Counts toward `files`
+| Type | What it represents | Also counts against link:high-file-count-workloads-maxdirsize.html[`maxdirsize`]
 
-| Directory index (default)
+| Directory index (default)^{asterisk}^
 | Companion B+tree used to look up names in a large directory
-| No
-| No, while the index remains in private inode space
+| *No.*
 
 | Private metafile
 | Hidden WAFL metadata used by ONTAP
-| No
-| No
+| *No.*
 
 | Zombie
 | An unlinked object retained until references or asynchronous delete finish
-| No
-| No
+| *No.*
 |===
 
-Monitor private use with these advanced fields. They are inode counts, not bytes, and they are not free data space.
+NOTE: ^{asterisk}^ Directory indexes are private by default. They can be moved into public inode space with `-is-dir-index-transfer-enabled true` for supported SnapMirror use cases, in which case they count toward `files`.
 
-[options="header"]
-|===
-| Field | Unit | Meaning
-
-| `files-private-used`
-| Inodes
-| Private system metadata inodes currently used, including private metafiles and zombies
-
-| `inodefile-private-capacity`
-| Inodes
-| Private inode-file high-water capacity currently allocated
-|===
-
-`files-private-used` cannot be used to calculate how many additional client files can be created. An increase can reflect ONTAP metadata activity rather than growth in the visible namespace.
+NOTE: In most cases, you do not need to monitor private inode usage because private inodes do not count against maxfiles, unless NetApp Support directs you to do so.
 
 ==== Zombie inodes
 
-An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work are completed. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. This does not mean those private inodes consume the configured public `files` allowance.
-
-== High file counts in ONTAP
-
-As mentioned, ONTAP uses inodes to track file-system objects. You can monitor public inode use with the following volume values in the CLI or in System Manager:
-
-* `files` is the configured public inode ceiling.
-* `files-used` is the number of public inodes currently in use.
-
-The `files` option controls how far the public inode file is allowed to grow. It does not immediately allocate inode-file space for every permitted inode. ONTAP grows the public inode file when the currently allocated records have no free inode and an operation needs another public inode, up to `files`. Creating files, directories, ACLs, named streams, or public directory indexes can cause that growth. Deleting objects decreases `files-used` and returns inodes for reuse, but the allocated public inode file does not shrink. Size for the peak allocation, not only the current used count.
-
-In addition, you can view how many public inodes the currently allocated inode file can hold with `inodefile-public-capacity`. That value is an *inode count*, not bytes, KiB, or MiB. It is available from the CLI (advanced privilege) and the REST API. For examples of how to view these values, see <<Monitoring example>>.
-
-== How an inode count increments
-
-Not all inodes count against the inode limits. Private inodes do not. <<Public inodes,Public inodes>> such as files, directories, ACLs, named streams, and public directory indexes do.
-
-`files-used` increases whenever a public inode is taken for use. If a free public inode already exists in the allocated inode file, `files-used` still increases and `inodefile-public-capacity` does not. If no free public inode remains, ONTAP grows the public inode file (up to `files`), and both values increase. Typical operations include:
-
-* Creating a file, directory, symbolic link, or special file: +1 public inode, and a new name in the parent directory (directory-file growth toward `maxdirsize`).
-* Creating a hard link: +0 public inodes, and +1 name in the parent directory.
-* Storing an NTFS or NFSv4 ACL on an object that did not already have an ACL inode: +1 public inode, and no extra parent-directory name.
-* Creating a named stream: +1 public inode for the stream (and a stream directory if one does not already exist for that file), and no extra name in the parent user directory.
-* Enabling public directory-index transfer so indexes move into public space: about +1 public inode per indexed directory.
-
-Examples:
-
-* One million files in UNIX security style that use only mode bits consume about one million public inodes for those files, plus directory inodes.
-* The same million files with per-file NTFS ACLs can approach two million public inodes if ACL inodes are not shared, plus directories.
-* One million SMB files, each with a `Zone.Identifier` stream, add about one million extra public inodes for the streams, which NFS `ls` does not show.
-
-`files-used` decreases when public inodes become free, such as after a delete completes and is not held as a zombie. `inodefile-public-capacity` remains at the high-water mark. New creates reuse free public inodes until that high-water allocation is fully occupied again, then the inode file grows if `files` still has room.
-
-== How high file counts affect NAS workloads
-
-High file counts increase the proportion of metadata work relative to data transfer. Common operations include:
-
-* Allocating and freeing inodes
-* Looking up directory names and file handles
-* Reading and updating attributes, permissions, and timestamps
-* Opening, closing, renaming, linking, and deleting files
-* Enumerating directories and walking directory trees
-* Scanning namespaces for analytics, backup, replication, or security features
-
-The performance effect depends on operation rate, concurrency, protocol behavior, namespace layout, cache state, and node resources. Total file count alone is not a performance forecast. Millions of files spread across many active directories can expose more parallelism than the same population concentrated behind a small number of namespace hot spots.
-
-== Capacity impact
-
-Each inode in ONTAP 9 occupies 288 bytes in the inode file. A planning approximation for an inode population is:
-
-----
-inode-file bytes = inode count × 288
-----
-
-Examples:
-
-[options="header"]
-|===
-| Inodes | Approximate raw inode bytes | Approximate binary capacity
-
-| 1 million
-| 288,000,000
-| 274.7 MiB
-
-| 100 million
-| 28,800,000,000
-| 26.8 GiB
-
-| 1 billion
-| 288,000,000,000
-| 268.2 GiB
-|===
-
-These figures describe inode records and are useful for planning, but observed physical usage can also include inode-file structure, block rounding, Snapshot retention, and other metadata.
-
-Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If the inode file later holds one million public inodes, those inode-file blocks use about 288 MB of actual volume capacity. Because that file does not shrink, size for the peak historical inode allocation rather than only the current `files-used` value.
-
-This inode-file capacity is separate from `maxdirsize`. `maxdirsize` caps the byte size of each directory's name-mapping file. The inode file stores inode records for the volume as a whole. A 320 MB directory file uses 320 MB of directory-file blocks in that one directory; a similarly sized inode file would reflect a much larger public-inode high-water mark (on the order of a million inodes) and is not limited by `maxdirsize`.
-
-To view inode-file space in capacity units, use `volume show-space` and inspect the `Inodes` line. Do not interpret `inodefile-public-capacity` as a byte value.
-
-== What happens when maxfiles is exceeded?
-
-When no public inode is available:
-
-* New files, directories, and other objects that require public inodes cannot be created.
-* A client can receive a no-space or file-creation error even when data capacity remains available.
-* Existing objects and read operations are generally unaffected by the lack of a free inode.
-* Deleting objects can make public inodes available for reuse, although inode-file capacity remains allocated.
-* Raising `files`, when the volume size and ONTAP maximum allow it, restores room for additional objects.
-
-In a FlexGroup volume, one constituent can approach or exhaust its inode supply before others. ONTAP reduces placement to a nearly full constituent, which can create imbalance and route more work to constituents with available inodes.
-
-== Maxfiles limits
-
-The maximum configurable value is constrained by both volume size and an absolute FlexVol limit.
-
-* The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
-* `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
-* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes.
-* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints.
-* The FlexGroup-wide total is not the only operational boundary. Uneven placement can cause one constituent to approach or exhaust its assigned inode count while other constituents still have room. Aggregate FlexGroup scale therefore depends on constituent count, constituent size, distribution, and release support.
-
-Always query the target system rather than assuming that a theoretical platform maximum is configurable on a particular volume:
-
-----
-set -privilege advanced
-volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity
-----
-
-== Controlling maxfiles
-
-=== Set a specific ceiling
-
-Use `volume modify -files` when capacity planning calls for a specific value:
-
-----
-volume modify -vserver <svm> -volume <volume> -files <inode-count>
-----
-
-ONTAP validates the requested value against volume size, the maximum possible value, and inode-file capacity already allocated. A configured ceiling cannot be reduced below the inode-file capacity already reached.
-
-For a FlexGroup, specify the FlexGroup name and the desired FlexGroup-wide total. Do not set `files` independently on a constituent. ONTAP distributes the requested total evenly among the current constituents, and each constituent enforces its allocated portion:
-
-----
-volume modify -vserver <svm> -volume <flexgroup> -files <flexgroup-total-inodes>
-----
-
-After changing the value, inspect constituent-level `files` and `files-used` because usage does not necessarily remain as evenly distributed as the configured limits:
-
-----
-volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
-----
-
-Some ONTAP commands accept a relative increase:
-
-----
-volume modify -vserver <svm> -volume <volume> -files +<additional-inodes>
-----
-
-Confirm the result with `volume show` instead of assuming that every requested value was accepted without adjustment.
-
-=== Set the maximum currently possible
-
-Beginning with ONTAP 9.9.1, the advanced `files-set-maximum` action sets `files` to the current `files-maximum-possible` value:
-
-----
-set -privilege advanced
-volume modify -vserver <svm> -volume <volume> -files-set-maximum true
-----
-
-This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` instead when you want a deliberate value below the maximum.
-
-== ONTAP functionality and enhancements related to maxfiles
-
-[options="header"]
-|===
-| ONTAP release | Functionality
-
-| Earlier ONTAP 9 releases
-| Administrators can inspect `files` and `files-used` and set a specific `-files` value. The default automatic value historically stopped growing at 21,251,126 when volume size reached approximately 680 GB; this was a default-sizing plateau, not the maximum configurable value.
-
-| ONTAP 9.9.1
-| Added `-files-set-maximum true`, a one-shot action that sets `files` to the current `files-maximum-possible`.
-
-| ONTAP 9.13.1
-| Automatic default inode sizing continues as volumes grow beyond the earlier approximately 21-million plateau.
-
-| ONTAP 9.17.1
-| Added the option to place and migrate directory-index inodes into public inode space for transfer by supported replication workflows. This is controlled by `-is-dir-index-transfer-enabled`; it does not enable directory indexing itself. Public indexes consume public inodes and can increase `files-used` by approximately one for each indexed directory.
-|===
-
-Release support and limits can vary by platform and volume type. Verify behavior in the command reference for the ONTAP release in use.
-
-== EMS messages related to maxfiles
-
-=== `callhome.no.inodes`
-
-This ERROR event indicates that a volume is out of inodes. New file-system objects cannot be created until inodes are made available or the configured maximum is increased. Check `files`, `files-used`, `files-maximum-possible`, and volume capacity before changing the limit.
-
-=== FlexGroup constituent events
-
-* `fg.inodes.member.nearlyFull` indicates that a constituent is almost out of inodes. ONTAP directs fewer creates to that constituent, potentially affecting distribution and performance.
-* `fg.inodes.member.full` indicates that a constituent has run out of inodes and cannot accept new files.
-* `fg.inodes.member.allOK` indicates that the conditions that raised the nearly-full or full events no longer apply.
-
-For FlexGroup events, investigate the constituent distribution as well as the FlexGroup-level totals. Raising the FlexGroup's file allowance is generally preferable to attempting to identify and delete files from one constituent.
-
-== Monitoring example
-
-CLI:
-
-----
-volume show -vserver <svm> -volume <volume> -fields files,files-used
-
-set -privilege advanced
-volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,files-set-maximum,inodefile-public-capacity,files-private-used,inodefile-private-capacity
-
-volume show-space -vserver <svm> -volume <volume>
-----
-
-REST API (public `files` ceiling and current use):
-
-----
-GET /api/storage/volumes?name=<volume>&fields=files
-----
-
-The REST `files.maximum` and `files.used` fields correspond to CLI `files` and `files-used`. Use the advanced CLI fields for `inodefile-public-capacity` and the private inode counters.
-
-Track both current use and inode-file capacity. A low `files-used` value after a large deletion does not mean that the inode-file capacity has been returned.
+An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work complete. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. Again, private inodes do not count against the total `files` allowed in the volume.
 
 == Related information
 
 * link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
-* link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
-* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
+* link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
+* link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]
+* link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]
-* link:https://docs.netapp.com/us-en/ontap/nfs-admin/limitations-support-nfsv4-concept.html[ONTAP support limitations for NFSv4^]
-* link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
-* link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
-* link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]
 
 == Next and previous
 
 * Previous: link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* Next: link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* Next: link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]

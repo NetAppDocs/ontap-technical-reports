@@ -1,0 +1,95 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-maxfiles-limits.html
+keywords: ONTAP, NAS, maxfiles, files-maximum-possible, files-set-maximum, FlexGroup
+summary: "Understand ONTAP maxfiles limits, behavior at inode exhaustion, and methods to control the public-inode ceiling."
+---
+
+= Maxfiles limits and controls
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+The maximum number of public inodes available to an ONTAP volume is constrained by volume size, the configured `files` value, release behavior, and an absolute FlexVol limit.
+
+== Maxfiles limits
+
+* The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
+* `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
+* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes.
+* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints.
+* The FlexGroup-wide total is not the only operational boundary. Uneven placement can cause one constituent to approach or exhaust its assigned inode count while other constituents still have room.
+
+Always query the target system rather than assuming that a theoretical maximum is configurable on a particular volume:
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity
+----
+
+== What happens when maxfiles is exceeded?
+
+When no public inode is available:
+
+* New files, directories, and other objects that require public inodes cannot be created.
+* A client can receive a no-space or file-creation error even when data capacity remains available.
+* Existing objects and read operations are generally unaffected.
+* Deleting objects can make public inodes available for reuse, although inode-file capacity remains allocated.
+* Raising `files`, when volume size and ONTAP limits allow it, restores room for additional objects.
+
+In a FlexGroup volume, one constituent can approach or exhaust its inode supply before others. ONTAP reduces placement to a nearly full constituent, which can create imbalance and route more work to constituents that have available inodes.
+
+== Controlling maxfiles
+
+=== Set a specific ceiling
+
+Use `volume modify -files` when capacity planning calls for a specific value:
+
+----
+volume modify -vserver <svm> -volume <volume> -files <inode-count>
+----
+
+ONTAP validates the requested value against volume size, the maximum possible value, and inode-file capacity already allocated. A configured ceiling cannot be reduced below the inode-file capacity already reached.
+
+For a FlexGroup, specify the FlexGroup name and desired FlexGroup-wide total. Do not set `files` independently on a constituent. ONTAP distributes the requested total evenly among the current constituents, and each constituent enforces its portion:
+
+----
+volume modify -vserver <svm> -volume <flexgroup> -files <flexgroup-total-inodes>
+----
+
+After changing the value, inspect constituent-level `files` and `files-used` because usage does not necessarily remain as evenly distributed as the configured limits:
+
+----
+volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
+----
+
+Some ONTAP commands accept a relative increase:
+
+----
+volume modify -vserver <svm> -volume <volume> -files +<additional-inodes>
+----
+
+Confirm the result with `volume show`.
+
+=== Set the maximum currently possible
+
+Beginning with ONTAP 9.9.1, the advanced `files-set-maximum` action sets `files` to the current `files-maximum-possible` value:
+
+----
+set -privilege advanced
+volume modify -vserver <svm> -volume <volume> -files-set-maximum true
+----
+
+This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` when you want a deliberate value below the maximum.
+
+== Related information
+
+* link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
+* link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
+* link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
+* link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
+
+== Next and previous
+
+* Previous: link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
+* Next: link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]

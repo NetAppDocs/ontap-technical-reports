@@ -316,5 +316,5 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 == Next and previous
 
-* Previous: link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
+* Previous: link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * Next: link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
