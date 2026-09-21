@@ -22,7 +22,7 @@ Public inodes count toward the volume `files` setting, commonly called maxfiles.
 
 The following figure shows how the public inode file relates to `files-used`, `inodefile-public-capacity`, the `files` ceiling, and the capacity consumed in the volume.
 
-image::ontap-inode-file.png[Diagram of the ONTAP volume inode file showing files-used nested in inodefile-public-capacity, files, and files-maximum-possible,align="center"]
+image::ontap-inode-file.png[Diagram of the ONTAP volume inode file showing files-used nested in inodefile-public-capacity, files, and files-maximum-possible,width=600,align="center",link=../media/high-file-count-workloads/ontap-inode-file.png,window=_blank]
 
 == Types of inodes in ONTAP
 
