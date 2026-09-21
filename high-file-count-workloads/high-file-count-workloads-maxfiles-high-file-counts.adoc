@@ -93,13 +93,10 @@ This capacity is separate from `maxdirsize`. `maxdirsize` caps the byte size of 
 
 Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value.
 
+link:high-file-count-workloads-maxfiles.html[← Previous: Maxfiles and ONTAP inode limits] | link:high-file-count-workloads-maxfiles-limits.html[Next: Maxfiles limits and controls →]
+
 == Related information
 
 * link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]
 * link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
-
-== Next and previous
-
-* Previous: link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
-* Next: link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]

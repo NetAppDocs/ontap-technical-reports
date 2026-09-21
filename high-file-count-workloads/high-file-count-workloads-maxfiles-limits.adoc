@@ -82,14 +82,11 @@ volume modify -vserver <svm> -volume <volume> -files-set-maximum true
 
 This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` when you want a deliberate value below the maximum.
 
+link:high-file-count-workloads-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-maxfiles-monitoring.html[Next: Monitor maxfiles, EMS events, and ONTAP enhancements →]
+
 == Related information
 
 * link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
 * link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
-
-== Next and previous
-
-* Previous: link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
-* Next: link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]

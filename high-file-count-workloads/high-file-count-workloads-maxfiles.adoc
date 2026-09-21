@@ -86,21 +86,26 @@ ACL inode use is not always a 1:1 relationship with a file or directory:
 * A create can inherit the parent's ACL when the request does not supply its own ACEs and the parent ACL has inheritance attributes.
 * NTFS security-style volumes apply NTFS ACLs by default. New files and directories can share an ACL inode when their resulting stored descriptors are identical, but administrators must not assume that all default or inherited ACLs will share one inode.
 * UNIX security-style objects that remain on mode bits do not consume an ACL inode until an NFSv4 ACL is stored. Mixed security style can contain both mode-bit-only and ACL-protected objects.
-* Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
 
 ==== Named streams
 
 A named stream is extra data attached to a file besides the content users normally open. In ONTAP it is the WAFL representation of an NTFS alternate data stream (ADS). The file's default, unnamed data lives in the base file inode. Each additional named stream is a separate public inode and counts toward `files` and `files-used`.
 
-SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. Common sources include browser metadata such as `Zone.Identifier`, backup and security applications, and other applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. An Office document downloaded from the internet can nevertheless have a `Zone.Identifier` stream attached by Windows or the browser.
+Some things to note:
 
-macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`. These streams remain associated with the base file and add public inode use without adding names to the parent user directory.
+* SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. Common sources include browser metadata such as `Zone.Identifier`, backup and security applications, and other applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. An Office document downloaded from the internet through a web browser can nevertheless have a `Zone.Identifier` stream attached by Windows or the browser. Files synchronized by OneDrive do not necessarily receive this stream; behavior depends on the client and transfer path.
 
-Explorer and a simple directory listing usually show only the default stream, so public inode use can exceed the visible file count.
+* macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`. These streams remain associated with the base file and add public inode use without adding names to the parent user directory.
 
-NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate SMB named streams as extra names. Streams that SMB already created still exist and consume public inodes even when `ls` on an NFS mount does not show them.
+* Windows Explorer, macOS Finder, and a simple directory listing such as `dir` or `ls` usually show only the default stream, so public inode use can exceed the visible file count.
 
-NFSv4.2 extended attributes (xattrs), supported beginning with ONTAP 9.12.1, are a different feature. They are not ACL inodes and should not be counted as ACL xinodes. A hidden file, swap file, or backup file created by `vi` (for example `.file.swp` or `file~`) is also an ordinary file and directory entry, not a named stream.
+* A Windows SMB client can enumerate streams with `dir /r` or PowerShell `Get-Item <file> -Stream *`, and it can address a stream directly as `filename:stream_name`. Windows Explorer and macOS Finder do not normally enumerate streams. On an NFS client, `ls`, `ls -la`, and ordinary `stat` commands inspect directory entries or the base file; they do not enumerate SMB named streams.
+
+* NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate SMB named streams as extra names. Streams that SMB already created still exist and consume public inodes even when `ls` on an NFS mount does not show them.
+
+* A hidden file, swap file, or backup file created by `vi` (for example `.file.swp` or `file~`) is an ordinary file and directory entry, not a named stream.
+
+* NFSv4.2 extended attributes (xattrs), supported beginning with ONTAP 9.12.1, are a different feature. They are not ACL inodes and should not be counted as ACL xinodes.
 
 === Private inodes
 
@@ -133,6 +138,8 @@ NOTE: In most cases, you do not need to monitor private inode usage because priv
 
 An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work complete. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. Again, private inodes do not count against the total `files` allowed in the volume.
 
+link:high-file-count-workloads-overview.html[← Previous: NetApp ONTAP High File Count Workloads for NAS volumes] | link:high-file-count-workloads-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
+
 == Related information
 
 * link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
@@ -141,8 +148,3 @@ An unlinked file cannot always be released immediately. ONTAP can retain it temp
 * link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]
-
-== Next and previous
-
-* Previous: link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* Next: link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]

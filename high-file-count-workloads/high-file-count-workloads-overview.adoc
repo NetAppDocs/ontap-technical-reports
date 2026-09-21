@@ -155,12 +155,10 @@ Do not derive `maxdirsize` directly from the total volume file count, and do not
 
 For design and operational recommendations, see link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices].
 
+link:high-file-count-workloads-maxfiles.html[Next: Maxfiles and ONTAP inode limits →]
+
 == Related information
 
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html[Maximum directory size for FlexVol volumes^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volume management^]
-
-== Next and previous
-
-* Next: link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]

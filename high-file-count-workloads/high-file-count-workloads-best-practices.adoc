@@ -37,6 +37,8 @@ Maintain two separate forecasts:
 
 Do not derive either value from the other. A sharded namespace can exhaust `maxfiles` without creating a large directory. A single flat directory can reach `maxdirsize` while the volume has millions of free inodes.
 
+Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
+
 See link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits] and link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
 
 == Prefer a sharded directory structure
@@ -264,6 +266,8 @@ Record:
 
 Revisit the model when application versions, filename formats, retention, protocols, or data protection workflows change.
 
+link:high-file-count-workloads-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories]
+
 == Related information
 
 * link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
@@ -271,7 +275,3 @@ Revisit the model when application versions, filename formats, retention, protoc
 * link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]
-
-== Next and previous
-
-* Previous: link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]

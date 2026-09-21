@@ -76,6 +76,8 @@ Track both current use and inode-file capacity. A low `files-used` value after a
 
 Release support and limits can vary by platform and volume type. Verify behavior in the command reference for the ONTAP release in use.
 
+link:high-file-count-workloads-maxfiles-limits.html[← Previous: Maxfiles limits and controls] | link:high-file-count-workloads-maxdirsize.html[Next: Maxdirsize and large ONTAP directories →]
+
 == Related information
 
 * link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
@@ -85,7 +87,3 @@ Release support and limits can vary by platform and volume type. Verify behavior
 * link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
 * link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]
 
-== Next and previous
-
-* Previous: link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]
-* Next: link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
