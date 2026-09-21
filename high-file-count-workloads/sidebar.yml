@@ -2,18 +2,29 @@ section: high-file-count-workloads
 title: High-file-count NAS workloads
 entries:
   - title: Overview
-    url: /high-file-count-workloads/high-file-count-workloads-overview.html
+    url: /high-file-count-workloads/high-file-count-workloads-01-overview.html
   - title: Maxdirsize and large directories
-    url: /high-file-count-workloads/high-file-count-workloads-maxdirsize.html
+    url: /high-file-count-workloads/high-file-count-workloads-02-maxdirsize.html
+    entries:
+      - title: View maxdirsize and current directory size
+        url: /high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html
+      - title: Directory indexing in ONTAP
+        url: /high-file-count-workloads/high-file-count-workloads-04-maxdirsize-indexing.html
+      - title: Impact of maxdirsize
+        url: /high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html
+      - title: Volume type considerations
+        url: /high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html
+      - title: Features, EMS, and monitoring
+        url: /high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html
   - title: High file counts and inode capacity
-    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-high-file-counts.html
+    url: /high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html
   - title: Inode types
-    url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
+    url: /high-file-count-workloads/high-file-count-workloads-09-maxfiles.html
   - title: Maxfiles and ONTAP inode information
-    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-limits.html
+    url: /high-file-count-workloads/high-file-count-workloads-10-maxfiles-limits.html
   - title: Monitoring, EMS, and enhancements
-    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-monitoring.html
+    url: /high-file-count-workloads/high-file-count-workloads-11-maxfiles-monitoring.html
   - title: Best practices
-    url: /high-file-count-workloads/high-file-count-workloads-best-practices.html
+    url: /high-file-count-workloads/high-file-count-workloads-12-best-practices.html
   - title: Planning approach
-    url: /high-file-count-workloads/high-file-count-workloads-planning.html
+    url: /high-file-count-workloads/high-file-count-workloads-13-planning.html

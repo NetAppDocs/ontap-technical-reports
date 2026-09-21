@@ -1,0 +1,58 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html
+keywords: ONTAP, NAS, maxdirsize, maxdir-size, volume show, stat, EMS
+summary: "View the ONTAP maxdirsize cap, measure a directory file from NFS, and resolve EMS file IDs to paths."
+---
+
+= View maxdirsize and current directory size
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+The volume `maxdir-size` field is the authorized cap for every directory in the volume. Measuring an individual directory requires inspecting that directory object, not the volume's data used.
+
+== View the configured cap
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields maxdir-size
+----
+
+This reports the per-directory cap, not the size of a particular directory.
+
+== View the directory file from an NFS client
+
+On a mounted NFS path from a GNU/Linux client, use `stat` or a long directory listing on the directory object itself:
+
+----
+stat -c '%n %s bytes' /mount/path/directory
+ls -ld /mount/path/directory
+----
+
+Do not use `du` for this purpose. `du` reports data reachable below the directory, whereas `maxdirsize` applies to the directory metadata file itself.
+
+Client tools and protocols do not all report directory-file size consistently. An NFS client is the preferred client-side method when exact directory-object size is required.
+
+== Locate a directory reported by EMS
+
+The maxdirsize EMS event includes a volume and file ID. Resolve that inode to a path with:
+
+----
+volume file show-inode -vserver <svm> -volume <volume-or-constituent> -inode-number <file-id>
+----
+
+The reported file ID belongs to the directory that reached or approached the limit, not to the file whose creation failed. For a FlexGroup, `volume file show-inode` operates on a constituent rather than the FlexGroup name. Use the constituent named by the EMS event, such as `fg__0024`.
+
+== Inspect the companion index
+
+Diagnostic `volume explore` can expose the directory inode's `index-inode` pointer and the B+tree, but it is a diagnostic interface intended for NetApp personnel. It is not required for routine maxdirsize monitoring.
+
+link:high-file-count-workloads-02-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories] | link:high-file-count-workloads-04-maxdirsize-indexing.html[Next: Directory indexing in ONTAP →]
+
+== Related information
+
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
+* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdirsize]
+* link:https://docs.netapp.com/us-en/ontap-cli/volume-file-show-inode.html[`volume file show-inode` command reference^]

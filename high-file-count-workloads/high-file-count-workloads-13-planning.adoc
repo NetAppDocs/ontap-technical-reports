@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-planning.html
+permalink: high-file-count-workloads/high-file-count-workloads-13-planning.html
 keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdirsize, inodes, metadata
 summary: "Gather inode, directory, operation-rate, and capacity estimates before sizing a high-file-count NAS workload on ONTAP."
 ---
@@ -46,7 +46,7 @@ Use application inventory, migration tools, or a controlled namespace scan to id
 stat -c '%n %s bytes' /mount/path/directory
 ----
 
-Do not substitute `du`; it reports the data below the directory rather than the directory metadata-file size. Model filename lengths and alternate names as described in link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
+Do not substitute `du`; it reports the data below the directory rather than the directory metadata-file size. Model filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories].
 
 == Measure metadata operation rates
 
@@ -58,14 +58,14 @@ Use `volume show-space` to separate user data, file-system metadata, inodes, and
 
 Do not derive `maxdirsize` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
 
-For design and operational recommendations, see link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices].
+For design and operational recommendations, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
 
-link:high-file-count-workloads-best-practices.html[← Previous: High-file-count NAS workload best practices]
+link:high-file-count-workloads-12-best-practices.html[← Previous: High-file-count NAS workload best practices]
 
 == Related information
 
-* link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
-* link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
-* link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices]
+* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]

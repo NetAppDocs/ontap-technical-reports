@@ -1,0 +1,71 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html
+keywords: ONTAP, NAS, maxdirsize, FlexVol, FlexGroup, volume options
+summary: "Compare FlexVol and FlexGroup maxdirsize behavior and review volume options related to large directories."
+---
+
+= Volume type considerations
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+`maxdirsize` applies to every directory in both FlexVol and FlexGroup volumes, but FlexGroup directory entries and constituent layout change how quickly a directory file can grow.
+
+== FlexVol volumes
+
+A FlexVol has one file system and one public inode supply. `maxdirsize` still applies independently to every directory. A single hot directory is processed within that volume's ownership and does not gain parallelism merely because the cluster contains additional nodes.
+
+== FlexGroup volumes
+
+A FlexGroup presents one namespace backed by multiple FlexVol constituents. This improves aggregate file-count scale and enables distribution across nodes and aggregates, but it does not multiply the limit of one logical directory by the constituent count.
+
+Consider the following differences:
+
+* Directory entries can point to files on remote constituents and can require a larger on-disk representation than local FlexVol entries.
+* The same visible filenames can therefore consume directory-file space at a different rate than in a FlexVol.
+* File and inode capacity is maintained per constituent, so distribution and constituent pressure matter.
+* Modify `maxdir-size` on the FlexGroup, not directly on a constituent.
+* Sharding an application across multiple directories gives ONTAP more opportunities to distribute work and files.
+
+Do not assume that a FlexVol files-per-directory estimate transfers unchanged to FlexGroup. Include the volume type in every maxdirsize model or migration assessment.
+
+== Volume options related to large directories
+
+[options="header"]
+|===
+| Field | Settable and privilege | Purpose
+
+| `maxdir-size`
+| Yes, advanced
+| Authorizes a larger per-directory file. Raise only after measuring or modeling need.
+
+| `is-dir-index-transfer-enabled`
+| Yes, admin
+| Moves directory indexes into public inode space for supported replication and restore portability. It does not enable indexing.
+
+| `has-dir-index-public`
+| No, advanced
+| Reports whether public directory-index inodes exist.
+
+| `has-optimized-sparse-directories`
+| No, advanced
+| Reports whether the volume contains optimized hole-punched sparse directories.
+
+| `language`
+| Limited, admin
+| Controls name interpretation. Non-ASCII and alternate name forms can change directory size behavior.
+
+| `analytics-state`
+| Yes, admin
+| Enables File System Analytics. Its namespace scans add work on high-file-count volumes but do not change `maxdirsize`.
+|===
+
+link:high-file-count-workloads-05-maxdirsize-impact.html[← Previous: Impact of maxdirsize] | link:high-file-count-workloads-07-maxdirsize-features-ems.html[Next: Features, EMS, and monitoring for maxdirsize →]
+
+== Related information
+
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
+* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdirsize]
+* link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volume management^]

@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-maxfiles.html
+permalink: high-file-count-workloads/high-file-count-workloads-09-maxfiles.html
 keywords: ONTAP, NAS, maxfiles, files, inode, files-used, public inode, private inode
 summary: "Understand ONTAP inodes, public and private inode types, ACL inodes, and named streams."
 ---
@@ -10,13 +10,13 @@ summary: "Understand ONTAP inodes, public and private inode types, ACL inodes, a
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see link:high-file-count-workloads-maxfiles-limits.html[Maxfiles and ONTAP inode information]), and public inodes count against that limit in the file system.
+ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]), and public inodes count against that limit in the file system.
 
 == What is an inode?
 
 In general, an inode is the file-system record for an object. It stores identity and metadata such as type, ownership, timestamps, and permissions, and it points to the object's data. The object's name is stored in a directory, not in the inode itself.
 
-In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Each ONTAP 9 inode uses 288 bytes in that file, which counts against the physical capacity used in the volume. See link:high-file-count-workloads-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
+In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Each ONTAP 9 inode uses 288 bytes in that file, which counts against the physical capacity used in the volume. See link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
 
 Public inodes count toward the volume `files` setting, commonly called maxfiles. ONTAP also maintains a private inode space for internal metadata that does not consume that public ceiling. Creating a public object increases public inode use. If no free record remains in the currently allocated public inode file, ONTAP grows the inode file. Deleting an object frees its inode for reuse but does not shrink the inode file's size.
 
@@ -32,11 +32,11 @@ An inode's *type* describes what kind of object it represents. ONTAP also places
 
 Public inodes are allocated from the volume's public inode file and count toward `files` and `files-used`. They include client-visible objects and public metadata objects that do not appear as directory entries.
 
-The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-maxdirsize.html[`maxdirsize`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
+The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against link:high-file-count-workloads-maxdirsize.html[`maxdirsize`]
+| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`]
 
 | Regular file
 | Default file contents and attributes
@@ -125,7 +125,7 @@ The following table shows common private inode types.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against link:high-file-count-workloads-maxdirsize.html[`maxdirsize`]
+| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`]
 
 | Directory index (default)^{asterisk}^
 | Companion B+tree used to look up names in a large directory
@@ -148,13 +148,13 @@ NOTE: In most cases, you do not need to monitor private inode usage because priv
 
 An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work complete. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. Again, private inodes do not count against the total `files` allowed in the volume.
 
-link:high-file-count-workloads-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-maxfiles-limits.html[Next: Maxfiles and ONTAP inode information →]
+link:high-file-count-workloads-08-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-10-maxfiles-limits.html[Next: Maxfiles and ONTAP inode information →]
 
 == Related information
 
-* link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
-* link:high-file-count-workloads-maxfiles-limits.html[Maxfiles and ONTAP inode information]
-* link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
+* link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity]
+* link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
+* link:high-file-count-workloads-11-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]
