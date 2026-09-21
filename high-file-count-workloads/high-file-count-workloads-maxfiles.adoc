@@ -22,7 +22,85 @@ Three values must be kept distinct:
 * `files-used` is the number of public inodes currently in use.
 * `inodefile-public-capacity` is the number of public inodes that the currently allocated inode file can hold.
 
-`inodefile-public-capacity` is an *inode count*, not bytes, KiB, or MiB. ONTAP grows the inode file when its existing allocation has no free inode records and an operation needs another public inode, up to `files`. Examples include creating a file or directory, allocating an additional inode for a stream or ACL, and creating a public directory-index inode when directory-index transfer is enabled. The allocated inode file is a high-water mark and does not shrink after files are deleted.
+`inodefile-public-capacity` is an *inode count*, not bytes, KiB, or MiB. ONTAP grows the inode file when its existing allocation has no free inode records and an operation needs another public inode, up to `files`. Examples include creating a file or directory, allocating an additional inode for an ACL or a named stream, and creating a public directory-index inode when directory-index transfer is enabled. The allocated inode file is a high-water mark and does not shrink after files are deleted.
+
+== Types of inodes in ONTAP
+
+An inode's *type* describes what kind of object it represents. That is separate from inode *space*: public inodes count toward `maxfiles`, and private inodes do not. The same type can appear in public space (client-visible objects and public ACL or stream inodes) or, for some metadata, in private space.
+
+Types you are likely to encounter on a NAS volume:
+
+[options="header"]
+|===
+| Type | What it represents | Typical client view | Inode space | Counts toward `files`
+
+| Regular file
+| Default file contents and attributes
+| NFS or SMB file
+| Public
+| Yes
+
+| Directory
+| A directory's names and the directory's own inode
+| NFS or SMB directory
+| Public
+| Yes
+
+| Symbolic link
+| A pathname pointer rather than file data
+| NFS symlink. SMB clients may see a related reparse point depending on configuration.
+| Public
+| Yes
+
+| Special file
+| UNIX fifo, socket, or device node
+| NFS special file. Uncommon in SMB-only workloads.
+| Public
+| Yes
+
+| Named stream
+| Extra data besides the file's default contents (NTFS alternate data stream)
+| SMB `filename:stream_name`. NFS listings usually show only the base file.
+| Public
+| Yes
+
+| Stream directory
+| Hidden container that holds the names of a file's named streams
+| Not listed in the user namespace
+| Public
+| Yes
+
+| ACL (xinode)
+| NTFS security descriptor or NFSv4 ACL stored as ACE data
+| Not a directory entry. Access is through the file or directory that references it.
+| Public
+| Yes
+
+| Directory index
+| Companion B+tree used to look up names in a large directory
+| Not a directory entry
+| Private by default. Public when `-is-dir-index-transfer-enabled` is `true`.
+| Only when the index is in public inode space
+
+| Private metafile
+| Hidden WAFL metadata used by ONTAP
+| Not client-visible
+| Private
+| No
+
+| Zombie
+| An unlinked object retained until references or asynchronous delete finish
+| No longer in the namespace
+| Private
+| No
+|===
+
+Notes:
+
+* Hard links are additional directory names for the same regular-file inode, not a separate inode type.
+* UNIX mode bits do not create an ACL inode. See <<ACL inodes>>.
+* Named streams and stream directories appear mainly in SMB or multiprotocol workloads. See <<Named streams>>.
+* Dump, restore, and some EMS messages count regular inodes, directory inodes, NT stream inodes, stream-directory inodes, and ACL inodes separately. `volume show` `files-used` is the combined public total.
 
 == How high file counts affect NAS workloads
 
@@ -69,6 +147,31 @@ Use these advanced fields to separate the two:
 |===
 
 `files-private-used` is not free space and is not a byte count. It cannot be used to calculate how many additional client files can be created. An increase can reflect ONTAP metadata activity rather than growth in the visible namespace.
+
+=== ACL inodes
+
+UNIX mode bits are stored in the file or directory's own inode. They do not allocate an extra public inode.
+
+When a file or directory has an NTFS security descriptor or an NFSv4 ACL, ONTAP stores that ACL as a separate ACL inode (also called an extended inode, or xinode). The ACL inode's data is the list of access control entries (ACEs). ONTAP allocates these inodes from *public* inode space, so they count toward `files` and `files-used`. The file or directory inode references its ACL inode.
+
+ACL inode use is not always one extra inode per object:
+
+* Two files or directories with the same ACE set *can* share one ACL inode. That sharing is an optimization, not a guarantee; identical ACLs can still receive different ACL inodes.
+* A create can inherit the parent's ACL when the create does not supply its own ACEs and the parent ACL has inheritance attributes. Inherited ACLs still use public ACL inodes, subject to the same sharing behavior.
+* NTFS security-style volumes apply NTFS ACLs by default, so new files and directories commonly receive an ACL inode at create time.
+* UNIX security-style objects that remain on mode bits do not consume an ACL inode until an NFSv4 ACL is actually stored. Mixed security style can produce a mix of mode-bit-only objects and ACL'd objects, depending on which client last set permissions.
+
+Named streams are a separate public-inode consumer from ACLs. Stream inodes share the base file's ACL rather than each carrying a separate ACL inode. See <<Named streams>>.
+
+Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. `files-used` already includes those public ACL inodes; there is no separate CLI counter for ACL inode count in `volume show`.
+
+=== Named streams
+
+A named stream is extra data attached to a file besides the content users normally open. In ONTAP it is the WAFL form of an NTFS alternate data stream (ADS). The file's default, unnamed data lives in the base file inode. Each additional named stream is a separate public inode and counts toward `files` and `files-used`.
+
+SMB workloads create and use named streams. Windows clients address them as `filename:stream_name` (for example `report.docx:Zone.Identifier`). Common sources include browser Mark of the Web metadata (`Zone.Identifier`), some Office and backup tools, and applications that store sidecar data in ADS. Explorer and a simple directory listing usually show only the default stream, so public inode use can exceed the visible file count.
+
+NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate those Windows streams as extra names. Streams that SMB already created still exist on the volume and still consume public inodes even when `ls` on an NFS mount does not show them. Beginning with ONTAP 9.12.1, NFSv4.2 extended attributes (xattrs) are a different feature from named streams; do not treat xattrs as ADS inodes when planning `maxfiles`.
 
 === Zombie inodes
 
@@ -233,6 +336,9 @@ Track both current use and inode-file capacity. A low `files-used` value after a
 * link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
 * link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
+* link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
+* link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]
+* link:https://docs.netapp.com/us-en/ontap/nfs-admin/limitations-support-nfsv4-concept.html[ONTAP support limitations for NFSv4^]
 * link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
 * link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
 * link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]
