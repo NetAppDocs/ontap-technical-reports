@@ -1,0 +1,71 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-planning.html
+keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdirsize, inodes, metadata
+summary: "Gather inode, directory, operation-rate, and capacity estimates before sizing a high-file-count NAS workload on ONTAP."
+---
+
+= Planning approach
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+Begin high-file-count NAS planning with four separate estimates rather than a single file-count or capacity figure.
+
+. Total file-system objects over the workload lifecycle
+. Peak entries in the largest directory
+. Peak create, lookup, enumeration, and delete rates
+. Capacity for user data, inodes, directories, directory indexes, Snapshot copies, and growth
+
+Use the following methods to gather those inputs:
+
+== Find total objects and inode headroom
+
+Compare application inventory with ONTAP's public-inode counters:
+
+----
+volume show -vserver <svm> -volume <volume> -fields files,files-used
+
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files-maximum-possible,inodefile-public-capacity
+----
+
+For FlexGroup, inspect both the configured total and every constituent's use:
+
+----
+volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
+----
+
+Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap. Use the application's inventory or migration assessment to forecast future growth; `files-used` describes the current namespace, not the future peak.
+
+== Find the largest directories
+
+Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries. Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. On a GNU/Linux NFS client, inspect the directory object itself:
+
+----
+stat -c '%n %s bytes' /mount/path/directory
+----
+
+Do not substitute `du`; it reports the data below the directory rather than the directory metadata-file size. Model filename lengths and alternate names as described in link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories].
+
+== Measure metadata operation rates
+
+Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates. Test representative concurrency and both warm- and cold-cache behavior. A bandwidth-only test does not characterize a metadata-heavy workload.
+
+== Find metadata and Snapshot capacity
+
+Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve. Use `volume show-footprint` to review the volume's aggregate footprint. Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory files, companion indexes, block rounding, private metadata, Snapshot-retained blocks, and growth margin.
+
+Do not derive `maxdirsize` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
+
+For design and operational recommendations, see link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices].
+
+link:high-file-count-workloads-best-practices.html[← Previous: High-file-count NAS workload best practices]
+
+== Related information
+
+* link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+* link:high-file-count-workloads-best-practices.html[High-file-count NAS workload best practices]
+* link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
+* link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]

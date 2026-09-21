@@ -266,12 +266,13 @@ Record:
 
 Revisit the model when application versions, filename formats, retention, protocols, or data protection workflows change.
 
-link:high-file-count-workloads-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories]
+link:high-file-count-workloads-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements] | link:high-file-count-workloads-planning.html[Next: Planning approach →]
 
 == Related information
 
 * link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
 * link:high-file-count-workloads-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-planning.html[Planning approach]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]

@@ -10,7 +10,7 @@ summary: "Understand ONTAP inodes, public and private inode types, ACL inodes, a
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]), and public inodes count against that limit in the file system.
+ONTAP uses public inodes to represent file-system objects present in FlexVol and FlexGroup volumes. Each volume has a defined high-water limit (see link:high-file-count-workloads-maxfiles-limits.html[Maxfiles and ONTAP inode information]), and public inodes count against that limit in the file system.
 
 == What is an inode?
 
@@ -22,7 +22,7 @@ Public inodes count toward the volume `files` setting, commonly called maxfiles.
 
 The following figure shows how the public inode file relates to `files-used`, `inodefile-public-capacity`, the `files` ceiling, and the capacity consumed in the volume.
 
-image::ontap-inode-file.png[Diagram of the ONTAP volume inode file showing files-used nested in inodefile-public-capacity, files, and files-maximum-possible,width=600,align="center",link=../media/high-file-count-workloads/ontap-inode-file.png,window=_blank]
+image::ontap-inode-file.png[Diagram of the ONTAP volume inode file showing files-used nested in inodefile-public-capacity, files, and files-maximum-possible,width=400,align="center",link=../media/high-file-count-workloads/ontap-inode-file.png,window=_blank]
 
 == Types of inodes in ONTAP
 
@@ -31,8 +31,6 @@ An inode's *type* describes what kind of object it represents. ONTAP also places
 === Public inodes
 
 Public inodes are allocated from the volume's public inode file and count toward `files` and `files-used`. They include client-visible objects and public metadata objects that do not appear as directory entries.
-
-During NDMP dump and restore processing, ONTAP identifies object classes such as regular files, directories, NT streams, stream directories, and ACL inodes separately so each object's data and metadata can be serialized, reported in dump statistics, and reconstructed correctly. This classification does not create separate maxfiles limits or separate `volume show` counters. `files-used` remains the combined public-inode total.
 
 The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-maxdirsize.html[`maxdirsize`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
 
@@ -111,6 +109,14 @@ Some things to note:
 
 * NFSv4.2 extended attributes (xattrs), supported beginning with ONTAP 9.12.1, are a different feature. They are not ACL inodes and should not be counted as ACL xinodes.
 
+==== Impact on NDMP backup and restores
+
+During NDMP dump and restore processing, ONTAP identifies object classes such as regular files, directories, NT streams, stream directories, and ACL inodes separately so each object's data and metadata can be serialized, reported in dump statistics, and reconstructed correctly. This classification does not create separate maxfiles limits or separate `volume show` counters. `files-used` remains the combined public-inode total.
+
+NDMP dump walks the namespace and serializes those objects one by one. Restore reconstructs them the same way. High public inode counts therefore lengthen dump and restore even when the volume's data capacity is modest or the visible file count looks small. Named streams and ACL inodes are dumped and restored even when Explorer, Finder, `dir`, or `ls` do not show them, so dump statistics can report more stream and ACL objects than a simple directory listing suggests.
+
+The job is often metadata-bound rather than throughput-bound. Creating, looking up, and reconstructing millions of inodes, ACLs, and streams consumes CPU, memory, and storage I/O with relatively little data per object. Small files, dense ACL use, and many named streams increase that overhead. Large flat directories add enumeration cost during dump, and restore of a high-file-count volume can also spend time rebuilding directory indexes after the objects exist. Measure dump and restore duration with a representative object count, including streams and ACLs, rather than estimating from data size alone.
+
 === Private inodes
 
 Private inodes are ONTAP-internal metadata records. They reside in a separate private inode space, do not count toward `files` or `files-used`, and cannot be used as additional client files.
@@ -142,13 +148,13 @@ NOTE: In most cases, you do not need to monitor private inode usage because priv
 
 An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work complete. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. Again, private inodes do not count against the total `files` allowed in the volume.
 
-link:high-file-count-workloads-overview.html[← Previous: NetApp ONTAP High File Count Workloads for NAS volumes] | link:high-file-count-workloads-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
+link:high-file-count-workloads-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-maxfiles-limits.html[Next: Maxfiles and ONTAP inode information →]
 
 == Related information
 
 * link:high-file-count-workloads-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
 * link:high-file-count-workloads-maxfiles-high-file-counts.html[High file counts and inode capacity]
-* link:high-file-count-workloads-maxfiles-limits.html[Maxfiles limits and controls]
+* link:high-file-count-workloads-maxfiles-limits.html[Maxfiles and ONTAP inode information]
 * link:high-file-count-workloads-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]

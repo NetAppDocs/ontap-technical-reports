@@ -5,7 +5,7 @@ keywords: ONTAP, NAS, maxfiles, files-maximum-possible, files-set-maximum, FlexG
 summary: "Understand ONTAP maxfiles limits, behavior at inode exhaustion, and methods to control the public-inode ceiling."
 ---
 
-= Maxfiles limits and controls
+= Maxfiles and ONTAP inode information
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
@@ -82,7 +82,7 @@ volume modify -vserver <svm> -volume <volume> -files-set-maximum true
 
 This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` when you want a deliberate value below the maximum.
 
-link:high-file-count-workloads-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-maxfiles-monitoring.html[Next: Monitor maxfiles, EMS events, and ONTAP enhancements →]
+link:high-file-count-workloads-maxfiles.html[← Previous: Maxfiles and ONTAP inode limits] | link:high-file-count-workloads-maxfiles-monitoring.html[Next: Monitor maxfiles, EMS events, and ONTAP enhancements →]
 
 == Related information
 

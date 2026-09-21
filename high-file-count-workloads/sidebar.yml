@@ -3,17 +3,17 @@ title: High-file-count NAS workloads
 entries:
   - title: Overview
     url: /high-file-count-workloads/high-file-count-workloads-overview.html
-  - title: Maxfiles and inode limits
-    entries:
-      - title: Inode types
-        url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
-      - title: High file counts and inode capacity
-        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-high-file-counts.html
-      - title: Maxfiles limits and controls
-        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-limits.html
-      - title: Monitoring, EMS, and enhancements
-        url: /high-file-count-workloads/high-file-count-workloads-maxfiles-monitoring.html
   - title: Maxdirsize and large directories
     url: /high-file-count-workloads/high-file-count-workloads-maxdirsize.html
+  - title: High file counts and inode capacity
+    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-high-file-counts.html
+  - title: Inode types
+    url: /high-file-count-workloads/high-file-count-workloads-maxfiles.html
+  - title: Maxfiles and ONTAP inode information
+    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-limits.html
+  - title: Monitoring, EMS, and enhancements
+    url: /high-file-count-workloads/high-file-count-workloads-maxfiles-monitoring.html
   - title: Best practices
     url: /high-file-count-workloads/high-file-count-workloads-best-practices.html
+  - title: Planning approach
+    url: /high-file-count-workloads/high-file-count-workloads-planning.html
