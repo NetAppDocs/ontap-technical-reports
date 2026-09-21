@@ -20,6 +20,11 @@ In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each
 
 Public inodes count toward the volume `files` setting, commonly called maxfiles. ONTAP also maintains a private inode space for internal metadata that does not consume that public ceiling. Creating a public object increases public inode use. If no free record remains in the currently allocated public inode file, ONTAP grows the inode file. Deleting an object frees its inode for reuse but does not shrink the inode file's size.
 
+The following figure shows how the public inode file relates to `files-used`, `inodefile-public-capacity`, the `files` ceiling, and the capacity consumed in the volume.
+
+.How the volume inode file works in ONTAP
+image::ontap-inode-file.png[Diagram of the ONTAP volume inode file showing records in use, free records, allocated high-water capacity, the files ceiling, files-maximum-possible, and the separate private inode file,align="center"]
+
 == Types of inodes in ONTAP
 
 An inode's *type* describes what kind of object it represents. ONTAP also places each inode in *public* or *private* inode space. Public inodes count toward maxfiles; private inodes do not. A directory-index inode can be in either space depending on volume configuration.

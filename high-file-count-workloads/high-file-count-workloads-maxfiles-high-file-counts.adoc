@@ -58,7 +58,7 @@ High file counts increase the proportion of metadata work relative to data trans
 * Enumerating directories and walking directory trees
 * Scanning namespaces for analytics, backup, replication, or security features
 
-The performance effect depends on operation rate, concurrency, protocol behavior, namespace layout, cache state, and node resources. Total file count alone is not a performance forecast. Millions of files spread across many active directories can expose more parallelism than the same population concentrated behind a small number of namespace hot spots.
+The performance effect depends on operation rate, concurrency, protocol behavior, namespace layout, cache state, and node resources. Total file count alone is not a performance forecast. Millions of files spread across many active directories can expose more parallelism than the same file count concentrated in a single directory space.
 
 == Capacity impact
 
