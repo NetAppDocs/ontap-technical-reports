@@ -14,21 +14,25 @@ High-file-count NAS workloads place more emphasis on namespace and metadata oper
 
 == What is meant by a high-file-count workload?
 
-There is no single file-count threshold at which every workload becomes a high-file-count workload. The effect depends on more than the total number of files:
+There is no specific file-count threshold at which every workload becomes a high-file-count workload. That determination depends on more than the total number of files.
+
+For instance:
 
 * How many files and directories exist in a volume
-* How many entries are concentrated in each directory
+* How many inode entries are concentrated in a single directory
 * The rate at which files are created, opened, enumerated, renamed, and deleted
-* Filename length, character set, and protocol-generated alternate names
-* Whether access is spread across directories, FlexGroup constituents, and cluster nodes
+* Filename length, path length, character set, and protocol-generated alternate names
+* Whether data access is spread across directories, FlexGroup constituents, and cluster nodes
 * How often applications scan or list the entire namespace
 * The number and retention of Snapshot copies
 
-A workload should be treated as high file count when its projected namespace can materially affect inode planning, directory-file growth, metadata capacity, client-operation latency, backup or replication behavior, or recovery time. A workload with several million files distributed across many directories can behave differently from one that places the same number of files in a single directory.
+A workload should be treated as high file count when its projected namespace can materially affect inode planning, directory-file growth, metadata capacity, client-operation latency, backup or replication behavior, or recovery time.
+
+But a workload with several million files distributed across many directories can behave very differently from one that places the same number of files in a single directory.
 
 == Workloads commonly associated with high file counts
 
-Examples include:
+Not every workload will generate a high file count profile, but the list below shows some of the more common workloads that can be considered high file count workloads.
 
 * Electronic design automation (EDA) and semiconductor design flows
 * Software source trees, package repositories, and continuous integration build areas
@@ -39,71 +43,59 @@ Examples include:
 * Analytics, telemetry, and logging environments that create many short-lived files
 * Scientific and high-performance computing scratch spaces
 
-File size alone does not identify these workloads. A dataset can have modest capacity while consuming many inodes, and it can have enough total inodes while still exceeding the size allowed for one directory.
+The size of the file doesn't dictate whether a workload is high file count, but high file count workloads often consist of many smaller files, where a dataset can have modest capacity usage while consuming many inodes in a single volume. 
 
 == High-file-count challenges
 
+High file count workloads present a number of unique and difficult to solve challenges that don't always present themselves in lower file count/throughput driven workloads.
+
 === Metadata operations
 
-Each file or directory requires an inode and namespace metadata. File creation, lookup, attribute retrieval, rename, enumeration, and deletion can therefore dominate the workload even when data throughput is low. Protocol behavior also matters: NFS and SMB clients can issue different combinations of lookup, open, close, attribute, and directory-read operations.
+Each file or directory has an inode and contains namespace metadata. Common metadata operations, such as file creation, lookup, attribute retrieval, rename, enumeration, and deletions can dominate a high file count workload even when data throughput is low. In these scenarios, CPU utilization, serial processing of operations, and network RTT can become bottlenecks to performance. Protocol behavior also matters: NFS and SMB clients can issue different combinations of lookup, open, close, attribute, and directory-read operations that are often protocol version dependent. As a result, different results for similar workflows can be seen depending on which protocol is used.
 
 === Capacity
 
-ONTAP stores public inodes in a hidden, volume-level inode file. Each ONTAP 9 inode uses 288 bytes. The inode file and each directory file consume capacity independently:
+ONTAP stores public inodes in a hidden, volume-level inode file. Each ONTAP inode uses 288 bytes of space, which can cause the inode file itself to consume usable capacity within the volume. 
 
-* The *inode file* holds inode records for the FlexVol or FlexGroup constituent. `maxfiles` (`files`) is an inode count, not a byte cap. Raising it does not reserve space. The file grows as ONTAP allocates more inode records, using about `inode count × 288` bytes of actual capacity. One million allocated public inodes use about 288 MB. Deleting files frees inodes for reuse but does not shrink the inode file.
-* A *directory file* stores one directory's names and mappings to inode numbers. `maxdirsize` limits each directory independently. A 320 MB setting is a cap, not a reservation; the directory file grows into that value. A new directory starts at 4 KiB. If it later grows to 320 MB of directory-file blocks, those blocks use 320 MB of actual volume capacity. After growth, the directory-file size remains at that high-water mark even if entries are removed; deletion makes slots reusable but does not compact the directory. Indexed directories can hole-punch fully empty 4 KiB blocks (available in ONTAP 9.5 and later) and reclaim those physical blocks, but the reported size does not normally shrink. Companion indexes consume additional capacity.
+In addition, directory files can also consume capacity when large numbers of files are allocated to the same specific folder. These concepts, while similar in nature, are distinct and separate things to consider when dealing with high file count workloads. 
 
-A volume can use hundreds of megabytes in the inode file with every directory far below `maxdirsize`, or 320 MB in one directory file with a still-small inode file.
+As a result, a volume can potentially consume multiple GBs of capacity due to the system-specific files used to track and limit inode allocation within ONTAP.
 
 === Directory enumeration
 
-Large directories take longer to enumerate than smaller ones. A sparse directory that remains at its high-water size can still be expensive to scan, even when hole punching lets `READDIR` skip empty blocks. Avoid unnecessary full-directory scans.
+Large directories (directories with many files inside a single directory) take longer to enumerate than smaller ones. Even a directory that has had many files deleted can still be expensive to scan because there is still a high-water allocation of entries that never shrink.
 
 === Failure-domain concentration
 
-Concentrating millions of entries in one directory creates a single-directory scaling and serialization point. Distributing files across a hierarchy means using more directories with fewer files in each directory. That layout generally improves parallelism, reduces the scope of directory scans, and makes operational tasks easier.
+Concentrating millions of entries in one directory creates a single-directory scaling and serialization point that can impact performance not just for the directory itself, but also for the node that owns the directory. Distributing files across a directory hierarchy improves parallelism, reduces the scope of directory scans, and makes operational tasks easier.
 
 === Data protection and recovery
 
-High object counts can extend namespace scans, backup cataloging, replication, restore processing, and post-restore directory-index construction. SnapMirror replicates changed metadata as well as file data, so a baseline or update with many creates, deletes, or renames can be expensive even when the files are small. Measure those operations with a representative object count.
+High object counts can extend namespace scans, backup cataloging, replication, restore processing, and post-restore directory-index construction. SnapMirror replicates changed metadata as well as file data, so a baseline or update with many creates, deletes, or renames can be expensive even when the files are small. These challenges can also extend to NDMP-based backups.
 
-For directory-index transfer with SnapMirror, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
+For information on directory-index transfer with SnapMirror, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
 
 == Maxfiles compared with maxdirsize
 
-`maxfiles` and `maxdirsize` protect different resources. Neither is a substitute for the other.
+The concepts of `maxfiles` and `maxdirsize` protect different resources in ONTAP. Neither is a substitute for the other, but often generate confusion. This section attempts to clear things up.
 
-[options="header"]
-|===
-| Attribute | Scope | Measures | Typical symptom at the limit
+=== What is maxdirsize?
 
-| `maxfiles`
-| A FlexVol volume, or a FlexGroup as a whole with the configured total distributed across its constituents
-| Public inodes available for files, directories, streams, ACLs, and other user-visible file-system objects
-| New objects cannot be created because no public inode is available. NFS clients typically receive `ENOSPC`. SMB clients typically receive `STATUS_DISK_FULL`.
+`maxdirsize` is the per-volume cap on how large any single WAFL directory file can grow. It is presented as a capacity value, rather than a fixed number of entries, even though the number of entries in a single directory are one of the factors that can increase directory size. In addition, filename/path lengths, Unicode character representation, SMB 8.3 aliases, NFS alternate names, and FlexGroup remote-entry representation all factor into directory size behavior. When you increase the maxdirsize value for a volume, the setting authorizes growth on a per-directory basis rather than preallocating space.
 
-| `maxdirsize`
-| Each individual directory
-| Maximum size of the WAFL directory file, not a fixed number of names
-| New names cannot be added to that directory even if the volume has free inodes and capacity. NFS clients typically receive `ENOSPC`. SMB clients typically receive `STATUS_DISK_FULL` or `STATUS_CANNOT_MAKE`.
-|===
-
-A volume can have ample free inodes and still reach `maxdirsize` in one directory, or avoid large directories and still exhaust the public inode supply.
-
-== What is maxdirsize?
-
-`maxdirsize` is the per-volume cap on how large any single WAFL directory file can grow. It is a capacity value, not a fixed number of names. Filename length, Unicode representation, SMB 8.3 aliases, NFS alternate names, and FlexGroup remote-entry representation all change directory size behavior. Increasing the setting authorizes growth; it does not preallocate space.
-
-For calculation details, see link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]. For directory indexing, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]. For capacity, performance, and exceeded-limit behavior, see link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdirsize]. For FlexVol and FlexGroup considerations, see link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume type considerations]. For release enhancements and EMS events, see link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdirsize].
+* For maxdirsize calculation details, see link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]. 
+* For directory indexing information, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]. 
+* For capacity, performance, and exceeded-limit behavior, see link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdirsize]. 
+* For FlexVol and FlexGroup considerations, see link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume type considerations]. 
+* For release enhancements and EMS events, see link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdirsize].
 
 == What is maxfiles?
 
-`maxfiles` is the configured ceiling for public inodes: files, directories, streams, ACLs, and other user-visible objects. It is an inode count, not a directory byte size, and it is not the same as current inode-file allocation. ONTAP grows the inode file when an operation needs another public inode and no free record remains, up to `files` and available capacity. That includes creating a file or directory, allocating an extra inode for a stream or ACL, and creating a public directory-index inode after directory-index transfer is enabled. The configurable maximum depends on volume size and ONTAP limits.
+`maxfiles` (configured as the volume-level option called "-files") is a configurable ceiling for the total amount of public inodes available in a single volume. This includes all public inodes in the volume: files, directories, streams, ACLs, and other user-visible objects. The volume itself contains a hidden inode file that tracks the inode usage. ONTAP automatically grows the inode file when new inodes are allocated inside the volume. The configurable maximum of -files depends on the total volume size and ONTAP limits. The only factor that comes into play for maxfiles is the sheer inode count in the volume.
 
-For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits].
-
-For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach]. For design and operational recommendations, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
+* For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits].
+* For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach]. 
+* For design and operational recommendations, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
 
 link:high-file-count-workloads-02-maxdirsize.html[Next: Maxdirsize and large ONTAP directories →]
 
