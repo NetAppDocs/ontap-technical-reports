@@ -14,11 +14,15 @@ ONTAP automatically indexes large directories so targeted lookups do not have to
 
 == Why indexing exists
 
+An index in computing is a side structure whose job is to answer "where is this?" without walking every record. A book index is the familiar version: you look up a term and jump to a page instead of reading the whole book. Databases, search engines, and filesystems use the same idea so a lookup stays cheap as the collection grows. The index is not a second copy of the data. It is a map from a key, such as a name, to the location of that item.
+
+A directory is a list of names. Without an index, finding one name can mean scanning a large part of that list. ONTAP's directory index is the filesystem version of that shortcut.
+
 Without a persistent index, finding a name can require reading many directory blocks and building an in-memory hash. Beginning with ONTAP 9.2, ONTAP automatically creates a companion directory-index inode when a directory file grows to approximately 2 MiB.
 
 The persistent index maps to the location of entries in the directory file. A targeted lookup can therefore read the required index and specific directory blocks instead of loading the entire directory file into memory. Indexing generally reduces CPU, memory, and I/O for lookup-oriented operations on large directories, which can free up more node resources for other workloads in addition to the large directory's contents.
 
-image::directory-file-companion-index.png[Diagram showing a companion directory index mapping names to blocks in a separate directory file while READDIR processes the full namespace,width=700,align="center",link=../media/high-file-count-workloads/directory-file-companion-index.png,window=_blank]
+image::directory-file-companion-index.png[Flow diagram from a client name lookup through a small directory scan and growth to about 2 MiB, to ONTAP automatically creating a companion index that allows a targeted lookup to read only the matching directory block,width=700,align="center",link=../media/high-file-count-workloads/directory-file-companion-index.png,window=_blank]
 
 There is no administrator option needed to enable directory indexing. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
 
