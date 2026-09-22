@@ -39,7 +39,7 @@ Every 4 KiB directory block is divided the same way:
 
 Together these occupy one 4 KiB block. Each stored name needs an entry record and one or more name chunks, and whichever pool runs out first — the 128 entry records or the 160 name chunks — sets how many names that block can hold. With ASCII names, the name chunks are what run out first. As a result, neither `maxdir-size / filename-length` nor a fixed files-per-megabyte ratio is exact.
 
-image::directory-block-4kib-layout.png[Diagram of a 4 KiB directory block showing the 48-byte Unicode short name using one 12-byte entry record and four 16-byte name chunks, with the 160-chunk pool allowing about 40 such names per block,width=600,align="center",link=../media/high-file-count-workloads/directory-block-4kib-layout.png,window=_blank]
+image::directory-block-4kib-layout.png[Diagram of a 4 KiB directory block showing the 48-byte Unicode short name using one 12-byte entry record and four 16-byte name chunks, with the 160-chunk pool allowing about 40 such names per block,width=400,align="center",link=../media/high-file-count-workloads/directory-block-4kib-layout.png,window=_blank]
 
 Following the 48-byte name from the previous example, that one name consumes a single 12-byte entry record plus the four 16-byte name chunks (64 bytes) shown earlier. The 160-chunk pool is what runs out first: 160 / 4 gives about 40 of those names per block, while 88 of the 128 entry records go unused. A shorter everyday name needs only three chunks, so the same block holds about 53 of those instead.
 
