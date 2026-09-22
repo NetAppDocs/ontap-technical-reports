@@ -45,7 +45,9 @@ Examples:
 * The same million files with per-file NTFS ACLs can approach two million public inodes if ACL inodes are not shared, plus directory inodes.
 * One million SMB files that each have a `Zone.Identifier` stream add about one million public stream inodes that an NFS `ls` does not show.
 
-`files-used` decreases when public inodes become free, such as after deletion completes and the objects are no longer retained as zombies. `inodefile-public-capacity` remains at its high-water mark. New creates reuse free records until the allocated inode file is full, after which ONTAP grows it if `files` and volume capacity permit.
+`files-used` decreases when public inodes become free, such as after deletion completes and the objects are no longer retained as zombies. `inodefile-public-capacity` remains at its high-water mark and the inode file size never decreases. 
+
+New creates reuse free records until the allocated inode file is full, after which ONTAP grows it if `files` and volume capacity permit.
 
 == How high file counts affect NAS workloads
 
@@ -87,11 +89,11 @@ inode-file bytes = inode count × 288
 
 These figures describe inode records. Observed physical usage can also include inode-file structure, block rounding, Snapshot retention, and other metadata.
 
-Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If it later holds one million public inodes, the raw inode records use 288 MB (approximately 274.7 MiB) of actual volume capacity. The inode file does not shrink, so capacity planning must account for its historical high-water allocation.
+Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If it later holds one million public inodes, the raw inode records use 288 MB (approximately 274.7 MiB) of actual volume capacity. The inode file does not shrink, so capacity planning must account for its historical high-water allocation. In addition, the 'files' value cannot be set lower than the high-water mark it has already reached. For instance, if the volume had ever had 1 million public inodes used, then 'maxfiles' can only be set to values above 1 million. 
 
-This capacity is separate from `maxdir-size`. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
+Used physical capacity for the inode file is separate from `maxdir-size` used capacity. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
 
-Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value.
+Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value - instead, treat it as a total number of inodes.
 
 [cols="<,>",frame=none,grid=none]
 |===
