@@ -31,20 +31,19 @@ Together these occupy one 4 KiB block. Each stored name needs an entry record an
 
 === Estimating the number of names per directory file
 
-The following calculation can be used to estimate how many files could be placed in a single directory based on the size of maxdirsize and the size of the names themselves.
+To estimate how many names fit in one directory, work at the level of the 4 KiB directory block and then multiply by the number of blocks the cap allows:
 
 ----
-estimated directory-file bytes =
-    directory entry count × average on-disk bytes per entry
+names in one directory = names per block × number of 4 KiB blocks
 ----
 
-Round the result up to 4 KiB blocks and leave operating margin. The average on-disk entry footprint must account for filename representation, not only the visible character count. That footprint can be modeled as name chunks per entry, rounding each division up:
+At a 320MB cap that block count is 81,920 (335,544,320 / 4096). The names per block is set by how many of the block's 160 name chunks each entry consumes, rounding each division up:
 
-* Standard ASCII names: `chunks = max(3, (name length / 16) + 1)`
-* Long-form names, which ONTAP uses whenever the name contains non-ASCII characters, stores an NFS alternate name, or represents a FlexGroup remote entry: `chunks = max(3, (name length × 2 / 16) + 2)`, because those names are counted at UTF-16 width. An NFS alternate name adds eight characters to the name length before that calculation.
+* Standard ASCII names: `chunks = max(3, (name length / 16) + 1)`. The floor of 3 chunks means any name up to 32 characters costs the same 3 chunks, so a block always holds 53 of them (160 / 3), whether the name is 3 characters or 32.
+* Long-form names, which ONTAP uses whenever the name contains non-ASCII characters, stores an NFS alternate name, or represents a FlexGroup remote entry: `chunks = max(3, (name length × 2 / 16) + 2)`, because those names are counted at UTF-16 width. An NFS alternate name adds eight characters to the name length first.
 * An SMB DOS 8.3 alias stored alongside the long name adds approximately three more chunks.
 
-From there, `names per block = 160 / chunks` (never more than the 128 entry records), and the names that fit in one directory at a 320MB cap is that value multiplied by the 81,920 available directory blocks.
+`names per block = 160 / chunks`, capped at the block's 128 entry records. For normal names the 3-chunk floor keeps this at 53 or fewer, so the 128-record cap is only reached by legacy DOS 8.3 names that fit in a single chunk. Longer or long-form names use more chunks and therefore pack fewer per block, which is why the total varies.
 
 === Why the number of names varies
 
