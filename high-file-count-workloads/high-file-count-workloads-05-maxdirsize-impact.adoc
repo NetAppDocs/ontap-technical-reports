@@ -14,14 +14,7 @@ Raising the `maxdir-size` limit authorizes growth of the directory file. Capacit
 
 == Capacity impact
 
-Changing the `maxdir-size` setting consumes no capacity by itself. Growth in the directory's entries does:
-
-* The directory file allocates 4 KiB blocks as names are added.
-* The companion index allocates separate B+tree and indirect blocks.
-* Snapshot copies can retain older directory and index blocks.
-* A directory that reached a high-water mark can keep its logical size after deletion.
-
-For example, setting maxdir-size to a 4 GiB cap does not allocate 4 GiB of space. Conversely, a directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
+Changing the `maxdir-size` setting consumes no capacity by itself. Growth in the directory's entries does. Directory files allocate 4 KiB blocks as names are added; companion indexes and Snapshot-retained directory blocks add more. Setting the cap does not reserve that space. High-water size after deletion is described in link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves].
 
 When estimating `maxdir-size` values, you don't need to include the data stored in the files beneath the directory. Instead, consider only the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
 
@@ -52,7 +45,7 @@ When a directory file reaches the cap:
 * The volume can still have free data capacity and public inodes.
 * Reading existing files is not equivalent to adding another directory entry and is generally unaffected.
 
-Exceeding maxfiles or maxdir-size limits can add complexity to troubleshooting since the issue appears to be capacity-related rather than file count related. Be sure to check EMS messages for clues.
+Exceeding `maxfiles` or `maxdir-size` can look like a capacity problem. Check EMS messages; the client errors overlap with inode exhaustion. See link:high-file-count-workloads-01-overview.html#maxfiles-compared-with-maxdir-size[Maxfiles compared with maxdir-size].
 
 If a flat namespace cannot change, evaluate a controlled `maxdir-size` increase:
 
@@ -73,7 +66,5 @@ You can later lower the cap, but not below the largest existing directory-file h
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
-* link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations]
+* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
 * link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]

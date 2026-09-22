@@ -5,7 +5,7 @@ keywords: ONTAP, NAS, maxfiles, files, inode, files-used, public inode, private 
 summary: "Understand ONTAP inodes, public and private inode types, ACL inodes, and named streams."
 ---
 
-= Maxfiles and ONTAP inode limits
+= ONTAP inode types
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
@@ -16,9 +16,7 @@ ONTAP uses public inodes to represent file-system objects present in FlexVol and
 
 In general, an inode is the file-system record for an object. It stores identity and metadata such as type, ownership, timestamps, and permissions, and it points to the object's data. The object's name is stored in a directory, not in the inode itself.
 
-In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Each ONTAP 9 inode uses 288 bytes in that file, which counts against the physical capacity used in the volume. See link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
-
-Public inodes count toward the volume `files` setting, commonly called maxfiles. ONTAP also maintains a private inode space for internal metadata that does not consume that public ceiling. Creating a public object increases public inode use. If no free record remains in the currently allocated public inode file, ONTAP grows the inode file. Deleting an object frees its inode for reuse but does not shrink the inode file's size.
+In ONTAP, WAFL stores those records in a hidden, volume-level inode file on each FlexVol or FlexGroup constituent. Public inodes count toward the volume `files` setting, commonly called maxfiles. Creating a public object increases public inode use; private inodes do not. Capacity and growth of the inode file are described in link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
 
 The following figure shows how the public inode file relates to `files-used`, `inodefile-public-capacity`, the `files` ceiling, and the capacity consumed in the volume.
 
@@ -73,7 +71,7 @@ The following table shows a list of public inodes found in ONTAP and additional 
 
 NOTE: ^{asterisk}^ A symbolic link is its own public inode and directory entry. A hard link is different: it is another directory name for an existing regular-file inode, not a separate inode type. Creating a hard link adds a directory entry and grows the parent directory file, but it does not allocate another public inode.
 
-NOTE: ^{asterisk}{asterisk}^ Directory-index inodes are private by default. Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves them into public inode space for supported SnapMirror and restore workflows. Public indexes count toward `files` and `files-used`.
+NOTE: ^{asterisk}{asterisk}^ Directory-index inodes are private by default. They can be moved into public inode space as described in link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
 
 ==== ACL inodes
 
@@ -99,13 +97,9 @@ Some things to note:
 
 * SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. `Zone.Identifier` is Windows Mark of the Web metadata. When a file is downloaded from the internet, Windows or the browser records a zone ID (commonly the Internet zone) so Explorer, SmartScreen, and Office can treat the file as untrusted until a user unblocks it. That stream stays on the file until it is removed. Other common sources include backup and security applications, and applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. Files synchronized by OneDrive do not necessarily receive a `Zone.Identifier` stream; behavior depends on the client and transfer path.
 
-* macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`. These streams remain associated with the base file and add public inode use without adding names to the parent user directory.
+* macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`.
 
-* Windows Explorer, macOS Finder, and a simple directory listing such as `dir` or `ls` usually show only the default stream, so public inode use can exceed the visible file count.
-
-* A Windows SMB client can enumerate streams with `dir /r` or PowerShell `Get-Item <file> -Stream *`, and it can address a stream directly as `filename:stream_name`. Windows Explorer and macOS Finder do not normally enumerate streams. On an NFS client, `ls`, `ls -la`, and ordinary `stat` commands inspect directory entries or the base file; they do not enumerate SMB named streams.
-
-* NFS workloads generally see only the default file data. ONTAP does not support NFSv4 named attributes, so NFS clients do not enumerate SMB named streams as extra names. Streams that SMB already created still exist and consume public inodes even when `ls` on an NFS mount does not show them.
+* Ordinary listings hide named streams. Windows Explorer, macOS Finder, `dir`, and NFS `ls` / `stat` show the default file, so `files-used` can exceed the visible count. Enumerate streams from a Windows SMB client with `dir /r` or PowerShell `Get-Item <file> -Stream *`. ONTAP does not support NFSv4 named attributes, so NFS clients do not see SMB streams as extra names, but the inodes still exist.
 
 * A hidden file, swap file, or backup file created by `vi` (for example `.file.swp` or `file~`) is an ordinary file and directory entry, not a named stream.
 
@@ -142,7 +136,7 @@ The following table shows common private inode types.
 | *No.*
 |===
 
-NOTE: ^{asterisk}^ Directory indexes are private by default. They can be moved into public inode space with `-is-dir-index-transfer-enabled true` for supported SnapMirror use cases, in which case they count toward `files`.
+NOTE: ^{asterisk}^ Directory indexes are private by default. Public index transfer is described in link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
 
 NOTE: In most cases, you do not need to monitor private inode usage because private inodes do not count against maxfiles, unless NetApp Support directs you to do so.
 
@@ -158,10 +152,5 @@ An unlinked file cannot always be released immediately. ONTAP can retain it temp
 
 == Related information
 
-* link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity]
-* link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
-* link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]
-* link:high-file-count-workloads-12-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]

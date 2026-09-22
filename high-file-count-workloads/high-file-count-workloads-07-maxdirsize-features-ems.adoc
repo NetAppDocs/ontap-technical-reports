@@ -27,7 +27,7 @@ For how to view `maxdir-size` and a directory object's current size, see link:hi
 | Optimized sparse directories (`-has-optimized-sparse-directories`): hole-punch empty blocks in indexed directories. Public docs do not confirm an earlier introduction. See link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
 
 | ONTAP 9.14.1
-| 320 MiB default `maxdir-size`; Confirm the supported maximum for the release and platform for increases. See link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-02-maxdirsize.html#raising-the-maxdir-size-value[Raising the maxdir-size value].
+| 320 MB default `maxdir-size`. Confirm the supported maximum for the release and platform for increases. See link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-02-maxdirsize.html#raising-the-maxdir-size-value[Raising the maxdir-size value].
 
 | ONTAP 9.17.1
 | `-is-dir-index-transfer-enabled` and public directory-index inodes for supported SnapMirror transfer. See link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
@@ -68,7 +68,5 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-dir-events.html[WAFL directory EMS events^]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-maxdirsize-events.html[`wafl.maxdirsize` EMS events^]

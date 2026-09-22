@@ -74,7 +74,4 @@ If an application's directory size remains problematic after deletion, copying t
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdir-size]
-* link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations]
-* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
+* link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types]

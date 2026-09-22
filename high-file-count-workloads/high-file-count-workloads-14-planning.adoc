@@ -40,13 +40,7 @@ Include projected files, directories, streams, ACLs, public directory indexes, t
 
 == Find the largest directories
 
-Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries. Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. On a GNU/Linux NFS client, inspect the directory object itself:
-
-----
-stat -c '%n %s bytes' /mount/path/directory
-----
-
-Do not substitute `du`; it reports the data below the directory rather than the directory metadata-file size. Model filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
+Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries. Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. Measure the directory object itself as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]. Model filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 
 == Measure metadata operation rates
 
@@ -67,8 +61,5 @@ For design and operational recommendations, see link:high-file-count-workloads-1
 
 == Related information
 
-* link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]
-* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
+* link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]

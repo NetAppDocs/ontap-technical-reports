@@ -10,7 +10,7 @@ summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ON
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-High-file-count workload design must account for total public inodes, entries in the largest directory, metadata operation rate, and lifecycle tasks. Use these recommendations to avoid treating file count as a single limit or relying on data capacity alone.
+High-file-count workload design must account for total public inodes, entries in the largest directory, metadata operation rate, and lifecycle tasks. Gather those inputs as described in link:high-file-count-workloads-14-planning.html[Planning approach], then use these recommendations. Do not treat file count as a single limit or rely on data capacity alone.
 
 == Profile the namespace before sizing storage
 
@@ -39,7 +39,9 @@ Do not derive either value from the other. A sharded namespace can exhaust `maxf
 
 Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
 
-See link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits] and link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
+Treat the two knobs differently. For high-file-count volumes, set `files` to the current `files-maximum-possible` when volume size and protocol constraints allow it; that ceiling does not preallocate space. Raise `maxdir-size` only for a demonstrated single-directory need, typically in approximately 2% steps. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles] and link:high-file-count-workloads-05-maxdirsize-impact.html#what-happens-when-maxdir-size-is-exceeded[What happens when maxdir-size is exceeded?].
+
+See link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types] and link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 
 == Prefer a sharded directory structure
 
@@ -87,37 +89,13 @@ A FlexGroup does not automatically parallelize operations on one logical directo
 
 == Leave operating margin
 
-Do not plan steady-state operation at 100% of any limit. Keep margin for:
+Do not plan steady-state operation at 100% of *used* inodes or of the largest directory file. Keep margin for unexpected growth, temporary objects, Snapshot-retained metadata, ACLs and streams, migration overlap, backup work, FlexGroup placement imbalance, and software changes that alter filenames.
 
-* Unexpected growth
-* Temporary files and application retries
-* Snapshot-retained metadata
-* ACLs, streams, and directories that also consume public inodes
-* Migration overlap
-* Backup and restore work
-* FlexGroup placement imbalance
-* Software changes that alter filename length or namespace layout
-
-Set `files` high enough to cover projected peak objects plus margin. Set `maxdir-size` from measured directory entry behavior plus margin. For average growth, public maxdir-size guidance recommends increases of approximately 2% of the current cap; for migration, it recommends approximately 2% above measured need. This is adjustment guidance, not a universal operating margin. Additional margin should reflect forecast uncertainty and response time.
+Setting `files` to the current maximum is a ceiling, not permission to run until the last inode is gone. Alert on `files-used` well before that ceiling. For `maxdir-size`, the approximately 2% increase guidance in link:high-file-count-workloads-05-maxdirsize-impact.html#what-happens-when-maxdir-size-is-exceeded[What happens when maxdir-size is exceeded?] is how to raise the cap, not a universal operating margin.
 
 == Account for metadata capacity
 
-For ONTAP 9, use 288 bytes per inode as the base public inode-file estimate:
-
-----
-estimated inode bytes = peak allocated inodes × 288
-----
-
-This does not include all file-system metadata. Also budget for:
-
-* Directory-file blocks
-* Companion directory indexes
-* Indirect blocks and allocation rounding
-* Private metafiles
-* Snapshot-retained blocks
-* Volume and aggregate metadata
-
-Raising `files` does not allocate the entire inode file immediately. Actual creation grows the inode file, and deletion does not shrink it. Treat peak allocated inode capacity as persistent.
+Budget inode-file, directory-file, index, Snapshot, and aggregate metadata separately. Use 288 bytes per allocated public inode as the base inode-file estimate; see link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact[Capacity impact]. Raising `files` does not allocate that space immediately. Treat peak allocated inode-file capacity as persistent.
 
 Use `volume show-space` to inspect inode and metadata capacity rather than converting every CLI counter as though it were a byte value.
 
@@ -164,47 +142,15 @@ Test more than initial ingest:
 * ONTAP upgrade and, when required, revert checks
 * Migration from FlexVol to FlexGroup or between protocol environments
 
-Directory indexes might need to be built or transferred at the destination. Historically, private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand. Beginning with ONTAP 9.17.1, `-is-dir-index-transfer-enabled true` moves indexes into public inode space so supported SnapMirror workflows can transfer them. This can reduce post-restore index construction, but public indexes consume public inodes and can increase `files-used` by approximately one inode for each indexed directory, so include them in `maxfiles` planning.
-
-Evaluate the option when avoiding index reconstruction materially improves recovery or restore behavior. Do not enable it merely to improve local lookup performance.
-
-For more information on this, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
+Directory indexes might need to be built or transferred at the destination. Enable public index transfer only when avoiding rebuilds materially improves recovery; it does not improve local lookup. See link:high-file-count-workloads-04-maxdirsize-indexing.html#when-to-enable-public-directory-index-transfers[When to enable public directory index transfers].
 
 == Monitor inode limits and allocation
 
-For a FlexVol or FlexGroup, track:
-
-----
-set -privilege advanced
-volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity,files-private-used,inodefile-private-capacity
-----
-
-Interpret the fields correctly:
-
-* `files-used` is current public inode use.
-* `inodefile-public-capacity` is an inode count representing allocated high-water capacity, not bytes.
-* `files-private-used` is the count of private ONTAP metadata inodes currently used and does not consume the public `files` allowance.
-* `inodefile-private-capacity` is the private inode-file high-water count.
-
-Alert before `files-used` reaches `files`. For FlexGroup volumes, investigate constituent-level events even when the overall total appears to have room.
+Track `files-used` against `files` and `inodefile-public-capacity` as described in link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitor maxfiles, EMS events, and ONTAP enhancements]. Alert before `files-used` reaches `files`. For FlexGroup volumes, investigate constituent-level events even when the overall total appears to have room.
 
 == Monitor large directories
 
-View the configured cap:
-
-----
-volume show -vserver <svm> -volume <volume> -fields maxdir-size
-----
-
-Measure important directory objects from a GNU/Linux NFS client:
-
-----
-stat -c '%n %s bytes' /mount/path/directory
-----
-
-Do not substitute `du`; it measures content below the directory rather than the directory metadata file.
-
-Inventory known flat or churn-heavy directories before they generate warnings. When an EMS event provides a file ID, use `volume file show-inode` to resolve it to a path. For FlexGroup, run the command against the constituent named by the event rather than against the FlexGroup name.
+Measure directory-file size and resolve EMS file IDs as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]. Inventory known flat or churn-heavy directories before they generate warnings.
 
 == Respond to warnings before failures
 
@@ -240,7 +186,7 @@ volume file async-delete show
 
 Constraints: the volume must be online and mounted, the path must be a directory (not a single file), and only one async-delete job can run at a time.
 
-If a large sparse directory remains a problem, create a new directory and copy or move the remaining namespace into a compact layout. Do not assume that lowering `maxdir-size` will compact it.
+If a large sparse directory remains a problem, copy remaining entries into a new directory. Lowering `maxdir-size` does not compact it. See link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
 
 == Plan node and HA headroom
 
@@ -262,8 +208,7 @@ Later ONTAP releases include directory indexing, inode-management improvements, 
 Do not enable a feature solely because it is related to high file count:
 
 * Raise `maxdir-size` only for a demonstrated single-directory requirement.
-* Raise `files` before projected public inode exhaustion. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
-* Use `-files-set-maximum true` only when the largest currently possible ceiling is appropriate.
+* Set `files` to the current maximum when that is appropriate; see link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
 * Enable directory-index transfer only when replication or restore should preserve indexes.
 * Enable File System Analytics only when its insight justifies its scanning work.
 * Treat `-has-dir-index-public` and `-has-optimized-sparse-directories` as status, not enable switches.
@@ -294,9 +239,5 @@ Revisit the model when application versions, filename formats, retention, protoc
 
 == Related information
 
-* link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
-* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-14-planning.html[Planning approach]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]

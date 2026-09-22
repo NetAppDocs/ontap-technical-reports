@@ -63,7 +63,7 @@ These two structures can add up. At high allocated inode counts, the inode file 
 
 === Directory enumeration
 
-Large directories (directories with many names in a single directory) take longer to enumerate than smaller ones. Even a directory that has had many files deleted can still be expensive to scan because the directory-file size stays at its high-water mark. Deletion makes slots reusable, but it does not compact the directory file. Indexed directories can hole-punch fully empty 4 KiB blocks and reclaim those physical blocks, but the reported size does not normally shrink.
+Large directories take longer to enumerate than smaller ones, and a directory that has had many files deleted can still be expensive to scan. The directory-file size stays at its high-water mark unless empty blocks are hole-punched; see link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
 
 === Failure-domain concentration
 
@@ -99,8 +99,11 @@ image::maxfiles-vs-maxdir-size.png[Diagram comparing maxfiles exhaustion across 
 
 `maxfiles` (configured as the volume-level option `-files`) is a configurable ceiling for the number of public inodes available in a single volume. That count includes not just files and directories, but also named streams, ACLs, and other public objects - sometimes objects that are not seen in a directory listing. The volume contains a hidden inode file that holds those records. ONTAP grows the inode file when a new public inode is needed and no free record remains, up to the `-files` setting and total volume size. The configurable maximum for `-files` depends on volume size and ONTAP limits.
 
-* For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits].
-* For how to set `-files` to a specific value or to the current maximum, see link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
+* For inode counters and capacity, see link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity].
+* For public and private inode types, see link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types].
+* For volume-size limits, NFS file IDs, and exhaustion behavior, see link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information].
+* For how to set `-files`, see link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
+* For EMS events and monitoring, see link:high-file-count-workloads-12-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements].
 * For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-14-planning.html[Planning approach].
 * For design and operational recommendations, see link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices].
 
@@ -111,10 +114,7 @@ image::maxfiles-vs-maxdir-size.png[Diagram comparing maxfiles exhaustion across 
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
-* link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]
-* link:high-file-count-workloads-14-planning.html[Planning approach]
+* link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html[Maximum directory size for FlexVol volumes^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volume management^]

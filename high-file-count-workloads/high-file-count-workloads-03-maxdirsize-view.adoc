@@ -100,7 +100,5 @@ NOTE: For a FlexGroup, `volume file show-inode` operates on a constituent rather
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
 * link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
 * link:https://docs.netapp.com/us-en/ontap-cli/volume-file-show-inode.html[`volume file show-inode` command reference^]

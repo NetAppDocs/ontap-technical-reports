@@ -28,9 +28,9 @@ image::directory-name-chunks-48-byte.png[Diagram of a 48-byte filename stored as
 
 === Max number of directory blocks and maximum number of names
 
-The maximum number of directory blocks allowed is determined by the maxdir-size value. 
+The maximum number of directory blocks allowed is determined by the `maxdir-size` value.
 
-With a 320MB directory size, up to 81,920 directory blocks can be allocated (320MB/4KiB, where 320MB is 335,544,320 bytes because ONTAP reports these values in binary units). As such, the total number of names allowed in the directory file depends on the number of entries allowed per directory block.
+With a 320 MB directory size, up to 81,920 directory blocks can be allocated (320 MB / 4 KiB, where 320 MB is 335,544,320 bytes because ONTAP reports these values in binary units). As such, the total number of names allowed in the directory file depends on the number of entries allowed per directory block.
 
 Every 4 KiB directory block is divided the same way:
 
@@ -57,7 +57,7 @@ Because names vary so much, there is no single number of files allowed in a dire
 
 [cols="3,3,1,2",options="header"]
 |===
-| Name profile | Sample filename | Names per 4 KiB block | Names in one directory at 320MB
+| Name profile | Sample filename | Names per 4 KiB block | Names in one directory at 320 MB
 
 | Short, everyday name (8 characters)
 | `f0001.db`
@@ -91,7 +91,7 @@ In summary, the same 320 MB cap holds roughly 4.3 million short, everyday names 
 
 === Filename length compared with path length
 
-`maxdir-size` accounts for the basename stored in a particular parent directory. It does not store the entire absolute path with every entry. Each pathname component is an entry in its own parent directory. As such, deeper directory structures would not increase maxdir-size usage.
+`maxdir-size` accounts for the basename stored in a particular parent directory. It does not store the entire absolute path with every entry. Each pathname component is an entry in its own parent directory. As such, deeper directory structures would not increase `maxdir-size` usage.
 
 A deeper hierarchy adds directories and public inodes in the volume, but it reduces the number of names stored in each directory. This tradeoff usually improves scalability and overall performance. 
 
@@ -124,9 +124,7 @@ For how to inspect the configured cap and a directory's current size, see link:h
 
 == Do FlexGroup volumes bypass maxdir-size limitations?
 
-No. In a FlexGroup volume, every member volume uses the same `maxdir-size` setting, which is configured at the FlexGroup level. Although the files in a directory can be spread across multiple member volumes and nodes, the directory itself resides on a single member volume. The same `maxdir-size` limits therefore apply exactly as they do on a FlexVol volume, because directory size — not volume size — is what matters. A FlexGroup does not provide relief for a directory that is approaching `maxdir-size`.
-
-FlexGroup volumes also use remote hard links to redirect I/O to member volumes, and those entries count against the directory-file size. A directory that generates many remote hard links reaches `maxdir-size` sooner than the same directory on a FlexVol, so the number of names that fit under a 320 MB cap is typically lower — often in the 2 to 2.6 million range rather than roughly 4.3 million.
+No. A FlexGroup does not multiply one directory's `maxdir-size` by the constituent count. The directory file still lives on a single constituent, and remote entries can make that file grow faster than the same names on a FlexVol. For placement, remote-entry inflation, and planning figures, see link:high-file-count-workloads-06-maxdirsize-volume-types.html#flexgroup-volumes[FlexGroup volumes].
 
 [cols="<,>",frame=none,grid=none]
 |===
@@ -136,9 +134,5 @@ FlexGroup volumes also use remote hard links to redirect I/O to member volumes, 
 
 == Related information
 
-* link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]
-* link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
-* link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdir-size]
 * link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations]
-* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
 * link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html[Maximum directory size for FlexVol volumes^]

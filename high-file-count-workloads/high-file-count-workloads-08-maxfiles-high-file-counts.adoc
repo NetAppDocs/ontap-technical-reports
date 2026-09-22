@@ -35,15 +35,11 @@ Typical operations include:
 
 * Creating a file, directory, symbolic link, or special file: +1 public inode and a new name in the parent directory.
 * Creating a hard link: +0 public inodes and +1 name in the parent directory.
-* Storing an NTFS or NFSv4 ACL on an object that did not already have an ACL inode: up to +1 public inode and no extra parent-directory name. ACL sharing can avoid the increment.
-* Creating a named stream: +1 public inode for the stream and, if the base file does not already have one, a stream-directory inode. Neither adds a name to the parent user directory.
-* Moving directory indexes into public space with directory-index transfer: approximately +1 public inode per indexed directory.
+* Storing an NTFS or NFSv4 ACL on an object that did not already have an ACL inode: up to +1 public inode, subject to ACL sharing.
+* Creating a named stream: +1 public inode for the stream and, if needed, a stream-directory inode. Neither adds a name to the parent user directory.
+* Moving directory indexes into public space: approximately +1 public inode per indexed directory.
 
-Examples:
-
-* One million files in UNIX security style that use only mode bits consume about one million public inodes for the files, plus directory inodes.
-* The same million files with per-file NTFS ACLs can approach two million public inodes if ACL inodes are not shared, plus directory inodes.
-* One million SMB files that each have a `Zone.Identifier` stream add about one million public stream inodes that an NFS `ls` does not show.
+How those object types, ACL sharing, and streams such as `Zone.Identifier` affect visible file count is described in link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types].
 
 `files-used` decreases when public inodes become free, such as after deletion completes and the objects are no longer retained as zombies. `inodefile-public-capacity` remains at its high-water mark and the inode file size never decreases. 
 
@@ -98,12 +94,10 @@ For how to inspect inode-file space in capacity units and how to read `inodefile
 [cols="<,>",frame=none,grid=none]
 |===
 |link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdir-size]
-|link:high-file-count-workloads-09-maxfiles.html[Next: Maxfiles and ONTAP inode limits →]
+|link:high-file-count-workloads-09-maxfiles.html[Next: ONTAP inode types →]
 |===
 
 == Related information
 
-* link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
 * link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]
-* link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]
