@@ -104,8 +104,8 @@ image::maxfiles-vs-maxdir-size.png[Diagram comparing maxfiles exhaustion across 
 * For volume-size limits, NFS file IDs, and exhaustion behavior, see link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information].
 * For how to set `-files`, see link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
 * For EMS events and monitoring, see link:high-file-count-workloads-12-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements].
-* For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-14-planning.html[Planning approach].
-* For design and operational recommendations, see link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices].
+* For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach].
+* For design and operational recommendations, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
 
 [cols=">",frame=none,grid=none]
 |===

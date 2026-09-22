@@ -23,7 +23,7 @@ The `files` option controls how many public inode entries may be allocated in th
 
 Creating files, directories, ACLs, named streams, or public directory indexes can grow the public inode file. Deleting objects decreases `files-used` and returns public inodes for reuse, but it does not shrink the public inode file's size.
 
-For examples of how to view file-count usage details, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitoring example]. For sizing guidance, see link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices].
+For examples of how to view file-count usage details, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitoring example]. For sizing guidance, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
 
 == How an inode count increments
 

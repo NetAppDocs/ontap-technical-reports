@@ -18,15 +18,16 @@ entries:
         url: /high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html
   - title: High file counts and inode capacity
     url: /high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html
-  - title: Inode types
-    url: /high-file-count-workloads/high-file-count-workloads-09-maxfiles.html
-  - title: Maxfiles and ONTAP inode information
-    url: /high-file-count-workloads/high-file-count-workloads-10-maxfiles-limits.html
-  - title: Controlling maxfiles
-    url: /high-file-count-workloads/high-file-count-workloads-11-maxfiles-controlling.html
-  - title: Monitoring, EMS, and enhancements
-    url: /high-file-count-workloads/high-file-count-workloads-12-maxfiles-monitoring.html
-  - title: Best practices
-    url: /high-file-count-workloads/high-file-count-workloads-13-best-practices.html
+    entries:
+      - title: Inode types
+        url: /high-file-count-workloads/high-file-count-workloads-09-maxfiles.html
+      - title: Maxfiles and ONTAP inode information
+        url: /high-file-count-workloads/high-file-count-workloads-10-maxfiles-limits.html
+      - title: Controlling maxfiles
+        url: /high-file-count-workloads/high-file-count-workloads-11-maxfiles-controlling.html
+      - title: Monitoring, EMS, and enhancements
+        url: /high-file-count-workloads/high-file-count-workloads-12-maxfiles-monitoring.html
   - title: Planning approach
-    url: /high-file-count-workloads/high-file-count-workloads-14-planning.html
+    url: /high-file-count-workloads/high-file-count-workloads-13-planning.html
+  - title: Best practices
+    url: /high-file-count-workloads/high-file-count-workloads-14-best-practices.html

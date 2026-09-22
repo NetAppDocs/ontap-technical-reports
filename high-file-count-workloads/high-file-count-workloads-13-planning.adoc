@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-14-planning.html
+permalink: high-file-count-workloads/high-file-count-workloads-13-planning.html
 keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdir-size, maxdirsize, inodes, metadata
 summary: "Gather inode, directory, operation-rate, and capacity estimates before sizing a high-file-count NAS workload on ONTAP."
 ---
@@ -52,11 +52,12 @@ Use `volume show-space` to separate user data, file-system metadata, inodes, and
 
 Do not derive `maxdir-size` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
 
-For design and operational recommendations, see link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices].
+For design and operational recommendations, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
 
-[cols="<",frame=none,grid=none]
+[cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-13-best-practices.html[← Previous: High-file-count NAS workload best practices]
+|link:high-file-count-workloads-12-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements]
+|link:high-file-count-workloads-14-best-practices.html[Next: High-file-count NAS workload best practices →]
 |===
 
 == Related information

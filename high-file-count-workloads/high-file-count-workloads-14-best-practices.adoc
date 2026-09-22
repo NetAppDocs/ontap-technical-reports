@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-13-best-practices.html
+permalink: high-file-count-workloads/high-file-count-workloads-14-best-practices.html
 keywords: ONTAP, NAS, high file count, best practices, maxfiles, maxdir-size, maxdirsize, FlexGroup, NFS, SMB
 summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ONTAP."
 ---
@@ -10,7 +10,7 @@ summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ON
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-High-file-count workload design must account for total public inodes, entries in the largest directory, metadata operation rate, and lifecycle tasks. Gather those inputs as described in link:high-file-count-workloads-14-planning.html[Planning approach], then use these recommendations. Do not treat file count as a single limit or rely on data capacity alone.
+High-file-count workload design must account for total public inodes, entries in the largest directory, metadata operation rate, and lifecycle tasks. Gather those inputs as described in link:high-file-count-workloads-13-planning.html[Planning approach], then use these recommendations. Do not treat file count as a single limit or rely on data capacity alone.
 
 == Profile the namespace before sizing storage
 
@@ -231,10 +231,9 @@ Record:
 
 Revisit the model when application versions, filename formats, retention, protocols, or data protection workflows change.
 
-[cols="<,>",frame=none,grid=none]
+[cols="<",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-12-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements]
-|link:high-file-count-workloads-14-planning.html[Next: Planning approach →]
+|link:high-file-count-workloads-13-planning.html[← Previous: Planning approach]
 |===
 
 == Related information

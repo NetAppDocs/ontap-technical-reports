@@ -79,7 +79,7 @@ Release support and limits can vary by platform and volume type. Verify behavior
 [cols="<,>",frame=none,grid=none]
 |===
 |link:high-file-count-workloads-11-maxfiles-controlling.html[← Previous: Controlling maxfiles]
-|link:high-file-count-workloads-13-best-practices.html[Next: High-file-count NAS workload best practices →]
+|link:high-file-count-workloads-13-planning.html[Next: Planning approach →]
 |===
 
 == Related information
