@@ -32,13 +32,15 @@ The directory index is separate from the directory file. The following still hol
 
 == About private and public index inodes
 
+Each indexed directory has its own index; directory indexes are not shared. A volume can therefore hold many indexes — one for every directory large enough to be indexed (≥ ~2 MiB). Most directories in a normal namespace never reach that size, so they never get an index, and there is no mechanism that indexes small directories. In principle, if every directory in a volume exceeded the threshold, each could have its own index. Whether those indexes count against `maxfiles` depends on whether they are private or public, as described here.
+
 By default, directory indexes historically reside in the private inode space. Private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand after activation or restore.
 
 Beginning with ONTAP 9.17.1, the volume-level option `-is-dir-index-transfer-enabled true` moves directory indexes into public inode space so supported SnapMirror and SnapMirror Cloud workflows can transfer them. When the option is `true`, new indexes are created in public inode space and a scanner migrates existing private indexes. This can reduce post-restore index construction, but public indexes consume public inodes and must be included in `maxfiles` planning.
 
 You can see if there is a public directory index with the volume show option `-has-dir-index-public true`. This option is not able to be manually set; it only shows true if there is a public directory index.
 
-Public directory indexes count toward `files` and can increase `files-used` by approximately one inode for each indexed directory. Directory indexes are not shared; there can be multiple directory indexes in a single volume for each large directory (≥ ~2 MB). The vast majority of directories in a normal namespace never reach that size, so they never get an index. There's no mechanism that indexes small directories. In principle, if every directory in a volume exceeded the threshold, each could have its own index.
+Public directory indexes count toward `files` and can increase `files-used` by approximately one inode for each indexed directory.
 
 Private indexes do not consume the public `files` allowance.
 
