@@ -24,7 +24,7 @@ An ONTAP directory file grows in 4 KiB blocks, where each block is limited to a 
 
 Example of how name chunks would be allocated across a 48 byte name:
 
-image::directory-name-chunks-48-byte.png[Diagram of a 48-byte filename stored as three 16-byte name chunks plus one 16-byte Unicode short-form overhead chunk,width=400,align="center",link=../media/high-file-count-workloads/directory-name-chunks-48-byte.png,window=_blank]
+image::directory-name-chunks-48-byte.png[Diagram of a 48-byte filename stored as three 16-byte name chunks plus one 16-byte Unicode short-form overhead chunk,width=800,align="center",link=../media/high-file-count-workloads/directory-name-chunks-48-byte.png,window=_blank]
 
 === Max number of directory blocks and maximum number of names
 
