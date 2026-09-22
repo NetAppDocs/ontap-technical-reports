@@ -122,6 +122,12 @@ For details, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Dire
 
 For how to inspect the configured cap and a directory's current size, see link:high-file-count-workloads-03-maxdirsize-view.html[View maxdirsize and current directory size].
 
+== Do FlexGroup volumes bypass maxdirsize limitations?
+
+No. In a FlexGroup volume, every member volume uses the same `maxdirsize` setting, which is configured at the FlexGroup level. Although the files in a directory can be spread across multiple member volumes and nodes, the directory itself resides on a single member volume. The same `maxdirsize` limits therefore apply exactly as they do on a FlexVol volume, because directory size — not volume size — is what matters. A FlexGroup does not provide relief for a directory that is approaching `maxdirsize`.
+
+FlexGroup volumes also use remote hard links to redirect I/O to member volumes, and those entries count against the directory-file size. A directory that generates many remote hard links reaches `maxdirsize` sooner than the same directory on a FlexVol, so the number of names that fit under a 320 MB cap is typically lower — often in the 2 to 2.6 million range rather than roughly 4.3 million.
+
 link:high-file-count-workloads-01-overview.html[← Previous: NetApp ONTAP High File Count Workloads for NAS volumes] | link:high-file-count-workloads-03-maxdirsize-view.html[Next: View maxdirsize and current directory size →]
 
 == Related information
