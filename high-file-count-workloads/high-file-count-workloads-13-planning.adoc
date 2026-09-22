@@ -60,7 +60,10 @@ Do not derive `maxdirsize` directly from the total volume file count, and do not
 
 For design and operational recommendations, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
 
-link:high-file-count-workloads-12-best-practices.html[← Previous: High-file-count NAS workload best practices]
+[cols="<",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-12-best-practices.html[← Previous: High-file-count NAS workload best practices]
+|===
 
 == Related information
 

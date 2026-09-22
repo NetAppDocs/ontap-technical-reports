@@ -92,7 +92,11 @@ The reported file ID belongs to the directory that reached or approached the lim
 
 NOTE: For a FlexGroup, `volume file show-inode` operates on a constituent rather than the FlexGroup name. Use the constituent named by the EMS event, such as `fg__0024`.
 
-link:high-file-count-workloads-02-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories] | link:high-file-count-workloads-04-maxdirsize-indexing.html[Next: Directory indexing in ONTAP →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-02-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories]
+|link:high-file-count-workloads-04-maxdirsize-indexing.html[Next: Directory indexing in ONTAP →]
+|===
 
 == Related information
 

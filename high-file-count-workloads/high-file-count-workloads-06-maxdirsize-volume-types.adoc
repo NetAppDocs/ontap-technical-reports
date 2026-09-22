@@ -61,7 +61,11 @@ Do not assume that a FlexVol files-per-directory estimate transfers unchanged to
 | Enables File System Analytics. Its namespace scans add work on high-file-count volumes but do not change `maxdirsize`.
 |===
 
-link:high-file-count-workloads-05-maxdirsize-impact.html[← Previous: Impact of maxdirsize] | link:high-file-count-workloads-07-maxdirsize-features-ems.html[Next: Features, EMS, and monitoring for maxdirsize →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-05-maxdirsize-impact.html[← Previous: Impact of maxdirsize]
+|link:high-file-count-workloads-07-maxdirsize-features-ems.html[Next: Features, EMS, and monitoring for maxdirsize →]
+|===
 
 == Related information
 

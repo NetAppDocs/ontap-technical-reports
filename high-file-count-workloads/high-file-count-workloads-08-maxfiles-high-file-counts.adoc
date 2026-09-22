@@ -93,7 +93,11 @@ This capacity is separate from `maxdirsize`. `maxdirsize` caps the byte size of 
 
 Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value.
 
-link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdirsize] | link:high-file-count-workloads-09-maxfiles.html[Next: Maxfiles and ONTAP inode limits →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdirsize]
+|link:high-file-count-workloads-09-maxfiles.html[Next: Maxfiles and ONTAP inode limits →]
+|===
 
 == Related information
 

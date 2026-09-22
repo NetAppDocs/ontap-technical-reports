@@ -64,7 +64,11 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 `wafl.readdir.expired` and `wafl.readdir.sparse` identify expensive enumeration of large sparse directories. They are related to directory layout and high-water behavior, but they do not mean that `maxdirsize` itself has been reached.
 
-link:high-file-count-workloads-06-maxdirsize-volume-types.html[← Previous: Volume type considerations] | link:high-file-count-workloads-08-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-06-maxdirsize-volume-types.html[← Previous: Volume type considerations]
+|link:high-file-count-workloads-08-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
+|===
 
 == Related information
 

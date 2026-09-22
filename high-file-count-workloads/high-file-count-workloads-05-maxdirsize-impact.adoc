@@ -69,7 +69,11 @@ For average growth, public guidance recommends increasing the current cap in inc
 
 You can later lower the cap, but not below the largest existing directory-file high-water mark; lowering it does not compact existing directories. Validate the supported value for the ONTAP release and platform, and monitor performance after the change.
 
-link:high-file-count-workloads-04-maxdirsize-indexing.html[← Previous: Directory indexing in ONTAP] | link:high-file-count-workloads-06-maxdirsize-volume-types.html[Next: Volume type considerations →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-04-maxdirsize-indexing.html[← Previous: Directory indexing in ONTAP]
+|link:high-file-count-workloads-06-maxdirsize-volume-types.html[Next: Volume type considerations →]
+|===
 
 == Related information
 

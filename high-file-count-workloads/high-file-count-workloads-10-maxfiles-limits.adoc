@@ -82,7 +82,11 @@ volume modify -vserver <svm> -volume <volume> -files-set-maximum true
 
 This is a one-shot action, not a persistent allocation mode. Only `true` is valid. If the volume later grows, run it again if the new maximum should be applied. Use `-files` when you want a deliberate value below the maximum.
 
-link:high-file-count-workloads-09-maxfiles.html[← Previous: Maxfiles and ONTAP inode limits] | link:high-file-count-workloads-11-maxfiles-monitoring.html[Next: Monitor maxfiles, EMS events, and ONTAP enhancements →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-09-maxfiles.html[← Previous: Maxfiles and ONTAP inode limits]
+|link:high-file-count-workloads-11-maxfiles-monitoring.html[Next: Monitor maxfiles, EMS events, and ONTAP enhancements →]
+|===
 
 == Related information
 

@@ -64,7 +64,11 @@ The advanced `-has-optimized-sparse-directories` field is a read-only volume sho
 
 If an application's directory size remains problematic after deletion, copying the remaining entries into a newly created directory produces a more compact directory-file layout. Lowering `maxdir-size` does not compact a sparse directory.
 
-link:high-file-count-workloads-03-maxdirsize-view.html[← Previous: View maxdirsize and current directory size] | link:high-file-count-workloads-05-maxdirsize-impact.html[Next: Impact of maxdirsize →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-03-maxdirsize-view.html[← Previous: View maxdirsize and current directory size]
+|link:high-file-count-workloads-05-maxdirsize-impact.html[Next: Impact of maxdirsize →]
+|===
 
 == Related information
 

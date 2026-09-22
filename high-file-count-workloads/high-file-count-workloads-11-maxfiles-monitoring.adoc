@@ -76,7 +76,11 @@ Track both current use and inode-file capacity. A low `files-used` value after a
 
 Release support and limits can vary by platform and volume type. Verify behavior in the command reference for the ONTAP release in use.
 
-link:high-file-count-workloads-10-maxfiles-limits.html[← Previous: Maxfiles and ONTAP inode information] | link:high-file-count-workloads-12-best-practices.html[Next: High-file-count NAS workload best practices →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-10-maxfiles-limits.html[← Previous: Maxfiles and ONTAP inode information]
+|link:high-file-count-workloads-12-best-practices.html[Next: High-file-count NAS workload best practices →]
+|===
 
 == Related information
 

@@ -99,7 +99,10 @@ A volume can have ample free inodes and still reach `maxdirsize` in one director
 * For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach].
 * For design and operational recommendations, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
 
-link:high-file-count-workloads-02-maxdirsize.html[Next: Maxdirsize and large ONTAP directories →]
+[cols=">",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-02-maxdirsize.html[Next: Maxdirsize and large ONTAP directories →]
+|===
 
 == Related information
 

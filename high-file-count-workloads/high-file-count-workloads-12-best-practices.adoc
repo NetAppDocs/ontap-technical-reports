@@ -266,7 +266,11 @@ Record:
 
 Revisit the model when application versions, filename formats, retention, protocols, or data protection workflows change.
 
-link:high-file-count-workloads-11-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements] | link:high-file-count-workloads-13-planning.html[Next: Planning approach →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-11-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements]
+|link:high-file-count-workloads-13-planning.html[Next: Planning approach →]
+|===
 
 == Related information
 

@@ -148,7 +148,11 @@ NOTE: In most cases, you do not need to monitor private inode usage because priv
 
 An unlinked file cannot always be released immediately. ONTAP can retain it temporarily as a zombie while references or asynchronous work complete. Large asynchronous-delete operations can therefore increase private inode use while cleanup is in progress. Again, private inodes do not count against the total `files` allowed in the volume.
 
-link:high-file-count-workloads-08-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity] | link:high-file-count-workloads-10-maxfiles-limits.html[Next: Maxfiles and ONTAP inode information →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-08-maxfiles-high-file-counts.html[← Previous: High file counts and inode capacity]
+|link:high-file-count-workloads-10-maxfiles-limits.html[Next: Maxfiles and ONTAP inode information →]
+|===
 
 == Related information
 

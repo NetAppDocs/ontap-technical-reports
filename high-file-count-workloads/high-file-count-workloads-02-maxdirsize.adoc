@@ -128,7 +128,11 @@ No. In a FlexGroup volume, every member volume uses the same `maxdirsize` settin
 
 FlexGroup volumes also use remote hard links to redirect I/O to member volumes, and those entries count against the directory-file size. A directory that generates many remote hard links reaches `maxdirsize` sooner than the same directory on a FlexVol, so the number of names that fit under a 320 MB cap is typically lower — often in the 2 to 2.6 million range rather than roughly 4.3 million.
 
-link:high-file-count-workloads-01-overview.html[← Previous: NetApp ONTAP High File Count Workloads for NAS volumes] | link:high-file-count-workloads-03-maxdirsize-view.html[Next: View maxdirsize and current directory size →]
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-01-overview.html[← Previous: NetApp ONTAP High File Count Workloads for NAS volumes]
+|link:high-file-count-workloads-03-maxdirsize-view.html[Next: View maxdirsize and current directory size →]
+|===
 
 == Related information
 
