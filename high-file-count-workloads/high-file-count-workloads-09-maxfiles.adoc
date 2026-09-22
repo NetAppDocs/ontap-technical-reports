@@ -161,6 +161,7 @@ An unlinked file cannot always be released immediately. ONTAP can retain it temp
 * link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
 * link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity]
 * link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
-* link:high-file-count-workloads-11-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
+* link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]
+* link:high-file-count-workloads-12-maxfiles-monitoring.html[Monitor maxfiles, EMS events, and ONTAP enhancements]
 * link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html[ONTAP NAS security styles^]
 * link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html[Auditing of alternate NTFS data streams^]

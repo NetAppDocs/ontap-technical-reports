@@ -76,4 +76,4 @@ You can later lower the cap, but not below the largest existing directory-file h
 * link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
 * link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
 * link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations]
-* link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices]
+* link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]

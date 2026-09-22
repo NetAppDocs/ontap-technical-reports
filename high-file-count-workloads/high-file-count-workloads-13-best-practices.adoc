@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-12-best-practices.html
+permalink: high-file-count-workloads/high-file-count-workloads-13-best-practices.html
 keywords: ONTAP, NAS, high file count, best practices, maxfiles, maxdir-size, maxdirsize, FlexGroup, NFS, SMB
 summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ONTAP."
 ---
@@ -262,7 +262,7 @@ Later ONTAP releases include directory indexing, inode-management improvements, 
 Do not enable a feature solely because it is related to high file count:
 
 * Raise `maxdir-size` only for a demonstrated single-directory requirement.
-* Raise `files` before projected public inode exhaustion.
+* Raise `files` before projected public inode exhaustion. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
 * Use `-files-set-maximum true` only when the largest currently possible ceiling is appropriate.
 * Enable directory-index transfer only when replication or restore should preserve indexes.
 * Enable File System Analytics only when its insight justifies its scanning work.
@@ -288,8 +288,8 @@ Revisit the model when application versions, filename formats, retention, protoc
 
 [cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-11-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements]
-|link:high-file-count-workloads-13-planning.html[Next: Planning approach →]
+|link:high-file-count-workloads-12-maxfiles-monitoring.html[← Previous: Monitor maxfiles, EMS events, and ONTAP enhancements]
+|link:high-file-count-workloads-14-planning.html[Next: Planning approach →]
 |===
 
 == Related information
@@ -297,6 +297,6 @@ Revisit the model when application versions, filename formats, retention, protoc
 * link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
 * link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
-* link:high-file-count-workloads-13-planning.html[Planning approach]
+* link:high-file-count-workloads-14-planning.html[Planning approach]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]

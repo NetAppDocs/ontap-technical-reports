@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: high-file-count-workloads/high-file-count-workloads-11-maxfiles-monitoring.html
+permalink: high-file-count-workloads/high-file-count-workloads-12-maxfiles-monitoring.html
 keywords: ONTAP, NAS, maxfiles, EMS, files-used, inodefile-public-capacity, monitoring
 summary: "Monitor ONTAP maxfiles usage, interpret inode EMS events, and review release enhancements."
 ---
@@ -65,7 +65,7 @@ Track both current use and inode-file capacity. A low `files-used` value after a
 | Administrators can inspect `files` and `files-used` and set a specific `-files` value. The default automatic value historically stopped growing at 21,251,126 when volume size reached approximately 680 GB; this was a default-sizing plateau, not the maximum configurable value.
 
 | ONTAP 9.9.1
-| Added `-files-set-maximum true`, a one-shot action that sets `files` to the current `files-maximum-possible`.
+| Added `-files-set-maximum true`, a one-shot action that sets `files` to the current `files-maximum-possible`. See link:high-file-count-workloads-11-maxfiles-controlling.html#set-the-maximum-currently-possible[Set the maximum currently possible].
 
 | ONTAP 9.13.1
 | Automatic default inode sizing continues as volumes grow beyond the earlier approximately 21-million plateau.
@@ -78,8 +78,8 @@ Release support and limits can vary by platform and volume type. Verify behavior
 
 [cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-10-maxfiles-limits.html[← Previous: Maxfiles and ONTAP inode information]
-|link:high-file-count-workloads-12-best-practices.html[Next: High-file-count NAS workload best practices →]
+|link:high-file-count-workloads-11-maxfiles-controlling.html[← Previous: Controlling maxfiles]
+|link:high-file-count-workloads-13-best-practices.html[Next: High-file-count NAS workload best practices →]
 |===
 
 == Related information
@@ -87,6 +87,7 @@ Release support and limits can vary by platform and volume type. Verify behavior
 * link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-08-maxfiles-high-file-counts.html[High file counts and inode capacity]
 * link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
+* link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` EMS reference^]
 * link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html[FlexGroup inode EMS events^]

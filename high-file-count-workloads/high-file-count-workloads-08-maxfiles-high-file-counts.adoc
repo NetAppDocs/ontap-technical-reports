@@ -23,7 +23,7 @@ The `files` option controls how many public inode entries may be allocated in th
 
 Creating files, directories, ACLs, named streams, or public directory indexes can grow the public inode file. Deleting objects decreases `files-used` and returns public inodes for reuse, but it does not shrink the public inode file's size.
 
-For examples of how to view file-count usage details, see link:high-file-count-workloads-11-maxfiles-monitoring.html#monitoring-example[Monitoring example]. For sizing guidance, see link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices].
+For examples of how to view file-count usage details, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitoring example]. For sizing guidance, see link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices].
 
 == How an inode count increments
 
@@ -93,7 +93,7 @@ Raising `files` changes the permitted ceiling; it does not immediately allocate 
 
 Used physical capacity for the inode file is separate from `maxdir-size` used capacity. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
 
-For how to inspect inode-file space in capacity units and how to read `inodefile-public-capacity` as an inode count, see link:high-file-count-workloads-11-maxfiles-monitoring.html#monitoring-example[Monitor maxfiles, EMS events, and ONTAP enhancements].
+For how to inspect inode-file space in capacity units and how to read `inodefile-public-capacity` as an inode count, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitor maxfiles, EMS events, and ONTAP enhancements].
 
 [cols="<,>",frame=none,grid=none]
 |===
@@ -105,4 +105,5 @@ For how to inspect inode-file space in capacity units and how to read `inodefile
 
 * link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
 * link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
-* link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices]
+* link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]
+* link:high-file-count-workloads-13-best-practices.html[High-file-count NAS workload best practices]
