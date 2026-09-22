@@ -46,11 +46,11 @@ The following volume fields are the ones that most often come up when planning o
 
 | `maxdir-size`
 | Yes, advanced
-| Authorizes a larger per-directory file. Raise only after measuring or modeling need.
+| Authorizes a larger per-directory file for more files per directory.
 
 | `is-dir-index-transfer-enabled`
 | Yes, admin
-| Moves directory indexes into public inode space for supported replication and restore portability. It does not enable indexing.
+| Moves directory indexes into public inode space for supported replication and restore portability.
 
 | `has-dir-index-public`
 | No, advanced
@@ -66,7 +66,7 @@ The following volume fields are the ones that most often come up when planning o
 
 | `analytics-state`
 | Yes, admin
-| Enables File System Analytics. Its namespace scans add work on high-file-count volumes but do not change `maxdir-size`.
+| Enables File System Analytics. Its namespace scans can add work on high-file-count volumes but do not change `maxdir-size`.
 |===
 
 == Volume language
