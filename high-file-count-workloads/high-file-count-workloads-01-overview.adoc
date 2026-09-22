@@ -93,7 +93,7 @@ A volume can have ample free inodes and still reach `maxdirsize` in one director
 
 === What is maxfiles?
 
-`maxfiles` (configured as the volume-level option `-files`) is a configurable ceiling for the number of public inodes available in a single volume. That count includes not just files and directories, but also named streams, ACLs, and other public objects - sometimes objects that are not seen in a directory listing. The volume contains a hidden inode file that holds those records. ONTAP grows the inode file when a new public inode is needed and no free record remains, up to the files`setting and total volume size. The configurable maximum for `-files` depends on volume size and ONTAP limits.
+`maxfiles` (configured as the volume-level option `-files`) is a configurable ceiling for the number of public inodes available in a single volume. That count includes not just files and directories, but also named streams, ACLs, and other public objects - sometimes objects that are not seen in a directory listing. The volume contains a hidden inode file that holds those records. ONTAP grows the inode file when a new public inode is needed and no free record remains, up to the `-files` setting and total volume size. The configurable maximum for `-files` depends on volume size and ONTAP limits.
 
 * For inode accounting, capacity, controls, release behavior, limits, and EMS events, see link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits].
 * For how to gather inode, directory, operation-rate, and capacity estimates, see link:high-file-count-workloads-13-planning.html[Planning approach].
