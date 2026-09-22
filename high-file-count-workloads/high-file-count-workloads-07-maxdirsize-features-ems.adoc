@@ -21,19 +21,19 @@ For how to view `maxdir-size` and a directory object's current size, see link:hi
 | ONTAP release | Functionality
 
 | ONTAP 9.2
-| Added persistent indexing for directories at approximately 2 MiB, reducing the need to load an entire large directory for targeted lookup.
+| Persistent directory indexing at approximately 2 MiB. See link:high-file-count-workloads-04-maxdirsize-indexing.html#why-indexing-exists[Why indexing exists].
 
 | ONTAP 9.5 (documented)
-| The ONTAP 9.5 command reference includes `-has-optimized-sparse-directories`, establishing that optimized sparse directories are supported by this release. The optimization hole-punches fully empty blocks in indexed directories so `READDIR` can skip holes and physical blocks can be reclaimed. Available public documentation does not identify whether an earlier ONTAP 9 release introduced it.
+| Optimized sparse directories (`-has-optimized-sparse-directories`): hole-punch empty blocks in indexed directories. Public docs do not confirm an earlier introduction. See link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
 
 | ONTAP 9.14.1
-| Public guidance identifies 320 MiB as the default `maxdir-size`. Published guidance commonly describes increases up to approximately 1 GiB and cautions about higher settings. Supported maximums remain release- and platform-dependent; verify Hardware Universe and support guidance.
+| 320 MiB default `maxdir-size`; published guidance commonly cites increases up to about 1 GiB. Confirm the supported maximum for the release and platform. See link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-02-maxdirsize.html#raising-the-maxdir-size-value[Raising the maxdir-size value].
 
 | ONTAP 9.17.1
-| Added `-is-dir-index-transfer-enabled` and public directory-index inodes so supported replication and restore workflows can transfer indexes instead of rebuilding them.
+| `-is-dir-index-transfer-enabled` and public directory-index inodes for supported SnapMirror transfer. See link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
 
 | ONTAP 9.20.1 (internal target; uncommitted)
-| Internal planning targets first-class enablement and performance work for directories up to an older 4 GiB on-disk ceiling. This is not a customer support statement or release commitment. Do not plan a production directory above the currently published supported maximum until ONTAP release documentation and Hardware Universe explicitly qualify it.
+| Internal planning for first-class support of the older 4 GiB on-disk ceiling. Not a customer commitment. See link:high-file-count-workloads-05-maxdirsize-impact.html#capacity-impact[Capacity impact].
 |===
 
 Do not present uncommitted future work as available functionality. Use the release notes, Hardware Universe, and command reference for the target ONTAP release as the final support authority.
