@@ -18,7 +18,7 @@ Without a persistent index, finding a name can require reading many directory bl
 
 The persistent index maps to the location of entries in the directory file. A targeted lookup can therefore read the required index and specific directory blocks instead of loading the entire directory file into memory. Indexing generally reduces CPU, memory, and I/O for lookup-oriented operations on large directories, which can free up more node resources for other workloads in addition to the large directory's contents.
 
-There is no administrator option needed to enable directory indexing. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (such as a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
+There is no administrator option needed to enable directory indexing. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
 
 == What indexing does not change
 
@@ -36,7 +36,7 @@ By default, directory indexes historically reside in the private inode space. Pr
 
 Beginning with ONTAP 9.17.1, the volume-level option `-is-dir-index-transfer-enabled true` moves directory indexes into public inode space so supported SnapMirror and SnapMirror Cloud workflows can transfer them. When the option is `true`, new indexes are created in public inode space and a scanner migrates existing private indexes. This can reduce post-restore index construction, but public indexes consume public inodes and must be included in `maxfiles` planning.
 
-You can see if there is a public directory index with the volume show option `-has-dir-index-public true`. 
+You can see if there is a public directory index with the volume show option `-has-dir-index-public true`. This option is not able to be manually set; it only shows true if there is a public directory index.
 
 Public directory indexes count toward `files` and can increase `files-used` by approximately one inode for each indexed directory. Directory indexes are not shared; there can be multiple directory indexes in a single volume for each large directory (≥ ~2 MB). The vast majority of directories in a normal namespace never reach that size, so they never get an index. There's no mechanism that indexes small directories. In principle, if every directory in a volume exceeded the threshold, each could have its own index.
 
@@ -58,7 +58,7 @@ The index tracks the hole so that:
 * The physical block can be reclaimed.
 * A create can later reuse that logical location.
 
-The advanced `-has-optimized-sparse-directories` field is read-only volume show option. A value of `true` means that the volume contains directory blocks in this optimized, hole-punched form.
+The advanced `-has-optimized-sparse-directories` field is a read-only volume show option. A value of `true` means that the volume contains directory blocks in this optimized, hole-punched form.
 
 If an application's directory size remains problematic after deletion, copying the remaining entries into a newly created directory produces a more compact directory-file layout. Lowering `maxdir-size` does not compact a sparse directory.
 
