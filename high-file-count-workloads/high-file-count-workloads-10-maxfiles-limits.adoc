@@ -16,8 +16,8 @@ The maximum number of public inodes available to an ONTAP volume is constrained 
 
 * The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
 * `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
-* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes.
-* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints.
+* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes. Because ONTAP allows at most about one inode per 4 KiB of volume size, a FlexVol or FlexGroup constituent must be approximately 7.8 TB or larger before that absolute value is configurable. Smaller volumes have a lower `files-maximum-possible`. Always query the field; usable-capacity adjustments mean the size is not an exact 4 KiB formula.
+* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints. To allow 2,040,109,451 public inodes on a constituent, that constituent itself must be approximately 7.8 TB or larger.
 * The FlexGroup-wide total is not the only operational boundary. Uneven placement can cause one constituent to approach or exhaust its assigned inode count while other constituents still have room.
 * For NFS, FlexGroup file counts that exceed about two billion unique file IDs also depend on 64-bit file identifiers. See <<nfs-64-bit-file-identifiers-and-flexgroup-file-counts>>.
 
@@ -130,6 +130,19 @@ volume modify -vserver <svm> -volume <volume> -files +<additional-inodes>
 ----
 
 Confirm the result with `volume show`.
+
+=== Setting files to the maximum up front
+
+Raising `files` to the current `files-maximum-possible` does not preallocate the public inode file and does not reserve the corresponding inode-record capacity. Immediate space risk is therefore low. For high-file-count NAS volumes, set `files` to the maximum the volume can hold whenever volume size and protocol constraints allow it, rather than waiting for an out-of-inodes event.
+
+The remaining implications are about what happens if the namespace actually grows toward that ceiling, and about hitting a limit you cannot raise further:
+
+* Capacity is consumed only as inodes are allocated. Each ONTAP 9 public inode uses 288 bytes in the inode file, plus inode-file structure and other metadata. At the FlexVol absolute cap, raw inode records alone are about 2,040,109,451 × 288 bytes (approximately 547 GiB). That used space also occupies the underlying aggregate, so monitor aggregate free space, not only volume used percentage. See link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact[Capacity impact].
+* After the inode file has grown, you cannot lower `files` below `inodefile-public-capacity`. Setting the ceiling high does not lock unused capacity; allocated records do.
+* On a FlexVol, 2,040,109,451 is a hard stop. You cannot add more public inodes to that volume. If the workload might exceed one volume's absolute cap, use a FlexGroup so you can add constituents. Setting a FlexVol or constituent to the maximum *its current size* allows is still appropriate; that value is often far below 2,040,109,451.
+* A FlexGroup-wide total can exceed two billion inodes. For NFS, enable 64-bit file identifiers before the visible file-ID count approaches two billion. See <<nfs-64-bit-file-identifiers-and-flexgroup-file-counts>>.
+* `files-set-maximum` is a one-shot action. Growing the volume later does not keep `files` at the new maximum; apply `-files` or `files-set-maximum` again after a size increase if you still want the highest allowed value.
+* Continue to monitor `files-used` against `files`. A maximum setting removes the default ceiling as a surprise, but the volume can still run out of inodes at the supported cap.
 
 === Set the maximum currently possible
 
