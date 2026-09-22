@@ -20,18 +20,28 @@ The directory consumes one inode, whose record is stored in the volume-level ino
 
 === Directory-block layout
 
-An ONTAP directory file grows in 4 KiB blocks, where each block is limited to a variable number of entry records and name chunks based on the size of each. With a 320MB directory size, up to 81,920 directory blocks can be allocated (320MB/4KiB, where 320MB is 335,544,320 bytes because ONTAP reports these values in binary units), so the total number of names allowed in the directory file depends on the number of entries allowed per directory block.
+An ONTAP directory file grows in 4 KiB blocks, where each block is limited to a variable number of entry records and name chunks based on the size of each. A name chunk in ONTAP is a 16-byte slot that stores part of a filename; each name occupies one entry record plus as many 16-byte chunks as its encoded length requires.
+
+Example of how name chunks would be allocated across a 48 byte name:
+
+<image here>
+
+=== Max number of directory blocks and maximum number of names
+
+The maximum number of directory blocks allowed is determined by the maxdirsize value. 
+
+With a 320MB directory size, up to 81,920 directory blocks can be allocated (320MB/4KiB, where 320MB is 335,544,320 bytes because ONTAP reports these values in binary units). As such, the total number of names allowed in the directory file depends on the number of entries allowed per directory block.
 
 Every 4 KiB directory block is divided the same way:
 
 * Up to 128 entry records of 12 bytes each (1536 bytes)
 * A shared pool of 160 name chunks of 16 bytes each (2560 bytes)
 
-Together these occupy one 4 KiB block. Each stored name needs an entry record and one or more name chunks, and whichever pool runs out first — the 128 entry records or the 160 name chunks — sets how many names that block can hold. With ASCII names, the name chunks are what run out first. As a result, neither `maxdirsize / filename-length` nor a fixed files-per-megabyte ratio is exact. This block layout is an internal implementation detail that is useful for estimation; it is not a guaranteed public on-disk interface.
+Together these occupy one 4 KiB block. Each stored name needs an entry record and one or more name chunks, and whichever pool runs out first — the 128 entry records or the 160 name chunks — sets how many names that block can hold. With ASCII names, the name chunks are what run out first. As a result, neither `maxdirsize / filename-length` nor a fixed files-per-megabyte ratio is exact.
 
 === Estimating the number of names per directory file
 
-To estimate how many names fit in one directory, work at the level of the 4 KiB directory block and then multiply by the number of blocks the cap allows:
+To roughly estimate how many names fit in one directory, work at the level of the 4 KiB directory block and then multiply by the number of blocks the cap allows:
 
 ----
 names in one directory = names per block × number of 4 KiB blocks
