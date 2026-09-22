@@ -42,7 +42,6 @@ Together these occupy one 4 KiB block. Each stored name needs an entry record an
 image::directory-block-4kib-layout.png[Diagram of a 4 KiB directory block showing the 48-byte Unicode short name using one 12-byte entry record and four 16-byte name chunks, with the 160-chunk pool allowing 40 such names per block,width=400,align="center",link=../media/high-file-count-workloads/directory-block-4kib-layout.png,window=_blank]
 
 {nbsp}
-
 In the graphic above, we see the 48-byte name from the previous example. That one name consumes a single 12-byte entry record plus the four 16-byte name chunks (64 bytes) shown earlier. The 160-chunk pool will run out of space in the block before the entry records are consumed. 160 total chunks / 4 chunks gives 40 of those names per block. Alternately, 88 of the 128 entry records go unused. A shorter everyday name would need only three chunks, so the same 4 KiB directory block can hold about 53 of those names instead.
 
 === Estimating the number of names per directory file
