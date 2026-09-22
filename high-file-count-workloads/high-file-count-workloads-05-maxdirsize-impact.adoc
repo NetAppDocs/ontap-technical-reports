@@ -10,24 +10,30 @@ summary: "Understand the capacity and performance effects of large ONTAP directo
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-Raising `maxdir-size` authorizes growth. Capacity and performance cost appear when a directory file actually becomes large, and create or rename operations fail when it reaches the cap.
+Raising the `maxdir-size` limit authorizes growth of the directory file. Capacity and performance cost only appear when a directory file actually becomes large, while create and rename operations fail when it reaches the cap.
 
 == Capacity impact
 
-Changing the `maxdir-size` setting consumes no capacity by itself. Actual growth does:
+Changing the `maxdir-size` setting consumes no capacity by itself. Actual increase of the directory entries do:
 
 * The directory file allocates 4 KiB blocks as names are added.
 * The companion index allocates separate B+tree and indirect blocks.
 * Snapshot copies can retain older directory and index blocks.
 * A directory that reached a high-water mark can keep its logical size after deletion.
 
-For example, authorizing a 4 GiB cap does not allocate 4 GiB. A directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
+For example, setting maxdirsize to a 4 GiB cap does not allocate 4 GiB of space. Conversely, a directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
 
-Do not include the data bytes of files below the directory when estimating `maxdirsize`. Include directory and index overhead in overall volume and aggregate capacity planning.
+When estimating `maxdirsize` values, you don't need to include the actual used space in the directory. Instead, consider the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
+
+When planning capacity usage, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata. If those directories are indexed and public, add ~100 inodes to the maxfiles budget and multiply the whole metadata figure by Snapshot retention. 
+
+== FlexGroup considerations for maxdirsize
+
+n a FlexGroup volume, remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hardlink inflation — lower. Validate against a representative directory with stat, ls -ld, or XCP.
 
 == Performance impact
 
-Large directories can affect:
+Large directories in an ONTAP system can affect:
 
 * Name lookup, create, unlink, and rename path length
 * Full directory enumeration and wildcard searches
@@ -44,20 +50,24 @@ Raise `maxdir-size` only when the workload requires a larger single directory an
 
 When a directory file reaches the cap:
 
-* ONTAP rejects operations that need to add another name to that directory.
-* The client can report ENOSPC, "file too large," NFS error 27, `STATUS_CANNOT_MAKE`, or another application-specific create or rename failure.
+* ONTAP rejects operations that need to add another name to that directory (such as creates or renames).
+* The client can report ENOSPC, "file too large," NFS error 27, `STATUS_CANNOT_MAKE`, or another application-specific create or rename failure. 
 * Other directories can continue to accept entries if they have capacity and inodes.
 * The volume can still have free data capacity and public inodes.
 * Reading existing files is not equivalent to adding another directory entry and is generally unaffected.
 
-Deleting entries can expose reusable directory slots, but it does not reduce the high-water directory-file size. The durable fix is usually to distribute names across new directories. If the flat namespace cannot change, evaluate a controlled `maxdir-size` increase:
+Exceeding maxfiles or maxdirsize limits can add complexity to troubleshooting since the issue appears to be capacity-related rather than file count related. Be sure to check EMS messages for clues.
+
+If a flat namespace cannot change, evaluate a controlled `maxdir-size` increase:
 
 ----
 set -privilege advanced
 volume modify -vserver <svm> -volume <volume> -maxdir-size 327MB
 ----
 
-For average growth, public guidance recommends increasing the current cap in increments of approximately 2%. For a migration with a known measured requirement, set the cap approximately 2% above that requirement. The change is immediate. You can later lower the cap, but not below the largest existing directory-file high-water mark; lowering it does not compact existing directories. Validate the supported value for the ONTAP release and platform, and monitor performance after the change.
+For average growth, public guidance recommends increasing the current cap in increments of approximately 2%. For a migration with a known measured requirement, set the cap approximately 2% above that requirement. The change is immediate and nondisruptive. 
+
+You can later lower the cap, but not below the largest existing directory-file high-water mark; lowering it does not compact existing directories. Validate the supported value for the ONTAP release and platform, and monitor performance after the change.
 
 link:high-file-count-workloads-04-maxdirsize-indexing.html[← Previous: Directory indexing in ONTAP] | link:high-file-count-workloads-06-maxdirsize-volume-types.html[Next: Volume type considerations →]
 
