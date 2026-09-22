@@ -12,7 +12,7 @@ summary: "Understand ONTAP directory indexing, public compared with private inde
 [.lead]
 ONTAP automatically indexes large directories so targeted lookups do not have to read the entire directory file at once. Indexing is separate from `maxdir-size` and does not change the maximum directory-file cap.
 
-== Why indexing exists
+== Why directory indexing exists
 
 An index in computing is a side structure whose job is to answer "where is this?" without walking every record. A book index is the familiar version: you look up a term and jump to a page instead of reading the whole book. Databases, search engines, and filesystems use the same idea so a lookup stays cheap as the collection grows. The index is not a second copy of the data. It is a map from a key, such as a name, to the location of that item.
 
