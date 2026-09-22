@@ -18,19 +18,19 @@ A FlexVol has one file system and one public inode supply. `maxdir-size` still a
 
 == FlexGroup volumes
 
-A FlexGroup presents one namespace backed by multiple FlexVol constituents. This improves aggregate file-count scale and enables distribution across nodes and aggregates, but it does not multiply the limit of one logical directory by the constituent count.
+A FlexGroup presents one namespace backed by multiple FlexVol constituents. This improves aggregated file-count and capacity scale, while enabling data distribution across nodes and aggregates, but it does not multiply the limit of one logical directory ('maxdir-size') by the constituent count.
 
 Consider the following differences:
 
 * Directory entries can point to files on remote constituents and can require a larger on-disk representation than local FlexVol entries.
 * The same visible filenames can therefore consume directory-file space at a different rate than in a FlexVol.
 * File and inode capacity is maintained per constituent, so distribution and constituent pressure matter.
-* Modify `maxdir-size` on the FlexGroup, not directly on a constituent.
-* Sharding an application across multiple directories gives ONTAP more opportunities to distribute work and files.
+* `maxdir-size` is modified at the FlexGroup level, not directly on a constituent.
+* Sharding an application across multiple directories using FlexGroup volumes gives ONTAP more opportunities to distribute work and files.
 
-Do not assume that a FlexVol files-per-directory estimate transfers unchanged to FlexGroup. Include the volume type in every maxdir-size model or migration assessment.
+The bottom line is that the maxdir-size allocation for a FlexGroup volume (and the maximum number of files allowed in a directory at the same directory size) will be different than a FlexVol. How different it is will depend on the overall dataset layout, how much remote placement has occurred, etc. 
 
-These remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
+FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
 
 == Volume options related to large directories
 
