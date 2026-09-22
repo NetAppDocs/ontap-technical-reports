@@ -3,14 +3,14 @@ title: High-file-count NAS workloads
 entries:
   - title: Overview
     url: /high-file-count-workloads/high-file-count-workloads-01-overview.html
-  - title: Maxdirsize and large directories
+  - title: Maxdir-size and large directories
     url: /high-file-count-workloads/high-file-count-workloads-02-maxdirsize.html
     entries:
-      - title: View maxdirsize and current directory size
+      - title: View maxdir-size and current directory size
         url: /high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html
       - title: Directory indexing in ONTAP
         url: /high-file-count-workloads/high-file-count-workloads-04-maxdirsize-indexing.html
-      - title: Impact of maxdirsize
+      - title: Impact of maxdir-size
         url: /high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html
       - title: Volume type considerations
         url: /high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html

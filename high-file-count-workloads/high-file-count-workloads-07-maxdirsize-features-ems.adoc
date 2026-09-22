@@ -1,20 +1,20 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html
-keywords: ONTAP, NAS, maxdirsize, EMS, wafl.dir.size, directory indexing
-summary: "Review ONTAP maxdirsize release enhancements, EMS events, and monitoring guidance for large directories."
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, EMS, wafl.dir.size, directory indexing
+summary: "Review ONTAP maxdir-size release enhancements, EMS events, and monitoring guidance for large directories."
 ---
 
-= Features, EMS, and monitoring for maxdirsize
+= Features, EMS, and monitoring for maxdir-size
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
 Use ONTAP release features, EMS events, and directory-size measurements to detect large-directory growth before creates fail.
 
-For how to view `maxdir-size` and a directory object's current size, see link:high-file-count-workloads-03-maxdirsize-view.html[View maxdirsize and current directory size].
+For how to view `maxdir-size` and a directory object's current size, see link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size].
 
-== ONTAP functionality and enhancements related to maxdirsize
+== ONTAP functionality and enhancements related to maxdir-size
 
 [options="header"]
 |===
@@ -38,7 +38,7 @@ For how to view `maxdir-size` and a directory object's current size, see link:hi
 
 Do not present uncommitted future work as available functionality. Use the release notes, Hardware Universe, and command reference for the target ONTAP release as the final support authority.
 
-== EMS messages related to maxdirsize
+== EMS messages related to maxdir-size
 
 === `wafl.dir.entries.warning`
 
@@ -46,15 +46,15 @@ The number of occupied directory entries has crossed the configured warning perc
 
 === `wafl.dir.size.warning`
 
-The directory has reached the configured warning percentage, typically 90%, of its `maxdirsize` limit. Use the volume and file ID from the event to resolve the directory path. Restructure the namespace or plan an increase before the cap is reached.
+The directory has reached the configured warning percentage, typically 90%, of its `maxdir-size` limit. Use the volume and file ID from the event to resolve the directory path. Restructure the namespace or plan an increase before the cap is reached.
 
 === `wafl.dir.size.max.warning`
 
-The directory has reached or exceeded the configured warning percentage, typically 90%, while the volume's current `maxdirsize` is below the default value defined by the release (the EMS reference describes that default as 1% of system memory). This differs from the normal `wafl.dir.size.warning` condition. Determine why the configured cap is below the default before deciding whether to restore the default, restructure the directory, or choose another supported value.
+The directory has reached or exceeded the configured warning percentage, typically 90%, while the volume's current `maxdir-size` is below the default value defined by the release (the EMS reference describes that default as 1% of system memory). This differs from the normal `wafl.dir.size.warning` condition. Determine why the configured cap is below the default before deciding whether to restore the default, restructure the directory, or choose another supported value.
 
 === `wafl.dir.size.max`
 
-The directory reached `maxdirsize`. Operations that add names fail until slots become reusable, the namespace is restructured, or the limit is raised.
+The directory reached `maxdir-size`. Operations that add names fail until slots become reusable, the namespace is restructured, or the limit is raised.
 
 === `wafl.maxdirsize.boot.notice`
 
@@ -62,7 +62,7 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 === Sparse `READDIR` events
 
-`wafl.readdir.expired` and `wafl.readdir.sparse` identify expensive enumeration of large sparse directories. They are related to directory layout and high-water behavior, but they do not mean that `maxdirsize` itself has been reached.
+`wafl.readdir.expired` and `wafl.readdir.sparse` identify expensive enumeration of large sparse directories. They are related to directory layout and high-water behavior, but they do not mean that `maxdir-size` itself has been reached.
 
 [cols="<,>",frame=none,grid=none]
 |===
@@ -72,7 +72,7 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
-* link:high-file-count-workloads-03-maxdirsize-view.html[View maxdirsize and current directory size]
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
+* link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-dir-events.html[WAFL directory EMS events^]
 * link:https://docs.netapp.com/us-en/ontap-ems/wafl-maxdirsize-events.html[`wafl.maxdirsize` EMS events^]

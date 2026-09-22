@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html
-keywords: ONTAP, NAS, maxdirsize, maxdir-size, volume show, stat, find, XCP, SMB, EMS
-summary: "View the ONTAP maxdirsize cap, measure a directory file from NFS, SMB, or XCP, and resolve EMS file IDs to paths."
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, volume show, stat, find, XCP, SMB, EMS
+summary: "View the ONTAP maxdir-size cap, measure a directory file from NFS, SMB, or XCP, and resolve EMS file IDs to paths."
 ---
 
-= View maxdirsize and current directory size
+= View maxdir-size and current directory size
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
@@ -32,7 +32,7 @@ stat -c '%n %s bytes' /mount/path/directory
 ls -ld /mount/path/directory
 ----
 
-Do not use `du` for this purpose. `du` reports data reachable below the directory, whereas `maxdirsize` applies to the directory metadata file itself.
+Do not use `du` for this purpose. `du` reports data reachable below the directory, whereas `maxdir-size` applies to the directory metadata file itself.
 
 To find the largest directories under a mount point, run a `find` that lists leaf directories by size and prunes Snapshot copies. The following returns the 10 largest directories:
 
@@ -44,7 +44,7 @@ The seventh column is the directory-file size in bytes; a directory at the 320 M
 
 == View directory size from an SMB client
 
-Windows and SMB clients do not expose a directory's own metadata size, so there is no direct SMB equivalent of `stat` or `ls -ld` for `maxdirsize`:
+Windows and SMB clients do not expose a directory's own metadata size, so there is no direct SMB equivalent of `stat` or `ls -ld` for `maxdir-size`:
 
 * `dir` lists a directory as `<DIR>` with no size of its own.
 * A folder's *Properties* dialog in File Explorer reports the total size of the data contained below the folder (equivalent to `du`), not the directory metadata file.
@@ -66,7 +66,7 @@ Print a tree-statistics report, which includes the largest directory's entry cou
 xcp scan -stats <host>:/<export>
 ----
 
-List each directory with its directory-file size in bytes, largest first. For a directory object, the `used` value is the directory metadata size that `maxdirsize` caps:
+List each directory with its directory-file size in bytes, largest first. For a directory object, the `used` value is the directory metadata size that `maxdir-size` caps:
 
 ----
 xcp scan -match "type == d" -fmt "'{} {}'.format(used, x)" <host>:/<export> | sort -rn
@@ -82,7 +82,7 @@ xcp diag find --branch-match True -fmt "'{size} {name}'.format(size=x.digest, na
 
 == Locate a directory reported by EMS
 
-The maxdirsize EMS event includes a volume and file ID. Resolve that inode to a path with:
+The maxdir-size EMS event includes a volume and file ID. Resolve that inode to a path with:
 
 ----
 volume file show-inode -vserver <svm> -volume <volume-or-constituent> -inode-number <file-id>
@@ -94,13 +94,13 @@ NOTE: For a FlexGroup, `volume file show-inode` operates on a constituent rather
 
 [cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-02-maxdirsize.html[← Previous: Maxdirsize and large ONTAP directories]
+|link:high-file-count-workloads-02-maxdirsize.html[← Previous: Maxdir-size and large ONTAP directories]
 |link:high-file-count-workloads-04-maxdirsize-indexing.html[Next: Directory indexing in ONTAP →]
 |===
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
 * link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
-* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdirsize]
+* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
 * link:https://docs.netapp.com/us-en/ontap-cli/volume-file-show-inode.html[`volume file show-inode` command reference^]

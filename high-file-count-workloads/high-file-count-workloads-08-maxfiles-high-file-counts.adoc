@@ -89,13 +89,13 @@ These figures describe inode records. Observed physical usage can also include i
 
 Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If it later holds one million public inodes, the raw inode records use 288 MB (approximately 274.7 MiB) of actual volume capacity. The inode file does not shrink, so capacity planning must account for its historical high-water allocation.
 
-This capacity is separate from `maxdirsize`. `maxdirsize` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdirsize`.
+This capacity is separate from `maxdir-size`. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
 
 Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value.
 
 [cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdirsize]
+|link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdir-size]
 |link:high-file-count-workloads-09-maxfiles.html[Next: Maxfiles and ONTAP inode limits →]
 |===
 

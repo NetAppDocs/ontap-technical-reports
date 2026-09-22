@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-12-best-practices.html
-keywords: ONTAP, NAS, high file count, best practices, maxfiles, maxdirsize, FlexGroup, NFS, SMB
+keywords: ONTAP, NAS, high file count, best practices, maxfiles, maxdir-size, maxdirsize, FlexGroup, NFS, SMB
 summary: "Plan, deploy, monitor, and operate high-file-count NAS workloads on ONTAP."
 ---
 
@@ -28,18 +28,18 @@ Collect or estimate:
 
 Use high-water values rather than daily averages. Build pipelines, analytics jobs, migrations, and temporary scratch workflows often create their largest namespace for a short period, but the inode and directory files can retain high-water capacity after cleanup.
 
-== Size maxfiles and maxdirsize independently
+== Size maxfiles and maxdir-size independently
 
 Maintain two separate forecasts:
 
 . *Volume inode forecast:* all public file-system objects expected in the FlexVol or in each FlexGroup constituent.
 . *Largest-directory forecast:* on-disk directory-file bytes for the directory with the most or largest names.
 
-Do not derive either value from the other. A sharded namespace can exhaust `maxfiles` without creating a large directory. A single flat directory can reach `maxdirsize` while the volume has millions of free inodes.
+Do not derive either value from the other. A sharded namespace can exhaust `maxfiles` without creating a large directory. A single flat directory can reach `maxdir-size` while the volume has millions of free inodes.
 
 Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces. Include directories, ACL inodes, named streams, and other public objects. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
 
-See link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits] and link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories].
+See link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits] and link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 
 == Prefer a sharded directory structure
 
@@ -87,7 +87,7 @@ Do not plan steady-state operation at 100% of any limit. Keep margin for:
 * FlexGroup placement imbalance
 * Software changes that alter filename length or namespace layout
 
-Set `files` high enough to cover projected peak objects plus margin. Set `maxdir-size` from measured directory entry behavior plus margin. For average growth, public maxdirsize guidance recommends increases of approximately 2% of the current cap; for migration, it recommends approximately 2% above measured need. This is adjustment guidance, not a universal operating margin. Additional margin should reflect forecast uncertainty and response time.
+Set `files` high enough to cover projected peak objects plus margin. Set `maxdir-size` from measured directory entry behavior plus margin. For average growth, public maxdir-size guidance recommends increases of approximately 2% of the current cap; for migration, it recommends approximately 2% above measured need. This is adjustment guidance, not a universal operating margin. Additional margin should reflect forecast uncertainty and response time.
 
 == Account for metadata capacity
 
@@ -276,7 +276,7 @@ Revisit the model when application versions, filename formats, retention, protoc
 
 * link:high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
 * link:high-file-count-workloads-09-maxfiles.html[Maxfiles and ONTAP inode limits]
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
 * link:high-file-count-workloads-13-planning.html[Planning approach]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volumes^]

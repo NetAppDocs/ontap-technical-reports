@@ -32,11 +32,11 @@ An inode's *type* describes what kind of object it represents. ONTAP also places
 
 Public inodes are allocated from the volume's public inode file and count toward `files` and `files-used`. They include client-visible objects and public metadata objects that do not appear as directory entries.
 
-The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
+The following table shows a list of public inodes found in ONTAP and additional information about them. The link:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`] column indicates whether creating that object adds a directory entry to the parent directory and therefore grows that parent's directory file.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`]
+| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`]
 
 | Regular file
 | Default file contents and attributes
@@ -44,7 +44,7 @@ The following table shows a list of public inodes found in ONTAP and additional 
 
 | Directory
 | A directory's names and the directory's own inode
-| *Yes.* Creating the directory adds a name in the parent. The new directory also has its own directory file, which `maxdirsize` limits independently.
+| *Yes.* Creating the directory adds a name in the parent. The new directory also has its own directory file, which `maxdir-size` limits independently.
 
 | Symbolic link
 | A pathname pointer rather than file data
@@ -125,7 +125,7 @@ The following table shows common private inode types.
 
 [options="header"]
 |===
-| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdirsize`]
+| Type | What it represents | Also counts against link:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`]
 
 | Directory index (default)^{asterisk}^
 | Companion B+tree used to look up names in a large directory

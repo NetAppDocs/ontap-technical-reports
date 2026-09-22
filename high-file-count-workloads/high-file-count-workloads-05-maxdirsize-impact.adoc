@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html
-keywords: ONTAP, NAS, maxdirsize, capacity, performance, ENOSPC
-summary: "Understand the capacity and performance effects of large ONTAP directories and what happens when maxdirsize is exceeded."
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, capacity, performance, ENOSPC
+summary: "Understand the capacity and performance effects of large ONTAP directories and what happens when maxdir-size is exceeded."
 ---
 
-= Impact of maxdirsize
+= Impact of maxdir-size
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
@@ -21,13 +21,13 @@ Changing the `maxdir-size` setting consumes no capacity by itself. Growth in the
 * Snapshot copies can retain older directory and index blocks.
 * A directory that reached a high-water mark can keep its logical size after deletion.
 
-For example, setting maxdirsize to a 4 GiB cap does not allocate 4 GiB of space. Conversely, a directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
+For example, setting maxdir-size to a 4 GiB cap does not allocate 4 GiB of space. Conversely, a directory file that actually grows to 320 MB of directory-file blocks uses 320 MB of actual volume capacity for those blocks; a directory that grows to 4 GiB of directory-file blocks uses 4 GiB. Companion indexes and other metadata add capacity on top of the directory-file size.
 
-When estimating `maxdirsize` values, you don't need to include the data stored in the files beneath the directory. Instead, consider only the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
+When estimating `maxdir-size` values, you don't need to include the data stored in the files beneath the directory. Instead, consider only the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
 
 When planning capacity usage, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata. If those directories are indexed and public, add ~100 inodes to the maxfiles budget. Account for extra Snapshot capacity where directory metadata churns, because Snapshot copies pin superseded directory and index blocks; a directory sitting at its high-water mark with stable contents adds little on its own. 
 
-== FlexGroup considerations for maxdirsize
+== FlexGroup considerations for maxdir-size
 
 In a FlexGroup volume, remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hardlink inflation — lower. Validate against a representative directory with stat, ls -ld, or XCP.
 
@@ -46,7 +46,7 @@ Directory indexing reduces targeted-lookup cost, but it does not make a very lar
 
 Raise `maxdir-size` only when the workload requires a larger single directory and restructuring is not practical. Prefer a wide or deep hierarchy when the application permits it.
 
-== What happens when maxdirsize is exceeded?
+== What happens when maxdir-size is exceeded?
 
 When a directory file reaches the cap:
 
@@ -56,7 +56,7 @@ When a directory file reaches the cap:
 * The volume can still have free data capacity and public inodes.
 * Reading existing files is not equivalent to adding another directory entry and is generally unaffected.
 
-Exceeding maxfiles or maxdirsize limits can add complexity to troubleshooting since the issue appears to be capacity-related rather than file count related. Be sure to check EMS messages for clues.
+Exceeding maxfiles or maxdir-size limits can add complexity to troubleshooting since the issue appears to be capacity-related rather than file count related. Be sure to check EMS messages for clues.
 
 If a flat namespace cannot change, evaluate a controlled `maxdir-size` increase:
 
@@ -77,7 +77,7 @@ You can later lower the cap, but not below the largest existing directory-file h
 
 == Related information
 
-* link:high-file-count-workloads-02-maxdirsize.html[Maxdirsize and large ONTAP directories]
+* link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
 * link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
 * link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume type considerations]
 * link:high-file-count-workloads-12-best-practices.html[High-file-count NAS workload best practices]
