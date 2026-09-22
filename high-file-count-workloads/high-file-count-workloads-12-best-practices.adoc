@@ -66,6 +66,7 @@ Use a FlexVol when one volume's capacity, inode scale, and performance domain sa
 Use FlexGroup when the workload benefits from greater aggregate capacity, file-count scale, and parallelism across constituents and nodes. Plan for:
 
 * Per-constituent inode limits and distribution
+* NFS 64-bit file identifiers when the FlexGroup can exceed about two billion files (see link:high-file-count-workloads-10-maxfiles-limits.html#nfs-64-bit-file-identifiers-and-flexgroup-file-counts[NFS 64-bit file identifiers and FlexGroup file counts])
 * Aggregate and constituent capacity balance
 * Workload placement behavior
 * FlexGroup-specific directory-entry representation
@@ -218,7 +219,16 @@ Do not wait for `callhome.no.inodes` or `wafl.dir.size.max`; at that point clien
 
 Deleting files frees public inodes for reuse but does not shrink the public inode file. Similarly, deleting names from a directory makes directory slots reusable but does not normally reduce the directory-file high-water size.
 
-Large deletes can be metadata-intensive and can temporarily increase private zombie inodes. Use supported asynchronous-delete capabilities where appropriate and monitor completion. Rate-limit client-side recursive deletes when they compete with production traffic.
+Large deletes can be metadata-intensive and can temporarily increase private zombie inodes. Rate-limit client-side recursive deletes (`rm -rf`) when they compete with production traffic.
+
+Beginning with ONTAP 9.8, `volume file async-delete` removes a directory from the cluster instead of over NFS or SMB, which avoids client and network contention. It applies to FlexVol and FlexGroup volumes. ONTAP scans the path, deletes subdirectory contents first, and runs parallel delete tasks (default 5,000 concurrent tasks; configurable from 50 to 100,000). In TR-4571 testing, that was about 10× faster than a single-threaded `rm -rf` on a 24,000-entry tree.
+
+----
+volume file async-delete start -vserver <svm> -volume <volume> -path /relative/dir
+volume file async-delete show
+----
+
+Constraints: the volume must be online and mounted, the path must be a directory (not a single file), and only one async-delete job can run at a time.
 
 If a large sparse directory remains a problem, create a new directory and copy or move the remaining namespace into a compact layout. Do not assume that lowering `maxdir-size` will compact it.
 

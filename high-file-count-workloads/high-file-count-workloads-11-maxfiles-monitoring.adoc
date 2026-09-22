@@ -24,7 +24,7 @@ This ERROR event indicates that a volume is out of inodes. New file-system objec
 * `fg.inodes.member.full` indicates that a constituent has run out of inodes and cannot accept new files.
 * `fg.inodes.member.allOK` indicates that the conditions that raised the nearly-full or full events no longer apply.
 
-For FlexGroup events, investigate constituent distribution as well as FlexGroup-level totals. Raise the FlexGroup file allowance rather than attempting to set `files` directly on one constituent.
+For FlexGroup events, investigate constituent distribution as well as FlexGroup-level totals. Raise the FlexGroup file allowance rather than attempting to set `files` directly on one constituent. A constituent that is out of *data* capacity can make the whole FlexGroup report `ENOSPC` and can even fail `ls`; see link:high-file-count-workloads-10-maxfiles-limits.html#flexgroup-constituent-out-of-space[FlexGroup constituent out of space].
 
 == Monitoring example
 
