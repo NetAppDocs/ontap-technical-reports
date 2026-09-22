@@ -93,7 +93,7 @@ Raising `files` changes the permitted ceiling; it does not immediately allocate 
 
 Used physical capacity for the inode file is separate from `maxdir-size` used capacity. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
 
-Use `volume show-space` and inspect the `Inodes` line to view inode-file space in capacity units. Do not interpret `inodefile-public-capacity` as a byte value - instead, treat it as a total number of inodes.
+For how to inspect inode-file space in capacity units and how to read `inodefile-public-capacity` as an inode count, see link:high-file-count-workloads-11-maxfiles-monitoring.html#monitoring-example[Monitor maxfiles, EMS events, and ONTAP enhancements].
 
 [cols="<,>",frame=none,grid=none]
 |===
