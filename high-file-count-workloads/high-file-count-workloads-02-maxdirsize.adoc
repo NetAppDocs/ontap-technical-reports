@@ -51,7 +51,7 @@ How many names fit in one block depends on how much of the block's space each na
 * Longer names fit fewer — for example, a 48-character name fits about 40 per block.
 * Names that must be stored in a wider form take roughly twice the space, so fewer fit. This applies to names with non-ASCII characters (such as accented or East Asian text), names that also carry an NFS alternate name, and FlexGroup remote entries. A 32-character name of this kind fits about 26 per block. If SMB also generates a short "8.3" alias alongside the long name, that alias takes extra space as well.
 
-In the other direction, old volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small. You will not see this on modern volumes with normal names: current ONTAP volumes store names in Unicode format so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on.
+Older volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small (fewer bytes). You will not see this behavior on modern volumes with normal names. For example, current ONTAP volumes store names in Unicode format so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on.
 
 Because names vary so much, there is no single number of files allowed in a directory. Public guidance commonly cites approximately 4.3 million names at a 320 MB setting for a FlexVol volume. That figure assumes ordinary names up to about 32 characters; it is a rough example, not a guarantee, and it does not require names to be any particular length. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
 
@@ -85,19 +85,32 @@ Because names vary so much, there is no single number of files allowed in a dire
 | 1,802,238
 |===
 
-The counts assume the `.` and `..` entries are present, which is why each value is two below the simple block math. The point is the spread: the same 320 MB cap holds roughly 4.3 million short, everyday names but fewer than half as many when the names are stored in a wider form, and only about 737,000 names when every name runs to the 255-character protocol maximum. Look at the application's actual names before you decide whether a cap needs to be raised.
+*Note:* The counts assume the `.` and `..` entries are present, which is why each value is slightly less than what the math would show. 
+
+In summary, the same 320 MB cap holds roughly 4.3 million short, everyday names but fewer than half as many when the names are stored in a wider form. If every name runs to the 255-character protocol maximum, only about 737,000 names would be allowed.
 
 === Filename length compared with path length
 
-`maxdirsize` accounts for the basename stored in a particular parent directory. It does not store the entire absolute path with every entry. Each pathname component is an entry in its own parent directory.
+`maxdirsize` accounts for the basename stored in a particular parent directory. It does not store the entire absolute path with every entry. Each pathname component is an entry in its own parent directory. As such, deeper directory structures would not increase maxdirsize usage.
 
-A deeper hierarchy adds directories and public inodes, but it reduces the number of names stored in each directory. This tradeoff usually improves scalability. Protocol and client path-length limits still apply independently.
+A deeper hierarchy adds directories and public inodes in the volume, but it reduces the number of names stored in each directory. This tradeoff usually improves scalability and overall performance. 
+
+*Note:* Protocol and client path-length limits still apply independently.
 
 == How the maxdirsize cap behaves
 
-The cap applies to every directory in the volume independently, and it is a limit rather than a reservation. A setting of 320 MB does not set aside 320 MB of volume capacity; it simply allows any one directory to grow up to that size. If a directory file does grow to 320 MB of blocks, those blocks use 320 MB of actual volume capacity. Once a directory file grows, its size stays at that high-water mark even if entries are later removed. Deletion of files or directories makes those entry slots reusable, but it does not compact the directory. Indexed directories can hole-punch fully empty 4 KiB blocks (available in ONTAP 9.5 and later) and reclaim those physical blocks, but the reported directory-file size does not normally shrink.
+The cap applies to every directory in the volume independently, and it is a limit rather than a reservation. A setting of 320 MB does not set aside 320 MB of volume capacity; it simply allows any one directory to grow up to that size. 
 
-The companion directory index that ONTAP creates for large directories consumes its own metadata capacity and an inode, but it is not part of the directory file and does not count against `maxdirsize`. See link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
+The following lists some considerations:
+
+* If a directory file does grow to 320 MB of blocks, those blocks use 320 MB of actual volume capacity. 
+* Once a directory file grows, its size stays at that high-water mark even if entries are later removed. 
+* Deletion of files or directories makes those entry slots reusable, but it does not compact the directory file. 
+* Indexed directories can hole-punch fully empty 4 KiB blocks (available in ONTAP 9.5 and later) and reclaim those physical blocks on disk, but the reported directory-file size does not normally shrink.
+
+*Note:* The companion directory index that ONTAP creates for large directories consumes its own metadata capacity and an inode, but it is not part of the directory file and does not count against `maxdirsize` unless it is configured to occupy the public inode space for SnapMirror replication purposes. 
+
+For details, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
 
 === Raising the maxdirsize value
 
