@@ -51,7 +51,7 @@ How many names fit in one block depends on how much of the block's space each na
 * Longer names fit fewer — for example, a 48-character name fits about 40 per block.
 * Names that must be stored in a wider form take roughly twice the space, so fewer fit. This applies to names with non-ASCII characters (such as accented or East Asian text), names that also carry an NFS alternate name, and FlexGroup remote entries. A 32-character name of this kind fits about 26 per block. If SMB also generates a short "8.3" alias alongside the long name, that alias takes extra space as well.
 
-In the other direction, old volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small. You will not see this on modern volumes with normal names.
+In the other direction, old volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small. You will not see this on modern volumes with normal names: current ONTAP volumes store names in Unicode format so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on.
 
 === Why the number of names varies
 
