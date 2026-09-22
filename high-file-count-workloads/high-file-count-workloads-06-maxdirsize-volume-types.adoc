@@ -117,7 +117,9 @@ The following examples use 32-character names at a 320 MB `maxdir-size` and incl
 | About 41% of the default ASCII count when supplementary characters are present
 |===
 
-If the names stay in basic ASCII, switching from `C.UTF-8` to `en_US.UTF-8`, `de.UTF-8`, `ja.UTF-8`, or `utf8mb4` does not reduce the per-directory count. Model the application's actual names, not only the language code. Mixed NFS and SMB access can add NFS alternate names or SMB 8.3 aliases on top of these figures. For the packing rules behind the table, see link:high-file-count-workloads-02-maxdirsize.html#estimating-the-number-of-names-per-directory-file[Estimating the number of names per directory file].
+If the names stay in basic ASCII, switching from `C.UTF-8` to `en_US.UTF-8`, `de.UTF-8`, `ja.UTF-8`, or `utf8mb4` does not reduce the per-directory count. Mixed NFS and SMB access can add NFS alternate names or SMB 8.3 aliases on top of these figures. 
+
+For the packing rules behind the table, see link:high-file-count-workloads-02-maxdirsize.html#estimating-the-number-of-names-per-directory-file[Estimating the number of names per directory file].
 
 [cols="<,>",frame=none,grid=none]
 |===
