@@ -27,10 +27,6 @@ When estimating `maxdir-size` values, you don't need to include the data stored 
 
 When planning capacity usage, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata. If those directories are indexed and public, add ~100 inodes to the maxfiles budget. Account for extra Snapshot capacity where directory metadata churns, because Snapshot copies pin superseded directory and index blocks; a directory sitting at its high-water mark with stable contents adds little on its own. 
 
-== FlexGroup considerations for maxdir-size
-
-In a FlexGroup volume, remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hardlink inflation — lower. Validate against a representative directory with stat, ls -ld, or XCP.
-
 == Performance impact
 
 Large directories in an ONTAP system can affect:

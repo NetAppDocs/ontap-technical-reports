@@ -30,6 +30,8 @@ Consider the following differences:
 
 Do not assume that a FlexVol files-per-directory estimate transfers unchanged to FlexGroup. Include the volume type in every maxdir-size model or migration assessment.
 
+These remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
+
 == Volume options related to large directories
 
 [options="header"]
