@@ -93,9 +93,11 @@ ACL inode use is not always a 1:1 relationship with a file or directory:
 
 A named stream is extra data attached to a file besides the content users normally open. In ONTAP it is the WAFL representation of an NTFS alternate data stream (ADS). The file's default, unnamed data lives in the base file inode. Each additional named stream is a separate public inode and counts toward `files` and `files-used`.
 
+Named streams persist with the file. They are not a temporary scratch area that ONTAP uses only during an open, copy, or save. A stream remains allocated until that stream is deleted or the base file is deleted. An application can create a stream and later remove it, but ONTAP does not expire named streams on its own.
+
 Some things to note:
 
-* SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. Common sources include browser metadata such as `Zone.Identifier`, backup and security applications, and other applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. An Office document downloaded from the internet through a web browser can nevertheless have a `Zone.Identifier` stream attached by Windows or the browser. Files synchronized by OneDrive do not necessarily receive this stream; behavior depends on the client and transfer path.
+* SMB workloads create and use named streams. Windows addresses them as `filename:stream_name`, for example `report.docx:Zone.Identifier`. `Zone.Identifier` is Windows Mark of the Web metadata. When a file is downloaded from the internet, Windows or the browser records a zone ID (commonly the Internet zone) so Explorer, SmartScreen, and Office can treat the file as untrusted until a user unblocks it. That stream stays on the file until it is removed. Other common sources include backup and security applications, and applications that store sidecar data as ADS. Microsoft Office `~$` lock files and temporary save files are ordinary files and directory entries, not named streams. Files synchronized by OneDrive do not necessarily receive a `Zone.Identifier` stream; behavior depends on the client and transfer path.
 
 * macOS clients accessing SMB can use named streams for Finder metadata and resource forks, commonly represented as `AFP_AfpInfo` and `AFP_Resource`. These streams remain associated with the base file and add public inode use without adding names to the parent user directory.
 
