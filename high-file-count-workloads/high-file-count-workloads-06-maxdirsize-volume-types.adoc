@@ -24,6 +24,10 @@ A FlexVol has one file system and one public inode supply. `maxdir-size` still a
 
 A FlexGroup presents one namespace backed by multiple FlexVol constituents. This improves aggregated file-count and capacity scale, while enabling data distribution across nodes and aggregates, but it does not multiply the limit of one logical directory ('maxdir-size') by the constituent count.
 
+The following figure shows how a directory file remains on one constituent while the file objects named by that directory can reside on other constituents.
+
+image::flexgroup-directory-placement.png[Diagram showing a FlexGroup directory file on one constituent with local and remote file objects across multiple constituents,width=700,align="center",link=../media/high-file-count-workloads/flexgroup-directory-placement.png,window=_blank]
+
 Consider the following differences:
 
 * Directory entries can point to files on remote constituents and can require a larger on-disk representation than local FlexVol entries.
