@@ -24,7 +24,7 @@ An ONTAP directory file grows in 4 KiB blocks, where each block is limited to a 
 
 Example of how name chunks would be allocated across a 48 byte name:
 
-image::directory-name-chunks-48-byte.png[Diagram of a 48-byte filename stored as one 12-byte entry record plus four 16-byte name chunks, three holding the name characters and one for record overhead,width=600,align="center",link=../media/high-file-count-workloads/directory-name-chunks-48-byte.png,window=_blank]
+image::directory-name-chunks-48-byte.png[Diagram of a 48-byte filename stored as one 12-byte entry record plus four 16-byte name chunks, three holding the name characters and a fourth from rounding the chunk count up,width=600,align="center",link=../media/high-file-count-workloads/directory-name-chunks-48-byte.png,window=_blank]
 
 === Max number of directory blocks and maximum number of names
 
@@ -39,72 +39,64 @@ Every 4 KiB directory block is divided the same way:
 
 Together these occupy one 4 KiB block. Each stored name needs an entry record and one or more name chunks, and whichever pool runs out first — the 128 entry records or the 160 name chunks — sets how many names that block can hold. With ASCII names, the name chunks are what run out first. As a result, neither `maxdirsize / filename-length` nor a fixed files-per-megabyte ratio is exact.
 
+image::directory-block-4kib-layout.png[Diagram of a 4 KiB directory block divided into 128 twelve-byte entry records (1,536 bytes) and a shared pool of 160 sixteen-byte name chunks (2,560 bytes),width=600,align="center",link=../media/high-file-count-workloads/directory-block-4kib-layout.png,window=_blank]
+
 === Estimating the number of names per directory file
 
-To roughly estimate how many names fit in one directory, work at the level of the 4 KiB directory block and then multiply by the number of blocks the cap allows:
+To roughly estimate how many names fit in one directory, first work out how many names fit in a single 4 KiB block, then multiply by the number of blocks the cap allows. At a 320 MB cap that is 81,920 blocks.
 
-----
-names in one directory = names per block × number of 4 KiB blocks
-----
+How many names fit in one block depends on how much of the block's space each name uses. Shorter, simpler names take less space, so more of them fit; longer names, or names ONTAP has to store in a wider form, take more space and leave room for fewer:
 
-At a 320MB cap that block count is 81,920 (335,544,320 / 4096). The names per block is set by how many of the block's 160 name chunks each entry consumes, rounding each division up:
+* Everyday names up to about 32 characters (for example, `report-2026.csv`) all pack the same, and roughly 53 fit in one block.
+* Longer names fit fewer — for example, a 48-character name fits about 40 per block.
+* Names that must be stored in a wider form take roughly twice the space, so fewer fit. This applies to names with non-ASCII characters (such as accented or East Asian text), names that also carry an NFS alternate name, and FlexGroup remote entries. A 32-character name of this kind fits about 26 per block. If SMB also generates a short "8.3" alias alongside the long name, that alias takes extra space as well.
 
-* Standard ASCII names: `chunks = max(3, (name length / 16) + 1)`. The floor of 3 chunks means any name up to 32 characters costs the same 3 chunks, so a block always holds 53 of them (160 / 3), whether the name is 3 characters or 32.
-* Long-form names, which ONTAP uses whenever the name contains non-ASCII characters, stores an NFS alternate name, or represents a FlexGroup remote entry: `chunks = max(3, (name length × 2 / 16) + 2)`, because those names are counted at UTF-16 width. An NFS alternate name adds eight characters to the name length first.
-* An SMB DOS 8.3 alias stored alongside the long name adds approximately three more chunks.
-
-`names per block = 160 / chunks`, capped at the block's 128 entry records. For normal names the 3-chunk floor keeps this at 53 or fewer, so the 128-record cap is only reached by legacy DOS 8.3 names that fit in a single chunk. Longer or long-form names use more chunks and therefore pack fewer per block, which is why the total varies.
+In the other direction, old volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small. You will not see this on modern volumes with normal names.
 
 === Why the number of names varies
 
-The following factors change how much directory-file space each entry consumes:
+The following things change how much space each name uses, and therefore how many names fit in a directory:
 
-* Filename length
-* ASCII compared with non-ASCII characters
-* Unicode long-form representation
-* An additional NFS alternate name, when required
-* An SMB DOS 8.3 alias, when generated
-* FlexGroup remote-entry representation
-* Deleted-entry fragmentation and how well new names reuse available slots
+* How long the names are
+* Whether the names use non-ASCII characters, such as accented or East Asian text
+* Whether a name also carries an NFS alternate name
+* Whether SMB generates a short "8.3" alias for the name
+* Whether the directory belongs to a FlexGroup, where some entries point to other members
+* How much of the space freed by deleted names can be reused by new ones
 
-This is why there is no absolute number of files allowed in a single directory. Public guidance commonly cites approximately 4.3 million names at a 320 MiB setting for a FlexVol volume. That number works out to roughly 78 *bytes* of directory file per name (4 KiB divided by the 53 short ASCII names that fit in a block) and applies to any standard ASCII name up to 32 characters; it does not mean the average filename is 78 characters long. Since file names are highly variable, those numbers can shift one way or the other. Below are a small set of common scenarios with name sizes and the total allowed files in a single directory based on a 320MB maxdirsize setting.
+This is why there is no single number of files allowed in a directory. Public guidance commonly cites approximately 4.3 million names at a 320 MB setting for a FlexVol volume. That figure assumes ordinary names up to about 32 characters; it is a rough example, not a guarantee, and it does not require names to be any particular length. Because filenames vary so much, the real number moves up or down with the names in use. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
 
-[cols="2,3,1,1,2",options="header"]
+[cols="3,3,1,2",options="header"]
 |===
-| Name profile | Sample filename | Chunks per name | Names per 4 KiB block | Names in one directory at 320MB
+| Name profile | Sample filename | Names per 4 KiB block | Names in one directory at 320MB
 
-| 8-character ASCII
+| Short, everyday name (8 characters)
 | `f0001.db`
-| 3
 | 53
 | 4,341,758
 
-| 32-character ASCII
+| Everyday name (32 characters)
 | `project-alpha-run0142-input1.dat`
-| 3
 | 53
 | 4,341,758
 
-| 48-character ASCII
+| Longer name (48 characters)
 | `run-2026-09-21-node07-sensor-array-01423.parquet`
-| 4
 | 40
 | 3,276,798
 
-| 32-character long form (non-ASCII characters or a FlexGroup remote entry; also matches a 32-character ASCII name that stores an SMB 8.3 alias)
+| Name with non-ASCII characters, or a FlexGroup entry (32 characters)
 | `résumé-final-2026-09-21-v03.docx`
-| 6
 | 26
 | 2,129,918
 
-| 32-character multiprotocol name that also stores an 8-character NFS alternate name
+| Name that also carries an NFS alternate name (32 characters)
 | `Marketing-Overview-2026Q3v2.pptx` with alternate `MARKET~1.PPT`
-| 7
 | 22
 | 1,802,238
 |===
 
-The counts assume the `.` and `..` entries are present, which is why each value is two below the block arithmetic. The spread is the point: the same 320MB cap holds roughly 4.3 million short ASCII names but fewer than half that many long-form names, and a directory of machine-generated names at the 255-character protocol maximum fits only about 737,000 names (17 chunks per name, 9 names per block). Model the application's actual names before you decide whether a cap needs to be raised.
+The counts assume the `.` and `..` entries are present, which is why each value is two below the simple block math. The point is the spread: the same 320 MB cap holds roughly 4.3 million short, everyday names but fewer than half as many when the names are stored in a wider form, and only about 737,000 names when every name runs to the 255-character protocol maximum. Look at the application's actual names before you decide whether a cap needs to be raised.
 
 === Filename length compared with path length
 
