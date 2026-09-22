@@ -139,6 +139,6 @@ FlexGroup volumes also use remote hard links to redirect I/O to member volumes, 
 * link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]
 * link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
 * link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdir-size]
-* link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume type considerations]
+* link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations]
 * link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
 * link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html[Maximum directory size for FlexVol volumes^]

@@ -66,7 +66,7 @@ At boot, ONTAP emits this NOTICE for a volume whose configured value is higher t
 
 [cols="<,>",frame=none,grid=none]
 |===
-|link:high-file-count-workloads-06-maxdirsize-volume-types.html[← Previous: Volume type considerations]
+|link:high-file-count-workloads-06-maxdirsize-volume-types.html[← Previous: Volume considerations]
 |link:high-file-count-workloads-08-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
 |===
 

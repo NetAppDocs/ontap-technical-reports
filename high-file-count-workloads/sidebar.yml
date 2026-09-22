@@ -12,7 +12,7 @@ entries:
         url: /high-file-count-workloads/high-file-count-workloads-04-maxdirsize-indexing.html
       - title: Impact of maxdir-size
         url: /high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html
-      - title: Volume type considerations
+      - title: Volume considerations
         url: /high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html
       - title: Features, EMS, and monitoring
         url: /high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html

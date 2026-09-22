@@ -1,22 +1,26 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html
-keywords: ONTAP, NAS, maxdir-size, maxdirsize, FlexVol, FlexGroup, volume options
-summary: "Compare FlexVol and FlexGroup maxdir-size behavior and review volume options related to large directories."
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, FlexVol, FlexGroup, volume language, utf8mb4, volume options
+summary: "Understand how volume type, volume options, and volume language affect ONTAP maxdir-size behavior."
 ---
 
-= Volume type considerations
+= Volume considerations
 :icons: font
 :imagesdir: ../media/high-file-count-workloads/
 
 [.lead]
-`maxdir-size` applies to every directory in both FlexVol and FlexGroup volumes, but FlexGroup directory entries and constituent layout change how quickly a directory file can grow.
+`maxdir-size` is a per-directory cap, but the volume around that directory still matters. Volume type, volume options, and volume language all change how quickly a directory file grows and how you manage the cap.
 
-== FlexVol volumes
+== Volume type
+
+`maxdir-size` applies to every directory in both FlexVol and FlexGroup volumes. FlexGroup directory entries and constituent layout change how quickly a directory file can grow.
+
+=== FlexVol volumes
 
 A FlexVol has one file system and one public inode supply. `maxdir-size` still applies independently to every directory. A single hot directory is processed within that volume's ownership and does not gain parallelism merely because the cluster contains additional nodes.
 
-== FlexGroup volumes
+=== FlexGroup volumes
 
 A FlexGroup presents one namespace backed by multiple FlexVol constituents. This improves aggregated file-count and capacity scale, while enabling data distribution across nodes and aggregates, but it does not multiply the limit of one logical directory ('maxdir-size') by the constituent count.
 
@@ -32,7 +36,9 @@ The bottom line is that the maxdir-size allocation for a FlexGroup volume (and t
 
 FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
 
-== Volume options related to large directories
+== Volume options
+
+The following volume fields are the ones that most often come up when planning or troubleshooting large directories.
 
 [options="header"]
 |===
@@ -56,12 +62,62 @@ FlexGroup volume remote hard links raise the per-directory figure by an amount t
 
 | `language`
 | Limited, admin
-| Controls name interpretation. Non-ASCII and alternate name forms can change directory size behavior.
+| Controls name interpretation. Non-ASCII names and 4-byte UTF-8 (`utf8mb4`) characters can pack fewer names per directory; see <<volume-language>>.
 
 | `analytics-state`
 | Yes, admin
 | Enables File System Analytics. Its namespace scans add work on high-file-count volumes but do not change `maxdir-size`.
 |===
+
+== Volume language
+
+The volume `-language` setting controls how NFS converts names between the client encoding and the Unicode names stored on disk. Volumes inherit the SVM default unless you set `-language` at create time. The ONTAP default is `C.UTF-8`. Beginning with ONTAP 9.5, `utf8mb4` stores 4-byte UTF-8 names (emoji and other Unicode supplementary characters) instead of placing the extra bytes in bag-of-bits.
+
+The language code itself does not change how many ASCII names fit in a directory. `C.UTF-8`, `en_US.UTF-8`, `de.UTF-8`, `ja.UTF-8`, and `utf8mb4` all use the same Unicode directory packing for the same characters. What changes the count is the characters in the names that language is meant to hold: non-ASCII text is stored in a wider form, and 4-byte supplementary characters on a `utf8mb4` volume are wider still. NFSv3 clients that cannot represent a name in the volume encoding can also cause ONTAP to store an 8-character NFS alternate name, which uses still more directory space.
+
+The following examples use 32-character names at a 320 MB `maxdir-size` and include the `.` and `..` entries. They are planning figures, not guarantees.
+
+[cols="2,3,3,1,2,2",options="header"]
+|===
+| Volume language | Typical use | Example 32-character name style | Names per 4 KiB block | Names in one directory at 320 MB | Compared with default ASCII
+
+| `C.UTF-8` (ONTAP default)
+| POSIX C locale with UTF-8. New SVMs and volumes inherit this unless `-language` is set.
+| ASCII, such as `project-alpha-run0142-input1.dat`
+| 53
+| 4,341,758
+| Baseline
+
+| `en_US.UTF-8`
+| US English UTF-8
+| The same ASCII or basic Latin names
+| 53
+| 4,341,758
+| No reduction vs default for ASCII names
+
+| `de.UTF-8`
+| German UTF-8, including umlauts (`ä`, `ö`, `ü`, `ß`)
+| Accented Latin, such as `Geschäftsbericht-2026-Q3-v03.docx`
+| 26
+| 2,129,918
+| About 49% of the default ASCII count
+
+| `ja.UTF-8`
+| Japanese UTF-8 (CJK in the Basic Multilingual Plane)
+| Japanese names of the same 32-character length
+| 26
+| 2,129,918
+| About 49% of the default ASCII count
+
+| `utf8mb4`
+| 4-byte UTF-8 (ONTAP 9.5 and later). Use when names include emoji or other supplementary characters.
+| Ordinary German or Japanese text still packs like the UTF-8 rows above. A 32-character name that includes supplementary characters (for example an emoji) packs more widely.
+| 22
+| 1,802,238
+| About 41% of the default ASCII count when supplementary characters are present
+|===
+
+If the names stay in basic ASCII, switching from `C.UTF-8` to `en_US.UTF-8`, `de.UTF-8`, `ja.UTF-8`, or `utf8mb4` does not reduce the per-directory count. Model the application's actual names, not only the language code. Mixed NFS and SMB access can add NFS alternate names or SMB 8.3 aliases on top of these figures. For the packing rules behind the table, see link:high-file-count-workloads-02-maxdirsize.html#estimating-the-number-of-names-per-directory-file[Estimating the number of names per directory file].
 
 [cols="<,>",frame=none,grid=none]
 |===
@@ -74,4 +130,5 @@ FlexGroup volume remote hard links raise the per-directory figure by an amount t
 * link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories]
 * link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP]
 * link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
+* link:https://docs.netapp.com/us-en/ontap/smb-admin/multi-byte-file-directory-qtree-names-concept.html[SMB multi-byte file, directory, and qtree names^]
 * link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[FlexGroup volume management^]

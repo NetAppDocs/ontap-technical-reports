@@ -88,7 +88,7 @@ A volume can have ample free inodes and still reach `maxdir-size` in one directo
 * For maxdir-size calculation details, see link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 * For directory indexing information, see link:high-file-count-workloads-04-maxdirsize-indexing.html[Directory indexing in ONTAP].
 * For capacity, performance, and exceeded-limit behavior, see link:high-file-count-workloads-05-maxdirsize-impact.html[Impact of maxdir-size].
-* For FlexVol and FlexGroup considerations, see link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume type considerations].
+* For FlexVol and FlexGroup considerations, see link:high-file-count-workloads-06-maxdirsize-volume-types.html[Volume considerations].
 * For release enhancements and EMS events, see link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size].
 
 === What is maxfiles?
