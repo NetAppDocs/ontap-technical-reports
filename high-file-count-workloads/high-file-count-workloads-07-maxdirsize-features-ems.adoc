@@ -32,11 +32,7 @@ For how to view `maxdir-size` and a directory object's current size, see link:hi
 | ONTAP 9.17.1
 | `-is-dir-index-transfer-enabled` and public directory-index inodes for supported SnapMirror transfer. See link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
 
-| ONTAP 9.20.1 (internal target; uncommitted)
-| Internal planning for first-class support of the older 4 GiB on-disk ceiling. Not a customer commitment. See link:high-file-count-workloads-05-maxdirsize-impact.html#capacity-impact[Capacity impact].
 |===
-
-Do not present uncommitted future work as available functionality. Use the release notes, Hardware Universe, and command reference for the target ONTAP release as the final support authority.
 
 == EMS messages related to maxdir-size
 
