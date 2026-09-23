@@ -26,7 +26,7 @@ Collect or estimate:
 * Snapshot schedule and retention
 * Backup, replication, migration, analytics, and security scan frequency
 
-Use high-water values rather than daily averages. Build pipelines, analytics jobs, migrations, and temporary scratch workflows often create their largest namespace for a short period and then cleans it up, but the inode and directory file values can retain high-water marks after cleanup.
+Use high-water values rather than daily averages. Build pipelines, analytics jobs, migrations, and temporary scratch workflows often create their largest namespace for a short period and then clean it up, but the inode and directory files can retain high-water marks after cleanup.
 
 == Size maxfiles and maxdir-size independently
 
@@ -35,14 +35,14 @@ Maintain two separate forecasts:
 . *Volume inode forecast:* all public file-system objects expected in the FlexVol or in each FlexGroup constituent.
 . *Largest-directory forecast:* on-disk directory-file bytes for the directory with the most or largest names.
 
-*Do not derive one value from the other.* 
-A sharded namespace (files split across many directories) can exhaust `maxfiles` without creating a large directory. A single flat directory can reach the `maxdir-size` limits while the volume has millions of free inodes.
+*Do not derive one value from the other.*
+A sharded namespace (files split across many directories) can exhaust `maxfiles` without creating a large directory. A single flat directory can reach the `maxdir-size` limit while the volume has millions of free inodes.
 
-*Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces.* 
+*Do not size `maxfiles` from visible file count alone on NTFS or heavily ACL'd namespaces.*
 Include directories, ACL inodes, named streams, and other public objects in your projections. Where ACLs have a heavy presence, use up to twice the projected file and directory count as a conservative starting estimate for `files`, then validate with representative data because ACL sharing can reduce actual use.
 
-* For high-file-count volumes, set `files` to the current `files-maximum-possible` when volume size and protocol constraints allow it; that ceiling does not preallocate space and allows the files to grow into it rather than needing to constantly maintain it. 
-* Raise `maxdir-size` only for a demonstrated single-directory need, typically in ~2% steps. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles] and link:high-file-count-workloads-05-maxdirsize-impact.html#what-happens-when-maxdir-size-is-exceeded[What happens when maxdir-size is exceeded?].
+* For high-file-count volumes, set `files` to the current `files-maximum-possible` when volume size and protocol constraints allow it. That ceiling does not preallocate space; it lets `files-used` grow into the allowance instead of requiring repeated raises.
+* Raise `maxdir-size` only for a demonstrated single-directory need, typically in approximately 2% steps. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles] and link:high-file-count-workloads-05-maxdirsize-impact.html#what-happens-when-maxdir-size-is-exceeded[What happens when maxdir-size is exceeded?].
 
 See link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types] and link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 
@@ -54,13 +54,15 @@ There are three common namespace layouts.
 * *Wide:* many top-level directories divide the files.
 * *Deep:* fewer top-level directories lead to multiple levels of subdirectories.
 
-When possible, avoid placing millions of names at one flat directory level when the application can use a wide or deep hierarchy. Flat layouts concentrate memory and CPU work and can increase latency during mass `GETATTR`, `READDIR`, lookup, and delete operations. In a FlexGroup volume, a large flat directory can also produce more remote entries, causing its directory file to approach `maxdir-size` sooner than the same visible name count in a FlexVol.
+image::namespace-layouts-flat-wide-deep.png[Diagram comparing a flat namespace with many files in one directory, a wide namespace with many top-level directories, and a deep namespace with fewer top-level directories and multiple subdirectory levels,width=700,align="center",link=../media/high-file-count-workloads/namespace-layouts-flat-wide-deep.png,window=_blank]
 
-FlexGroup volumes generally work best with numerous small directory files (generally <2 MB or less), but with directory indexing, larger directory sizes aren't alwasy problematic. Instead, the nature of the workload becomes the main focal point for performance concerns. ONTAP can place FlexGroup child directories remotely while favoring file locality to their parent directory, which reduces remote latency penalties.
+When possible, avoid placing millions of names at one flat directory level if the application can use a wide or deep hierarchy. Flat layouts concentrate memory and CPU work and can increase latency during mass `GETATTR`, `READDIR`, lookup, and delete operations. In a FlexGroup volume, a large flat directory can also produce more remote entries, causing its directory file to approach `maxdir-size` sooner than the same visible name count in a FlexVol.
 
-Distributing files across a hierarchy means using more directories with fewer files in each directory. 
+FlexGroup volumes generally work best with many smaller directories rather than one large flat directory. Directories below about 2 MiB stay on the simple scan path. Beginning with ONTAP 9.2, larger directories are indexed automatically, which helps targeted lookups. Indexing does not make a very large directory equivalent to a sharded hierarchy: enumeration, wildcard scans, and single-directory create serialization still apply. ONTAP can place FlexGroup child directories remotely while favoring file locality to the parent directory, which reduces remote latency for those files.
 
-Common sharding drivers could include:
+Distributing files across a hierarchy means using more directories with fewer files in each directory.
+
+Common sharding keys include:
 
 * A hash prefix
 * Customer, project, or tenant
@@ -70,7 +72,7 @@ Common sharding drivers could include:
 
 Choose enough shards to keep directory operations manageable, but do not create so many nearly empty directories that directory count itself becomes excessive. A deterministic scheme makes placement predictable and allows clients to locate files without scanning every shard.
 
-Wide and deep layouts can both work. Keep the complete path lengths within the limits of the NAS protocol, client operating system, and application. If a flat layout is unavoidable, monitor the largest directory file's current size and `maxdir-size` headroom, and validate whether a controlled increase is appropriate. <add link to monitoring maxdir size>
+Wide and deep layouts can both work. Keep complete path lengths within the limits of the NAS protocol, client operating system, and application. If a flat layout is unavoidable, monitor the largest directory file's current size and `maxdir-size` headroom as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size], and validate whether a controlled increase is appropriate.
 
 == Select the appropriate volume architecture
 
