@@ -22,7 +22,7 @@ Without a persistent index, finding a name can require reading many directory bl
 
 The persistent index maps to the location of entries in the directory file. A targeted lookup can therefore read the required index and specific directory blocks instead of loading the entire directory file into memory. Indexing generally reduces CPU, memory, and I/O for lookup-oriented operations on large directories, which can free up more node resources for other workloads in addition to the large directory's contents.
 
-image::directory-file-companion-index.png[Flow diagram from a client name lookup through a small directory scan and growth to about 2 MiB, to ONTAP automatically creating a companion index that allows a targeted lookup to read only the matching directory block,width=700,align="center",link=../media/high-file-count-workloads/directory-file-companion-index.png,window=_blank]
+image::directory-file-index.png[Flow diagram showing a client name operation against a directory file under 2 MiB being answered by a full scan, and a directory file over 2 MiB getting a separate directory index that allows a targeted lookup of the requested name,width=700,align="center",link=../media/high-file-count-workloads/directory-file-index.png,window=_blank]
 
 There is no administrator option needed to enable directory indexing. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
 
