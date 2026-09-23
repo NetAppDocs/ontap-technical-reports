@@ -57,7 +57,7 @@ How many names fit in one block depends on how much of the block's space each na
 
 Older volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small (fewer bytes). You will not see this behavior on modern volumes with normal names. This is because current ONTAP volumes store names in Unicode format so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on.
 
-Because names vary so much, there is no single number of files allowed in a directory. Public guidance commonly cites approximately 4.3 million names at a 320 MB setting for a FlexVol volume. That figure assumes ordinary names up to about 32 characters; it is a rough example, not a guarantee, and it does not require names to be any particular length. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
+Because names vary so much, there is no single number of files allowed in a directory. A useful planning figure is up to about 4.3 million names at a 320 MB setting for a FlexVol volume. That figure assumes ordinary names up to about 32 characters; it is a rough example, not a guarantee, and it does not require names to be any particular length. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
 
 [cols="3,3,1,2",options="header"]
 |===
@@ -91,7 +91,7 @@ Because names vary so much, there is no single number of files allowed in a dire
 
 *Note:* The counts assume the `.` and `..` entries are present, which is why each value is slightly less than what the math would show. 
 
-In summary, the same 320 MB cap holds roughly 4.3 million short, everyday names but fewer than half as many when the names are stored in a wider form. If every name runs to the 255-character protocol maximum, only about 737,000 names would be allowed.
+In summary, the same 320 MB cap holds up to about 4.3 million short, everyday names but fewer than half as many when the names are stored in a wider form. If every name runs to the 255-character protocol maximum, only about 737,000 names would be allowed.
 
 === Filename length compared with path length
 

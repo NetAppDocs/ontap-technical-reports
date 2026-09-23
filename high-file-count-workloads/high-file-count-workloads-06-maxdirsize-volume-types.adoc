@@ -38,7 +38,7 @@ Consider the following differences:
 
 The bottom line is that the `maxdir-size` allocation for a FlexGroup volume (and the maximum number of files allowed in a directory at the same directory size) will be different than a FlexVol. How different it is will depend on the overall dataset layout, how much remote placement has occurred, etc. 
 
-FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus ~4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
+FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million names at the 320 MB default versus up to about 4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
 
 == Volume options
 

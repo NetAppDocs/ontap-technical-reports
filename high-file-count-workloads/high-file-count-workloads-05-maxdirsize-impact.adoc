@@ -54,7 +54,7 @@ set -privilege advanced
 volume modify -vserver <svm> -volume <volume> -maxdir-size 327MB
 ----
 
-For average growth, public guidance recommends increasing the current cap in increments of approximately 2%. For a migration with a known measured requirement, set the cap approximately 2% above that requirement. The change is immediate and nondisruptive. 
+For average growth, increase the current cap in increments of approximately 2%. For a migration with a known measured requirement, set the cap approximately 2% above that requirement. The change is immediate and nondisruptive. 
 
 You can later lower the cap, but not below the largest existing directory-file high-water mark; lowering it does not compact existing directories. Validate the supported value for the ONTAP release and platform, and monitor performance after the change.
 
