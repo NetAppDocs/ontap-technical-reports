@@ -36,15 +36,22 @@ For FlexGroup, inspect both the configured total and every constituent's use:
 volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
 ----
 
-Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap. Use the application's inventory or migration assessment to forecast future growth; `files-used` describes the current namespace, not the future peak.
+* Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap in your total estimation. 
+* For ACLs, assume 2x the number of inodes used, where each file could have an ACL that uses an additional inode. 
+* Use the application's inventory or migration assessment to forecast future growth; `files-used` describes the current usage rather than the future peak.
 
 == Find the largest directories
 
-Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries. Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. Measure the directory object itself as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]. Model filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
+* Use application inventory, migration tools, or a controlled namespace scan (XCP can be used for this exercise) to identify directories with the most entries. 
+* Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. 
+* Measure the directory object itself as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]. 
+* Model and evaluate filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
 
 == Measure metadata operation rates
 
-Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates. Test representative concurrency and both warm- and cold-cache behavior. A bandwidth-only test does not characterize a metadata-heavy workload.
+* Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates. 
+* Test representative concurrency and both warm- and cold-cache behavior. 
+* Throughput measuremeants do not necessarily characterize a metadata-heavy workload, but OPs counters can be a clue - particularly `other_ops`
 
 == Find metadata and Snapshot capacity
 
