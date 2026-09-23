@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: high-file-count-workloads/high-file-count-workloads-13-planning.html
-keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdir-size, maxdirsize, inodes, metadata
+keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdir-size, maxdirsize, inodes, metadata, XCP
 summary: "Gather inode, directory, operation-rate, and capacity estimates before sizing a high-file-count NAS workload on ONTAP."
 ---
 
@@ -36,37 +36,60 @@ For FlexGroup, inspect both the configured total and every constituent's use:
 volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
 ----
 
-* Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap in your total estimation. 
-* For ACLs, assume 2x the number of inodes used, where each file could have an ACL that uses an additional inode. 
-* Use the application's inventory or migration assessment to forecast future growth; `files-used` describes the current usage rather than the future peak.
+* Include projected files, directories, streams, ACLs, public directory indexes, temporary objects, and migration overlap in the total estimate.
+* Where ACLs are common, use up to twice the projected file and directory count as a conservative starting estimate for `files`. Each NTFS or NFSv4 ACL can consume an extra public inode, but link:high-file-count-workloads-09-maxfiles.html#acl-inodes[ACL sharing] can reduce actual use. Validate with representative data.
+* Use the application's inventory or a migration assessment to forecast growth. `files-used` is current usage, not the future peak.
+
+NetApp XCP can count files and directories in the current namespace. On XCP 1.5 and later:
+
+----
+xcp scan -stats <host>:/<export>
+xcp scan -stats \\<server>\<share>
+----
+
+The `-stats` report includes file and directory counts. It does not include ACL inodes or named streams that never appear as directory entries, so add those from the application profile. Allow time on high-file-count datasets; XCP scans the tree before it prints totals. For the XCP 1.5 subcommand note and related scans, see link:high-file-count-workloads-03-maxdirsize-view.html#scan-directory-sizes-with-xcp[Scan directory sizes with XCP].
 
 == Find the largest directories
 
-* Use application inventory, migration tools, or a controlled namespace scan (XCP can be used for this exercise) to identify directories with the most entries. 
-* Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit. 
-* Measure the directory object itself as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]. 
-* Model and evaluate filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
+* Use application inventory, migration tools, or a controlled namespace scan to identify directories with the most entries.
+* Review `wafl.dir.size.warning` and related EMS events for directories already approaching the limit.
+* Measure the directory object itself as described in link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size].
+* Model filename lengths and alternate names as described in link:high-file-count-workloads-02-maxdirsize.html[Maxdir-size and large ONTAP directories].
+
+XCP can rank directories by entry count or by directory-file size. The `-stats` report includes the largest directory's entry count as `Dirsize`. To list every directory with its metadata-file size, largest first:
+
+----
+xcp scan -match "type == d" -fmt "'{} {}'.format(used, x)" <host>:/<export> | sort -rn
+----
+
+To list directories above a chosen entry count (2,000 in this example):
+
+----
+xcp diag find --branch-match True -fmt "'{size} {name}'.format(size=x.digest, name=x)" <host>:/<export> 2>/dev/null | awk '{if ($1 > 2000) print $1 " " $2}'
+----
+
+Those scans find the busy directories. They do not replace modeling name length and encoding for `maxdir-size`.
 
 == Measure metadata operation rates
 
-* Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates. 
-* Test representative concurrency and both warm- and cold-cache behavior. 
-* Throughput measuremeants do not necessarily characterize a metadata-heavy workload, but OPs counters can be a clue - particularly `other_ops`
+* Use application telemetry, client workload tools, packet traces, ONTAP performance statistics, or a monitoring tool such as Harvest to measure create, lookup, open, close, attribute, enumeration, rename, and delete rates.
+* Test representative concurrency and both warm-cache and cold-cache behavior.
+* Throughput measurements do not necessarily characterize a metadata-heavy workload. Ops counters can be a clue, particularly `other_ops`.
 
 == Find metadata and Snapshot capacity
 
-* Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve. 
-* Use `volume show-footprint` to review the volume's aggregate footprint. 
-* Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory file size to that mix.
-* For Unified ONTAP, view aggregate metadata with `aggregate show-space`
-* For NetApp AFX, view the Storage Availability zone metadata with `storage availability-zone show`
-* Account for roughly 1% for other system-specific metadata capacity usage
+* Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve.
+* Use `volume show-footprint` to review the volume's aggregate footprint.
+* Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory-file size.
+* On unified ONTAP, review aggregate metadata with `storage aggregate show-space`.
+* On AFX, review Storage Availability Zone metadata with `storage availability-zone show`.
+* Account for roughly 1% of capacity for other system metadata that cannot be inventoried from the host.
 
 == Don't conflate maxdir-size with maxfiles
 
-* Maxfiles is the total number of inodes allowed in a single volume
-* Maxdir-size is the total size of a directory file (per directory in a volume), driven by the number and size of name entries
-* Do not derive `maxdir-size` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
+* `files` (maxfiles) is the public-inode ceiling for a FlexVol or FlexGroup constituent.
+* `maxdir-size` is the byte cap on each directory file in the volume. How many names fit depends on name length and encoding, not on the volume file count.
+* Do not derive `maxdir-size` from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
 
 For design and operational recommendations, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
 
@@ -79,4 +102,6 @@ For design and operational recommendations, see link:high-file-count-workloads-1
 == Related information
 
 * link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types]
+* link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size]
 * link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html[Determine file and inode usage for an ONTAP volume^]
+* link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes^]
