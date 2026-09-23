@@ -55,9 +55,18 @@ volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields 
 
 == Find metadata and Snapshot capacity
 
-Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve. Use `volume show-footprint` to review the volume's aggregate footprint. Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory files, companion indexes, block rounding, private metadata, Snapshot-retained blocks, and growth margin.
+* Use `volume show-space` to separate user data, file-system metadata, inodes, and Snapshot reserve. 
+* Use `volume show-footprint` to review the volume's aggregate footprint. 
+* Estimate raw ONTAP 9 inode records as `peak allocated inodes × 288 bytes`, then add directory file size to that mix.
+* For Unified ONTAP, view aggregate metadata with `aggregate show-space`
+* For NetApp AFX, view the Storage Availability zone metadata with `storage availability-zone show`
+* Account for roughly 1% for other system-specific metadata capacity usage
 
-Do not derive `maxdir-size` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
+== Don't conflate maxdir-size with maxfiles
+
+* Maxfiles is the total number of inodes allowed in a single volume
+* Maxdir-size is the total size of a directory file (per directory in a volume), driven by the number and size of name entries
+* Do not derive `maxdir-size` directly from the total volume file count, and do not use `maxfiles` to estimate how many names fit in one directory.
 
 For design and operational recommendations, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
 
