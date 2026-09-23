@@ -78,21 +78,23 @@ Wide and deep layouts can both work. Keep complete path lengths within the limit
 
 === FlexVol
 
-Use a FlexVol when one volume's capacity, inode scale, and performance domain satisfy the workload. Keep enough node headroom for metadata bursts and HA takeover.
+Use a FlexVol when one volume's capacity (less than 1 TB), inode scale (less than 2 billion), and performance domain satisfy the workload (lower ingest, fewer clients). FlexVol volumes should also be considered for workloads that may require creation of many volumes/file systems in the cluster that may risk hitting total volume counts (such as with Kubernetes PVCs) or for VMware datastores.
 
 === FlexGroup
 
-Use FlexGroup when the workload benefits from greater aggregate capacity, file-count scale, and parallelism across constituents and nodes. Plan for:
+Use FlexGroup when the workload benefits from greater total capacity (>300TB), file-count scale (>2 billion), and parallelism across constituents and nodes. 
+
+Plan for:
 
 * Per-constituent inode limits and distribution
 * NFS 64-bit file identifiers when the FlexGroup can exceed about two billion files (see link:high-file-count-workloads-10-maxfiles-limits.html#nfs-64-bit-file-identifiers-and-flexgroup-file-counts[NFS 64-bit file identifiers and FlexGroup file counts])
-* Aggregate and constituent capacity balance
+* Aggregate and constituent capacity balance (Note: For NetApp AFX, this is not required)
 * Workload placement behavior
 * FlexGroup-specific directory-entry representation
 * Data protection compatibility
 * Application behavior when files are distributed
 
-A FlexGroup does not automatically parallelize operations on one logical directory. Sharding across directories remains valuable.
+A FlexGroup does not automatically parallelize operations on one logical directory. Sharding across directories remains valuable to performance balance.
 
 == Leave operating margin
 
