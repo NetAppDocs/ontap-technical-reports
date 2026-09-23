@@ -81,10 +81,6 @@ The concepts of `maxfiles` and `maxdir-size` protect different resources in ONTA
 
 A volume can have ample free inodes and still reach `maxdir-size` in one directory. In addition, a dataset could avoid large directory sizes and still exhaust the public inode supply in the volume. The client symptoms look similar at first: NFS typically returns `ENOSPC`, and SMB typically returns `STATUS_DISK_FULL`. A full directory can also return `STATUS_CANNOT_MAKE` even when the volume still has free inodes and data capacity.
 
-The following figure shows why the two limits must be monitored separately.
-
-image::maxfiles-vs-maxdir-size.png[Diagram comparing maxfiles exhaustion across a volume with maxdir-size exhaustion in one directory,width=700,align="center",link=../media/high-file-count-workloads/maxfiles-vs-maxdir-size.png,window=_blank]
-
 === What is maxdir-size?
 
 `maxdir-size` is the per-volume cap on how large any single WAFL directory file can grow. It is presented as a capacity value, rather than a fixed number of entries, even though the number of names in a single directory is one of the factors that can increase directory size. Filename length, Unicode character representation, SMB 8.3 aliases, NFS alternate names, and FlexGroup remote-entry representation all factor into directory size. When you increase the `maxdir-size` value for a volume, the setting authorizes growth on a per-directory basis rather than preallocating space.
