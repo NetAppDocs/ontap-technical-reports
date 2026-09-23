@@ -26,7 +26,7 @@ A FlexGroup presents one namespace backed by multiple FlexVol constituents. This
 
 The following figure shows how a directory file remains on one constituent while the file objects named by that directory can reside on other constituents.
 
-image::flexgroup-directory-placement.png[Diagram showing a FlexGroup directory file on one constituent with local and remote file objects across multiple constituents,width=700,align="center",link=../media/high-file-count-workloads/flexgroup-directory-placement.png,window=_blank]
+image::flexgroup-directory-placement.png[Diagram of a FlexGroup with one directory inode and directory file on a single constituent, local and remote file objects across members, and remote links counting against maxdir-size,width=700,align="center",link=../media/high-file-count-workloads/flexgroup-directory-placement.png,window=_blank]
 
 Consider the following differences:
 
