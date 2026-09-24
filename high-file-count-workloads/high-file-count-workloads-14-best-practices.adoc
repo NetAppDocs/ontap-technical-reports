@@ -210,6 +210,17 @@ High-file-count operations consume CPU, memory, cache, and storage I/O even when
 
 Balance workloads using observed metadata demand, not only capacity or throughput. A node can become metadata-bound while network and disk bandwidth appear available.
 
+== Spread client connections across data LIFs and nodes
+
+High-file-count NAS is often metadata-bound. An NFS or SMB mount typically uses one TCP connection to one data LIF, and that LIF lives on one node. If many clients, scanners, or backup jobs mount the same address, that node spends CPU on protocol processing even when the rest of the cluster is idle. A FlexGroup can redirect file operations over the cluster network, but that does not remove the load on the node that owns the client connection.
+
+* Create multiple data LIFs (data network interfaces) in the SVM, with more than one LIF on each node that serves the workload so clients have several paths into every node.
+* Confirm every node that should participate has at least one data LIF in that SVM.
+* Balance mounts across those LIFs and nodes. When you mount by IP, pick addresses evenly. When clients mount by name, present multiple LIF addresses behind one FQDN and use DNS load balancing.
+* Do not pin the entire workload to a single LIF or a single node.
+
+A single client that supports NFS `nconnect` or SMB multichannel can open additional connections on one mount. That helps that client; it does not replace spreading many clients across LIFs and nodes.
+
 == Use current ONTAP releases
 
 Later ONTAP releases include directory indexing, inode-management improvements, sparse-directory optimizations, directory-index transfer, and other high-file-count enhancements. Upgrade decisions must still consider platform support, data protection compatibility, and application qualification.
@@ -232,6 +243,7 @@ Record:
 * Peak file and directory counts
 * Selected margins
 * Volume and constituent layout
+* Data LIF and client-mount layout
 * `files` and `maxdir-size` values
 * Alert thresholds and response owners
 * Expected ingest and delete rates
