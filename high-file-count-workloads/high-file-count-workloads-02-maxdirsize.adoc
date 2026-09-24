@@ -57,11 +57,11 @@ How many names fit in one block depends on how much of the block's space each na
 
 * Everyday names up to about 32 characters (for example, `report-2026.csv`) all pack the same, and roughly 53 fit in one block.
 * Longer names fit fewer — for example, a 48-character name fits about 40 per block.
-* Names that must be stored in a wider form take roughly twice the space, so fewer fit. This applies to names with non-ASCII characters (such as accented or East Asian text), names that also carry an NFS alternate name, and FlexGroup remote entries. A 32-character name of this kind fits about 26 per block. If SMB also generates a short "8.3" alias alongside the long name, that alias takes extra space as well.
+* Names that must be stored in a wider form take roughly twice the space, so fewer fit. This applies to names with non-ASCII characters (such as accented or East Asian text), names that also carry an NFS alternate name, and FlexGroup remote entries. A 32-character name of this kind fits about 26 per block due to the size required by special characters. If SMB also generates a short "8.3" alias alongside the long name, that alias takes extra space as well.
 
-Older volumes that store legacy DOS-style "8.3" names can fit up to 128 per block because those names are so small (fewer bytes). You will not see this behavior on modern volumes with normal names. This is because current ONTAP volumes store names in Unicode format so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on.
+Older volumes that store legacy DOS-style "8.3" names can fit up to 128 entries per block because those names are so small (fewer bytes). However, you will not see this behavior on modern volumes with normal names. This is because current ONTAP volumes store names in Unicode format (C.UTF-8 by default) so they can support long filenames and international characters across NFS and SMB, rather than the eight-character DOS-style names that much older systems relied on. For more details on volume languages, see <insert link here>.
 
-Because names vary so much, there is no single number of files allowed in a directory. A useful planning figure is up to about 4.3 million names at a 320 MB setting for a FlexVol volume. That figure assumes ordinary names up to about 32 characters; it is a rough example, not a guarantee, and it does not require names to be any particular length. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
+Because names can vary so much, there is no single set number of files allowed in a directory. A useful planning figure is up to about 4.3 million ordinary names at a 320 MB setting for a FlexVol volume. Ordinary names here means up to about 32 ASCII characters. This is a rough example, not a guarantee, and it does not require names to be any particular length. The table below shows a few common cases and the approximate number of names each allows in a single directory at a 320 MB setting.
 
 [cols="3,3,1,2",options="header"]
 |===
@@ -107,7 +107,7 @@ A deeper hierarchy adds directories and public inodes in the volume, but it redu
 
 == How the maxdir-size cap behaves
 
-The cap applies to every directory in the volume independently, and it is a limit rather than a reservation. A setting of 320 MB does not set aside 320 MB of volume capacity; it simply allows any one directory to grow up to that size. 
+The cap applies to every directory in the volume independently, and it is a limit rather than a reservation. A setting of 320 MB does not instantly set aside 320 MB of volume capacity; it simply allows any one directory to grow up to that size. 
 
 The following lists some considerations:
 
