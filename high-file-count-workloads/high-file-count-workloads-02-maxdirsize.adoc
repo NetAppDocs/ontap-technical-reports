@@ -47,7 +47,7 @@ image::directory-block-4kib-layout.png[Diagram of a 4 KiB directory block showin
 
 {nbsp}
 
-The 160-chunk pool will run out of space in the block before the entry records are consumed. 160 total chunks / 4 chunks gives 40 of those names per block. Alternately, 88 of the 128 entry records go unused. A shorter everyday name would need only three chunks, so the same 4 KiB directory block can hold about 53 of those names instead.
+The 160-chunk pool will run out of space in the block before the entry records are consumed. 160 total chunks / 4 chunks gives 40 of those names per block. Alternately, 88 of the 128 entry records go unused. A shorter everyday name would need only three chunks, so the same 4 KiB directory block can hold about 53 of those names instead. This illustrates how the size of a name can directly impact the number of names allowed in a single directory.
 
 === Estimating the number of names per directory file
 
