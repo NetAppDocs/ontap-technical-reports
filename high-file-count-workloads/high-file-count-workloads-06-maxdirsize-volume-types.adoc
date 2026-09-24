@@ -36,9 +36,9 @@ Consider the following differences:
 * `maxdir-size` is modified at the FlexGroup level, not directly on a constituent.
 * Sharding an application across multiple directories using FlexGroup volumes gives ONTAP more opportunities to distribute work and files.
 
-The bottom line is that the `maxdir-size` allocation for a FlexGroup volume (and the maximum number of files allowed in a directory at the same directory size) will be different than a FlexVol. How different it is will depend on the overall dataset layout, how much remote placement has occurred, etc. 
+The bottom line is that the same `maxdir-size` setting on a FlexGroup often holds fewer names than on a FlexVol, because remote directory entries take more space. How large that gap is depends on dataset layout and how much remote placement has occurred.
 
-FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million ordinary names<link this to the page that discusses name sizes> at the 320 MB default versus up to about 4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
+FlexGroup volume remote hard links raise the per-directory figure by an amount that scales with the fraction of entries stored remotely. Plan with an upper bound of roughly 2× for large, flat directories (about 85% remote entries), which lowers the practical ceiling to about 2 to 2.6 million link:high-file-count-workloads-02-maxdirsize.html#estimating-the-number-of-names-per-directory-file[ordinary names] at the 320 MB default versus up to about 4.3 million on a FlexVol. Wide or deep directory layouts keep the ratio — and the remote hard link inflation — lower. Validate against a representative directory with `stat`, `ls -ld`, or XCP.
 
 == Volume options
 
