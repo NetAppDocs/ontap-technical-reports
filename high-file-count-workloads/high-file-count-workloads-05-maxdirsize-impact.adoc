@@ -18,7 +18,7 @@ Changing the `maxdir-size` setting consumes no capacity by itself. Growth in the
 
 When estimating `maxdir-size` values, you don't need to include the data stored in the files beneath the directory. Instead, consider only the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
 
-When planning capacity usage with directories with high file counts, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata that would count against the volume capacity used. If those directories are indexed and public, add ~100 inodes to the maxfiles budget. Account for extra Snapshot capacity where directory metadata churns, because Snapshot copies lock superseded directory and index blocks.
+When planning capacity usage with directories with high file counts, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata that would count against the volume capacity used. If those directories are indexed and public, add ~100 inodes to the maxfiles budget. Account for extra Snapshot capacity where directory metadata churns, because Snapshot copies retain superseded directory and index blocks.
 
 == Performance impact
 
@@ -31,7 +31,7 @@ Large directories in an ONTAP system can affect:
 * Protocol latency and client timeouts during long operations
 * Namespace scans performed by analytics, backup, replication, or security features
 
-Directory indexing reduces targeted-lookup cost, but it does not make a very large flat directory equivalent to a sharded hierarchy. Operations against a single directory can still encounter serialization and affinity limits even when the surrounding volume or cluster has unused resources, and full directory scans will bypass the index entirely. Directory indexing only helps when a targeted lookup is performed.
+Directory indexing reduces targeted-lookup cost, but it does not make a very large flat directory equivalent to a sharded hierarchy. Operations against a single directory can still encounter serialization and affinity limits even when the surrounding volume or cluster has unused resources. Indexing helps targeted name operations such as lookup, open, create, rename, and remove. Full directory scans and wildcard searches still walk the directory namespace; they do not use the index as a name-to-block shortcut. On hole-punched directories the index can skip empty blocks during `READDIR`, but that is not a substitute for a sharded layout.
 
 Raise `maxdir-size` only when the workload requires a larger single directory and restructuring is not practical. Prefer a wide or deep hierarchy when the application permits it.
 
