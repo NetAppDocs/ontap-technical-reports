@@ -14,7 +14,7 @@ High-file-count NAS workloads place more emphasis on namespace and metadata oper
 
 == What is meant by a high-file-count workload?
 
-There is no specific file-count threshold at which every workload becomes a high-file-count workload. That determination depends on more than the total number of files.
+High file-count is a bit of a misnomer for the workload itself. There is no specific file-count threshold at which every workload becomes a high-file-count workload. That determination depends on more than just the total number of files.
 
 For instance:
 
