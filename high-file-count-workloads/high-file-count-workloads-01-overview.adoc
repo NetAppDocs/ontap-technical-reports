@@ -59,11 +59,11 @@ ONTAP stores public inodes in a hidden, system-managed, volume-level inode file.
 
 In addition, directory files consume capacity when large numbers of names are stored in the same directory. Those directory files are not part of the inode file. They store names and mappings to inode numbers, and `maxdir-size` limits each one independently. The 320 MB default setting is a cap, not a reservation; if one directory file grows to 320 MB of directory-file blocks, those blocks use 320 MB of actual volume capacity.
 
-These two structures can add up. At high allocated inode counts, the inode file alone can reach multiple GB, and one or more large directory files can add hundreds of megabytes on top of that. A volume can also have a large inode file with every directory size still small, or one large directory with a still-small inode file. The result is usually unexplained used capacity in the volume outside of the normal datasets.
+These two structures can add up. At high allocated inode counts, the inode file alone can reach multiple GB, and one or more large directory files can add hundreds of megabytes on top of that. A volume can also have a large inode file with every directory size still small, or one large directory with a still-small inode file. That metadata consumes used volume capacity that is easy to miss if you only look at client-side listings of the user data files. The inode file is not a user-visible file; directory-file size is visible on the directory object itself.
 
 === Directory enumeration
 
-Large directories take longer to enumerate than smaller ones, and a directory that has had many files deleted can still be expensive to scan. The directory-file size stays at its high-water mark unless empty blocks are hole-punched; see link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
+Large directories take longer to enumerate than smaller ones, and a directory that has had many files deleted can still be expensive to scan. The reported directory-file size stays at its high-water mark even after names are deleted. Hole punching on indexed directories can reclaim empty physical blocks and skip them during `READDIR`, but it does not normally shrink the reported size; see link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
 
 === Failure-domain concentration
 
