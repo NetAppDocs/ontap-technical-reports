@@ -24,7 +24,7 @@ The persistent index maps to the location of entries in the directory file. A ta
 
 image::directory-file-index.png[Flow diagram showing a client name operation against a directory file under 2 MiB being answered by a full scan, and a directory file over 2 MiB getting a separate directory index that allows a targeted lookup of the requested name,width=700,align="center",link=../media/high-file-count-workloads/directory-file-index.png,window=_blank]
 
-There is no administrator option needed to enable directory indexing. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
+There is no administrator option needed to enable directory indexing - it is on by default. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
 
 == What indexing does not change
 
@@ -52,11 +52,11 @@ Private indexes do not consume the public `files` allowance.
 
 === When to enable public directory index transfers
 
-Enable index transfer when preserving indexes through replication or restore avoids expensive rebuilds for high-file-count directories. When transfer is disabled, SnapMirror omits private indexes and ONTAP rebuilds them on demand through a scanner or qualifying front-end operation, which can create a performance impact after failing over to a SnapMirror destination. Enabling index transfers does not improve local lookup performance; local indexing already occurs when the option is `false`.
+Enabling index transfers preserves indexes for replication or restores to avoid expensive rebuilds for high-file-count directories. When index transfer is disabled, SnapMirror omits private indexes and ONTAP will rebuild them on demand through a scanner or qualifying front-end operation, which can cause a performance impact after failing over to a SnapMirror destination. Enabling index transfers does not improve local lookup performance; local indexing already occurs when the option is `false`. It is strictly intended for use with volumes that are a part of a SnapMirror relationship.
 
 == Sparse directories and hole punching
 
-A directory file can grow large and then become sparse after many names are deleted. The directory-file size will remain at its high-water mark, so a `READDIR` could spend substantial CPU and I/O traversing empty blocks.
+A directory file can grow large and then become sparse after many names are deleted (ie when files are removed from the directory). The directory-file size will remain at its high-water mark, so a `READDIR` could spend substantial CPU and I/O traversing empty blocks.
 
 For indexed directories, ONTAP can punch a hole when a 4 KiB directory block becomes completely empty. 
 
