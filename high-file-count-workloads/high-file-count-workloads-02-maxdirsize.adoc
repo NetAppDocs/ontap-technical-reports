@@ -51,7 +51,7 @@ The 160-chunk pool will run out of space in the block before the entry records a
 
 === Estimating the number of names per directory file
 
-To roughly estimate how many names fit in one directory, first work out how many names fit in a single 4 KiB block, then multiply by the number of blocks the cap allows. At a 320 MB cap that is 81,920 blocks.
+To roughly estimate how many names fit in one directory, first work out how many names fit in a single 4 KiB block, then multiply by the number of blocks the cap allows. (Remember, at a 320 MB cap that is 81,920 blocks.)
 
 How many names fit in one block depends on how much of the block's space each name uses. Shorter, simpler names take less space, so more of them fit; longer names, or names ONTAP has to store in a wider form, take more space and leave room for fewer:
 
