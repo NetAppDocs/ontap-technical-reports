@@ -24,7 +24,7 @@ The persistent index maps to the location of entries in the directory file. A ta
 
 image::directory-file-index.png[Flow diagram showing a client name operation against a directory file under 2 MiB being answered by a full scan, and a directory file over 2 MiB getting a separate directory index that allows a targeted lookup of the requested name,width=700,align="center",link=../media/high-file-count-workloads/directory-file-index.png,window=_blank]
 
-There is no administrator option needed to enable directory indexing - it is on by default. Crossing the 2MiB threshold, an indexing scanner, or a qualifying front-end operation (a client-driven name lookup such as LOOKUP, ACCESS, a path-based open or create, rename, or remove) triggers it automatically.
+There is no administrator option needed to enable directory indexing; it is enabled by default. A directory becomes eligible for a persistent index only after its directory file exceeds the approximately 2 MiB threshold. After that condition is met, index construction can be initiated by the operation that grows the directory beyond the threshold, an indexing scanner, or a qualifying front-end name operation such as LOOKUP, ACCESS, a path-based open or create, rename, or remove. These scanner and front-end triggers do not override the size threshold or create persistent indexes for smaller directories. The approximately 2 MiB point changes how targeted lookups are served. It is not a directory-size latency threshold. How growing directories show up in client and node behavior is described in link:high-file-count-workloads-05-maxdirsize-impact.html#performance-impact[Performance impact].
 
 == What indexing does not change
 
@@ -38,7 +38,7 @@ The directory index is separate from the directory file. The following still hol
 
 == About private and public index inodes
 
-Each indexed directory has its own index; directory indexes are not shared. A volume can therefore hold many indexes — one for every directory large enough to be indexed (≥ ~2 MiB). Most directories in a normal namespace never reach that size, so they never get an index, and there is no mechanism that indexes small directories. In principle, if every directory in a volume exceeded the threshold, each could have its own index. Whether those indexes count against `maxfiles` depends on whether they are private or public, as described here.
+Each indexed directory has its own index; directory indexes are not shared. A volume can therefore hold one index for every directory that grows beyond the approximately 2 MiB threshold. Directories below the threshold remain on the nonpersistent lookup path and do not receive a companion directory-index inode, even when scanner or front-end operations access them. Whether indexes for eligible directories count against `maxfiles` depends on whether they are private or public, as described here.
 
 By default, directory indexes historically reside in the private inode space. Private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand after activation or restore.
 
@@ -52,7 +52,7 @@ Private indexes do not consume the public `files` allowance.
 
 === When to enable public directory index transfers
 
-Enabling index transfers preserves indexes for replication or restores to avoid expensive rebuilds for high-file-count directories. When index transfer is disabled, SnapMirror omits private indexes and ONTAP will rebuild them on demand through a scanner or qualifying front-end operation, which can cause a performance impact after failing over to a SnapMirror destination. Enabling index transfers does not improve local lookup performance; local indexing already occurs when the option is `false`. It is strictly intended for use with volumes that are a part of a SnapMirror relationship.
+Enabling index transfers preserves indexes for replication or restores to avoid expensive rebuilds for high-file-count directories. When index transfer is disabled, SnapMirror omits private indexes. After activation or restore, ONTAP can rebuild missing indexes for eligible directories through an indexing scanner or qualifying front-end operation, which can cause a performance impact after failing over to a SnapMirror destination. Enabling index transfers does not improve local lookup performance; local indexing already occurs when the option is `false`. It is strictly intended for use with volumes that are a part of a SnapMirror relationship.
 
 == Sparse directories and hole punching
 

@@ -32,7 +32,7 @@ volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maxim
 
 `files` and `files-maximum-possible` are inode limits. NFS clients also see a *file ID* (the inode number reported by `stat` or `ls -i`). By default, ONTAP NFS uses 32-bit file IDs. That protocol identifier is independent of SMB, which does not use the same file-ID structure.
 
-A FlexVol (and each FlexGroup constituent) is capped at 2,040,109,451 public inodes, which is just below the 32-bit signed maximum of 2,147,483,647. A FlexGroup namespace is many constituents, so its *aggregate* file count can exceed two billion. With 32-bit NFS file IDs:
+A FlexVol (and each FlexGroup constituent) is capped at 2,040,109,451 public inodes, which is just below the 32-bit signed maximum of 2,147,483,647. A FlexGroup namespace is many constituents, so its *aggregate* file count can exceed two billion (up to 400 billion in unified ONTAP and up to 1 trillion in AFX running ONTAP 9.19.1 and later). With 32-bit NFS file IDs:
 
 * Collisions are mathematically impossible at or below 2,147,483,647 unique IDs.
 * ONTAP can still hand out IDs up to the 32-bit unsigned maximum of 4,294,967,295. Collision likelihood rises as the count moves through that range, and collisions are guaranteed at that unsigned ceiling.
