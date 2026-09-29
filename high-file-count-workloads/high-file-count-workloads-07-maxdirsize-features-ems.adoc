@@ -1,0 +1,72 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, EMS, wafl.dir.size, directory indexing
+summary: "Review ONTAP maxdir-size release enhancements, EMS events, and monitoring guidance for large directories."
+---
+
+= Features, EMS, and monitoring for maxdir-size
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+Use ONTAP release features, EMS events, and directory-size measurements to detect large-directory growth before creates fail.
+
+For how to view `maxdir-size` and a directory object's current size, see link:high-file-count-workloads-03-maxdirsize-view.html[View maxdir-size and current directory size].
+
+== ONTAP functionality and enhancements related to maxdir-size
+
+[options="header"]
+|===
+| ONTAP release | Functionality
+
+| ONTAP 9.2
+| Persistent directory indexing at approximately 2 MiB. See link:high-file-count-workloads-04-maxdirsize-indexing.html#why-indexing-exists[Why indexing exists].
+
+| ONTAP 9.5 (documented)
+| Optimized sparse directories (`-has-optimized-sparse-directories`): hole-punch empty blocks in indexed directories. Public docs do not confirm an earlier introduction. See link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].
+
+| ONTAP 9.14.1
+| 320 MB default `maxdir-size`. Confirm the supported maximum for the release and platform for increases. See link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves] and link:high-file-count-workloads-02-maxdirsize.html#raising-the-maxdir-size-value[Raising the maxdir-size value].
+
+| ONTAP 9.17.1
+| `-is-dir-index-transfer-enabled` and public directory-index inodes for supported SnapMirror transfer. See link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes[About private and public index inodes].
+
+|===
+
+== EMS messages related to maxdir-size
+
+=== `wafl.dir.entries.warning`
+
+The number of occupied directory entries has crossed the configured warning percentage. Use the volume and file ID to locate the directory, then evaluate its entry count, current directory-file size, and growth pattern.
+
+=== `wafl.dir.size.warning`
+
+The directory has reached the configured warning percentage, typically 90%, of its `maxdir-size` limit. Use the volume and file ID from the event to resolve the directory path. Restructure the namespace or plan an increase before the cap is reached.
+
+=== `wafl.dir.size.max.warning`
+
+The directory has reached or exceeded the configured warning percentage, typically 90%, while the volume's current `maxdir-size` is below the default value defined by the release (the EMS reference describes that default as 1% of system memory). This differs from the normal `wafl.dir.size.warning` condition. Determine why the configured cap is below the default before deciding whether to restore the default, restructure the directory, or choose another supported value.
+
+=== `wafl.dir.size.max`
+
+The directory reached `maxdir-size`. Operations that add names fail until slots become reusable, the namespace is restructured, or the limit is raised.
+
+=== `wafl.maxdirsize.boot.notice`
+
+At boot, ONTAP emits this NOTICE for a volume whose configured value is higher than the default. It reminds the administrator that operations on very large directories can carry a performance penalty.
+
+=== Sparse `READDIR` events
+
+`wafl.readdir.expired` and `wafl.readdir.sparse` identify expensive enumeration of large sparse directories. They are related to directory layout and high-water behavior, but they do not mean that `maxdir-size` itself has been reached.
+
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-06-maxdirsize-volume-types.html[← Previous: Volume considerations]
+|link:high-file-count-workloads-08-maxfiles-high-file-counts.html[Next: High file counts and inode capacity →]
+|===
+
+== Related information
+
+* link:https://docs.netapp.com/us-en/ontap-ems/wafl-dir-events.html[WAFL directory EMS events^]
+* link:https://docs.netapp.com/us-en/ontap-ems/wafl-maxdirsize-events.html[`wafl.maxdirsize` EMS events^]
