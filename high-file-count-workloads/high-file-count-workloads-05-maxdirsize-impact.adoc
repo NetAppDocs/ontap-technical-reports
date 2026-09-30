@@ -1,0 +1,76 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html
+keywords: ONTAP, NAS, maxdir-size, maxdirsize, capacity, performance, ENOSPC
+summary: "Understand the capacity and performance effects of large ONTAP directories and what happens when maxdir-size is exceeded."
+---
+
+= Impact of maxdir-size
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+Raising the `maxdir-size` limit authorizes growth of the directory file. Capacity and performance cost only appear when a directory file actually becomes large, while create and rename operations fail when it reaches the cap.
+
+== Capacity impact
+
+Changing the `maxdir-size` setting consumes no capacity by itself. Growth in the directory's entries does. Directory files allocate 4 KiB blocks as names are added; companion indexes and Snapshot-retained directory blocks add more. Setting the cap does not reserve that space. High-water size after deletion is described in link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves[How the maxdir-size cap behaves].
+
+When estimating `maxdir-size` values, you don't need to include the data stored in the files beneath the directory. Instead, consider only the entries in a single directory. While the option is set at the volume level, it is applied on a per-directory basis. 
+
+When planning capacity usage with directories with high file counts, you would need to include directory and index overhead. For instance, a volume with 100 directories that each grow to the 320 MB cap holds roughly 32 GB of directory-file metadata that would count against the volume capacity used. If those directories are indexed and public, add ~100 inodes to the maxfiles budget. Account for extra Snapshot capacity where directory metadata churns, because Snapshot copies retain superseded directory and index blocks.
+
+== Performance impact
+
+Large directories in an ONTAP system can affect:
+
+* Name lookup, create, unlink, and rename path length
+* Full directory enumeration and wildcard searches
+* CPU and memory used for namespace processing
+* Cold-cache I/O needed to load index and directory blocks
+* Protocol latency and client timeouts during long operations
+* Namespace scans performed by analytics, backup, replication, or security features
+
+Directory indexing reduces targeted-lookup cost, but it does not make a very large flat directory equivalent to a sharded hierarchy. Operations against a single directory can still encounter serialization and affinity limits even when the surrounding volume or cluster has unused resources. Indexing helps targeted name operations such as lookup, open, create, rename, and remove. Full directory scans and wildcard searches still walk the directory namespace; they do not use the index as a name-to-block shortcut. On hole-punched directories the index can skip empty blocks during `READDIR`, but that is not a substitute for a sharded layout.
+
+There is no separate directory-file size at which ONTAP declares a performance failure. The approximately 2 MiB index threshold, described in link:high-file-count-workloads-04-maxdirsize-indexing.html#why-directory-indexing-exists[Why directory indexing exists], changes how targeted lookups are served. Below that size, finding a name can scan directory blocks and build a temporary in-memory hash, so the cost grows with the directory, but ONTAP does not create a persistent index. Above that size, targeted name operations use the index. What continues to get more expensive as one directory grows is full enumeration and wildcard search, cold-cache loads of directory and index blocks, and serialization of operations against that directory.
+
+Clients can see longer directory listings, wildcard searches, and application scans, higher protocol latency, and timeouts during those operations. The node that owns the directory can spend CPU and memory on metadata while data throughput stays low. The effect depends on operation rate, concurrency, cache state, and how many names are concentrated in that directory. `wafl.dir.size.warning`, typically at about 90% of `maxdir-size`, warns that the directory is nearing its size cap. It does not mark a measured latency threshold.
+
+For example, opening one known file in that directory can still return quickly, because the index serves the name lookup. Listing the same directory with `ls`, walking it with `find`, or running an application, backup, or security scan that reads every name can run for a long time, appear hung, or hit a client or application timeout. During that time the client transfers little file data. Reading or writing a file that is already open is generally unaffected.
+
+Raise `maxdir-size` only when the workload requires a larger single directory and restructuring is not practical. Prefer a wide or deep hierarchy when the application permits it.
+
+== What happens when maxdir-size is exceeded?
+
+When a directory file reaches the cap:
+
+* ONTAP rejects operations that need to add another name to that directory (such as creates or renames).
+* The client can report ENOSPC, "file too large," NFS error 27, `STATUS_CANNOT_MAKE`, or another application-specific create or rename failure. 
+* Other directories can continue to accept entries if they have capacity and inodes.
+* The volume can still have free data capacity and public inodes.
+* Reading existing files is not equivalent to adding another directory entry and is generally unaffected.
+
+Exceeding `maxfiles` or `maxdir-size` can look like a capacity problem. Check EMS messages; the client errors overlap with inode exhaustion. See link:high-file-count-workloads-01-overview.html#maxfiles-compared-with-maxdir-size[Maxfiles compared with maxdir-size].
+
+If a flat namespace cannot change, evaluate a controlled `maxdir-size` increase:
+
+----
+set -privilege advanced
+volume modify -vserver <svm> -volume <volume> -maxdir-size 327MB
+----
+
+For average growth, increase the current cap in increments of approximately 2%. For a migration with a known measured requirement, set the cap approximately 2% above that requirement. The change is immediate and nondisruptive. 
+
+You can later lower the cap, but not below the largest existing directory-file high-water mark; lowering it does not compact existing directories. Validate the supported value for the ONTAP release and platform, and monitor performance after the change.
+
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-04-maxdirsize-indexing.html[← Previous: Directory indexing in ONTAP]
+|link:high-file-count-workloads-06-maxdirsize-volume-types.html[Next: Volume considerations →]
+|===
+
+== Related information
+
+* link:high-file-count-workloads-07-maxdirsize-features-ems.html[Features, EMS, and monitoring for maxdir-size]
+* link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices]

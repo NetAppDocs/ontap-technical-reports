@@ -49,7 +49,7 @@ In addition, NetApp AFX supports many of the security features provided by unifi
 
 For information on which certifications unified ONTAP has received (as well as other security hardening information), see:
 
-* link:https://security.netapp.com/certifications[NetApp Product Security^]  
+* link:https://security.netapp.com/resources/[NetApp Product Security^]  
 * link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/security-hardening-overview.html[ONTAP security hardening overview^]
 
 == Snapshots and Data Protection
