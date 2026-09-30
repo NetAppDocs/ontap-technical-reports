@@ -21,7 +21,7 @@ For how to view `maxdir-size` and a directory object's current size, see link:hi
 | ONTAP release | Functionality
 
 | ONTAP 9.2
-| Persistent directory indexing at approximately 2 MiB. See link:high-file-count-workloads-04-maxdirsize-indexing.html#why-indexing-exists[Why indexing exists].
+| Persistent directory indexing at approximately 2 MiB. See link:high-file-count-workloads-04-maxdirsize-indexing.html#why-directory-indexing-exists[Why directory indexing exists].
 
 | ONTAP 9.5 (documented)
 | Optimized sparse directories (`-has-optimized-sparse-directories`): hole-punch empty blocks in indexed directories. Public docs do not confirm an earlier introduction. See link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching[Sparse directories and hole punching].

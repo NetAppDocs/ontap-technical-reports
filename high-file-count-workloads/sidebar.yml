@@ -4,8 +4,9 @@ entries:
   - title: Overview
     url: /high-file-count-workloads/high-file-count-workloads-01-overview.html
   - title: Maxdir-size and large directories
-    url: /high-file-count-workloads/high-file-count-workloads-02-maxdirsize.html
     entries:
+      - title: Overview
+        url: /high-file-count-workloads/high-file-count-workloads-02-maxdirsize.html
       - title: View maxdir-size and current directory size
         url: /high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html
       - title: Directory indexing in ONTAP
@@ -17,8 +18,9 @@ entries:
       - title: Features, EMS, and monitoring
         url: /high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html
   - title: High file counts and inode capacity
-    url: /high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html
     entries:
+      - title: Overview
+        url: /high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html
       - title: Inode types
         url: /high-file-count-workloads/high-file-count-workloads-09-maxfiles.html
       - title: Maxfiles and ONTAP inode information
