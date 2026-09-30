@@ -28,12 +28,6 @@ link:https://docs.netapp.com/us-en/ontap/flexcache-writeback/flexcache-write-bac
 Introduced in ONTAP 9.15.1, FlexCache write-back is an alternate mode of operation for writing at a cache. Write-back allows the write to be committed to stable storage at the cache and acknowledged to the client without waiting for the data to make it to the origin. The data is asynchronously flushed back to the origin. The result is a globally distributed file system that enables writes to perform at near-local speeds for specific workloads and environments, offering significant performance benefits.
 
 == FlexGroup volumes
-link:https://www.netapp.com/pdf.html?item=/media/17251-tr4571a.pdf[TR-4571a: FlexGroup top ten best practices^]
-This technical report is a condensed version of TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide for quick consumption.
-
-link:https://www.netapp.com/pdf.html?item=/media/7337-tr4557.pdf[TR-4557: NetApp ONTAP FlexGroup volumes - A technical overview^]
-Learn about FlexGroup volumes, an ONTAP scale-out NAS container, that blends near-infinite capacity with predictable, low-latency performance in metadata-heavy workloads.
-
 link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes best practices and implementation guide^]
 Learn about FlexGroup volumes, recommended practices and implementation tips. FlexGroup volumes are an evolution of ONTAP scale-out NAS containers, that blends nearly infinite capacity with predictable, low latency performance in metadata-heavy workloads.
 
