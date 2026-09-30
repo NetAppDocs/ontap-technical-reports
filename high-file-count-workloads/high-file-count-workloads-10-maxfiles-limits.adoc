@@ -1,0 +1,111 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-10-maxfiles-limits.html
+keywords: ONTAP, NAS, maxfiles, files-maximum-possible, FlexGroup, 64-bit file IDs
+summary: "Understand ONTAP maxfiles limits, NFS file identifiers, and behavior at inode exhaustion."
+---
+
+= Maxfiles and ONTAP inode information
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+The maximum number of public inodes available to an ONTAP volume is constrained by volume size, the configured `files` value, release behavior, and an absolute FlexVol limit.
+
+== Maxfiles limits
+
+* The normal default is derived from volume size at approximately one inode for every 32 KiB of volume capacity, subject to ONTAP's usable-capacity factor and release behavior.
+* `files-maximum-possible` is based on approximately one inode for every 4 KiB of volume capacity, with ONTAP's usable-capacity adjustment, before the absolute cap is applied. Query the field instead of treating this ratio as an exact formula.
+* A FlexVol volume has an absolute maximum of 2,040,109,451 public inodes. Because ONTAP allows at most about one inode per 4 KiB of volume size, a FlexVol or FlexGroup constituent must be approximately 7.8 TB or larger before that absolute value is configurable. Smaller volumes have a lower `files-maximum-possible`. Always query the field; usable-capacity adjustments mean the size is not an exact 4 KiB formula.
+* A FlexGroup consists of multiple constituents, each with its own inode file and enforced limit. Configure `files` on the FlexGroup. ONTAP divides the FlexGroup total evenly across its constituents, subject to rounding and existing allocation constraints. The same approximately 7.8 TB constituent size applies if a constituent must be able to hold 2,040,109,451 public inodes.
+* The FlexGroup-wide total is not the only operational boundary. Uneven placement can cause one constituent to approach or exhaust its assigned inode count while other constituents still have room.
+* For NFS, FlexGroup file counts that exceed about two billion unique file IDs also depend on 64-bit file identifiers. See <<nfs-64-bit-file-identifiers-and-flexgroup-file-counts>>.
+
+Always query the target system rather than assuming that a theoretical maximum is configurable on a particular volume:
+
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,inodefile-public-capacity
+----
+
+== NFS 64-bit file identifiers and FlexGroup file counts
+
+`files` and `files-maximum-possible` are inode limits. NFS clients also see a *file ID* (the inode number reported by `stat` or `ls -i`). By default, ONTAP NFS uses 32-bit file IDs. That protocol identifier is independent of SMB, which does not use the same file-ID structure.
+
+A FlexVol (and each FlexGroup constituent) is capped at 2,040,109,451 public inodes, which is just below the 32-bit signed maximum of 2,147,483,647. A FlexGroup namespace is many constituents, so its *aggregate* file count can exceed two billion (up to 400 billion in unified ONTAP and up to 1 trillion in AFX running ONTAP 9.19.1 and later). With 32-bit NFS file IDs:
+
+* Collisions are mathematically impossible at or below 2,147,483,647 unique IDs.
+* ONTAP can still hand out IDs up to the 32-bit unsigned maximum of 4,294,967,295. Collision likelihood rises as the count moves through that range, and collisions are guaranteed at that unsigned ceiling.
+* Raising `files` on the FlexGroup does not prevent NFS from wrapping 32-bit IDs. ONTAP does not stop creates at two billion solely because 32-bit IDs are in use.
+
+A collision can look like two different objects sharing one inode number. Clients can then report stale file handles, circular directory structure errors during `find` or `rm`, failed listings, or application failure.
+
+To go safely beyond two billion files over NFS, enable 64-bit file IDs on the SVM's NFS server (disabled by default for legacy 32-bit application compatibility). Beginning with ONTAP 9.7, NFSv3 and NFSv4.x have separate options; set both if both protocols are in use. Otherwise one protocol can keep creating files while the other errors on a collision.
+
+----
+set -privilege advanced
+vserver nfs modify -vserver <svm> -v3-64bit-identifiers enabled -v4-64bit-identifiers enabled
+----
+
+After you enable or disable the option, remount NFS clients. File-system IDs change, and existing mounts can return stale file handles until they remount. Test application and OS support on a separate SVM first. Most modern NFS clients accept 64-bit IDs.
+
+If 64-bit IDs must stay off, keep the FlexGroup-wide NFS-visible count at or below 2,147,483,647. Split 32-bit and high-file-count NFS workloads onto different SVMs if only some volumes need more than two billion files.
+
+=== Quota safety rail for 32-bit NFS file IDs
+
+Beginning with ONTAP 9.5, a quota *file* limit can stop creates before NFS wraps 32-bit IDs. Tree quotas do not enforce on files created at the volume root, only in qtrees, so:
+
+. Create a qtree that will hold the dataset.
+. Create a tree quota rule with a file limit of 2,000,000,000 (or 2,147,483,647).
+. Turn quotas on and resize.
+. Export, share, and mount the *qtree*, not the volume root, and use permissions or export policy so clients cannot create at the volume level.
+
+----
+qtree create -vserver <svm> -volume <flexgroup> -qtree <qtree>
+quota policy rule create -vserver <svm> -policy-name default -volume <flexgroup> -type tree -target <qtree> -file-limit 2000000000
+quota on -vserver <svm> -volume <flexgroup>
+quota resize -vserver <svm> -volume <flexgroup>
+----
+
+User or group file-limit rules are an alternative when the creating identities are known. This is a safety rail for 32-bit NFS IDs, not a substitute for enabling 64-bit identifiers when the namespace is expected to grow past two billion files.
+
+=== NFS FSID change
+
+NFS uses a file-system ID (FSID) so the client can tell one file system from another. In ONTAP, junctioned volumes can present different FSIDs. Some older Linux clients mishandle FSID changes on operations such as `chown` and `chmod`.
+
+The SVM NFS options `-v3-fsid-change` and `-v4-fsid-change` (the latter applies to FlexGroup with NFSv4.x from ONTAP 9.7) control that behavior. Leave them enabled for FlexGroup and other high-file-count SVMs. When FSID change is enabled, each volume has its own file-ID pool, so ten volumes with a billion files each do not share one 32-bit ID space. When it is disabled, 32-bit or 64-bit file IDs apply to the *SVM*: every volume shares one pool, and collisions appear much sooner.
+
+If you must disable FSID change for a legacy client, enable 64-bit file IDs on that SVM first and test on a separate SVM. Disabling FSID change does not make Snapshot FSIDs identical in NFSv3; Snapshot copies still have distinct FSIDs.
+
+== What happens when maxfiles is exceeded?
+
+When no public inode is available:
+
+* New files, directories, and other objects that require public inodes cannot be created.
+* A client can receive a no-space or file-creation error even when data capacity remains available.
+* Existing objects and read operations are generally unaffected.
+* Deleting objects can make public inodes available for reuse, although inode-file capacity remains allocated.
+* Raising `files`, when volume size and ONTAP limits allow it, restores room for additional objects. See link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles].
+
+In a FlexGroup volume, one constituent can approach or exhaust its inode supply before others. ONTAP reduces placement to a nearly full constituent, which can create imbalance and route more work to constituents that have available inodes. Check constituent `files` and `files-used`, not only the FlexGroup totals, and raise `files` on the FlexGroup rather than on a single constituent. See link:high-file-count-workloads-12-maxfiles-monitoring.html#flexgroup-constituent-events[FlexGroup constituent events].
+
+== FlexGroup constituent out of space
+
+A FlexGroup can still have free capacity and inodes in other members when one constituent is full. Clients often still see `ENOSPC` (or a similar "disk full" error) because:
+
+* Creates that land on, or cannot be redirected away from, that constituent fail.
+* If a member is out of *data* capacity, the FlexGroup as a whole can report out of space.
+* Even `ls` and other reads can fail. FlexGroup needs a small amount of writable space (the internal RAL reserve) for metadata cache; when a member is 100% full, Snapshot overwrite and other higher-priority consumers can take that reserve.
+
+Inspect constituents with `volume show-space` and `df` (or `volume show -volume-style-extended flexgroup-constituent`) instead of trusting only the FlexGroup-level used percentage. Free space or inodes on the full member, or add capacity, rather than raising `maxdir-size` or assuming the namespace is globally full.
+
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-09-maxfiles.html[← Previous: ONTAP inode types]
+|link:high-file-count-workloads-11-maxfiles-controlling.html[Next: Controlling maxfiles →]
+|===
+
+== Related information
+
+* link:https://docs.netapp.com/us-en/ontap/volumes/change-maximum-number-files-allowed-concept.html[Default and maximum files allowed for FlexVol volumes^]
+* link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf[TR-4571: NetApp ONTAP FlexGroup volumes^]

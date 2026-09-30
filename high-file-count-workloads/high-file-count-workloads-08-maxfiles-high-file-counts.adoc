@@ -1,0 +1,103 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html
+keywords: ONTAP, NAS, maxfiles, files-used, inodefile-public-capacity, high file count
+summary: "Understand how ONTAP inode counters change and how high file counts affect capacity and NAS workloads."
+---
+
+= High file counts and inode capacity in ONTAP
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+ONTAP reports the configured public-inode limit, current public-inode use, and the high-water capacity of the allocated public inode file as separate values.
+
+== High file counts in ONTAP
+
+ONTAP uses inodes to track file-system objects. You can monitor public inode use with the following volume values in the CLI, REST API, or System Manager:
+
+* `files` is the configured public inode ceiling.
+* `files-used` is the number of public inodes currently in use.
+
+The `files` option controls how many public inode entries may be allocated in the public inode file. Increasing the `files` limit does not immediately allocate inodes or inode-file space to the active file system. Instead, it sets the upper limit allowed by the volume.
+
+Creating files, directories, ACLs, named streams, or public directory indexes can grow the public inode file. Deleting objects decreases `files-used` and returns public inodes for reuse, but it does not shrink the public inode file's size.
+
+For examples of how to view file-count usage details, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitoring example]. For sizing guidance, see link:high-file-count-workloads-14-best-practices.html[High-file-count NAS workload best practices].
+
+== How an inode count increments
+
+Not all inodes count against the public inode limit. link:high-file-count-workloads-09-maxfiles.html#private-inodes[Private inodes] do not. link:high-file-count-workloads-09-maxfiles.html#public-inodes[Public inodes] such as files, directories, ACLs, named streams, and public directory indexes do.
+
+`files-used` increases whenever a public inode is taken for use. If a free public inode already exists in the allocated inode file, `files-used` still increases, but `inodefile-public-capacity` does not. If no free public inode remains, ONTAP grows the public inode file up to `files`, and both values increase.
+
+Typical operations include:
+
+* Creating a file, directory, symbolic link, or special file: +1 public inode and a new name in the parent directory.
+* Creating a hard link: +0 public inodes and +1 name in the parent directory.
+* Storing an NTFS or NFSv4 ACL on an object that did not already have an ACL inode: up to +1 public inode, subject to ACL sharing.
+* Creating a named stream: +1 public inode for the stream and, if needed, a stream-directory inode. Neither adds a name to the parent user directory.
+* Moving directory indexes into public space: approximately +1 public inode per indexed directory.
+
+How those object types, ACL sharing, and streams such as `Zone.Identifier` affect visible file count is described in link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types].
+
+`files-used` decreases when public inodes become free, such as after deletion completes and the objects are no longer retained as zombies. `inodefile-public-capacity` remains at its high-water mark and the inode file size never decreases. 
+
+New creates reuse free records until the allocated inode file is full, after which ONTAP grows it if `files` and volume capacity permit.
+
+== How high file counts affect NAS workloads
+
+High file counts increase the proportion of metadata work relative to data transfer. Common operations include:
+
+* Allocating and freeing inodes
+* Looking up directory names and file handles
+* Reading and updating attributes, permissions, and timestamps
+* Opening, closing, renaming, linking, and deleting files
+* Enumerating directories and walking directory trees
+* Scanning namespaces for analytics, backup, replication, or security features
+
+The performance effect depends on operation rate, concurrency, protocol behavior, namespace layout, cache state, and node resources. Total file count alone is not a performance forecast. Millions of files spread across many active directories can expose more parallelism than the same file count concentrated in a single directory space.
+
+== Capacity impact
+
+Each ONTAP 9 inode occupies 288 bytes in the inode file. A planning approximation is:
+
+----
+inode-file bytes = inode count × 288
+----
+
+[options="header"]
+|===
+| Inodes | Approximate raw inode bytes | Approximate binary capacity
+
+| 1 million
+| 288,000,000
+| 274.7 MiB
+
+| 100 million
+| 28,800,000,000
+| 26.8 GiB
+
+| 1 billion
+| 288,000,000,000
+| 268.2 GiB
+|===
+
+These figures describe inode records. Observed physical usage can also include inode-file structure, block rounding, Snapshot retention, and other metadata.
+
+Raising `files` changes the permitted ceiling; it does not immediately allocate all corresponding inode-file space. Capacity is consumed as the inode file grows. If it later holds one million public inodes, the raw inode records use 288 MB (approximately 274.7 MiB) of actual volume capacity. The inode file does not shrink, so capacity planning must account for its historical high-water allocation. You can later lower `files`, but not below `inodefile-public-capacity`. That field is the allocated inode-file high-water mark, not peak `files-used` and not a previous `files` setting. For example, if the inode file has already grown to 1 million records, `files` cannot be set below 1 million even if current `files-used` is much lower. If you raised `files` without growing the inode file that far, you can lower it again down to the current capacity.
+
+Used physical capacity for the inode file is separate from `maxdir-size` used capacity. `maxdir-size` caps the byte size of each directory's name-mapping file. A 320 MB directory file uses 320 MB of directory-file blocks in that directory; a similarly sized inode file represents the volume-wide inode population and is not limited by `maxdir-size`.
+
+For how to inspect inode-file space in capacity units and how to read `inodefile-public-capacity` as an inode count, see link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example[Monitor maxfiles, EMS events, and ONTAP enhancements].
+
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-07-maxdirsize-features-ems.html[← Previous: Features, EMS, and monitoring for maxdir-size]
+|link:high-file-count-workloads-09-maxfiles.html[Next: ONTAP inode types →]
+|===
+
+== Related information
+
+* link:high-file-count-workloads-10-maxfiles-limits.html[Maxfiles and ONTAP inode information]
+* link:high-file-count-workloads-11-maxfiles-controlling.html[Controlling maxfiles]

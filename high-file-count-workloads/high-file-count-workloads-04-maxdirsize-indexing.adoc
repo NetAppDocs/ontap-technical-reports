@@ -1,0 +1,81 @@
+---
+sidebar: sidebar
+permalink: high-file-count-workloads/high-file-count-workloads-04-maxdirsize-indexing.html
+keywords: ONTAP, NAS, directory indexing, sparse directory, hole punching, SnapMirror
+summary: "Understand ONTAP directory indexing, public compared with private index inodes, and sparse-directory hole punching."
+---
+
+= Directory indexing in ONTAP
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+[.lead]
+ONTAP automatically indexes large directories so targeted lookups do not have to read the entire directory file at once. Indexing is separate from `maxdir-size` and does not change the maximum directory-file cap.
+
+== Why directory indexing exists
+
+An index in computing is a side structure whose job is to answer "where is this?" without walking every record. A book index is the familiar version: you look up a term and jump to a page instead of reading the whole book. Databases, search engines, and filesystems use the same idea so a lookup stays cheap as the collection grows. The index is not a second copy of the data. It is a map from a key, such as a name, to the location of that item.
+
+A directory is a list of names. Without an index, finding one name can mean scanning a large part of that list. ONTAP's directory index is the filesystem version of that shortcut.
+
+Without a persistent index, finding a name can require reading many directory blocks and building an in-memory hash. Beginning with ONTAP 9.2, ONTAP automatically creates a companion directory-index inode when a directory file grows to approximately 2 MiB.
+
+The persistent index maps to the location of entries in the directory file. A targeted lookup can therefore read the required index and specific directory blocks instead of loading the entire directory file into memory. Indexing generally reduces CPU, memory, and I/O for lookup-oriented operations on large directories, which can free up more node resources for other workloads in addition to the large directory's contents.
+
+image::directory-file-index.png[Flow diagram showing a client name operation against a directory file under 2 MiB being answered by a full scan, and a directory file over 2 MiB getting a separate directory index that allows a targeted lookup of the requested name,width=700,align="center",link=../media/high-file-count-workloads/directory-file-index.png,window=_blank]
+
+There is no administrator option needed to enable directory indexing; it is enabled by default. A directory becomes eligible for a persistent index only after its directory file exceeds the approximately 2 MiB threshold. After that condition is met, index construction can be initiated by the operation that grows the directory beyond the threshold, an indexing scanner, or a qualifying front-end name operation such as LOOKUP, ACCESS, a path-based open or create, rename, or remove. These scanner and front-end triggers do not override the size threshold or create persistent indexes for smaller directories. The approximately 2 MiB point changes how targeted lookups are served. It is not a directory-size latency threshold. How growing directories show up in client and node behavior is described in link:high-file-count-workloads-05-maxdirsize-impact.html#performance-impact[Performance impact].
+
+== What indexing does not change
+
+The directory index is separate from the directory file. The following still holds true despite the presence of a directory index:
+
+* `maxdir-size` still limits the directory file size.
+* The companion index consumes additional metadata and an inode but does not impact directory size.
+* Indexing improves targeted lookup as opposed to full directory enumeration.
+* Wildcard scans and `READDIR` still process the entire directory namespace.
+* Losing or rebuilding the index does not remove the directory's names; ONTAP can reconstruct it from the directory file.
+
+== About private and public index inodes
+
+Each indexed directory has its own index; directory indexes are not shared. A volume can therefore hold one index for every directory that grows beyond the approximately 2 MiB threshold. Directories below the threshold remain on the nonpersistent lookup path and do not receive a companion directory-index inode, even when scanner or front-end operations access them. Whether indexes for eligible directories count against `maxfiles` depends on whether they are private or public, as described here.
+
+By default, directory indexes historically reside in the private inode space. Private directory-index inodes are omitted from SnapMirror transfers, so ONTAP rebuilds indexes at the destination on demand after activation or restore.
+
+Beginning with ONTAP 9.17.1, the volume-level option `-is-dir-index-transfer-enabled true` moves directory indexes into public inode space so supported SnapMirror and SnapMirror Cloud workflows can transfer them. When the option is `true`, new indexes are created in public inode space and a scanner migrates existing private indexes. This can reduce post-restore index construction, but public indexes consume public inodes and must be included in `maxfiles` planning.
+
+You can see if there is a public directory index with the volume show option `-has-dir-index-public true`. This option is not able to be manually set; it only shows true if there is a public directory index.
+
+Public directory indexes count toward `files` and can increase `files-used` by approximately one inode for each indexed directory.
+
+Private indexes do not consume the public `files` allowance.
+
+=== When to enable public directory index transfers
+
+Enabling index transfers preserves indexes for replication or restores to avoid expensive rebuilds for high-file-count directories. When index transfer is disabled, SnapMirror omits private indexes. After activation or restore, ONTAP can rebuild missing indexes for eligible directories through an indexing scanner or qualifying front-end operation, which can cause a performance impact after failing over to a SnapMirror destination. Enabling index transfers does not improve local lookup performance; local indexing already occurs when the option is `false`. It is strictly intended for use with volumes that are a part of a SnapMirror relationship.
+
+== Sparse directories and hole punching
+
+A directory file can grow large and then become sparse after many names are deleted (ie when files are removed from the directory). The directory-file size will remain at its high-water mark, so a `READDIR` could spend substantial CPU and I/O traversing empty blocks.
+
+For indexed directories, ONTAP can punch a hole when a 4 KiB directory block becomes completely empty. 
+
+The index tracks the hole so that:
+
+* `READDIR` can skip the empty block.
+* The physical block can be reclaimed.
+* A create can later reuse that logical location.
+
+The advanced `-has-optimized-sparse-directories` field is a read-only volume show option. A value of `true` means that the volume contains directory blocks in this optimized, hole-punched form.
+
+If an application's directory size remains problematic after deletion, copying the remaining entries into a newly created directory produces a more compact directory-file layout. Lowering `maxdir-size` does not compact a sparse directory.
+
+[cols="<,>",frame=none,grid=none]
+|===
+|link:high-file-count-workloads-03-maxdirsize-view.html[← Previous: View maxdir-size and current directory size]
+|link:high-file-count-workloads-05-maxdirsize-impact.html[Next: Impact of maxdir-size →]
+|===
+
+== Related information
+
+* link:high-file-count-workloads-09-maxfiles.html[ONTAP inode types]

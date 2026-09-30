@@ -14,6 +14,10 @@ summary: "These technical reports provide an overview of SMB/CIFS in ONTAP as we
 [.lead]
 NetApp NAS solutions simplify data management and help you keep pace with growth while optimizing costs. 
 
+== High-file-count workloads
+link:high-file-count-workloads/high-file-count-workloads-01-overview.html[NetApp ONTAP High File Count Workloads for NAS volumes]
+Learn how high-file-count NAS workloads use ONTAP metadata, how `maxfiles` and `maxdir-size` define different scaling boundaries, and how to plan namespaces for capacity and performance.
+
 == SMB
 link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR-4740: SMB 3.0 multichannel^]
 Microsoft introduced Multichannel in the SMB 3.0 protocol with the goal of improving the SMB3 protocol by addressing the performance and reliability limitations of SMB1 and SMB2. Learn about the Multichannel feature in ONTAP, including its capabilities, recommended practices, and performance test results.
