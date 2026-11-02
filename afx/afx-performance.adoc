@@ -30,7 +30,7 @@ NOTE: Maximum performance was reached using multiple clients reading and writing
 |===
 | Node type | Read performance max | Write performance max
 | AFX 1K | ~35GB/s | ~10GB/s
-| AFX 2K | ~35GB/s | ~17GB/s (+70% increase)
+| AFX 2K | ~35GB/s | ~16GB/s (+60% increase)
 |===
 
 NOTE: For the most up-to-date performance estimates, check with your NetApp sales team.
@@ -175,7 +175,7 @@ Even more impressive are the improvements with one of NFSv4.x's top performance 
 
 With the changes in AFX ONTAP 9.18.1, NFSv4.x performance for these types of workloads has improved substantially and has closed the gap on NFSv3 performance (within 15%).
 
-Our performance engineering teams compared performance of standard AI image, EDA, and software build benchmarks and found massive gains from the previous ONTAP release.
+Our performance engineering teams compared performance of standard AI, EDA, and software build benchmarks and found massive gains from the previous ONTAP release.
 
 *NetApp AFX – NFSv4.1 metadata IO performance in NetApp AFX*
 
